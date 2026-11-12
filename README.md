@@ -1,1 +1,270 @@
-# App-microphone
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Note Vocale IA</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-color: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #0a84ff;
+            --danger-color: #ff453a;
+            --success-color: #30d158;
+            --border-radius: 16px;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0; padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh;
+        }
+
+        .container { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 20px; }
+
+        .card {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 { font-size: 1.25rem; font-weight: 600; margin: 0 0 16px 0; text-align: center; letter-spacing: -0.5px; }
+
+        .info-box {
+            background-color: rgba(10, 132, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .recorder-section { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 30px 20px; }
+
+        #recordBtn {
+            width: 90px; height: 90px; border-radius: 50%; border: none;
+            background-color: var(--accent-color); color: white;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(10, 132, 255, 0.3);
+        }
+
+        #recordBtn.recording {
+            background-color: var(--danger-color);
+            box-shadow: 0 4px 15px rgba(255, 69, 58, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.95); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        #timer { font-size: 1.5rem; font-weight: 300; font-variant-numeric: tabular-nums; color: var(--text-secondary); height: 2rem; }
+        #status { font-size: 0.9rem; color: var(--accent-color); text-align: center; min-height: 1.2em; font-weight: 500; }
+        
+        #errorBox {
+            background-color: rgba(255, 69, 58, 0.15); border: 1px solid var(--danger-color);
+            color: var(--danger-color); padding: 12px; border-radius: 12px;
+            font-size: 0.9rem; text-align: center; display: none;
+        }
+
+        #resultBox { display: none; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        #resultText { white-space: pre-wrap; line-height: 1.6; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 16px; }
+
+        .btn-secondary {
+            width: 100%; padding: 14px; border-radius: 12px; border: none;
+            background-color: #2c2c2e; color: var(--accent-color);
+            font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s;
+        }
+        .btn-secondary:active { background-color: #3a3a3c; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1>🎙️ Note Vocale IA</h1>
+        <div class="info-box">
+            🔒 Traitement sécurisé via backend. Aucune clé API n'est stockée sur cet appareil.
+        </div>
+    </div>
+
+    <div class="card recorder-section">
+        <div id="timer">00:00</div>
+        <button id="recordBtn">Enregistrer</button>
+        <div id="status"></div>
+        <div id="errorBox"></div>
+    </div>
+
+    <div id="resultBox" class="card">
+        <div id="resultText"></div>
+        <button id="copyBtn" class="btn-secondary">Copier le compte-rendu</button>
+    </div>
+</div>
+
+<script>
+    // ⚠️ REMPLACEZ CETTE URL PAR CELLE DE VOTRE CLOUDFLARE WORKER
+    const BACKEND_URL = 'https://VOTRE_URL_CLOUDFLARE_WORKER_ICI'; 
+
+    const state = {
+        mediaRecorder: null,
+        audioChunks: [],
+        stream: null,
+        timerInterval: null,
+        seconds: 0,
+        isRecording: false
+    };
+
+    const recordBtn = document.getElementById('recordBtn');
+    const timerDisplay = document.getElementById('timer');
+    const statusDisplay = document.getElementById('status');
+    const errorBox = document.getElementById('errorBox');
+    const resultBox = document.getElementById('resultBox');
+    const resultText = document.getElementById('resultText');
+    const copyBtn = document.getElementById('copyBtn');
+
+    function formatTime(totalSeconds) {
+        const m = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+        const s = (totalSeconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    function showError(message) {
+        errorBox.textContent = message;
+        errorBox.style.display = 'block';
+        statusDisplay.textContent = '';
+    }
+
+    function clearError() {
+        errorBox.style.display = 'none';
+        errorBox.textContent = '';
+    }
+
+    async function startRecording() {
+        clearError();
+        try {
+            // Demande d'accès au micro
+            state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            
+            // Format optimisé pour la compatibilité mobile et Gemini
+            const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 
+                             MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '';
+            
+            state.mediaRecorder = new MediaRecorder(state.stream, mimeType ? { mimeType } : undefined);
+            state.audioChunks = [];
+
+            state.mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) state.audioChunks.push(event.data);
+            };
+
+            state.mediaRecorder.onstop = async () => {
+                state.stream.getTracks().forEach(track => track.stop());
+                const audioBlob = new Blob(state.audioChunks, { type: state.mediaRecorder.mimeType || 'audio/webm' });
+                await processAudioWithBackend(audioBlob);
+            };
+
+            state.mediaRecorder.start();
+            state.isRecording = true;
+            
+            recordBtn.textContent = 'Arrêter';
+            recordBtn.classList.add('recording');
+            statusDisplay.textContent = 'Enregistrement en cours...';
+            resultBox.style.display = 'none';
+            
+            state.seconds = 0;
+            timerDisplay.textContent = formatTime(state.seconds);
+            state.timerInterval = setInterval(() => {
+                state.seconds++;
+                timerDisplay.textContent = formatTime(state.seconds);
+            }, 1000);
+
+        } catch (err) {
+            console.error(err);
+            showError('Accès au micro refusé. Veuillez l\'autoriser dans les paramètres de votre navigateur.');
+        }
+    }
+
+    function stopRecording() {
+        if (state.mediaRecorder && state.isRecording) {
+            state.mediaRecorder.stop();
+            state.isRecording = false;
+            clearInterval(state.timerInterval);
+            
+            recordBtn.textContent = 'Enregistrer';
+            recordBtn.classList.remove('recording');
+            statusDisplay.textContent = 'Analyse IA en cours...';
+        }
+    }
+
+    recordBtn.addEventListener('click', () => {
+        if (state.isRecording) stopRecording();
+        else startRecording();
+    });
+
+    async function processAudioWithBackend(audioBlob) {
+        try {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'recording.webm');
+
+            const response = await fetch(BACKEND_URL, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || data.error) {
+                throw new Error(data.error || 'Erreur de communication avec le serveur.');
+            }
+
+            // Succès : affichage du résultat
+            statusDisplay.textContent = 'Terminé !';
+            resultText.textContent = data.text;
+            resultBox.style.display = 'block';
+            
+            setTimeout(() => {
+                resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+
+        } catch (error) {
+            console.error('Erreur:', error);
+            showError(error.message);
+            timerDisplay.textContent = '00:00';
+        }
+    }
+
+    copyBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(resultText.textContent);
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copié !';
+            copyBtn.style.color = 'var(--success-color)';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.color = 'var(--accent-color)';
+            }, 2000);
+        } catch (err) {
+            showError('Impossible de copier. Veuillez sélectionner le texte manuellement.');
+        }
+    });
+</script>
+
+</body>
+</html>
