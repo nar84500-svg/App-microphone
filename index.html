@@ -120,8 +120,7 @@
 </div>
 
 <script>
-    // ⚠️ REMPLACEZ CETTE URL PAR CELLE DE VOTRE CLOUDFLARE WORKER
-    const BACKEND_URL = 'https://VOTRE_URL_CLOUDFLARE_WORKER_ICI'; 
+    const BACKEND_URL = 'https://note-vocale.nar84500.workers.dev'; 
 
     const state = {
         mediaRecorder: null,
@@ -160,10 +159,8 @@
     async function startRecording() {
         clearError();
         try {
-            // Demande d'accès au micro
             state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             
-            // Format optimisé pour la compatibilité mobile et Gemini
             const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 
                              MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '';
             
@@ -234,9 +231,8 @@
                 throw new Error(data.error || 'Erreur de communication avec le serveur.');
             }
 
-            // Succès : affichage du résultat
             statusDisplay.textContent = 'Terminé !';
-            resultText.textContent = data.text;
+            resultText.textContent = data.text || data.summary || JSON.stringify(data);
             resultBox.style.display = 'block';
             
             setTimeout(() => {
