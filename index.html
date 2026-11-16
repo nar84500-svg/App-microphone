@@ -1,957 +1,1496 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>START</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>START — Commencez simplement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-  :root{
-    --bg:#FAF9F6;
-    --card:#FFFFFF;
-    --border:#ECEAE6;
-    --border-strong:#E0DCD6;
-    --ink:#2B2B32;
-    --ink-soft:#6B6B72;
-    --ink-faint:#9A9AA2;
-    --coral:#E8734A;
-    --coral-soft:#F29070;
-    --coral-pale:#FBEBE5;
-    --sage:#8FA88E;
-    --shadow-sm:0 1px 2px rgba(43,43,50,0.04);
-    --shadow-md:0 4px 16px rgba(43,43,50,0.05);
-    --shadow-lg:0 12px 40px rgba(43,43,50,0.08);
-    --radius:18px;
-    --radius-lg:26px;
-  }
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Inter',-apple-system,sans-serif;
-    background:var(--bg);
-    color:var(--ink);
-    line-height:1.55;
-    font-weight:400;
-    -webkit-font-smoothing:antialiased;
-    min-height:100vh;
+  /* ============ RESET & BASE ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  :root {
+    --bg: #FAF6F1;
+    --bg-soft: #F3ECE2;
+    --surface: #FFFFFF;
+    --surface-2: #FDFBF8;
+    --ink: #2B2A28;
+    --ink-2: #5A564F;
+    --ink-3: #8A857E;
+    --line: #EDE7DF;
+    --line-2: #E3DBCF;
+    --accent: #E0856F;          /* terracotta / rose corail */
+    --accent-2: #C96E59;
+    --accent-soft: #FCEAE3;
+    --sage: #A8B89A;
+    --sage-soft: #E8EFE1;
+    --shadow-sm: 0 1px 2px rgba(60, 45, 30, 0.04), 0 2px 8px rgba(60, 45, 30, 0.04);
+    --shadow-md: 0 2px 6px rgba(60, 45, 30, 0.05), 0 10px 28px rgba(60, 45, 30, 0.08);
+    --shadow-lg: 0 8px 24px rgba(60, 45, 30, 0.08), 0 24px 60px rgba(60, 45, 30, 0.12);
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
+    --radius-xl: 36px;
+    --ease: cubic-bezier(.2,.7,.2,1);
   }
 
-  /* ===== HEADER ===== */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(250,249,246,0.92);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--border);
-  }
-  .header-inner{
-    max-width:1100px;margin:0 auto;
-    padding:18px 32px;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .logo{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
-  .logo-mark{
-    width:42px;height:42px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:12px;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:var(--shadow-sm);
-  }
-  .logo-mark svg{width:24px;height:24px;display:block}
-  .logo-text{
-    font-family:'Fraunces',serif;
-    font-size:1.35rem;font-weight:500;
-    letter-spacing:-0.01em;
-  }
-  .logo-text span{color:var(--coral);font-style:italic}
-
-  /* ===== NAV TABS ===== */
-  nav.tabs{
-    max-width:1100px;margin:0 auto;
-    padding:0 32px;
-    display:flex;gap:6px;
-  }
-  .tab{
-    padding:14px 22px;
-    font-size:.92rem;font-weight:400;
-    color:var(--ink-soft);
-    background:transparent;
-    border:none;cursor:pointer;
-    border-bottom:2px solid transparent;
-    transition:all .2s ease;
-    font-family:inherit;
-  }
-  .tab:hover{color:var(--ink)}
-  .tab.active{
-    color:var(--ink);
-    font-weight:500;
-    border-bottom-color:var(--coral);
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
   }
 
-  /* ===== MAIN ===== */
-  main{
-    max-width:1100px;margin:0 auto;
-    padding:48px 32px 80px;
-  }
-  .view{display:none;animation:fadeIn .4s ease}
-  .view.active{display:block}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-  .view-header{margin-bottom:40px}
-  .view-label{
-    font-family:'Fraunces',serif;
-    font-style:italic;font-weight:400;
-    font-size:.95rem;color:var(--coral);
-    margin-bottom:10px;display:block;
-  }
-  .view-title{
-    font-family:'Fraunces',serif;
-    font-size:clamp(1.9rem,4vw,2.6rem);
-    font-weight:500;letter-spacing:-0.02em;
-    line-height:1.15;color:var(--ink);
-    margin-bottom:12px;
-  }
-  .view-subtitle{
-    font-size:1rem;color:var(--ink-soft);
-    font-weight:300;max-width:520px;
+  /* subtle warm texture */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(224,133,111,0.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
   }
 
-  /* ===== CARDS ===== */
-  .card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    padding:28px;
-    box-shadow:var(--shadow-sm);
-    transition:all .25s ease;
-  }
-  .card:hover{box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+  .app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 32px 24px 40px; }
 
-  /* ===== TASKS LIST ===== */
-  .tasks-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:18px;
+  /* ============ HEADER ============ */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 36px;
   }
-  .task-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    padding:26px;
-    cursor:pointer;
-    transition:all .25s ease;
-    position:relative;
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(145deg, #FCEAE3, #F5D4C7);
+    display: grid; place-items: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 4px 12px rgba(224,133,111,0.25);
+    position: relative;
   }
-  .task-card:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow-md);
-    border-color:var(--border-strong);
+  .brand-mark::after {
+    content: ""; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(224,133,111,0.15);
   }
-  .task-card.selected{
-    border-color:var(--coral);
-    box-shadow:0 0 0 3px var(--coral-pale),var(--shadow-md);
+  .brand-name {
+    font-family: 'Caveat', cursive;
+    font-size: 32px; font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.5px;
   }
-  .task-card.selected::after{
-    content:'';position:absolute;
-    top:20px;right:20px;
-    width:22px;height:22px;border-radius:50%;
-    background:var(--coral);
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
-    background-size:14px;background-position:center;background-repeat:no-repeat;
+  .brand-tag {
+    font-size: 12px; color: var(--ink-3);
+    font-weight: 500; letter-spacing: 0.5px;
+    margin-top: -2px;
   }
-  .task-name{
-    font-family:'Fraunces',serif;
-    font-size:1.2rem;font-weight:500;
-    margin-bottom:6px;letter-spacing:-0.01em;
+  .topbar-right {
+    display: flex; align-items: center; gap: 10px;
   }
-  .task-meta{
-    font-size:.82rem;color:var(--ink-faint);
-    font-weight:300;
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    font-size: 13px; color: var(--ink-2);
+    font-weight: 500;
   }
-  .task-steps{
-    margin-top:14px;
-    display:flex;gap:6px;flex-wrap:wrap;
-  }
-  .step-dot{
-    width:7px;height:7px;border-radius:50%;
-    background:var(--border-strong);
-  }
-  .task-card.selected .step-dot{background:var(--coral)}
-
-  .add-task{
-    background:transparent;
-    border:1.5px dashed var(--border-strong);
-    border-radius:var(--radius-lg);
-    padding:26px;
-    cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    gap:10px;
-    color:var(--ink-soft);
-    font-size:.95rem;font-weight:400;
-    transition:all .2s ease;
-    min-height:130px;
-    font-family:inherit;
-  }
-  .add-task:hover{
-    border-color:var(--coral);
-    color:var(--coral);
-    background:var(--coral-pale);
-  }
-  .add-task .plus{
-    width:28px;height:28px;border-radius:50%;
-    background:var(--bg);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.2rem;font-weight:300;
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--sage);
+    box-shadow: 0 0 0 3px var(--sage-soft);
   }
 
-  /* ===== ACTION BAR ===== */
-  .action-bar{
-    margin-top:32px;
-    display:flex;gap:12px;align-items:center;
-    flex-wrap:wrap;
+  /* ============ PAGE TITLES ============ */
+  .page-head { margin-bottom: 28px; }
+  .page-title {
+    font-family: 'Caveat', cursive;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 8px;
   }
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:14px 28px;
-    border-radius:50px;
-    font-size:.95rem;font-weight:500;
-    font-family:inherit;
-    cursor:pointer;
-    border:none;
-    transition:all .25s ease;
-    text-decoration:none;
-  }
-  .btn-primary{
-    background:var(--coral);color:white;
-    box-shadow:0 4px 16px rgba(232,115,74,0.2);
-  }
-  .btn-primary:hover{
-    background:var(--coral-soft);
-    transform:translateY(-1px);
-    box-shadow:0 6px 20px rgba(232,115,74,0.28);
-  }
-  .btn-primary:active{transform:translateY(0) scale(.98)}
-  .btn-primary:disabled{
-    opacity:.4;cursor:not-allowed;
-    transform:none!important;
-  }
-  .btn-ghost{
-    background:var(--card);color:var(--ink);
-    border:1px solid var(--border);
-  }
-  .btn-ghost:hover{
-    border-color:var(--border-strong);
-    background:var(--bg);
+  .page-subtitle {
+    font-size: 16px; color: var(--ink-3);
+    max-width: 520px;
   }
 
-  /* ===== PREPARE SECTION ===== */
-  .prepare-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-  }
-  @media(max-width:760px){.prepare-grid{grid-template-columns:1fr}}
-
-  .field{margin-bottom:22px}
-  .field-label{
-    display:block;
-    font-size:.82rem;font-weight:500;
-    color:var(--ink-soft);
-    margin-bottom:10px;
-    letter-spacing:0.02em;
-  }
-  .field-input{
-    width:100%;
-    padding:14px 18px;
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    background:var(--card);
-    font-family:inherit;
-    font-size:.95rem;
-    color:var(--ink);
-    transition:all .2s ease;
-    outline:none;
-  }
-  .field-input:focus{
-    border-color:var(--coral);
-    box-shadow:0 0 0 3px var(--coral-pale);
-  }
-  .field-input::placeholder{color:var(--ink-faint);font-weight:300}
-  textarea.field-input{
-    resize:vertical;min-height:90px;
-    line-height:1.5;
+  /* ============ SECTIONS / VIEWS ============ */
+  .view { display: none; animation: fadeUp .45s var(--ease); }
+  .view.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Templates */
-  .templates{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-    gap:10px;
+  /* ============ CARDS ============ */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
   }
-  .template{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:16px;
-    cursor:pointer;
-    transition:all .2s ease;
-    text-align:left;
-    font-family:inherit;
-  }
-  .template:hover{
-    border-color:var(--border-strong);
-    transform:translateY(-1px);
-  }
-  .template.selected{
-    border-color:var(--coral);
-    background:var(--coral-pale);
-  }
-  .template-icon{
-    font-size:1.3rem;margin-bottom:8px;display:block;
-  }
-  .template-name{
-    font-size:.85rem;font-weight:500;color:var(--ink);
-    display:block;
-  }
-  .template-desc{
-    font-size:.72rem;color:var(--ink-faint);
-    font-weight:300;margin-top:2px;
+  .card + .card { margin-top: 16px; }
+  .card:hover { box-shadow: var(--shadow-md); }
+
+  .section-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 1.2px;
+    color: var(--ink-3); text-transform: uppercase;
+    margin-bottom: 14px;
   }
 
-  /* Steps editor */
-  .steps-list{
-    display:flex;flex-direction:column;gap:8px;
+  /* ============ TASKS LIST ============ */
+  .tasks-grid {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
-  .step-item{
-    display:flex;align-items:center;gap:12px;
-    background:var(--bg);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:12px 16px;
-    transition:all .2s ease;
+  .task-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    cursor: pointer;
+    transition: all .25s var(--ease);
+    position: relative;
+    overflow: hidden;
   }
-  .step-item:hover{border-color:var(--border-strong)}
-  .step-num{
-    width:26px;height:26px;border-radius:50%;
-    background:var(--card);
-    border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    font-size:.78rem;font-weight:500;color:var(--ink-soft);
-    flex-shrink:0;
+  .task-card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: transparent;
+    transition: background .25s var(--ease);
   }
-  .step-text{
-    flex:1;
-    background:transparent;border:none;
-    font-family:inherit;font-size:.9rem;
-    color:var(--ink);outline:none;
-    padding:4px 0;
+  .task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--line-2);
   }
-  .step-text::placeholder{color:var(--ink-faint);font-weight:300}
-  .step-remove{
-    width:26px;height:26px;border-radius:50%;
-    background:transparent;border:none;
-    cursor:pointer;color:var(--ink-faint);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1rem;
-    transition:all .2s;
+  .task-card:hover::before { background: var(--accent); }
+  .task-card.selected {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, #FFF 0%, var(--accent-soft) 100%);
+    box-shadow: var(--shadow-md);
   }
-  .step-remove:hover{background:var(--coral-pale);color:var(--coral)}
-  .add-step{
-    background:transparent;
-    border:1px dashed var(--border-strong);
-    border-radius:var(--radius);
-    padding:12px;
-    cursor:pointer;
-    color:var(--ink-soft);
-    font-size:.85rem;
-    font-family:inherit;
-    transition:all .2s;
-    display:flex;align-items:center;justify-content:center;gap:6px;
+  .task-card.selected::before { background: var(--accent); }
+  .task-card.done {
+    opacity: 0.55;
   }
-  .add-step:hover{
-    border-color:var(--coral);
-    color:var(--coral);
-    background:var(--coral-pale);
+  .task-card.done .task-title::after {
+    content: " ✓"; color: var(--sage);
   }
 
-  /* Timer select */
-  .timers{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
-    gap:10px;
+  .task-title {
+    font-size: 17px; font-weight: 600; color: var(--ink);
+    margin-bottom: 6px;
   }
-  .timer{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:14px;
-    cursor:pointer;
-    text-align:center;
-    transition:all .2s ease;
-    font-family:inherit;
+  .task-meta {
+    display: flex; gap: 12px; align-items: center;
+    font-size: 13px; color: var(--ink-3);
   }
-  .timer:hover{border-color:var(--border-strong)}
-  .timer.selected{
-    border-color:var(--coral);
-    background:var(--coral-pale);
+  .task-meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .task-actions {
+    display: flex; gap: 8px; margin-top: 14px;
+    opacity: 0; transform: translateY(4px);
+    transition: all .25s var(--ease);
   }
-  .timer-value{
-    font-family:'Fraunces',serif;
-    font-size:1.3rem;font-weight:500;
-    color:var(--ink);display:block;
+  .task-card:hover .task-actions,
+  .task-card.selected .task-actions { opacity: 1; transform: translateY(0); }
+
+  .icon-btn {
+    width: 32px; height: 32px; border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink-2);
+    cursor: pointer;
+    display: grid; place-items: center;
+    transition: all .2s var(--ease);
   }
-  .timer-label{
-    font-size:.72rem;color:var(--ink-faint);
-    font-weight:300;margin-top:2px;
+  .icon-btn:hover { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
+  .icon-btn.danger:hover { background: #FBEAEA; color: #B84A4A; border-color: #F5D5D5; }
+
+  .empty-state {
+    text-align: center; padding: 60px 24px;
+    background: var(--surface);
+    border: 1px dashed var(--line-2);
+    border-radius: var(--radius-lg);
+  }
+  .empty-state .emoji { font-size: 40px; margin-bottom: 12px; display: block; }
+  .empty-state h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 28px; color: var(--ink); margin-bottom: 6px;
+  }
+  .empty-state p { color: var(--ink-3); font-size: 14px; }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer;
+    transition: all .2s var(--ease);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 4px 14px rgba(224,133,111,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .btn-primary:hover { background: var(--accent-2); box-shadow: 0 6px 18px rgba(201,110,89,0.4); }
+  .btn-ghost {
+    background: var(--surface); color: var(--ink);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover { background: var(--bg-soft); border-color: var(--line-2); }
+  .btn-soft {
+    background: var(--accent-soft); color: var(--accent-2);
+  }
+  .btn-soft:hover { background: #F8D8CC; }
+  .btn-sage {
+    background: var(--sage-soft); color: #5C7050;
+  }
+  .btn-sage:hover { background: #DCE7D0; }
+
+  .btn-lg { padding: 16px 30px; font-size: 15px; }
+
+  /* ============ PREPARE VIEW ============ */
+  .prepare-layout {
+    display: grid; gap: 20px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 860px) {
+    .prepare-layout { grid-template-columns: 1.1fr 1fr; }
   }
 
-  /* ===== DEVICE SECTION ===== */
-  .device-layout{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    align-items:start;
+  .input-row {
+    display: flex; gap: 10px; align-items: stretch;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 6px 6px 6px 18px;
+    transition: all .2s var(--ease);
   }
-  @media(max-width:760px){.device-layout{grid-template-columns:1fr}}
-
-  .device-visual{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    padding:48px 32px;
-    display:flex;align-items:center;justify-content:center;
-    min-height:380px;
-    position:relative;
+  .input-row:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(224,133,111,0.12);
   }
-  .device-button{
-    width:200px;height:200px;
-    background:var(--card);
-    border:1.5px solid var(--border-strong);
-    border-radius:44px;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:var(--shadow-lg);
-    cursor:pointer;
-    transition:all .25s ease;
-    position:relative;
+  .input-row input {
+    flex: 1; border: none; outline: none; background: transparent;
+    font-family: inherit; font-size: 16px; color: var(--ink);
+    padding: 10px 0;
   }
-  .device-button:hover{transform:scale(1.03)}
-  .device-button:active{transform:scale(.94);box-shadow:var(--shadow-sm)}
-  .device-button svg{width:110px;height:110px}
-  .device-button .ring{
-    position:absolute;inset:-8px;
-    border-radius:50px;
-    border:2px solid transparent;
-    transition:all .3s ease;
+  .input-row input::placeholder { color: var(--ink-3); }
+  .mic-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: none; background: var(--bg-soft);
+    color: var(--ink-2); cursor: pointer;
+    display: grid; place-items: center;
+    transition: all .2s var(--ease);
+    flex-shrink: 0;
   }
-  .device-button.pressed .ring{
-    border-color:var(--coral);
-    inset:-14px;
-    opacity:0;
-    animation:ringPulse .6s ease;
+  .mic-btn:hover { background: var(--accent-soft); color: var(--accent-2); }
+  .mic-btn.listening {
+    background: var(--accent); color: #fff;
+    animation: pulse 1.4s ease-in-out infinite;
   }
-  @keyframes ringPulse{
-    0%{opacity:.6;transform:scale(1)}
-    100%{opacity:0;transform:scale(1.15)}
-  }
-  .device-label{
-    position:absolute;bottom:24px;left:50%;
-    transform:translateX(-50%);
-    font-size:.78rem;color:var(--ink-faint);
-    font-weight:300;letter-spacing:0.05em;
-    text-transform:uppercase;
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(224,133,111,0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(224,133,111,0); }
   }
 
-  .device-config h3{
-    font-family:'Fraunces',serif;
-    font-size:1.3rem;font-weight:500;
-    margin-bottom:24px;letter-spacing:-0.01em;
+  .templates-grid {
+    display: grid; gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }
-  .config-group{margin-bottom:28px}
-  .config-group-title{
-    font-size:.78rem;font-weight:500;
-    color:var(--ink-faint);
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    margin-bottom:12px;
+  .template-chip {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: all .2s var(--ease);
+    font-family: inherit;
+    display: flex; flex-direction: column; gap: 4px;
   }
-  .config-options{
-    display:flex;flex-direction:column;gap:8px;
+  .template-chip:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
   }
-  .config-option{
-    display:flex;align-items:center;gap:14px;
-    padding:14px 18px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    cursor:pointer;
-    transition:all .2s ease;
-    font-family:inherit;
-    text-align:left;
-    width:100%;
+  .template-chip .t-icon {
+    width: 32px; height: 32px; border-radius: 10px;
+    background: var(--bg-soft);
+    display: grid; place-items: center;
+    font-size: 16px;
+    margin-bottom: 4px;
   }
-  .config-option:hover{border-color:var(--border-strong)}
-  .config-option.selected{
-    border-color:var(--coral);
-    background:var(--coral-pale);
+  .template-chip .t-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .template-chip .t-sub { font-size: 12px; color: var(--ink-3); }
+
+  .duration-picker {
+    display: flex; gap: 8px; flex-wrap: wrap;
   }
-  .config-radio{
-    width:18px;height:18px;border-radius:50%;
-    border:1.5px solid var(--border-strong);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-    transition:all .2s;
+  .dur-opt {
+    flex: 1; min-width: 80px;
+    padding: 14px 10px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s var(--ease);
+    font-family: inherit;
   }
-  .config-option.selected .config-radio{
-    border-color:var(--coral);
+  .dur-opt:hover { border-color: var(--line-2); }
+  .dur-opt.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-2);
   }
-  .config-option.selected .config-radio::after{
-    content:'';width:9px;height:9px;border-radius:50%;
-    background:var(--coral);
+  .dur-opt .dur-val { font-size: 18px; font-weight: 700; display: block; }
+  .dur-opt .dur-lbl { font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; }
+  .dur-opt.active .dur-lbl { color: var(--accent-2); }
+
+  .steps-editor { margin-top: 8px; }
+  .step-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    transition: all .2s var(--ease);
   }
-  .config-option-text{flex:1}
-  .config-option-name{
-    font-size:.92rem;font-weight:500;color:var(--ink);
-    display:block;
+  .step-item:hover { border-color: var(--line-2); }
+  .step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent-2);
+    font-size: 12px; font-weight: 700;
+    display: grid; place-items: center;
+    flex-shrink: 0;
   }
-  .config-option-desc{
-    font-size:.78rem;color:var(--ink-faint);
-    font-weight:300;margin-top:1px;
+  .step-text {
+    flex: 1; border: none; background: transparent;
+    font-family: inherit; font-size: 14px; color: var(--ink);
+    outline: none;
+  }
+  .step-remove {
+    width: 26px; height: 26px; border-radius: 8px;
+    border: none; background: transparent;
+    color: var(--ink-3); cursor: pointer;
+    display: grid; place-items: center;
+    transition: all .2s var(--ease);
+  }
+  .step-remove:hover { background: #FBEAEA; color: #B84A4A; }
+
+  .add-step-btn {
+    width: 100%; padding: 10px;
+    border: 1px dashed var(--line-2);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--ink-3);
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    transition: all .2s var(--ease);
+  }
+  .add-step-btn:hover { border-color: var(--accent); color: var(--accent-2); background: var(--accent-soft); }
+
+  /* ============ DEVICE VIEW (SIMULATED BOÎTIER) ============ */
+  .device-layout {
+    display: grid; gap: 28px;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  @media (min-width: 860px) {
+    .device-layout { grid-template-columns: 1fr 1fr; }
   }
 
-  /* Presses config */
-  .presses-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+  .device-stage {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 20px 10px;
   }
-  .press-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:16px;
-    cursor:pointer;
-    transition:all .2s;
-    font-family:inherit;
-    text-align:left;
+  .device {
+    width: 280px;
+    background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    padding: 28px;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.08),
+      inset 0 -4px 12px rgba(0,0,0,0.4),
+      0 20px 50px rgba(40,30,20,0.3),
+      0 4px 12px rgba(40,30,20,0.2);
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 18px;
   }
-  .press-card:hover{border-color:var(--border-strong)}
-  .press-card.selected{
-    border-color:var(--coral);
-    background:var(--coral-pale);
+  .device::before {
+    content: ""; position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+    pointer-events: none;
   }
-  .press-name{
-    font-size:.88rem;font-weight:500;color:var(--ink);
-    display:block;margin-bottom:2px;
+  .device-screen {
+    width: 100%;
+    background: #0a0908;
+    border-radius: 24px;
+    padding: 18px 16px;
+    color: #F5E9DC;
+    text-align: center;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
+    min-height: 110px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
-  .press-action{
-    font-size:.75rem;color:var(--ink-faint);
-    font-weight:300;
+  .device-screen::after {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+    pointer-events: none;
+  }
+  .device-label {
+    font-size: 10px; letter-spacing: 2px;
+    color: #8A857E; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .device-task {
+    font-family: 'Caveat', cursive;
+    font-size: 22px; font-weight: 600;
+    color: #F5E9DC;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    min-height: 28px;
+  }
+  .device-step {
+    font-size: 13px; color: #B8AFA2;
+    margin-bottom: 8px;
+  }
+  .device-progress {
+    display: flex; gap: 4px; justify-content: center;
+  }
+  .device-progress .pip {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #3a3632;
+    transition: all .3s var(--ease);
+  }
+  .device-progress .pip.done { background: var(--accent); }
+  .device-progress .pip.current { background: #F5E9DC; box-shadow: 0 0 8px rgba(245,233,220,0.6); }
+
+  .start-button {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    border: none;
+    background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%);
+    color: #fff;
+    font-family: 'Caveat', cursive;
+    font-size: 28px; font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.35),
+      inset 0 -4px 10px rgba(0,0,0,0.25),
+      0 8px 20px rgba(224,133,111,0.5),
+      0 0 0 6px rgba(224,133,111,0.12);
+    transition: all .15s var(--ease);
+    letter-spacing: 1px;
+  }
+  .start-button:hover {
+    transform: scale(1.03);
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.4),
+      inset 0 -4px 10px rgba(0,0,0,0.25),
+      0 12px 28px rgba(224,133,111,0.55),
+      0 0 0 10px rgba(224,133,111,0.18);
+  }
+  .start-button:active {
+    transform: scale(0.96);
+    box-shadow:
+      inset 0 4px 10px rgba(0,0,0,0.3),
+      0 4px 12px rgba(224,133,111,0.4),
+      0 0 0 4px rgba(224,133,111,0.15);
+  }
+  .start-button.pulse {
+    animation: btnPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); }
+    50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 18px rgba(224,133,111,0); }
   }
 
-  /* ===== STATUS BAR ===== */
-  .status-bar{
-    margin-top:24px;
-    padding:16px 20px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    display:flex;align-items:center;gap:12px;
-    font-size:.88rem;
-  }
-  .status-dot{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--sage);
-  }
-  .status-dot.inactive{background:var(--ink-faint)}
-  .status-text{color:var(--ink-soft);font-weight:300}
-  .status-text strong{color:var(--ink);font-weight:500}
-
-  /* ===== RESPONSIVE ===== */
-  @media(max-width:640px){
-    .header-inner{padding:14px 20px}
-    nav.tabs{padding:0 20px;overflow-x:auto}
-    .tab{padding:12px 16px;font-size:.88rem;white-space:nowrap}
-    main{padding:32px 20px 60px}
-    .view-title{font-size:1.8rem}
-    .device-button{width:170px;height:170px}
-    .device-button svg{width:90px;height:90px}
-    .presses-grid{grid-template-columns:1fr}
+  .device-hint {
+    margin-top: 20px;
+    font-size: 13px; color: var(--ink-3);
+    text-align: center;
+    max-width: 280px;
   }
 
-  /* ===== EMPTY STATE ===== */
-  .empty{
-    text-align:center;
-    padding:60px 20px;
-    color:var(--ink-faint);
+  /* ============ SETTINGS ============ */
+  .settings-section { margin-bottom: 24px; }
+  .settings-section:last-child { margin-bottom: 0; }
+  .setting-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
   }
-  .empty-icon{
-    width:64px;height:64px;
-    margin:0 auto 20px;
-    border-radius:50%;
-    background:var(--bg);
-    border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.6rem;
+  .setting-row:last-child { border-bottom: none; }
+  .setting-info { flex: 1; }
+  .setting-title {
+    font-size: 15px; font-weight: 600; color: var(--ink);
+    margin-bottom: 2px;
   }
-  .empty-title{
-    font-family:'Fraunces',serif;
-    font-size:1.15rem;font-weight:500;
-    color:var(--ink);
-    margin-bottom:6px;
+  .setting-desc {
+    font-size: 13px; color: var(--ink-3);
   }
-  .empty-text{font-size:.88rem;font-weight:300}
+
+  /* Toggle */
+  .toggle {
+    position: relative;
+    width: 48px; height: 28px;
+    background: var(--line-2);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .25s var(--ease);
+    flex-shrink: 0;
+    border: none;
+  }
+  .toggle::after {
+    content: ""; position: absolute;
+    top: 3px; left: 3px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    transition: transform .25s var(--ease);
+  }
+  .toggle.on { background: var(--accent); }
+  .toggle.on::after { transform: translateX(20px); }
+
+  /* Segmented control */
+  .segmented {
+    display: inline-flex;
+    background: var(--bg-soft);
+    border-radius: 999px;
+    padding: 4px;
+    gap: 2px;
+  }
+  .seg-opt {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: inherit;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    transition: all .2s var(--ease);
+  }
+  .seg-opt.active {
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ============ BOTTOM NAV ============ */
+  .bottom-nav {
+    position: fixed;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px;
+    display: flex; gap: 4px;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+  }
+  .nav-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: inherit;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    transition: all .25s var(--ease);
+  }
+  .nav-btn:hover { color: var(--ink); }
+  .nav-btn.active {
+    background: var(--ink);
+    color: #fff;
+  }
+  .nav-btn svg { width: 18px; height: 18px; }
+
+  /* ============ TOAST ============ */
+  .toast {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s var(--ease);
+    z-index: 200;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ============ TIMER DISPLAY ============ */
+  .timer-display {
+    display: flex; align-items: baseline; justify-content: center;
+    gap: 2px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    color: #F5E9DC;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .timer-display .colon { opacity: 0.5; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 600px) {
+    .app { padding: 20px 16px 40px; }
+    .page-title { font-size: 40px; }
+    .brand-name { font-size: 26px; }
+    .brand-mark { width: 36px; height: 36px; }
+    .brand-mark::after { width: 12px; height: 12px; }
+    .status-pill { font-size: 11px; padding: 6px 10px; }
+    .device { width: 240px; padding: 22px; }
+    .start-button { width: 96px; height: 96px; font-size: 24px; }
+    .device-task { font-size: 18px; }
+    .nav-btn { padding: 10px 14px; font-size: 12px; }
+    .nav-btn span.nav-label { display: none; }
+    .card { padding: 18px; }
+  }
+
+  /* Focus states for accessibility */
+  button:focus-visible, input:focus-visible, .task-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <a href="#" class="logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M72 30 A35 35 0 1 0 72 70" stroke="#2B2B32" stroke-width="9" stroke-linecap="round" fill="none"/>
-          <polygon points="48,38 68,50 48,62" fill="#E8734A"/>
-        </svg>
+<div class="app">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand-name">start</div>
+        <div class="brand-tag">Commencez simplement</div>
       </div>
-      <div class="logo-text">START<span>.</span></div>
-    </a>
-  </div>
-  <nav class="tabs" role="tablist">
-    <button class="tab active" data-view="tasks">Mes tâches</button>
-    <button class="tab" data-view="prepare">Préparer</button>
-    <button class="tab" data-view="device">Appareil</button>
-  </nav>
-</header>
+    </div>
+    <div class="topbar-right">
+      <div class="status-pill" id="statusPill">
+        <span class="status-dot"></span>
+        <span id="statusText">Boîtier simulé</span>
+      </div>
+    </div>
+  </header>
 
-<main>
-
-  <!-- ===== VIEW: TASKS ===== -->
+  <!-- ============ VIEW : MES TÂCHES ============ -->
   <section class="view active" id="view-tasks">
-    <div class="view-header">
-      <span class="view-label">Aujourd'hui</span>
-      <h1 class="view-title">Mes tâches</h1>
-      <p class="view-subtitle">Sélectionnez une tâche pour lancer les étapes sur votre boîtier START.</p>
+    <div class="page-head">
+      <h1 class="page-title">Mes tâches</h1>
+      <p class="page-subtitle">Choisissez une tâche, chargez-la sur le boîtier, et avancez pas à pas avec le bouton START.</p>
     </div>
 
-    <div class="tasks-grid" id="tasksGrid">
-      <div class="task-card" data-task="1">
-        <div class="task-name">Écrire l'article</div>
-        <div class="task-meta">4 étapes · 25 min</div>
-        <div class="task-steps">
-          <span class="step-dot"></span><span class="step-dot"></span>
-          <span class="step-dot"></span><span class="step-dot"></span>
-        </div>
-      </div>
-      <div class="task-card" data-task="2">
-        <div class="task-name">Préparer la réunion</div>
-        <div class="task-meta">3 étapes · 15 min</div>
-        <div class="task-steps">
-          <span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
-        </div>
-      </div>
-      <div class="task-card" data-task="3">
-        <div class="task-name">Ranger le bureau</div>
-        <div class="task-meta">5 étapes · 10 min</div>
-        <div class="task-steps">
-          <span class="step-dot"></span><span class="step-dot"></span>
-          <span class="step-dot"></span><span class="step-dot"></span>
-          <span class="step-dot"></span>
-        </div>
-      </div>
-      <button class="add-task" id="addTaskBtn">
-        <span class="plus">+</span>
-        Nouvelle tâche
-      </button>
-    </div>
-
-    <div class="action-bar">
-      <button class="btn btn-primary" id="launchBtn" disabled>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Lancer sur le boîtier
-      </button>
-      <button class="btn btn-ghost">Modifier</button>
-    </div>
-
-    <div class="status-bar">
-      <span class="status-dot inactive" id="statusDot"></span>
-      <span class="status-text" id="statusText">Aucune tâche sélectionnée</span>
-    </div>
+    <div id="tasksContainer"></div>
   </section>
 
-  <!-- ===== VIEW: PREPARE ===== -->
+  <!-- ============ VIEW : PRÉPARER ============ -->
   <section class="view" id="view-prepare">
-    <div class="view-header">
-      <span class="view-label">Créer</span>
-      <h1 class="view-title">Préparer une tâche</h1>
-      <p class="view-subtitle">Décrivez votre tâche, choisissez un modèle et personnalisez les étapes.</p>
+    <div class="page-head">
+      <h1 class="page-title">Préparer</h1>
+      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. START découpera la tâche en petites actions claires.</p>
     </div>
 
-    <div class="prepare-grid">
-      <div class="card">
-        <div class="field">
-          <label class="field-label">Nom de la tâche</label>
-          <input type="text" class="field-input" placeholder="Ex. Rédiger le rapport mensuel" id="taskName">
-        </div>
+    <div class="prepare-layout">
 
-        <div class="field">
-          <label class="field-label">Modèle rapide</label>
-          <div class="templates">
-            <button class="template" data-tpl="focus">
-              <span class="template-icon">🎯</span>
-              <span class="template-name">Focus</span>
-              <span class="template-desc">3 étapes</span>
-            </button>
-            <button class="template" data-tpl="review">
-              <span class="template-icon">📋</span>
-              <span class="template-name">Revue</span>
-              <span class="template-desc">4 étapes</span>
-            </button>
-            <button class="template" data-tpl="creative">
-              <span class="template-icon">✨</span>
-              <span class="template-name">Création</span>
-              <span class="template-desc">5 étapes</span>
-            </button>
-            <button class="template" data-tpl="admin">
-              <span class="template-icon">🗂️</span>
-              <span class="template-name">Admin</span>
-              <span class="template-desc">2 étapes</span>
+      <!-- LEFT : task creation -->
+      <div>
+        <div class="card">
+          <div class="section-label">Nom de la tâche</div>
+          <div class="input-row">
+            <input type="text" id="taskNameInput" placeholder="Ex. Réviser mon cours de mathématiques" maxlength="80" />
+            <button class="mic-btn" id="micBtn" title="Saisie vocale" aria-label="Saisie vocale">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
             </button>
           </div>
         </div>
 
-        <div class="field">
-          <label class="field-label">Notes (optionnel)</label>
-          <textarea class="field-input" placeholder="Détails supplémentaires…"></textarea>
+        <div class="card" style="margin-top:16px;">
+          <div class="section-label">Étapes de la tâche</div>
+          <div class="steps-editor" id="stepsEditor"></div>
+          <button class="add-step-btn" id="addStepBtn">+ Ajouter une étape</button>
         </div>
       </div>
 
-      <div class="card">
-        <div class="field">
-          <label class="field-label">Étapes</label>
-          <div class="steps-list" id="stepsList">
-            <div class="step-item">
-              <span class="step-num">1</span>
-              <input type="text" class="step-text" placeholder="Première action…">
-              <button class="step-remove" aria-label="Supprimer">×</button>
-            </div>
-            <div class="step-item">
-              <span class="step-num">2</span>
-              <input type="text" class="step-text" placeholder="Deuxième action…">
-              <button class="step-remove" aria-label="Supprimer">×</button>
-            </div>
-            <div class="step-item">
-              <span class="step-num">3</span>
-              <input type="text" class="step-text" placeholder="Troisième action…">
-              <button class="step-remove" aria-label="Supprimer">×</button>
-            </div>
-          </div>
-          <button class="add-step" id="addStepBtn">+ Ajouter une étape</button>
+      <!-- RIGHT : templates + duration -->
+      <div>
+        <div class="card">
+          <div class="section-label">Modèles rapides</div>
+          <div class="templates-grid" id="templatesGrid"></div>
         </div>
 
-        <div class="field" style="margin-top:28px">
-          <label class="field-label">Chronomètre</label>
-          <div class="timers">
-            <button class="timer" data-time="5">
-              <span class="timer-value">5</span>
-              <span class="timer-label">minutes</span>
+        <div class="card" style="margin-top:16px;">
+          <div class="section-label">Durée de la session</div>
+          <div class="duration-picker" id="durationPicker">
+            <button class="dur-opt" data-dur="0">
+              <span class="dur-val">∞</span>
+              <span class="dur-lbl">Libre</span>
             </button>
-            <button class="timer selected" data-time="15">
-              <span class="timer-value">15</span>
-              <span class="timer-label">minutes</span>
+            <button class="dur-opt" data-dur="3">
+              <span class="dur-val">3</span>
+              <span class="dur-lbl">Minutes</span>
             </button>
-            <button class="timer" data-time="25">
-              <span class="timer-value">25</span>
-              <span class="timer-label">minutes</span>
+            <button class="dur-opt active" data-dur="5">
+              <span class="dur-val">5</span>
+              <span class="dur-lbl">Minutes</span>
             </button>
-            <button class="timer" data-time="45">
-              <span class="timer-value">45</span>
-              <span class="timer-label">minutes</span>
-            </button>
-            <button class="timer" data-time="0">
-              <span class="timer-value">∞</span>
-              <span class="timer-label">libre</span>
+            <button class="dur-opt" data-dur="10">
+              <span class="dur-val">10</span>
+              <span class="dur-lbl">Minutes</span>
             </button>
           </div>
         </div>
 
-        <div class="action-bar" style="margin-top:28px">
-          <button class="btn btn-primary">Enregistrer la tâche</button>
+        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-ghost" id="clearPrepareBtn">Effacer</button>
+          <button class="btn btn-primary btn-lg" id="saveTaskBtn" style="flex:1;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+            Enregistrer la tâche
+          </button>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- ===== VIEW: DEVICE ===== -->
+  <!-- ============ VIEW : APPAREIL ============ -->
   <section class="view" id="view-device">
-    <div class="view-header">
-      <span class="view-label">Configuration</span>
-      <h1 class="view-title">Mon appareil START</h1>
-      <p class="view-subtitle">Visualisez votre boîtier et configurez les appuis et les retours.</p>
+    <div class="page-head">
+      <h1 class="page-title">Appareil</h1>
+      <p class="page-subtitle">Votre boîtier START simulé. Personnalisez les sensations et le comportement des boutons.</p>
     </div>
 
     <div class="device-layout">
-      <div class="device-visual">
-        <div class="device-button" id="deviceBtn">
-          <div class="ring"></div>
-          <svg viewBox="0 0 100 100" fill="none">
-            <path d="M72 30 A35 35 0 1 0 72 70" stroke="#2B2B32" stroke-width="9" stroke-linecap="round" fill="none"/>
-            <polygon points="48,38 68,50 48,62" fill="#E8734A"/>
-          </svg>
+
+      <!-- LEFT : simulated device -->
+      <div class="card" style="padding: 32px 20px;">
+        <div class="device-stage">
+          <div class="device" role="group" aria-label="Boîtier START simulé">
+            <div class="device-screen">
+              <div class="device-label" id="devLabel">Bienvenue</div>
+              <div class="device-task" id="devTask">—</div>
+              <div class="device-step" id="devStep">Sélectionnez une tâche</div>
+              <div class="device-progress" id="devProgress"></div>
+              <div class="timer-display" id="devTimer" style="display:none;">
+                <span id="timerMin">05</span><span class="colon">:</span><span id="timerSec">00</span>
+              </div>
+            </div>
+            <button class="start-button pulse" id="startBtn" aria-label="Bouton START">
+              START
+            </button>
+          </div>
+          <p class="device-hint" id="deviceHint">Appuyez sur START pour avancer d'une étape. Appui long pour revenir en arrière.</p>
         </div>
-        <div class="device-label">Appuyez pour tester</div>
       </div>
 
-      <div class="device-config">
-        <div class="config-group">
-          <div class="config-group-title">Retour au clic</div>
-          <div class="config-options" id="feedbackOptions">
-            <button class="config-option selected" data-feedback="light">
-              <span class="config-radio"></span>
-              <span class="config-option-text">
-                <span class="config-option-name">Lumineux</span>
-                <span class="config-option-desc">Anneau lumineux corail</span>
-              </span>
-            </button>
-            <button class="config-option" data-feedback="vibrate">
-              <span class="config-radio"></span>
-              <span class="config-option-text">
-                <span class="config-option-name">Vibratoire</span>
-                <span class="config-option-desc">Vibration courte et douce</span>
-              </span>
-            </button>
-            <button class="config-option" data-feedback="silent">
-              <span class="config-radio"></span>
-              <span class="config-option-text">
-                <span class="config-option-name">Silencieux</span>
-                <span class="config-option-desc">Aucun retour perceptible</span>
-              </span>
-            </button>
+      <!-- RIGHT : settings -->
+      <div>
+        <div class="card">
+          <div class="section-label">Comportement des boutons</div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Appui simple</div>
+              <div class="setting-desc">Action effectuée sur un appui court</div>
+            </div>
+            <div class="segmented" id="shortPressSeg">
+              <button class="seg-opt active" data-act="next">Suivant</button>
+              <button class="seg-opt" data-act="prev">Précédent</button>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Appui long</div>
+              <div class="setting-desc">Action effectuée sur un appui prolongé</div>
+            </div>
+            <div class="segmented" id="longPressSeg">
+              <button class="seg-opt" data-act="next">Suivant</button>
+              <button class="seg-opt active" data-act="prev">Précédent</button>
+            </div>
           </div>
         </div>
 
-        <div class="config-group">
-          <div class="config-group-title">Actions par appui</div>
-          <div class="presses-grid">
-            <button class="press-card selected">
-              <span class="press-name">Appui court</span>
-              <span class="press-action">Étape suivante</span>
-            </button>
-            <button class="press-card">
-              <span class="press-name">Appui long</span>
-              <span class="press-action">Pause / reprise</span>
-            </button>
-            <button class="press-card">
-              <span class="press-name">Double appui</span>
-              <span class="press-action">Étape précédente</span>
-            </button>
-            <button class="press-card">
-              <span class="press-name">Triple appui</span>
-              <span class="press-action">Terminer la tâche</span>
-            </button>
+        <div class="card" style="margin-top:16px;">
+          <div class="section-label">Retour haptique</div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Mode de retour</div>
+              <div class="setting-desc">Feedback à chaque appui</div>
+            </div>
+            <div class="segmented" id="feedbackSeg">
+              <button class="seg-opt active" data-fb="light">Lumière</button>
+              <button class="seg-opt" data-fb="vibration">Vibration</button>
+              <button class="seg-opt" data-fb="silent">Silencieux</button>
+            </div>
           </div>
         </div>
+
+        <div class="card" style="margin-top:16px;">
+          <div class="section-label">Options avancées</div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Mode démonstration</div>
+              <div class="setting-desc">Affiche une tâche d'exemple au démarrage</div>
+            </div>
+            <button class="toggle on" id="demoToggle" aria-label="Mode démonstration"></button>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Réinitialiser les données</div>
+              <div class="setting-desc">Supprime toutes les tâches et réglages</div>
+            </div>
+            <button class="btn btn-ghost" id="resetBtn" style="padding:10px 16px; font-size:13px;">Réinitialiser</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-</main>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Navigation principale">
+  <button class="nav-btn active" data-view="tasks">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    <span class="nav-label">Tâches</span>
+  </button>
+  <button class="nav-btn" data-view="prepare">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+    <span class="nav-label">Préparer</span>
+  </button>
+  <button class="nav-btn" data-view="device">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+    <span class="nav-label">Appareil</span>
+  </button>
+</nav>
+
+<div class="toast" id="toast"></div>
 
 <script>
-  // Tab navigation
-  const tabs = document.querySelectorAll('.tab');
-  const views = document.querySelectorAll('.view');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      views.forEach(v => v.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('view-' + tab.dataset.view).classList.add('active');
-    });
-  });
+/* ============================================================
+   START — Application
+   ============================================================ */
 
-  // Task selection
-  const taskCards = document.querySelectorAll('.task-card');
-  const launchBtn = document.getElementById('launchBtn');
-  const statusDot = document.getElementById('statusDot');
-  const statusText = document.getElementById('statusText');
-  taskCards.forEach(card => {
-    card.addEventListener('click', () => {
-      taskCards.forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-      launchBtn.disabled = false;
-      statusDot.classList.remove('inactive');
-      statusText.innerHTML = '<strong>' + card.querySelector('.task-name').textContent + '</strong> prête à être lancée';
-    });
-  });
-  document.getElementById('addTaskBtn').addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    views.forEach(v => v.classList.remove('active'));
-    document.querySelector('[data-view="prepare"]').classList.add('active');
-    document.getElementById('view-prepare').classList.add('active');
-  });
+const STORAGE_KEY = 'start_app_v1';
 
-  // Template selection
-  document.querySelectorAll('.template').forEach(tpl => {
-    tpl.addEventListener('click', () => {
-      document.querySelectorAll('.template').forEach(t => t.classList.remove('selected'));
-      tpl.classList.add('selected');
-    });
-  });
+const DEFAULT_STATE = {
+  tasks: [],
+  settings: {
+    shortPress: 'next',
+    longPress: 'prev',
+    feedback: 'light',
+    demo: true
+  },
+  currentTaskId: null,
+  currentStepIndex: 0,
+  duration: 5
+};
 
-  // Timer selection
-  document.querySelectorAll('.timer').forEach(t => {
-    t.addEventListener('click', () => {
-      document.querySelectorAll('.timer').forEach(x => x.classList.remove('selected'));
-      t.classList.add('selected');
-    });
-  });
+const TEMPLATES = [
+  {
+    name: "Réviser un cours",
+    icon: "📖",
+    sub: "Mémoriser l'essentiel",
+    steps: [
+      "Relire les titres et sous-titres",
+      "Surligner les idées clés",
+      "Résumer chaque partie en une phrase",
+      "Réciter sans regarder le cours",
+      "Noter ce qui reste flou"
+    ]
+  },
+  {
+    name: "Faire un exercice difficile",
+    icon: "🧩",
+    sub: "Avancer pas à pas",
+    steps: [
+      "Lire l'énoncé entièrement",
+      "Identifier ce qui est demandé",
+      "Lister les données utiles",
+      "Esquisser une première piste",
+      "Rédiger une solution propre"
+    ]
+  },
+  {
+    name: "Rédiger un devoir",
+    icon: "✍️",
+    sub: "Structurer sa pensée",
+    steps: [
+      "Choisir l'angle du sujet",
+      "Écrire le plan en 3 parties",
+      "Rédiger l'introduction",
+      "Développer chaque partie",
+      "Conclure et relire"
+    ]
+  },
+  {
+    name: "Ranger mon bureau",
+    icon: "✨",
+    sub: "Un espace clair",
+    steps: [
+      "Tout retirer du bureau",
+      "Jeter ce qui est inutile",
+      "Essuyer la surface",
+      "Remettre l'essentiel seulement",
+      "Profiler le résultat"
+    ]
+  }
+];
 
-  // Feedback selection
-  document.querySelectorAll('#feedbackOptions .config-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      document.querySelectorAll('#feedbackOptions .config-option').forEach(x => x.classList.remove('selected'));
-      opt.classList.add('selected');
-    });
-  });
+/* ---------- State ---------- */
+let state = loadState();
 
-  // Press cards selection
-  document.querySelectorAll('.press-card').forEach(p => {
-    p.addEventListener('click', () => p.classList.toggle('selected'));
-  });
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return structuredClone(DEFAULT_STATE);
+    const parsed = JSON.parse(raw);
+    return { ...structuredClone(DEFAULT_STATE), ...parsed, settings: { ...DEFAULT_STATE.settings, ...(parsed.settings||{}) } };
+  } catch(e) {
+    return structuredClone(DEFAULT_STATE);
+  }
+}
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
 
-  // Add step
-  document.getElementById('addStepBtn').addEventListener('click', () => {
-    const list = document.getElementById('stepsList');
-    const n = list.children.length + 1;
-    const item = document.createElement('div');
-    item.className = 'step-item';
-    item.innerHTML = '<span class="step-num">' + n + '</span><input type="text" class="step-text" placeholder="Nouvelle action…"><button class="step-remove" aria-label="Supprimer">×</button>';
-    list.appendChild(item);
-    item.querySelector('.step-remove').addEventListener('click', () => {
-      item.remove();
-      renumber();
-    });
+/* ---------- Navigation ---------- */
+const views = {
+  tasks: document.getElementById('view-tasks'),
+  prepare: document.getElementById('view-prepare'),
+  device: document.getElementById('view-device')
+};
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchView(btn.dataset.view));
+});
+function switchView(name) {
+  Object.entries(views).forEach(([k, el]) => {
+    el.classList.toggle('active', k === name);
   });
-  document.querySelectorAll('.step-remove').forEach(b => {
-    b.addEventListener('click', e => {
-      e.target.closest('.step-item').remove();
-      renumber();
-    });
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === name);
   });
-  function renumber(){
-    document.querySelectorAll('#stepsList .step-item').forEach((it,i) => {
-      it.querySelector('.step-num').textContent = i + 1;
-    });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ---------- Toast ---------- */
+const toastEl = document.getElementById('toast');
+let toastTimer;
+function toast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+}
+
+/* ---------- Tasks rendering ---------- */
+const tasksContainer = document.getElementById('tasksContainer');
+
+function renderTasks() {
+  tasksContainer.innerHTML = '';
+  if (state.tasks.length === 0) {
+    tasksContainer.innerHTML = `
+      <div class="empty-state">
+        <span class="emoji">🌱</span>
+        <h3>Aucune tâche pour l'instant</h3>
+        <p>Préparez votre première tâche en quelques secondes.</p>
+        <button class="btn btn-primary" style="margin-top:18px;" onclick="switchView('prepare')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Créer une tâche
+        </button>
+      </div>`;
+    return;
   }
 
-  // Device button press
-  const deviceBtn = document.getElementById('deviceBtn');
-  deviceBtn.addEventListener('click', () => {
-    deviceBtn.classList.remove('pressed');
-    void deviceBtn.offsetWidth;
-    deviceBtn.classList.add('pressed');
+  const grid = document.createElement('div');
+  grid.className = 'tasks-grid';
+
+  state.tasks.forEach(task => {
+    const card = document.createElement('div');
+    card.className = 'task-card';
+    card.tabIndex = 0;
+    if (task.id === state.currentTaskId) card.classList.add('selected');
+    if (task.done) card.classList.add('done');
+
+    card.innerHTML = `
+      <div class="task-title">${escapeHtml(task.name)}</div>
+      <div class="task-meta">
+        <span>📋 ${task.steps.length} étapes</span>
+        <span>⏱ ${task.duration === 0 ? 'Libre' : task.duration + ' min'}</span>
+      </div>
+      <div class="task-actions">
+        <button class="icon-btn" data-act="load" title="Charger sur le boîtier" aria-label="Charger">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="icon-btn danger" data-act="delete" title="Supprimer" aria-label="Supprimer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+        </button>
+      </div>
+    `;
+
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('[data-act]')) return;
+      loadTask(task.id);
+    });
+    card.querySelector('[data-act="load"]').addEventListener('click', (e) => {
+      e.stopPropagation();
+      loadTask(task.id);
+      switchView('device');
+    });
+    card.querySelector('[data-act="delete"]').addEventListener('click', (e) => {
+      e.stopPropagation();
+      deleteTask(task.id);
+    });
+
+    grid.appendChild(card);
   });
+
+  tasksContainer.appendChild(grid);
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+
+function deleteTask(id) {
+  state.tasks = state.tasks.filter(t => t.id !== id);
+  if (state.currentTaskId === id) {
+    state.currentTaskId = null;
+    state.currentStepIndex = 0;
+  }
+  saveState();
+  renderTasks();
+  renderDevice();
+  toast('Tâche supprimée');
+}
+
+/* ---------- Prepare view ---------- */
+const taskNameInput = document.getElementById('taskNameInput');
+const stepsEditor = document.getElementById('stepsEditor');
+const addStepBtn = document.getElementById('addStepBtn');
+const templatesGrid = document.getElementById('templatesGrid');
+const durationPicker = document.getElementById('durationPicker');
+const saveTaskBtn = document.getElementById('saveTaskBtn');
+const clearPrepareBtn = document.getElementById('clearPrepareBtn');
+
+let prepareSteps = [];
+
+function renderTemplates() {
+  templatesGrid.innerHTML = '';
+  TEMPLATES.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'template-chip';
+    btn.innerHTML = `
+      <div class="t-icon">${t.icon}</div>
+      <div class="t-name">${t.name}</div>
+      <div class="t-sub">${t.sub}</div>
+    `;
+    btn.addEventListener('click', () => applyTemplate(t));
+    templatesGrid.appendChild(btn);
+  });
+}
+
+function applyTemplate(t) {
+  taskNameInput.value = t.name;
+  prepareSteps = t.steps.slice();
+  renderSteps();
+  toast('Modèle appliqué');
+}
+
+function renderSteps() {
+  stepsEditor.innerHTML = '';
+  prepareSteps.forEach((step, i) => {
+    const row = document.createElement('div');
+    row.className = 'step-item';
+    row.innerHTML = `
+      <div class="step-num">${i+1}</div>
+      <input type="text" class="step-text" value="${escapeHtml(step)}" data-i="${i}" placeholder="Décrire l'étape" />
+      <button class="step-remove" data-i="${i}" aria-label="Supprimer l'étape">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    `;
+    row.querySelector('.step-text').addEventListener('input', (e) => {
+      prepareSteps[i] = e.target.value;
+    });
+    row.querySelector('.step-remove').addEventListener('click', () => {
+      prepareSteps.splice(i, 1);
+      renderSteps();
+    });
+    stepsEditor.appendChild(row);
+  });
+}
+
+addStepBtn.addEventListener('click', () => {
+  prepareSteps.push('');
+  renderSteps();
+  const inputs = stepsEditor.querySelectorAll('.step-text');
+  inputs[inputs.length-1].focus();
+});
+
+durationPicker.addEventListener('click', (e) => {
+  const opt = e.target.closest('.dur-opt');
+  if (!opt) return;
+  durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.remove('active'));
+  opt.classList.add('active');
+  state.duration = parseInt(opt.dataset.dur, 10);
+});
+
+saveTaskBtn.addEventListener('click', () => {
+  const name = taskNameInput.value.trim();
+  const steps = prepareSteps.filter(s => s && s.trim());
+  if (!name) { toast('Donnez un nom à votre tâche'); taskNameInput.focus(); return; }
+  if (steps.length === 0) { toast('Ajoutez au moins une étape'); return; }
+
+  const task = {
+    id: 't_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+    name,
+    steps,
+    duration: state.duration,
+    done: false,
+    createdAt: Date.now()
+  };
+  state.tasks.unshift(task);
+  saveState();
+  renderTasks();
+  resetPrepare();
+  toast('Tâche enregistrée ✨');
+  switchView('tasks');
+});
+
+clearPrepareBtn.addEventListener('click', resetPrepare);
+
+function resetPrepare() {
+  taskNameInput.value = '';
+  prepareSteps = [];
+  renderSteps();
+}
+
+/* ---------- Voice input ---------- */
+const micBtn = document.getElementById('micBtn');
+micBtn.addEventListener('click', () => {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { toast('Saisie vocale non disponible sur ce navigateur'); return; }
+  const rec = new SR();
+  rec.lang = 'fr-FR';
+  rec.interimResults = false;
+  rec.maxAlternatives = 1;
+  micBtn.classList.add('listening');
+  rec.start();
+  rec.onresult = (e) => {
+    const text = e.results[0][0].transcript;
+    taskNameInput.value = text;
+    toast('Texte reconnu');
+  };
+  rec.onerror = () => toast('Erreur de reconnaissance');
+  rec.onend = () => micBtn.classList.remove('listening');
+});
+
+/* ---------- Device / START button ---------- */
+const startBtn = document.getElementById('startBtn');
+const devLabel = document.getElementById('devLabel');
+const devTask = document.getElementById('devTask');
+const devStep = document.getElementById('devStep');
+const devProgress = document.getElementById('devProgress');
+const devTimer = document.getElementById('devTimer');
+const timerMin = document.getElementById('timerMin');
+const timerSec = document.getElementById('timerSec');
+const deviceHint = document.getElementById('deviceHint');
+
+let timerInterval = null;
+let timerRemaining = 0;
+
+function loadTask(id) {
+  const task = state.tasks.find(t => t.id === id);
+  if (!task) return;
+  state.currentTaskId = id;
+  state.currentStepIndex = 0;
+  saveState();
+  renderTasks();
+  renderDevice();
+  toast('Tâche chargée sur le boîtier');
+}
+
+function getCurrentTask() {
+  return state.tasks.find(t => t.id === state.currentTaskId) || null;
+}
+
+function renderDevice() {
+  const task = getCurrentTask();
+
+  // Demo mode
+  if (!task && state.settings.demo) {
+    devLabel.textContent = 'Démonstration';
+    devTask.textContent = 'Bienvenue';
+    devStep.textContent = 'Chargez une tâche pour commencer';
+    devProgress.innerHTML = '';
+    devTimer.style.display = 'none';
+    stopTimer();
+    startBtn.classList.add('pulse');
+    deviceHint.textContent = 'Mode démonstration. Chargez une tâche depuis l\'écran Tâches.';
+    return;
+  }
+  if (!task) {
+    devLabel.textContent = 'Aucune tâche';
+    devTask.textContent = '—';
+    devStep.textContent = 'Préparez une tâche d\'abord';
+    devProgress.innerHTML = '';
+    devTimer.style.display = 'none';
+    stopTimer();
+    startBtn.classList.remove('pulse');
+    deviceHint.textContent = 'Aucune tâche chargée.';
+    return;
+  }
+
+  startBtn.classList.remove('pulse');
+  devLabel.textContent = 'Étape ' + (state.currentStepIndex + 1) + ' / ' + task.steps.length;
+  devTask.textContent = task.name;
+  devStep.textContent = task.steps[state.currentStepIndex] || 'Terminé';
+
+  // Progress pips
+  devProgress.innerHTML = '';
+  task.steps.forEach((_, i) => {
+    const pip = document.createElement('span');
+    pip.className = 'pip';
+    if (i < state.currentStepIndex) pip.classList.add('done');
+    else if (i === state.currentStepIndex) pip.classList.add('current');
+    devProgress.appendChild(pip);
+  });
+
+  // Timer
+  if (task.duration > 0) {
+    devTimer.style.display = 'flex';
+    if (!timerInterval) startTimer(task.duration * 60);
+  } else {
+    devTimer.style.display = 'none';
+    stopTimer();
+  }
+
+  deviceHint.textContent = 'Appui simple : ' + (state.settings.shortPress === 'next' ? 'étape suivante' : 'étape précédente') + '. Appui long : ' + (state.settings.longPress === 'next' ? 'étape suivante' : 'étape précédente') + '.';
+}
+
+function startTimer(totalSeconds) {
+  stopTimer();
+  timerRemaining = totalSeconds;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timerRemaining--;
+    updateTimerDisplay();
+    if (timerRemaining <= 0) {
+      stopTimer();
+      toast('Session terminée 🎉');
+      if (navigator.vibrate && state.settings.feedback === 'vibration') {
+        navigator.vibrate([200, 100, 200]);
+      }
+    }
+  }, 1000);
+}
+function stopTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+}
+function updateTimerDisplay() {
+  const m = Math.max(0, Math.floor(timerRemaining / 60));
+  const s = Math.max(0, timerRemaining % 60);
+  timerMin.textContent = String(m).padStart(2, '0');
+  timerSec.textContent = String(s).padStart(2, '0');
+}
+
+function advanceStep() {
+  const task = getCurrentTask();
+  if (!task) return;
+  if (state.currentStepIndex < task.steps.length - 1) {
+    state.currentStepIndex++;
+    saveState();
+    renderDevice();
+    feedback();
+  } else {
+    task.done = true;
+    saveState();
+    renderTasks();
+    toast('Tâche terminée ✨');
+    feedback();
+  }
+}
+function previousStep() {
+  const task = getCurrentTask();
+  if (!task) return;
+  if (state.currentStepIndex > 0) {
+    state.currentStepIndex--;
+    saveState();
+    renderDevice();
+    feedback();
+  }
+}
+
+function feedback() {
+  const fb = state.settings.feedback;
+  if (fb === 'vibration' && navigator.vibrate) {
+    navigator.vibrate(30);
+  }
+  if (fb === 'light') {
+    startBtn.animate(
+      [{ filter: 'brightness(1.4)' }, { filter: 'brightness(1)' }],
+      { duration: 300, easing: 'ease-out' }
+    );
+  }
+}
+
+/* START button interactions (short / long press) */
+let pressTimer = null;
+let pressStart = 0;
+let longFired = false;
+const LONG_PRESS_MS = 500;
+
+function onPointerDown(e) {
+  e.preventDefault();
+  pressStart = Date.now();
+  longFired = false;
+  pressTimer = setTimeout(() => {
+    longFired = true;
+    const act = state.settings.longPress;
+    if (act === 'next') advanceStep(); else previousStep();
+  }, LONG_PRESS_MS);
+}
+function onPointerUp(e) {
+  e.preventDefault();
+  clearTimeout(pressTimer);
+  if (longFired) return;
+  const act = state.settings.shortPress;
+  if (act === 'next') advanceStep(); else previousStep();
+}
+function onPointerCancel() { clearTimeout(pressTimer); }
+
+startBtn.addEventListener('pointerdown', onPointerDown);
+startBtn.addEventListener('pointerup', onPointerUp);
+startBtn.addEventListener('pointercancel', onPointerCancel);
+startBtn.addEventListener('pointerleave', onPointerCancel);
+// Keyboard
+startBtn.addEventListener('keydown', (e) => {
+  if (e.key === ' ' || e.key === 'Enter') {
+    e.preventDefault();
+    advanceStep();
+  }
+});
+
+/* ---------- Settings ---------- */
+function bindSegmented(containerId, settingKey) {
+  const container = document.getElementById(containerId);
+  container.addEventListener('click', (e) => {
+    const opt = e.target.closest('.seg-opt');
+    if (!opt) return;
+    container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+    state.settings[settingKey] = opt.dataset.act;
+    saveState();
+    renderDevice();
+  });
+}
+bindSegmented('shortPressSeg', 'shortPress');
+bindSegmented('longPressSeg', 'longPress');
+
+const feedbackSeg = document.getElementById('feedbackSeg');
+feedbackSeg.addEventListener('click', (e) => {
+  const opt = e.target.closest('.seg-opt');
+  if (!opt) return;
+  feedbackSeg.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active'));
+  opt.classList.add('active');
+  state.settings.feedback = opt.dataset.fb;
+  saveState();
+});
+
+const demoToggle = document.getElementById('demoToggle');
+demoToggle.addEventListener('click', () => {
+  state.settings.demo = !state.settings.demo;
+  demoToggle.classList.toggle('on', state.settings.demo);
+  saveState();
+  renderDevice();
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!confirm('Réinitialiser toutes les tâches et réglages ?')) return;
+  state = structuredClone(DEFAULT_STATE);
+  saveState();
+  renderTasks();
+  renderDevice();
+  applySettingsToUI();
+  toast('Données réinitialisées');
+});
+
+function applySettingsToUI() {
+  // segmented
+  document.querySelectorAll('#shortPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.shortPress));
+  document.querySelectorAll('#longPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.longPress));
+  document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.fb === state.settings.feedback));
+  demoToggle.classList.toggle('on', state.settings.demo);
+  // duration
+  durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.toggle('active', parseInt(o.dataset.dur,10) === state.duration));
+}
+
+/* ---------- Init ---------- */
+function init() {
+  renderTemplates();
+  renderSteps();
+  renderTasks();
+  applySettingsToUI();
+  renderDevice();
+}
+init();
+
+// Expose for inline onclick
+window.switchView = switchView;
 </script>
 
 </body>
