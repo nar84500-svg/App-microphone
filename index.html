@@ -67,28 +67,27 @@
     margin-bottom: 36px;
   }
   .brand { display: flex; align-items: center; gap: 12px; }
+  
+  /* NOUVEAU LOGO CLIC EXACT */
   .brand-mark {
-    width: 42px; height: 42px; border-radius: 50%;
-    background: linear-gradient(145deg, #FCEAE3, #F5D4C7);
+    width: 44px; height: 44px;
     display: grid; place-items: center;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 4px 12px rgba(224,133,111,0.25);
-    position: relative;
+    flex-shrink: 0;
   }
-  .brand-mark::after {
-    content: ""; width: 14px; height: 14px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 4px rgba(224,133,111,0.15);
-  }
+  .brand-mark svg { width: 100%; height: 100%; }
+  
   .brand-name {
     font-family: 'Caveat', cursive;
-    font-size: 32px; font-weight: 700;
+    font-size: 36px; 
+    font-weight: 700;
     color: var(--ink);
     letter-spacing: 0.5px;
+    line-height: 1;
   }
   .brand-tag {
     font-size: 12px; color: var(--ink-3);
     font-weight: 500; letter-spacing: 0.5px;
-    margin-top: -2px;
+    margin-top: 2px;
   }
   .topbar-right {
     display: flex; align-items: center; gap: 10px;
@@ -203,11 +202,6 @@
   .task-meta span {
     display: inline-flex; align-items: center; gap: 6px;
   }
-  .task-meta .meta-icon {
-    width: 14px; height: 14px;
-    color: var(--ink-3);
-    flex-shrink: 0;
-  }
   .task-actions {
     display: flex; gap: 8px; margin-top: 14px;
     opacity: 0; transform: translateY(4px);
@@ -274,14 +268,6 @@
     border-color: var(--line);
   }
   .btn-ghost:hover { background: var(--bg-soft); border-color: var(--line-2); }
-  .btn-soft {
-    background: var(--accent-soft); color: var(--accent-2);
-  }
-  .btn-soft:hover { background: #F8D8CC; }
-  .btn-sage {
-    background: var(--sage-soft); color: var(--sage-2);
-  }
-  .btn-sage:hover { background: #DCE7D0; }
   .btn-lg { padding: 16px 30px; font-size: 15px; }
   .btn svg { width: 16px; height: 16px; }
 
@@ -561,7 +547,6 @@
   }
 
   /* ============ SETTINGS ============ */
-  .settings-section { margin-bottom: 24px; }
   .setting-row {
     display: flex; align-items: center; justify-content: space-between;
     gap: 16px;
@@ -702,9 +687,8 @@
   @media (max-width: 600px) {
     .app { padding: 20px 16px 40px; }
     .page-title { font-size: 40px; }
-    .brand-name { font-size: 26px; }
-    .brand-mark { width: 36px; height: 36px; }
-    .brand-mark::after { width: 12px; height: 12px; }
+    .brand-name { font-size: 28px; }
+    .brand-mark { width: 38px; height: 38px; }
     .status-pill { font-size: 11px; padding: 6px 10px; }
     .device { width: 240px; padding: 22px; }
     .start-button { width: 96px; height: 96px; font-size: 24px; }
@@ -729,12 +713,19 @@
 
 <div class="app">
 
-  <!-- TOP BAR -->
+  <!-- TOP BAR AVEC NOUVEAU LOGO CLIC -->
   <header class="topbar">
     <div class="brand">
-      <div class="brand-mark" aria-hidden="true"></div>
+      <div class="brand-mark">
+        <!-- Icône exacte de l'image : Carré arrondi, C gris, triangle terracotta -->
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="44" height="44" rx="12" fill="#FDFBF8" stroke="#EDE7DF" stroke-width="1"/>
+          <path d="M28 15A10 10 0 1 0 28 29" stroke="#2B2A28" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M20 17L27 22L20 27V17Z" fill="#E0856F"/>
+        </svg>
+      </div>
       <div>
-        <div class="brand-name">start</div>
+        <div class="brand-name">Clic</div>
         <div class="brand-tag">Commencez simplement</div>
       </div>
     </div>
@@ -944,18 +935,10 @@ const STORAGE_KEY = 'start_app_v1';
 
 const DEFAULT_STATE = {
   tasks: [],
-  settings: {
-    shortPress: 'next',
-    longPress: 'prev',
-    feedback: 'light',
-    demo: true
-  },
-  currentTaskId: null,
-  currentStepIndex: 0,
-  duration: 5
+  settings: { shortPress: 'next', longPress: 'prev', feedback: 'light', demo: true },
+  currentTaskId: null, currentStepIndex: 0, duration: 5
 };
 
-/* Icônes SVG Lucide-style (fines, monochromes) */
 const ICONS = {
   book: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
   target: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
@@ -963,553 +946,164 @@ const ICONS = {
   archive: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>`,
   seedling: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>`,
   check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
-  sparkle: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path d="M19 15l.75 2.25L22 18l-2.25.75L19 21l-.75-2.25L16 18l2.25-.75L19 15z"/><path d="M5 15l.5 1.5L7 17l-1.5.5L5 19l-.5-1.5L3 17l1.5-.5L5 15z"/></svg>`,
+  sparkle: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path d="M19 15l.75 2.25L22 18l-2.25.75L19 21l-.75-2.25L16 18l2.25-.75L19 15z"/></svg>`,
   list: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`,
   clock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
   arrowRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
   trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>`,
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
-  x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
-  mic: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>`,
-  tasks: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
-  prepare: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
-  device: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>`
+  x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
 };
 
 const TEMPLATES = [
-  {
-    name: "Réviser un cours",
-    icon: ICONS.book,
-    sub: "Mémoriser l'essentiel",
-    steps: [
-      "Relire les titres et sous-titres",
-      "Surligner les idées clés",
-      "Résumer chaque partie en une phrase",
-      "Réciter sans regarder le cours",
-      "Noter ce qui reste flou"
-    ]
-  },
-  {
-    name: "Faire un exercice difficile",
-    icon: ICONS.target,
-    sub: "Avancer pas à pas",
-    steps: [
-      "Lire l'énoncé entièrement",
-      "Identifier ce qui est demandé",
-      "Lister les données utiles",
-      "Esquisser une première piste",
-      "Rédiger une solution propre"
-    ]
-  },
-  {
-    name: "Rédiger un devoir",
-    icon: ICONS.pen,
-    sub: "Structurer sa pensée",
-    steps: [
-      "Choisir l'angle du sujet",
-      "Écrire le plan en 3 parties",
-      "Rédiger l'introduction",
-      "Développer chaque partie",
-      "Conclure et relire"
-    ]
-  },
-  {
-    name: "Ranger mon bureau",
-    icon: ICONS.archive,
-    sub: "Un espace clair",
-    steps: [
-      "Tout retirer du bureau",
-      "Jeter ce qui est inutile",
-      "Essuyer la surface",
-      "Remettre l'essentiel seulement",
-      "Profiler le résultat"
-    ]
-  }
+  { name: "Réviser un cours", icon: ICONS.book, sub: "Mémoriser l'essentiel", steps: ["Relire les titres et sous-titres", "Surligner les idées clés", "Résumer chaque partie en une phrase", "Réciter sans regarder le cours", "Noter ce qui reste flou"] },
+  { name: "Faire un exercice difficile", icon: ICONS.target, sub: "Avancer pas à pas", steps: ["Lire l'énoncé entièrement", "Identifier ce qui est demandé", "Lister les données utiles", "Esquisser une première piste", "Rédiger une solution propre"] },
+  { name: "Rédiger un devoir", icon: ICONS.pen, sub: "Structurer sa pensée", steps: ["Choisir l'angle du sujet", "Écrire le plan en 3 parties", "Rédiger l'introduction", "Développer chaque partie", "Conclure et relire"] },
+  { name: "Ranger mon bureau", icon: ICONS.archive, sub: "Un espace clair", steps: ["Tout retirer du bureau", "Jeter ce qui est inutile", "Essuyer la surface", "Remettre l'essentiel seulement", "Profiler le résultat"] }
 ];
 
 let state = loadState();
-
 function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return structuredClone(DEFAULT_STATE);
-    const parsed = JSON.parse(raw);
-    return { ...structuredClone(DEFAULT_STATE), ...parsed, settings: { ...DEFAULT_STATE.settings, ...(parsed.settings||{}) } };
-  } catch(e) {
-    return structuredClone(DEFAULT_STATE);
-  }
+  try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return structuredClone(DEFAULT_STATE); const p = JSON.parse(raw); return { ...structuredClone(DEFAULT_STATE), ...p, settings: { ...DEFAULT_STATE.settings, ...(p.settings||{}) } }; } catch(e) { return structuredClone(DEFAULT_STATE); }
 }
-function saveState() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
-}
+function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {} }
 
-const views = {
-  tasks: document.getElementById('view-tasks'),
-  prepare: document.getElementById('view-prepare'),
-  device: document.getElementById('view-device')
-};
-document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => switchView(btn.dataset.view));
-});
+const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device') };
+document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
 function switchView(name) {
-  Object.entries(views).forEach(([k, el]) => {
-    el.classList.toggle('active', k === name);
-  });
-  document.querySelectorAll('.nav-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.view === name);
-  });
+  Object.entries(views).forEach(([k, el]) => el.classList.toggle('active', k === name));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-const toastEl = document.getElementById('toast');
-let toastTimer;
+const toastEl = document.getElementById('toast'); let toastTimer;
 function toast(msg, iconKey = 'check') {
   toastEl.innerHTML = `${ICONS[iconKey] || ICONS.check}<span>${msg}</span>`;
-  toastEl.classList.add('show');
-  clearTimeout(toastTimer);
+  toastEl.classList.add('show'); clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
 }
 
 const tasksContainer = document.getElementById('tasksContainer');
-
 function renderTasks() {
   tasksContainer.innerHTML = '';
   if (state.tasks.length === 0) {
-    tasksContainer.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">${ICONS.seedling}</div>
-        <h3>Aucune tâche pour l'instant</h3>
-        <p>Préparez votre première tâche en quelques secondes.</p>
-        <button class="btn btn-primary" style="margin-top:18px;" onclick="switchView('prepare')">
-          ${ICONS.plus}
-          Créer une tâche
-        </button>
-      </div>`;
+    tasksContainer.innerHTML = `<div class="empty-state"><div class="empty-icon">${ICONS.seedling}</div><h3>Aucune tâche pour l'instant</h3><p>Préparez votre première tâche en quelques secondes.</p><button class="btn btn-primary" style="margin-top:18px;" onclick="switchView('prepare')">${ICONS.plus}Créer une tâche</button></div>`;
     return;
   }
-
-  const grid = document.createElement('div');
-  grid.className = 'tasks-grid';
-
+  const grid = document.createElement('div'); grid.className = 'tasks-grid';
   state.tasks.forEach(task => {
-    const card = document.createElement('div');
-    card.className = 'task-card';
-    card.tabIndex = 0;
+    const card = document.createElement('div'); card.className = 'task-card'; card.tabIndex = 0;
     if (task.id === state.currentTaskId) card.classList.add('selected');
     if (task.done) card.classList.add('done');
-
-    card.innerHTML = `
-      <div class="task-title">${escapeHtml(task.name)}</div>
-      <div class="task-meta">
-        <span>${ICONS.list}<span class="meta-icon" style="display:none"></span>${task.steps.length} étapes</span>
-        <span>${ICONS.clock}<span class="meta-icon" style="display:none"></span>${task.duration === 0 ? 'Libre' : task.duration + ' min'}</span>
-      </div>
-      <div class="task-actions">
-        <button class="icon-btn" data-act="load" title="Charger sur le boîtier" aria-label="Charger">
-          ${ICONS.arrowRight}
-        </button>
-        <button class="icon-btn danger" data-act="delete" title="Supprimer" aria-label="Supprimer">
-          ${ICONS.trash}
-        </button>
-      </div>
-    `;
-
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('[data-act]')) return;
-      loadTask(task.id);
-    });
-    card.querySelector('[data-act="load"]').addEventListener('click', (e) => {
-      e.stopPropagation();
-      loadTask(task.id);
-      switchView('device');
-    });
-    card.querySelector('[data-act="delete"]').addEventListener('click', (e) => {
-      e.stopPropagation();
-      deleteTask(task.id);
-    });
-
+    card.innerHTML = `<div class="task-title">${escapeHtml(task.name)}</div><div class="task-meta"><span>${ICONS.list} ${task.steps.length} étapes</span><span>${ICONS.clock} ${task.duration === 0 ? 'Libre' : task.duration + ' min'}</span></div><div class="task-actions"><button class="icon-btn" data-act="load" title="Charger" aria-label="Charger">${ICONS.arrowRight}</button><button class="icon-btn danger" data-act="delete" title="Supprimer" aria-label="Supprimer">${ICONS.trash}</button></div>`;
+    card.addEventListener('click', (e) => { if (e.target.closest('[data-act]')) return; loadTask(task.id); });
+    card.querySelector('[data-act="load"]').addEventListener('click', (e) => { e.stopPropagation(); loadTask(task.id); switchView('device'); });
+    card.querySelector('[data-act="delete"]').addEventListener('click', (e) => { e.stopPropagation(); deleteTask(task.id); });
     grid.appendChild(card);
   });
-
   tasksContainer.appendChild(grid);
 }
-
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-}
-
+function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
 function deleteTask(id) {
   state.tasks = state.tasks.filter(t => t.id !== id);
-  if (state.currentTaskId === id) {
-    state.currentTaskId = null;
-    state.currentStepIndex = 0;
-  }
-  saveState();
-  renderTasks();
-  renderDevice();
-  toast('Tâche supprimée', 'check');
+  if (state.currentTaskId === id) { state.currentTaskId = null; state.currentStepIndex = 0; }
+  saveState(); renderTasks(); renderDevice(); toast('Tâche supprimée');
 }
 
-const taskNameInput = document.getElementById('taskNameInput');
-const stepsEditor = document.getElementById('stepsEditor');
-const addStepBtn = document.getElementById('addStepBtn');
-const templatesGrid = document.getElementById('templatesGrid');
-const durationPicker = document.getElementById('durationPicker');
-const saveTaskBtn = document.getElementById('saveTaskBtn');
-const clearPrepareBtn = document.getElementById('clearPrepareBtn');
-
+const taskNameInput = document.getElementById('taskNameInput'), stepsEditor = document.getElementById('stepsEditor'), addStepBtn = document.getElementById('addStepBtn'), templatesGrid = document.getElementById('templatesGrid'), durationPicker = document.getElementById('durationPicker'), saveTaskBtn = document.getElementById('saveTaskBtn'), clearPrepareBtn = document.getElementById('clearPrepareBtn');
 let prepareSteps = [];
 
 function renderTemplates() {
   templatesGrid.innerHTML = '';
   TEMPLATES.forEach(t => {
-    const btn = document.createElement('button');
-    btn.className = 'template-chip';
-    btn.innerHTML = `
-      <div class="t-icon">${t.icon}</div>
-      <div class="t-name">${t.name}</div>
-      <div class="t-sub">${t.sub}</div>
-    `;
-    btn.addEventListener('click', () => applyTemplate(t));
-    templatesGrid.appendChild(btn);
+    const btn = document.createElement('button'); btn.className = 'template-chip';
+    btn.innerHTML = `<div class="t-icon">${t.icon}</div><div class="t-name">${t.name}</div><div class="t-sub">${t.sub}</div>`;
+    btn.addEventListener('click', () => applyTemplate(t)); templatesGrid.appendChild(btn);
   });
 }
-
-function applyTemplate(t) {
-  taskNameInput.value = t.name;
-  prepareSteps = t.steps.slice();
-  renderSteps();
-  toast('Modèle appliqué', 'check');
-}
-
+function applyTemplate(t) { taskNameInput.value = t.name; prepareSteps = t.steps.slice(); renderSteps(); toast('Modèle appliqué'); }
 function renderSteps() {
   stepsEditor.innerHTML = '';
   prepareSteps.forEach((step, i) => {
-    const row = document.createElement('div');
-    row.className = 'step-item';
-    row.innerHTML = `
-      <div class="step-num">${i+1}</div>
-      <input type="text" class="step-text" value="${escapeHtml(step)}" data-i="${i}" placeholder="Décrire l'étape" />
-      <button class="step-remove" data-i="${i}" aria-label="Supprimer l'étape">
-        ${ICONS.x}
-      </button>
-    `;
-    row.querySelector('.step-text').addEventListener('input', (e) => {
-      prepareSteps[i] = e.target.value;
-    });
-    row.querySelector('.step-remove').addEventListener('click', () => {
-      prepareSteps.splice(i, 1);
-      renderSteps();
-    });
+    const row = document.createElement('div'); row.className = 'step-item';
+    row.innerHTML = `<div class="step-num">${i+1}</div><input type="text" class="step-text" value="${escapeHtml(step)}" data-i="${i}" placeholder="Décrire l'étape" /><button class="step-remove" data-i="${i}" aria-label="Supprimer">${ICONS.x}</button>`;
+    row.querySelector('.step-text').addEventListener('input', (e) => { prepareSteps[i] = e.target.value; });
+    row.querySelector('.step-remove').addEventListener('click', () => { prepareSteps.splice(i, 1); renderSteps(); });
     stepsEditor.appendChild(row);
   });
 }
-
-addStepBtn.addEventListener('click', () => {
-  prepareSteps.push('');
-  renderSteps();
-  const inputs = stepsEditor.querySelectorAll('.step-text');
-  inputs[inputs.length-1].focus();
-});
-
-durationPicker.addEventListener('click', (e) => {
-  const opt = e.target.closest('.dur-opt');
-  if (!opt) return;
-  durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.remove('active'));
-  opt.classList.add('active');
-  state.duration = parseInt(opt.dataset.dur, 10);
-});
-
+addStepBtn.addEventListener('click', () => { prepareSteps.push(''); renderSteps(); stepsEditor.querySelectorAll('.step-text')[stepsEditor.querySelectorAll('.step-text').length-1].focus(); });
+durationPicker.addEventListener('click', (e) => { const opt = e.target.closest('.dur-opt'); if (!opt) return; durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.duration = parseInt(opt.dataset.dur, 10); });
 saveTaskBtn.addEventListener('click', () => {
-  const name = taskNameInput.value.trim();
-  const steps = prepareSteps.filter(s => s && s.trim());
-  if (!name) { toast('Donnez un nom à votre tâche', 'check'); taskNameInput.focus(); return; }
-  if (steps.length === 0) { toast('Ajoutez au moins une étape', 'check'); return; }
-
-  const task = {
-    id: 't_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
-    name,
-    steps,
-    duration: state.duration,
-    done: false,
-    createdAt: Date.now()
-  };
-  state.tasks.unshift(task);
-  saveState();
-  renderTasks();
-  resetPrepare();
-  toast('Tâche enregistrée', 'sparkle');
-  switchView('tasks');
+  const name = taskNameInput.value.trim(), steps = prepareSteps.filter(s => s && s.trim());
+  if (!name) { toast('Donnez un nom à votre tâche'); taskNameInput.focus(); return; }
+  if (steps.length === 0) { toast('Ajoutez au moins une étape'); return; }
+  state.tasks.unshift({ id: 't_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), name, steps, duration: state.duration, done: false, createdAt: Date.now() });
+  saveState(); renderTasks(); resetPrepare(); toast('Tâche enregistrée', 'sparkle'); switchView('tasks');
 });
-
 clearPrepareBtn.addEventListener('click', resetPrepare);
-
-function resetPrepare() {
-  taskNameInput.value = '';
-  prepareSteps = [];
-  renderSteps();
-}
+function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; renderSteps(); }
 
 const micBtn = document.getElementById('micBtn');
 micBtn.addEventListener('click', () => {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { toast('Saisie vocale non disponible', 'check'); return; }
-  const rec = new SR();
-  rec.lang = 'fr-FR';
-  rec.interimResults = false;
-  rec.maxAlternatives = 1;
-  micBtn.classList.add('listening');
-  rec.start();
-  rec.onresult = (e) => {
-    const text = e.results[0][0].transcript;
-    taskNameInput.value = text;
-    toast('Texte reconnu', 'check');
-  };
-  rec.onerror = () => toast('Erreur de reconnaissance', 'check');
+  if (!SR) { toast('Saisie vocale non disponible'); return; }
+  const rec = new SR(); rec.lang = 'fr-FR'; rec.interimResults = false;
+  micBtn.classList.add('listening'); rec.start();
+  rec.onresult = (e) => { taskNameInput.value = e.results[0][0].transcript; toast('Texte reconnu'); };
+  rec.onerror = () => toast('Erreur de reconnaissance');
   rec.onend = () => micBtn.classList.remove('listening');
 });
 
-const startBtn = document.getElementById('startBtn');
-const devLabel = document.getElementById('devLabel');
-const devTask = document.getElementById('devTask');
-const devStep = document.getElementById('devStep');
-const devProgress = document.getElementById('devProgress');
-const devTimer = document.getElementById('devTimer');
-const timerMin = document.getElementById('timerMin');
-const timerSec = document.getElementById('timerSec');
-const deviceHint = document.getElementById('deviceHint');
-
-let timerInterval = null;
-let timerRemaining = 0;
+const startBtn = document.getElementById('startBtn'), devLabel = document.getElementById('devLabel'), devTask = document.getElementById('devTask'), devStep = document.getElementById('devStep'), devProgress = document.getElementById('devProgress'), devTimer = document.getElementById('devTimer'), timerMin = document.getElementById('timerMin'), timerSec = document.getElementById('timerSec'), deviceHint = document.getElementById('deviceHint');
+let timerInterval = null, timerRemaining = 0;
 
 function loadTask(id) {
-  const task = state.tasks.find(t => t.id === id);
-  if (!task) return;
-  state.currentTaskId = id;
-  state.currentStepIndex = 0;
-  saveState();
-  renderTasks();
-  renderDevice();
-  toast('Tâche chargée sur le boîtier', 'check');
+  const task = state.tasks.find(t => t.id === id); if (!task) return;
+  state.currentTaskId = id; state.currentStepIndex = 0; saveState(); renderTasks(); renderDevice(); toast('Tâche chargée sur le boîtier');
 }
-
-function getCurrentTask() {
-  return state.tasks.find(t => t.id === state.currentTaskId) || null;
-}
-
+function getCurrentTask() { return state.tasks.find(t => t.id === state.currentTaskId) || null; }
 function renderDevice() {
   const task = getCurrentTask();
-
-  if (!task && state.settings.demo) {
-    devLabel.textContent = 'Démonstration';
-    devTask.textContent = 'Bienvenue';
-    devStep.textContent = 'Chargez une tâche pour commencer';
-    devProgress.innerHTML = '';
-    devTimer.style.display = 'none';
-    stopTimer();
-    startBtn.classList.add('pulse');
-    deviceHint.textContent = 'Mode démonstration. Chargez une tâche depuis l\'écran Tâches.';
-    return;
-  }
-  if (!task) {
-    devLabel.textContent = 'Aucune tâche';
-    devTask.textContent = '—';
-    devStep.textContent = 'Préparez une tâche d\'abord';
-    devProgress.innerHTML = '';
-    devTimer.style.display = 'none';
-    stopTimer();
-    startBtn.classList.remove('pulse');
-    deviceHint.textContent = 'Aucune tâche chargée.';
-    return;
-  }
-
-  startBtn.classList.remove('pulse');
-  devLabel.textContent = 'Étape ' + (state.currentStepIndex + 1) + ' / ' + task.steps.length;
-  devTask.textContent = task.name;
-  devStep.textContent = task.steps[state.currentStepIndex] || 'Terminé';
-
-  devProgress.innerHTML = '';
-  task.steps.forEach((_, i) => {
-    const pip = document.createElement('span');
-    pip.className = 'pip';
-    if (i < state.currentStepIndex) pip.classList.add('done');
-    else if (i === state.currentStepIndex) pip.classList.add('current');
-    devProgress.appendChild(pip);
-  });
-
-  if (task.duration > 0) {
-    devTimer.style.display = 'flex';
-    if (!timerInterval) startTimer(task.duration * 60);
-  } else {
-    devTimer.style.display = 'none';
-    stopTimer();
-  }
-
+  if (!task && state.settings.demo) { devLabel.textContent = 'Démonstration'; devTask.textContent = 'Bienvenue'; devStep.textContent = 'Chargez une tâche pour commencer'; devProgress.innerHTML = ''; devTimer.style.display = 'none'; stopTimer(); startBtn.classList.add('pulse'); deviceHint.textContent = 'Mode démonstration. Chargez une tâche depuis l\'écran Tâches.'; return; }
+  if (!task) { devLabel.textContent = 'Aucune tâche'; devTask.textContent = '—'; devStep.textContent = 'Préparez une tâche d\'abord'; devProgress.innerHTML = ''; devTimer.style.display = 'none'; stopTimer(); startBtn.classList.remove('pulse'); deviceHint.textContent = 'Aucune tâche chargée.'; return; }
+  startBtn.classList.remove('pulse'); devLabel.textContent = 'Étape ' + (state.currentStepIndex + 1) + ' / ' + task.steps.length; devTask.textContent = task.name; devStep.textContent = task.steps[state.currentStepIndex] || 'Terminé';
+  devProgress.innerHTML = ''; task.steps.forEach((_, i) => { const pip = document.createElement('span'); pip.className = 'pip'; if (i < state.currentStepIndex) pip.classList.add('done'); else if (i === state.currentStepIndex) pip.classList.add('current'); devProgress.appendChild(pip); });
+  if (task.duration > 0) { devTimer.style.display = 'flex'; if (!timerInterval) startTimer(task.duration * 60); } else { devTimer.style.display = 'none'; stopTimer(); }
   deviceHint.textContent = 'Appui simple : ' + (state.settings.shortPress === 'next' ? 'étape suivante' : 'étape précédente') + '. Appui long : ' + (state.settings.longPress === 'next' ? 'étape suivante' : 'étape précédente') + '.';
 }
+function startTimer(totalSeconds) { stopTimer(); timerRemaining = totalSeconds; updateTimerDisplay(); timerInterval = setInterval(() => { timerRemaining--; updateTimerDisplay(); if (timerRemaining <= 0) { stopTimer(); toast('Session terminée', 'sparkle'); if (navigator.vibrate && state.settings.feedback === 'vibration') navigator.vibrate([200, 100, 200]); } }, 1000); }
+function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
+function updateTimerDisplay() { const m = Math.max(0, Math.floor(timerRemaining / 60)), s = Math.max(0, timerRemaining % 60); timerMin.textContent = String(m).padStart(2, '0'); timerSec.textContent = String(s).padStart(2, '0'); }
+function advanceStep() { const task = getCurrentTask(); if (!task) return; if (state.currentStepIndex < task.steps.length - 1) { state.currentStepIndex++; saveState(); renderDevice(); feedback(); } else { task.done = true; saveState(); renderTasks(); toast('Tâche terminée', 'sparkle'); feedback(); } }
+function previousStep() { const task = getCurrentTask(); if (!task) return; if (state.currentStepIndex > 0) { state.currentStepIndex--; saveState(); renderDevice(); feedback(); } }
+function feedback() { const fb = state.settings.feedback; if (fb === 'vibration' && navigator.vibrate) navigator.vibrate(30); if (fb === 'light') startBtn.animate([{ filter: 'brightness(1.4)' }, { filter: 'brightness(1)' }], { duration: 300, easing: 'ease-out' }); }
 
-function startTimer(totalSeconds) {
-  stopTimer();
-  timerRemaining = totalSeconds;
-  updateTimerDisplay();
-  timerInterval = setInterval(() => {
-    timerRemaining--;
-    updateTimerDisplay();
-    if (timerRemaining <= 0) {
-      stopTimer();
-      toast('Session terminée', 'sparkle');
-      if (navigator.vibrate && state.settings.feedback === 'vibration') {
-        navigator.vibrate([200, 100, 200]);
-      }
-    }
-  }, 1000);
-}
-function stopTimer() {
-  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
-}
-function updateTimerDisplay() {
-  const m = Math.max(0, Math.floor(timerRemaining / 60));
-  const s = Math.max(0, timerRemaining % 60);
-  timerMin.textContent = String(m).padStart(2, '0');
-  timerSec.textContent = String(s).padStart(2, '0');
-}
-
-function advanceStep() {
-  const task = getCurrentTask();
-  if (!task) return;
-  if (state.currentStepIndex < task.steps.length - 1) {
-    state.currentStepIndex++;
-    saveState();
-    renderDevice();
-    feedback();
-  } else {
-    task.done = true;
-    saveState();
-    renderTasks();
-    toast('Tâche terminée', 'sparkle');
-    feedback();
-  }
-}
-function previousStep() {
-  const task = getCurrentTask();
-  if (!task) return;
-  if (state.currentStepIndex > 0) {
-    state.currentStepIndex--;
-    saveState();
-    renderDevice();
-    feedback();
-  }
-}
-
-function feedback() {
-  const fb = state.settings.feedback;
-  if (fb === 'vibration' && navigator.vibrate) {
-    navigator.vibrate(30);
-  }
-  if (fb === 'light') {
-    startBtn.animate(
-      [{ filter: 'brightness(1.4)' }, { filter: 'brightness(1)' }],
-      { duration: 300, easing: 'ease-out' }
-    );
-  }
-}
-
-let pressTimer = null;
-let pressStart = 0;
-let longFired = false;
-const LONG_PRESS_MS = 500;
-
-function onPointerDown(e) {
-  e.preventDefault();
-  pressStart = Date.now();
-  longFired = false;
-  pressTimer = setTimeout(() => {
-    longFired = true;
-    const act = state.settings.longPress;
-    if (act === 'next') advanceStep(); else previousStep();
-  }, LONG_PRESS_MS);
-}
-function onPointerUp(e) {
-  e.preventDefault();
-  clearTimeout(pressTimer);
-  if (longFired) return;
-  const act = state.settings.shortPress;
-  if (act === 'next') advanceStep(); else previousStep();
-}
+let pressTimer = null, longFired = false;
+function onPointerDown(e) { e.preventDefault(); longFired = false; pressTimer = setTimeout(() => { longFired = true; const act = state.settings.longPress; if (act === 'next') advanceStep(); else previousStep(); }, 500); }
+function onPointerUp(e) { e.preventDefault(); clearTimeout(pressTimer); if (longFired) return; const act = state.settings.shortPress; if (act === 'next') advanceStep(); else previousStep(); }
 function onPointerCancel() { clearTimeout(pressTimer); }
-
-startBtn.addEventListener('pointerdown', onPointerDown);
-startBtn.addEventListener('pointerup', onPointerUp);
-startBtn.addEventListener('pointercancel', onPointerCancel);
-startBtn.addEventListener('pointerleave', onPointerCancel);
-startBtn.addEventListener('keydown', (e) => {
-  if (e.key === ' ' || e.key === 'Enter') {
-    e.preventDefault();
-    advanceStep();
-  }
-});
+startBtn.addEventListener('pointerdown', onPointerDown); startBtn.addEventListener('pointerup', onPointerUp); startBtn.addEventListener('pointercancel', onPointerCancel); startBtn.addEventListener('pointerleave', onPointerCancel);
+startBtn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); advanceStep(); } });
 
 function bindSegmented(containerId, settingKey) {
   const container = document.getElementById(containerId);
-  container.addEventListener('click', (e) => {
-    const opt = e.target.closest('.seg-opt');
-    if (!opt) return;
-    container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active'));
-    opt.classList.add('active');
-    state.settings[settingKey] = opt.dataset.act;
-    saveState();
-    renderDevice();
-  });
+  container.addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings[settingKey] = opt.dataset.act; saveState(); renderDevice(); });
 }
-bindSegmented('shortPressSeg', 'shortPress');
-bindSegmented('longPressSeg', 'longPress');
-
-const feedbackSeg = document.getElementById('feedbackSeg');
-feedbackSeg.addEventListener('click', (e) => {
-  const opt = e.target.closest('.seg-opt');
-  if (!opt) return;
-  feedbackSeg.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active'));
-  opt.classList.add('active');
-  state.settings.feedback = opt.dataset.fb;
-  saveState();
-});
-
-const demoToggle = document.getElementById('demoToggle');
-demoToggle.addEventListener('click', () => {
-  state.settings.demo = !state.settings.demo;
-  demoToggle.classList.toggle('on', state.settings.demo);
-  saveState();
-  renderDevice();
-});
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-  if (!confirm('Réinitialiser toutes les tâches et réglages ?')) return;
-  state = structuredClone(DEFAULT_STATE);
-  saveState();
-  renderTasks();
-  renderDevice();
-  applySettingsToUI();
-  toast('Données réinitialisées', 'check');
-});
-
+bindSegmented('shortPressSeg', 'shortPress'); bindSegmented('longPressSeg', 'longPress');
+document.getElementById('feedbackSeg').addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings.feedback = opt.dataset.fb; saveState(); });
+document.getElementById('demoToggle').addEventListener('click', () => { state.settings.demo = !state.settings.demo; document.getElementById('demoToggle').classList.toggle('on', state.settings.demo); saveState(); renderDevice(); });
+document.getElementById('resetBtn').addEventListener('click', () => { if (!confirm('Réinitialiser toutes les tâches et réglages ?')) return; state = structuredClone(DEFAULT_STATE); saveState(); renderTasks(); renderDevice(); applySettingsToUI(); toast('Données réinitialisées'); });
 function applySettingsToUI() {
   document.querySelectorAll('#shortPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.shortPress));
   document.querySelectorAll('#longPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.longPress));
   document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.fb === state.settings.feedback));
-  demoToggle.classList.toggle('on', state.settings.demo);
+  document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
   durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.toggle('active', parseInt(o.dataset.dur,10) === state.duration));
 }
 
-function init() {
-  renderTemplates();
-  renderSteps();
-  renderTasks();
-  applySettingsToUI();
-  renderDevice();
-}
-init();
-
-window.switchView = switchView;
+function init() { renderTemplates(); renderSteps(); renderTasks(); applySettingsToUI(); renderDevice(); }
+init(); window.switchView = switchView;
 </script>
 
 </body>
