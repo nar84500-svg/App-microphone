@@ -3,895 +3,956 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clic — Le bouton qui simplifie tout</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>START</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
   :root{
-    --cream:#FAF8F5;
-    --warm-white:#F5F0EB;
-    --dark:#1E1E24;
-    --dark-soft:#2D2D35;
-    --terracotta:#E8734A;
-    --terracotta-light:#F29070;
-    --terracotta-dark:#D4603A;
+    --bg:#FAF9F6;
+    --card:#FFFFFF;
+    --border:#ECEAE6;
+    --border-strong:#E0DCD6;
+    --ink:#2B2B32;
+    --ink-soft:#6B6B72;
+    --ink-faint:#9A9AA2;
+    --coral:#E8734A;
+    --coral-soft:#F29070;
+    --coral-pale:#FBEBE5;
     --sage:#8FA88E;
-    --sage-light:#B5C9B4;
-    --text:#1E1E24;
-    --text-light:#6B6B72;
-    --radius:24px;
-    --radius-lg:40px;
+    --shadow-sm:0 1px 2px rgba(43,43,50,0.04);
+    --shadow-md:0 4px 16px rgba(43,43,50,0.05);
+    --shadow-lg:0 12px 40px rgba(43,43,50,0.08);
+    --radius:18px;
+    --radius-lg:26px;
   }
-  html{scroll-behavior:smooth;overflow-x:hidden}
+  html{scroll-behavior:smooth}
   body{
-    font-family:'Inter',sans-serif;
-    background:var(--cream);
-    color:var(--text);
-    line-height:1.6;
+    font-family:'Inter',-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+    font-weight:400;
     -webkit-font-smoothing:antialiased;
+    min-height:100vh;
   }
 
-  /* NAV */
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:20px 48px;
-    background:rgba(250,248,245,0.85);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    transition:all .3s ease;
+  /* ===== HEADER ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,249,246,0.92);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
   }
-  nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,0.04)}
-  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--dark)}
-  .nav-logo-icon{
-    width:40px;height:40px;
-    background:white;
+  .header-inner{
+    max-width:1100px;margin:0 auto;
+    padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+  .logo-mark{
+    width:42px;height:42px;
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:12px;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    box-shadow:var(--shadow-sm);
   }
-  .nav-logo-icon svg{width:24px;height:24px}
-  .nav-logo span{font-family:'Caveat',cursive;font-size:1.6rem;font-weight:700}
-  .nav-links{display:flex;gap:36px;align-items:center}
-  .nav-links a{
-    text-decoration:none;color:var(--text-light);
-    font-size:.9rem;font-weight:400;
-    transition:color .2s;
+  .logo-mark svg{width:24px;height:24px;display:block}
+  .logo-text{
+    font-family:'Fraunces',serif;
+    font-size:1.35rem;font-weight:500;
+    letter-spacing:-0.01em;
   }
-  .nav-links a:hover{color:var(--dark)}
-  .nav-cta{
-    background:var(--terracotta);color:white!important;
-    padding:10px 24px;border-radius:50px;
-    font-weight:500!important;
-    transition:all .25s ease!important;
+  .logo-text span{color:var(--coral);font-style:italic}
+
+  /* ===== NAV TABS ===== */
+  nav.tabs{
+    max-width:1100px;margin:0 auto;
+    padding:0 32px;
+    display:flex;gap:6px;
   }
-  .nav-cta:hover{
-    background:var(--terracotta-dark)!important;
-    transform:translateY(-1px);
-    box-shadow:0 4px 16px rgba(232,115,74,0.3);
+  .tab{
+    padding:14px 22px;
+    font-size:.92rem;font-weight:400;
+    color:var(--ink-soft);
+    background:transparent;
+    border:none;cursor:pointer;
+    border-bottom:2px solid transparent;
+    transition:all .2s ease;
+    font-family:inherit;
+  }
+  .tab:hover{color:var(--ink)}
+  .tab.active{
+    color:var(--ink);
+    font-weight:500;
+    border-bottom-color:var(--coral);
   }
 
-  /* HERO */
-  .hero{
-    min-height:100vh;
-    display:flex;align-items:center;justify-content:center;
-    flex-direction:column;
-    padding:120px 48px 80px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
+  /* ===== MAIN ===== */
+  main{
+    max-width:1100px;margin:0 auto;
+    padding:48px 32px 80px;
   }
-  .hero::before{
+  .view{display:none;animation:fadeIn .4s ease}
+  .view.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  .view-header{margin-bottom:40px}
+  .view-label{
+    font-family:'Fraunces',serif;
+    font-style:italic;font-weight:400;
+    font-size:.95rem;color:var(--coral);
+    margin-bottom:10px;display:block;
+  }
+  .view-title{
+    font-family:'Fraunces',serif;
+    font-size:clamp(1.9rem,4vw,2.6rem);
+    font-weight:500;letter-spacing:-0.02em;
+    line-height:1.15;color:var(--ink);
+    margin-bottom:12px;
+  }
+  .view-subtitle{
+    font-size:1rem;color:var(--ink-soft);
+    font-weight:300;max-width:520px;
+  }
+
+  /* ===== CARDS ===== */
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:28px;
+    box-shadow:var(--shadow-sm);
+    transition:all .25s ease;
+  }
+  .card:hover{box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+
+  /* ===== TASKS LIST ===== */
+  .tasks-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:18px;
+  }
+  .task-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:26px;
+    cursor:pointer;
+    transition:all .25s ease;
+    position:relative;
+  }
+  .task-card:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
+    border-color:var(--border-strong);
+  }
+  .task-card.selected{
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px var(--coral-pale),var(--shadow-md);
+  }
+  .task-card.selected::after{
     content:'';position:absolute;
-    width:600px;height:600px;
-    background:radial-gradient(circle,rgba(232,115,74,0.06) 0%,transparent 70%);
-    top:50%;left:50%;transform:translate(-50%,-50%);
-    pointer-events:none;
+    top:20px;right:20px;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--coral);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+    background-size:14px;background-position:center;background-repeat:no-repeat;
   }
-  .hero-badge{
-    display:inline-flex;align-items:center;gap:8px;
-    background:white;padding:8px 20px;border-radius:50px;
-    font-size:.82rem;color:var(--text-light);
-    box-shadow:0 2px 12px rgba(0,0,0,0.04);
-    margin-bottom:40px;
-    animation:fadeUp .8s ease both;
+  .task-name{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;font-weight:500;
+    margin-bottom:6px;letter-spacing:-0.01em;
   }
-  .hero-badge .dot{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--sage);
-    animation:pulse 2s ease infinite;
-  }
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-  .hero h1{
-    font-family:'Caveat',cursive;
-    font-size:clamp(3rem,7vw,5.5rem);
-    font-weight:700;line-height:1.1;
-    margin-bottom:24px;
-    animation:fadeUp .8s .15s ease both;
-  }
-  .hero h1 em{
-    font-style:normal;
-    color:var(--terracotta);
-    position:relative;
-  }
-  .hero p{
-    font-size:clamp(1.05rem,2vw,1.25rem);
-    color:var(--text-light);
-    max-width:520px;
-    margin:0 auto 48px;
+  .task-meta{
+    font-size:.82rem;color:var(--ink-faint);
     font-weight:300;
-    animation:fadeUp .8s .3s ease both;
   }
-  .hero-actions{
-    display:flex;gap:16px;align-items:center;justify-content:center;
+  .task-steps{
+    margin-top:14px;
+    display:flex;gap:6px;flex-wrap:wrap;
+  }
+  .step-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--border-strong);
+  }
+  .task-card.selected .step-dot{background:var(--coral)}
+
+  .add-task{
+    background:transparent;
+    border:1.5px dashed var(--border-strong);
+    border-radius:var(--radius-lg);
+    padding:26px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    gap:10px;
+    color:var(--ink-soft);
+    font-size:.95rem;font-weight:400;
+    transition:all .2s ease;
+    min-height:130px;
+    font-family:inherit;
+  }
+  .add-task:hover{
+    border-color:var(--coral);
+    color:var(--coral);
+    background:var(--coral-pale);
+  }
+  .add-task .plus{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;font-weight:300;
+  }
+
+  /* ===== ACTION BAR ===== */
+  .action-bar{
+    margin-top:32px;
+    display:flex;gap:12px;align-items:center;
     flex-wrap:wrap;
-    animation:fadeUp .8s .45s ease both;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 28px;
+    border-radius:50px;
+    font-size:.95rem;font-weight:500;
+    font-family:inherit;
+    cursor:pointer;
+    border:none;
+    transition:all .25s ease;
+    text-decoration:none;
   }
   .btn-primary{
-    display:inline-flex;align-items:center;gap:10px;
-    background:var(--terracotta);color:white;
-    padding:16px 36px;border-radius:50px;
-    font-size:1rem;font-weight:500;
-    text-decoration:none;border:none;cursor:pointer;
-    transition:all .25s ease;
-    box-shadow:0 4px 20px rgba(232,115,74,0.25);
+    background:var(--coral);color:white;
+    box-shadow:0 4px 16px rgba(232,115,74,0.2);
   }
   .btn-primary:hover{
-    background:var(--terracotta-dark);
-    transform:translateY(-2px);
-    box-shadow:0 8px 30px rgba(232,115,74,0.35);
+    background:var(--coral-soft);
+    transform:translateY(-1px);
+    box-shadow:0 6px 20px rgba(232,115,74,0.28);
   }
-  .btn-primary:active{transform:translateY(0) scale(.97)}
-  .btn-secondary{
-    display:inline-flex;align-items:center;gap:8px;
-    background:transparent;color:var(--text);
-    padding:16px 28px;border-radius:50px;
-    font-size:1rem;font-weight:400;
-    text-decoration:none;
-    border:1.5px solid rgba(0,0,0,0.1);
-    transition:all .25s ease;
+  .btn-primary:active{transform:translateY(0) scale(.98)}
+  .btn-primary:disabled{
+    opacity:.4;cursor:not-allowed;
+    transform:none!important;
   }
-  .btn-secondary:hover{
-    border-color:rgba(0,0,0,0.2);
-    background:white;
+  .btn-ghost{
+    background:var(--card);color:var(--ink);
+    border:1px solid var(--border);
+  }
+  .btn-ghost:hover{
+    border-color:var(--border-strong);
+    background:var(--bg);
   }
 
-  /* PRODUCT HERO IMAGE */
-  .hero-product{
-    margin-top:60px;
-    position:relative;
-    animation:fadeUp 1s .6s ease both;
+  /* ===== PREPARE SECTION ===== */
+  .prepare-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
   }
-  .product-showcase{
-    width:320px;height:320px;
-    background:white;
-    border-radius:var(--radius-lg);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 20px 60px rgba(0,0,0,0.06),0 1px 3px rgba(0,0,0,0.04);
-    position:relative;
+  @media(max-width:760px){.prepare-grid{grid-template-columns:1fr}}
+
+  .field{margin-bottom:22px}
+  .field-label{
+    display:block;
+    font-size:.82rem;font-weight:500;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+    letter-spacing:0.02em;
+  }
+  .field-input{
+    width:100%;
+    padding:14px 18px;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--card);
+    font-family:inherit;
+    font-size:.95rem;
+    color:var(--ink);
+    transition:all .2s ease;
+    outline:none;
+  }
+  .field-input:focus{
+    border-color:var(--coral);
+    box-shadow:0 0 0 3px var(--coral-pale);
+  }
+  .field-input::placeholder{color:var(--ink-faint);font-weight:300}
+  textarea.field-input{
+    resize:vertical;min-height:90px;
+    line-height:1.5;
+  }
+
+  /* Templates */
+  .templates{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:10px;
+  }
+  .template{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px;
     cursor:pointer;
-    transition:transform .4s ease;
+    transition:all .2s ease;
+    text-align:left;
+    font-family:inherit;
   }
-  .product-showcase:hover{transform:scale(1.03)}
-  .product-showcase:active{transform:scale(.97)}
-  .product-showcase svg{width:180px;height:180px}
-  .product-glow{
-    position:absolute;
-    width:200px;height:200px;
-    background:radial-gradient(circle,rgba(232,115,74,0.12) 0%,transparent 70%);
-    border-radius:50%;
-    animation:glowPulse 3s ease infinite;
+  .template:hover{
+    border-color:var(--border-strong);
+    transform:translateY(-1px);
   }
-  @keyframes glowPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.3);opacity:1}}
-
-  /* FLOATING ELEMENTS */
-  .float-card{
-    position:absolute;
-    background:white;
-    border-radius:16px;
-    padding:14px 20px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.06);
-    font-size:.85rem;
-    display:flex;align-items:center;gap:10px;
-    animation:float 4s ease-in-out infinite;
+  .template.selected{
+    border-color:var(--coral);
+    background:var(--coral-pale);
   }
-  .float-card.left{left:-60px;top:60px;animation-delay:0s}
-  .float-card.right{right:-70px;bottom:80px;animation-delay:1.5s}
-  .float-card .icon-circle{
-    width:36px;height:36px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-size:1rem;
+  .template-icon{
+    font-size:1.3rem;margin-bottom:8px;display:block;
   }
-  .float-card .icon-circle.green{background:rgba(143,168,142,0.15)}
-  .float-card .icon-circle.orange{background:rgba(232,115,74,0.12)}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-
-  @keyframes fadeUp{
-    from{opacity:0;transform:translateY(24px)}
-    to{opacity:1;transform:translateY(0)}
-  }
-
-  /* SECTION COMMON */
-  section{padding:100px 48px}
-  .section-label{
-    font-family:'Caveat',cursive;
-    font-size:1.1rem;
-    color:var(--terracotta);
-    margin-bottom:12px;
+  .template-name{
+    font-size:.85rem;font-weight:500;color:var(--ink);
     display:block;
   }
-  .section-title{
-    font-family:'Caveat',cursive;
-    font-size:clamp(2.2rem,4.5vw,3.5rem);
-    font-weight:700;
-    line-height:1.15;
-    margin-bottom:20px;
+  .template-desc{
+    font-size:.72rem;color:var(--ink-faint);
+    font-weight:300;margin-top:2px;
   }
-  .section-desc{
-    font-size:1.05rem;
-    color:var(--text-light);
-    max-width:480px;
+
+  /* Steps editor */
+  .steps-list{
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .step-item{
+    display:flex;align-items:center;gap:12px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:12px 16px;
+    transition:all .2s ease;
+  }
+  .step-item:hover{border-color:var(--border-strong)}
+  .step-num{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--card);
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.78rem;font-weight:500;color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .step-text{
+    flex:1;
+    background:transparent;border:none;
+    font-family:inherit;font-size:.9rem;
+    color:var(--ink);outline:none;
+    padding:4px 0;
+  }
+  .step-text::placeholder{color:var(--ink-faint);font-weight:300}
+  .step-remove{
+    width:26px;height:26px;border-radius:50%;
+    background:transparent;border:none;
+    cursor:pointer;color:var(--ink-faint);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;
+    transition:all .2s;
+  }
+  .step-remove:hover{background:var(--coral-pale);color:var(--coral)}
+  .add-step{
+    background:transparent;
+    border:1px dashed var(--border-strong);
+    border-radius:var(--radius);
+    padding:12px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    font-size:.85rem;
+    font-family:inherit;
+    transition:all .2s;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+  }
+  .add-step:hover{
+    border-color:var(--coral);
+    color:var(--coral);
+    background:var(--coral-pale);
+  }
+
+  /* Timer select */
+  .timers{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+    gap:10px;
+  }
+  .timer{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:14px;
+    cursor:pointer;
+    text-align:center;
+    transition:all .2s ease;
+    font-family:inherit;
+  }
+  .timer:hover{border-color:var(--border-strong)}
+  .timer.selected{
+    border-color:var(--coral);
+    background:var(--coral-pale);
+  }
+  .timer-value{
+    font-family:'Fraunces',serif;
+    font-size:1.3rem;font-weight:500;
+    color:var(--ink);display:block;
+  }
+  .timer-label{
+    font-size:.72rem;color:var(--ink-faint);
+    font-weight:300;margin-top:2px;
+  }
+
+  /* ===== DEVICE SECTION ===== */
+  .device-layout{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  @media(max-width:760px){.device-layout{grid-template-columns:1fr}}
+
+  .device-visual{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:48px 32px;
+    display:flex;align-items:center;justify-content:center;
+    min-height:380px;
+    position:relative;
+  }
+  .device-button{
+    width:200px;height:200px;
+    background:var(--card);
+    border:1.5px solid var(--border-strong);
+    border-radius:44px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow-lg);
+    cursor:pointer;
+    transition:all .25s ease;
+    position:relative;
+  }
+  .device-button:hover{transform:scale(1.03)}
+  .device-button:active{transform:scale(.94);box-shadow:var(--shadow-sm)}
+  .device-button svg{width:110px;height:110px}
+  .device-button .ring{
+    position:absolute;inset:-8px;
+    border-radius:50px;
+    border:2px solid transparent;
+    transition:all .3s ease;
+  }
+  .device-button.pressed .ring{
+    border-color:var(--coral);
+    inset:-14px;
+    opacity:0;
+    animation:ringPulse .6s ease;
+  }
+  @keyframes ringPulse{
+    0%{opacity:.6;transform:scale(1)}
+    100%{opacity:0;transform:scale(1.15)}
+  }
+  .device-label{
+    position:absolute;bottom:24px;left:50%;
+    transform:translateX(-50%);
+    font-size:.78rem;color:var(--ink-faint);
+    font-weight:300;letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+
+  .device-config h3{
+    font-family:'Fraunces',serif;
+    font-size:1.3rem;font-weight:500;
+    margin-bottom:24px;letter-spacing:-0.01em;
+  }
+  .config-group{margin-bottom:28px}
+  .config-group-title{
+    font-size:.78rem;font-weight:500;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:12px;
+  }
+  .config-options{
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .config-option{
+    display:flex;align-items:center;gap:14px;
+    padding:14px 18px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:all .2s ease;
+    font-family:inherit;
+    text-align:left;
+    width:100%;
+  }
+  .config-option:hover{border-color:var(--border-strong)}
+  .config-option.selected{
+    border-color:var(--coral);
+    background:var(--coral-pale);
+  }
+  .config-radio{
+    width:18px;height:18px;border-radius:50%;
+    border:1.5px solid var(--border-strong);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    transition:all .2s;
+  }
+  .config-option.selected .config-radio{
+    border-color:var(--coral);
+  }
+  .config-option.selected .config-radio::after{
+    content:'';width:9px;height:9px;border-radius:50%;
+    background:var(--coral);
+  }
+  .config-option-text{flex:1}
+  .config-option-name{
+    font-size:.92rem;font-weight:500;color:var(--ink);
+    display:block;
+  }
+  .config-option-desc{
+    font-size:.78rem;color:var(--ink-faint);
+    font-weight:300;margin-top:1px;
+  }
+
+  /* Presses config */
+  .presses-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .press-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px;
+    cursor:pointer;
+    transition:all .2s;
+    font-family:inherit;
+    text-align:left;
+  }
+  .press-card:hover{border-color:var(--border-strong)}
+  .press-card.selected{
+    border-color:var(--coral);
+    background:var(--coral-pale);
+  }
+  .press-name{
+    font-size:.88rem;font-weight:500;color:var(--ink);
+    display:block;margin-bottom:2px;
+  }
+  .press-action{
+    font-size:.75rem;color:var(--ink-faint);
     font-weight:300;
   }
 
-  /* FEATURES */
-  .features{
-    background:var(--warm-white);
-    border-radius:var(--radius-lg);
-    margin:0 24px;
-    padding:80px 48px;
-  }
-  .features-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:40px;
-    margin-top:60px;
-  }
-  .feature-card{
-    background:white;
+  /* ===== STATUS BAR ===== */
+  .status-bar{
+    margin-top:24px;
+    padding:16px 20px;
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:var(--radius);
-    padding:40px 32px;
-    transition:all .3s ease;
-    cursor:default;
+    display:flex;align-items:center;gap:12px;
+    font-size:.88rem;
   }
-  .feature-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 12px 40px rgba(0,0,0,0.06);
+  .status-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--sage);
   }
-  .feature-icon{
-    width:56px;height:56px;
+  .status-dot.inactive{background:var(--ink-faint)}
+  .status-text{color:var(--ink-soft);font-weight:300}
+  .status-text strong{color:var(--ink);font-weight:500}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:640px){
+    .header-inner{padding:14px 20px}
+    nav.tabs{padding:0 20px;overflow-x:auto}
+    .tab{padding:12px 16px;font-size:.88rem;white-space:nowrap}
+    main{padding:32px 20px 60px}
+    .view-title{font-size:1.8rem}
+    .device-button{width:170px;height:170px}
+    .device-button svg{width:90px;height:90px}
+    .presses-grid{grid-template-columns:1fr}
+  }
+
+  /* ===== EMPTY STATE ===== */
+  .empty{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-faint);
+  }
+  .empty-icon{
+    width:64px;height:64px;
+    margin:0 auto 20px;
     border-radius:50%;
+    background:var(--bg);
+    border:1px solid var(--border);
     display:flex;align-items:center;justify-content:center;
-    margin-bottom:24px;
-    font-size:1.5rem;
+    font-size:1.6rem;
   }
-  .feature-icon.t{background:rgba(232,115,74,0.1)}
-  .feature-icon.s{background:rgba(143,168,142,0.15)}
-  .feature-icon.d{background:rgba(30,30,36,0.06)}
-  .feature-card h3{
-    font-size:1.15rem;font-weight:600;
-    margin-bottom:10px;
+  .empty-title{
+    font-family:'Fraunces',serif;
+    font-size:1.15rem;font-weight:500;
+    color:var(--ink);
+    margin-bottom:6px;
   }
-  .feature-card p{
-    font-size:.92rem;color:var(--text-light);
-    font-weight:300;line-height:1.6;
-  }
-
-  /* HOW IT WORKS */
-  .how-it-works{
-    display:flex;align-items:center;
-    gap:80px;
-    max-width:1200px;
-    margin:0 auto;
-  }
-  .how-visual{
-    flex:1;
-    display:flex;align-items:center;justify-content:center;
-    position:relative;
-  }
-  .how-visual .desk{
-    width:100%;max-width:480px;
-    aspect-ratio:4/3;
-    background:linear-gradient(135deg,#E8DDD0 0%,#D4C5B5 100%);
-    border-radius:var(--radius-lg);
-    display:flex;align-items:center;justify-content:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .desk-surface{
-    position:absolute;bottom:0;left:0;right:0;
-    height:40%;
-    background:linear-gradient(180deg,transparent,rgba(180,160,140,0.3));
-  }
-  .desk-button{
-    width:120px;height:120px;
-    background:white;
-    border-radius:30px;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 16px 48px rgba(0,0,0,0.1),0 2px 8px rgba(0,0,0,0.04);
-    z-index:2;
-    cursor:pointer;
-    transition:all .3s ease;
-  }
-  .desk-button:hover{transform:scale(1.05)}
-  .desk-button:active{transform:scale(.92);box-shadow:0 4px 16px rgba(0,0,0,0.1)}
-  .desk-button svg{width:64px;height:64px}
-  .desk-plant{
-    position:absolute;top:20px;right:30px;
-    font-size:2.5rem;
-    z-index:2;
-  }
-  .desk-cup{
-    position:absolute;bottom:30px;left:30px;
-    font-size:2rem;
-    z-index:2;
-  }
-  .how-content{flex:1}
-  .steps{margin-top:40px;display:flex;flex-direction:column;gap:28px}
-  .step{display:flex;gap:20px;align-items:flex-start}
-  .step-num{
-    width:44px;height:44px;min-width:44px;
-    border-radius:50%;
-    background:var(--terracotta);
-    color:white;
-    display:flex;align-items:center;justify-content:center;
-    font-weight:600;font-size:.95rem;
-  }
-  .step h4{font-size:1.05rem;font-weight:600;margin-bottom:4px}
-  .step p{font-size:.9rem;color:var(--text-light);font-weight:300}
-
-  /* USE CASES */
-  .use-cases{text-align:center}
-  .use-cases .section-desc{margin:0 auto 60px}
-  .cases-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    max-width:1000px;
-    margin:0 auto;
-  }
-  .case-card{
-    background:white;
-    border-radius:var(--radius);
-    padding:36px 24px;
-    text-align:center;
-    transition:all .3s ease;
-    cursor:default;
-  }
-  .case-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 12px 40px rgba(0,0,0,0.06);
-  }
-  .case-emoji{font-size:2.2rem;margin-bottom:16px;display:block}
-  .case-card h4{font-size:.95rem;font-weight:600;margin-bottom:6px}
-  .case-card p{font-size:.82rem;color:var(--text-light);font-weight:300}
-
-  /* TESTIMONIAL */
-  .testimonial-section{
-    background:var(--dark);
-    border-radius:var(--radius-lg);
-    margin:0 24px;
-    padding:80px 48px;
-    text-align:center;
-    color:white;
-  }
-  .testimonial-section .section-label{color:var(--terracotta-light)}
-  .testimonial-section .section-title{color:white}
-  .testimonial-quote{
-    font-family:'Caveat',cursive;
-    font-size:clamp(1.6rem,3vw,2.4rem);
-    line-height:1.4;
-    max-width:600px;
-    margin:40px auto 32px;
-    color:rgba(255,255,255,0.9);
-  }
-  .testimonial-author{
-    display:flex;align-items:center;justify-content:center;gap:14px;
-  }
-  .testimonial-avatar{
-    width:44px;height:44px;border-radius:50%;
-    background:var(--terracotta);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.1rem;
-  }
-  .testimonial-name{font-weight:500;font-size:.95rem}
-  .testimonial-role{font-size:.82rem;color:rgba(255,255,255,0.5)}
-
-  /* PRICING */
-  .pricing{text-align:center}
-  .pricing .section-desc{margin:0 auto 60px}
-  .pricing-cards{
-    display:flex;gap:24px;justify-content:center;
-    max-width:800px;margin:0 auto;flex-wrap:wrap;
-  }
-  .price-card{
-    background:white;
-    border-radius:var(--radius);
-    padding:48px 40px;
-    flex:1;min-width:280px;max-width:360px;
-    text-align:center;
-    transition:all .3s ease;
-    position:relative;
-    border:1.5px solid transparent;
-  }
-  .price-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 12px 40px rgba(0,0,0,0.06);
-  }
-  .price-card.featured{
-    border-color:var(--terracotta);
-    box-shadow:0 8px 30px rgba(232,115,74,0.12);
-  }
-  .price-card.featured::before{
-    content:'Populaire';
-    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-    background:var(--terracotta);color:white;
-    padding:4px 20px;border-radius:50px;
-    font-size:.78rem;font-weight:500;
-  }
-  .price-card h3{font-size:1.1rem;font-weight:600;margin-bottom:8px}
-  .price-card .price{
-    font-family:'Caveat',cursive;
-    font-size:3rem;font-weight:700;
-    margin:16px 0 4px;
-  }
-  .price-card .price-note{font-size:.82rem;color:var(--text-light);margin-bottom:28px}
-  .price-features{list-style:none;text-align:left;margin-bottom:32px}
-  .price-features li{
-    padding:8px 0;font-size:.9rem;color:var(--text-light);
-    display:flex;align-items:center;gap:10px;
-  }
-  .price-features li::before{
-    content:'✓';color:var(--sage);font-weight:600;font-size:.85rem;
-  }
-  .price-btn{
-    display:block;width:100%;
-    padding:14px;border-radius:50px;
-    font-size:.95rem;font-weight:500;
-    text-decoration:none;
-    transition:all .25s ease;
-    cursor:pointer;border:none;
-  }
-  .price-btn.outline{
-    background:transparent;color:var(--text);
-    border:1.5px solid rgba(0,0,0,0.12);
-  }
-  .price-btn.outline:hover{background:var(--warm-white)}
-  .price-btn.filled{
-    background:var(--terracotta);color:white;
-  }
-  .price-btn.filled:hover{
-    background:var(--terracotta-dark);
-    transform:translateY(-1px);
-    box-shadow:0 4px 16px rgba(232,115,74,0.3);
-  }
-
-  /* CTA FINAL */
-  .final-cta{
-    text-align:center;
-    padding:120px 48px;
-  }
-  .final-cta .section-title{margin-bottom:16px}
-  .final-cta p{
-    color:var(--text-light);font-size:1.05rem;
-    margin-bottom:40px;font-weight:300;
-  }
-  .final-cta .btn-primary{font-size:1.1rem;padding:18px 44px}
-
-  /* FOOTER */
-  footer{
-    background:var(--dark);
-    color:rgba(255,255,255,0.6);
-    padding:60px 48px 40px;
-    border-radius:var(--radius-lg) var(--radius-lg) 0 0;
-    margin:0 24px;
-  }
-  .footer-top{
-    display:flex;justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:48px;
-    flex-wrap:wrap;gap:32px;
-  }
-  .footer-brand{display:flex;align-items:center;gap:12px}
-  .footer-brand .nav-logo-icon{background:var(--dark-soft)}
-  .footer-brand span{
-    font-family:'Caveat',cursive;
-    font-size:1.5rem;font-weight:700;color:white;
-  }
-  .footer-brand p{
-    font-size:.85rem;margin-top:8px;
-    max-width:260px;line-height:1.5;
-  }
-  .footer-links{display:flex;gap:48px}
-  .footer-col h5{
-    color:white;font-size:.85rem;font-weight:600;
-    margin-bottom:16px;text-transform:uppercase;
-    letter-spacing:.5px;
-  }
-  .footer-col a{
-    display:block;color:rgba(255,255,255,0.5);
-    text-decoration:none;font-size:.88rem;
-    margin-bottom:10px;transition:color .2s;
-  }
-  .footer-col a:hover{color:white}
-  .footer-bottom{
-    border-top:1px solid rgba(255,255,255,0.08);
-    padding-top:24px;
-    display:flex;justify-content:space-between;
-    font-size:.82rem;
-    flex-wrap:wrap;gap:12px;
-  }
-
-  /* SCROLL ANIMATIONS */
-  .reveal{
-    opacity:0;transform:translateY(30px);
-    transition:all .7s cubic-bezier(.25,.46,.45,.94);
-  }
-  .reveal.visible{opacity:1;transform:translateY(0)}
-
-  /* RESPONSIVE */
-  @media(max-width:900px){
-    nav{padding:16px 24px}
-    .nav-links{display:none}
-    section{padding:60px 24px}
-    .features{margin:0 12px;padding:60px 24px}
-    .features-grid{grid-template-columns:1fr;gap:20px}
-    .how-it-works{flex-direction:column;gap:40px}
-    .cases-grid{grid-template-columns:repeat(2,1fr)}
-    .testimonial-section{margin:0 12px;padding:60px 24px}
-    .pricing-cards{flex-direction:column;align-items:center}
-    footer{margin:0 12px;padding:40px 24px 24px}
-    .footer-links{gap:24px}
-    .float-card{display:none}
-    .hero{padding:100px 24px 60px}
-    .product-showcase{width:240px;height:240px}
-    .product-showcase svg{width:130px;height:130px}
-  }
-  @media(max-width:600px){
-    .cases-grid{grid-template-columns:1fr 1fr;gap:12px}
-    .case-card{padding:24px 16px}
-  }
-
-  /* MOBILE NAV TOGGLE */
-  .nav-toggle{
-    display:none;
-    background:none;border:none;cursor:pointer;
-    width:32px;height:32px;
-    flex-direction:column;gap:5px;
-    align-items:center;justify-content:center;
-  }
-  .nav-toggle span{
-    display:block;width:22px;height:2px;
-    background:var(--dark);border-radius:2px;
-    transition:all .3s;
-  }
-  @media(max-width:900px){.nav-toggle{display:flex}}
+  .empty-text{font-size:.88rem;font-weight:300}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 100 100" fill="none">
-        <path d="M72 30 A35 35 0 1 0 72 70" stroke="#1E1E24" stroke-width="10" stroke-linecap="round" fill="none"/>
-        <polygon points="48,38 68,50 48,62" fill="#E8734A"/>
-      </svg>
-    </div>
-    <span>Clic</span>
-  </a>
-  <div class="nav-links">
-    <a href="#features">Fonctionnalités</a>
-    <a href="#how">Comment ça marche</a>
-    <a href="#pricing">Tarifs</a>
-    <a href="#buy" class="nav-cta">Commander</a>
-  </div>
-  <button class="nav-toggle" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">
-    <span class="dot"></span>
-    Nouveau — Disponible maintenant
-  </div>
-  <h1>Un geste.<br><em>Tout change.</em></h1>
-  <p>Le bouton intelligent qui contrôle votre maison, vos playlists et vos routines — en un seul clic. Simple, beau, rassurant.</p>
-  <div class="hero-actions">
-    <a href="#buy" class="btn-primary">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      Commander — 29€
-    </a>
-    <a href="#how" class="btn-secondary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      Voir la démo
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M72 30 A35 35 0 1 0 72 70" stroke="#2B2B32" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <polygon points="48,38 68,50 48,62" fill="#E8734A"/>
+        </svg>
+      </div>
+      <div class="logo-text">START<span>.</span></div>
     </a>
   </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-view="tasks">Mes tâches</button>
+    <button class="tab" data-view="prepare">Préparer</button>
+    <button class="tab" data-view="device">Appareil</button>
+  </nav>
+</header>
 
-  <div class="hero-product">
-    <div class="product-showcase" id="heroBtn">
-      <div class="product-glow"></div>
-      <svg viewBox="0 0 100 100" fill="none">
-        <path d="M74 28 A38 38 0 1 0 74 72" stroke="#1E1E24" stroke-width="9" stroke-linecap="round" fill="none"/>
-        <polygon points="46,36 68,50 46,64" fill="#E8734A"/>
-      </svg>
+<main>
+
+  <!-- ===== VIEW: TASKS ===== -->
+  <section class="view active" id="view-tasks">
+    <div class="view-header">
+      <span class="view-label">Aujourd'hui</span>
+      <h1 class="view-title">Mes tâches</h1>
+      <p class="view-subtitle">Sélectionnez une tâche pour lancer les étapes sur votre boîtier START.</p>
     </div>
-    <div class="float-card left">
-      <div class="icon-circle green">💡</div>
-      <div>
-        <strong>Lumière allumée</strong><br>
-        <span style="font-size:.75rem;color:var(--text-light)">Salon · il y a 2s</span>
+
+    <div class="tasks-grid" id="tasksGrid">
+      <div class="task-card" data-task="1">
+        <div class="task-name">Écrire l'article</div>
+        <div class="task-meta">4 étapes · 25 min</div>
+        <div class="task-steps">
+          <span class="step-dot"></span><span class="step-dot"></span>
+          <span class="step-dot"></span><span class="step-dot"></span>
+        </div>
+      </div>
+      <div class="task-card" data-task="2">
+        <div class="task-name">Préparer la réunion</div>
+        <div class="task-meta">3 étapes · 15 min</div>
+        <div class="task-steps">
+          <span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+        </div>
+      </div>
+      <div class="task-card" data-task="3">
+        <div class="task-name">Ranger le bureau</div>
+        <div class="task-meta">5 étapes · 10 min</div>
+        <div class="task-steps">
+          <span class="step-dot"></span><span class="step-dot"></span>
+          <span class="step-dot"></span><span class="step-dot"></span>
+          <span class="step-dot"></span>
+        </div>
+      </div>
+      <button class="add-task" id="addTaskBtn">
+        <span class="plus">+</span>
+        Nouvelle tâche
+      </button>
+    </div>
+
+    <div class="action-bar">
+      <button class="btn btn-primary" id="launchBtn" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Lancer sur le boîtier
+      </button>
+      <button class="btn btn-ghost">Modifier</button>
+    </div>
+
+    <div class="status-bar">
+      <span class="status-dot inactive" id="statusDot"></span>
+      <span class="status-text" id="statusText">Aucune tâche sélectionnée</span>
+    </div>
+  </section>
+
+  <!-- ===== VIEW: PREPARE ===== -->
+  <section class="view" id="view-prepare">
+    <div class="view-header">
+      <span class="view-label">Créer</span>
+      <h1 class="view-title">Préparer une tâche</h1>
+      <p class="view-subtitle">Décrivez votre tâche, choisissez un modèle et personnalisez les étapes.</p>
+    </div>
+
+    <div class="prepare-grid">
+      <div class="card">
+        <div class="field">
+          <label class="field-label">Nom de la tâche</label>
+          <input type="text" class="field-input" placeholder="Ex. Rédiger le rapport mensuel" id="taskName">
+        </div>
+
+        <div class="field">
+          <label class="field-label">Modèle rapide</label>
+          <div class="templates">
+            <button class="template" data-tpl="focus">
+              <span class="template-icon">🎯</span>
+              <span class="template-name">Focus</span>
+              <span class="template-desc">3 étapes</span>
+            </button>
+            <button class="template" data-tpl="review">
+              <span class="template-icon">📋</span>
+              <span class="template-name">Revue</span>
+              <span class="template-desc">4 étapes</span>
+            </button>
+            <button class="template" data-tpl="creative">
+              <span class="template-icon">✨</span>
+              <span class="template-name">Création</span>
+              <span class="template-desc">5 étapes</span>
+            </button>
+            <button class="template" data-tpl="admin">
+              <span class="template-icon">🗂️</span>
+              <span class="template-name">Admin</span>
+              <span class="template-desc">2 étapes</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Notes (optionnel)</label>
+          <textarea class="field-input" placeholder="Détails supplémentaires…"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="field">
+          <label class="field-label">Étapes</label>
+          <div class="steps-list" id="stepsList">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <input type="text" class="step-text" placeholder="Première action…">
+              <button class="step-remove" aria-label="Supprimer">×</button>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <input type="text" class="step-text" placeholder="Deuxième action…">
+              <button class="step-remove" aria-label="Supprimer">×</button>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <input type="text" class="step-text" placeholder="Troisième action…">
+              <button class="step-remove" aria-label="Supprimer">×</button>
+            </div>
+          </div>
+          <button class="add-step" id="addStepBtn">+ Ajouter une étape</button>
+        </div>
+
+        <div class="field" style="margin-top:28px">
+          <label class="field-label">Chronomètre</label>
+          <div class="timers">
+            <button class="timer" data-time="5">
+              <span class="timer-value">5</span>
+              <span class="timer-label">minutes</span>
+            </button>
+            <button class="timer selected" data-time="15">
+              <span class="timer-value">15</span>
+              <span class="timer-label">minutes</span>
+            </button>
+            <button class="timer" data-time="25">
+              <span class="timer-value">25</span>
+              <span class="timer-label">minutes</span>
+            </button>
+            <button class="timer" data-time="45">
+              <span class="timer-value">45</span>
+              <span class="timer-label">minutes</span>
+            </button>
+            <button class="timer" data-time="0">
+              <span class="timer-value">∞</span>
+              <span class="timer-label">libre</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="action-bar" style="margin-top:28px">
+          <button class="btn btn-primary">Enregistrer la tâche</button>
+        </div>
       </div>
     </div>
-    <div class="float-card right">
-      <div class="icon-circle orange">🎵</div>
-      <div>
-        <strong>Playlist lancée</strong><br>
-        <span style="font-size:.75rem;color:var(--text-light)">Morning Vibes</span>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="reveal">
-    <span class="section-label">Pourquoi Clic ?</span>
-    <h2 class="section-title">Trois bonnes raisons<br>de l'adopter.</h2>
-    <p class="section-desc">Pas d'application compliquée. Pas de configuration interminable. Juste un bouton qui fait ce qu'il faut.</p>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card reveal">
-      <div class="feature-icon t">⚡</div>
-      <h3>Instantané</h3>
-      <p>Moins de 50ms entre le clic et l'action. Votre maison réagit avant même que vous y pensiez.</p>
+  <!-- ===== VIEW: DEVICE ===== -->
+  <section class="view" id="view-device">
+    <div class="view-header">
+      <span class="view-label">Configuration</span>
+      <h1 class="view-title">Mon appareil START</h1>
+      <p class="view-subtitle">Visualisez votre boîtier et configurez les appuis et les retours.</p>
     </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon s">🌿</div>
-      <h3>Design chaleureux</h3>
-      <p>Des matériaux naturels, des formes douces. Il se fond dans votre intérieur au lieu de le dominer.</p>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon d">🔒</div>
-      <h3>Privé par défaut</h3>
-      <p>Vos données restent chez vous. Pas de cloud obligatoire, pas de publicité, pas de surprise.</p>
-    </div>
-  </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="how-it-works">
-    <div class="how-visual reveal">
-      <div class="desk">
-        <div class="desk-plant">🪴</div>
-        <div class="desk-cup">☕</div>
-        <div class="desk-surface"></div>
-        <div class="desk-button" id="deskBtn">
+    <div class="device-layout">
+      <div class="device-visual">
+        <div class="device-button" id="deviceBtn">
+          <div class="ring"></div>
           <svg viewBox="0 0 100 100" fill="none">
-            <path d="M74 28 A38 38 0 1 0 74 72" stroke="#1E1E24" stroke-width="9" stroke-linecap="round" fill="none"/>
-            <polygon points="46,36 68,50 46,64" fill="#E8734A"/>
+            <path d="M72 30 A35 35 0 1 0 72 70" stroke="#2B2B32" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <polygon points="48,38 68,50 48,62" fill="#E8734A"/>
           </svg>
         </div>
+        <div class="device-label">Appuyez pour tester</div>
       </div>
-    </div>
-    <div class="how-content reveal">
-      <span class="section-label">Comment ça marche</span>
-      <h2 class="section-title">Simple comme<br>un bonjour.</h2>
-      <p class="section-desc">Trois étapes. Cinq minutes. Et c'est parti.</p>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div>
-            <h4>Collez-le où vous voulez</h4>
-            <p>Au mur, sur le bureau, sur la table de nuit. L'adhésif 3M tient fort et se retire sans trace.</p>
+
+      <div class="device-config">
+        <div class="config-group">
+          <div class="config-group-title">Retour au clic</div>
+          <div class="config-options" id="feedbackOptions">
+            <button class="config-option selected" data-feedback="light">
+              <span class="config-radio"></span>
+              <span class="config-option-text">
+                <span class="config-option-name">Lumineux</span>
+                <span class="config-option-desc">Anneau lumineux corail</span>
+              </span>
+            </button>
+            <button class="config-option" data-feedback="vibrate">
+              <span class="config-radio"></span>
+              <span class="config-option-text">
+                <span class="config-option-name">Vibratoire</span>
+                <span class="config-option-desc">Vibration courte et douce</span>
+              </span>
+            </button>
+            <button class="config-option" data-feedback="silent">
+              <span class="config-radio"></span>
+              <span class="config-option-text">
+                <span class="config-option-name">Silencieux</span>
+                <span class="config-option-desc">Aucun retour perceptible</span>
+              </span>
+            </button>
           </div>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div>
-            <h4>Choisissez votre action</h4>
-            <p>Lumière, musique, scénario, notification… Configurez en quelques secondes via notre app minimaliste.</p>
+
+        <div class="config-group">
+          <div class="config-group-title">Actions par appui</div>
+          <div class="presses-grid">
+            <button class="press-card selected">
+              <span class="press-name">Appui court</span>
+              <span class="press-action">Étape suivante</span>
+            </button>
+            <button class="press-card">
+              <span class="press-name">Appui long</span>
+              <span class="press-action">Pause / reprise</span>
+            </button>
+            <button class="press-card">
+              <span class="press-name">Double appui</span>
+              <span class="press-action">Étape précédente</span>
+            </button>
+            <button class="press-card">
+              <span class="press-name">Triple appui</span>
+              <span class="press-action">Terminer la tâche</span>
+            </button>
           </div>
         </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div>
-            <h4>Cliquez. C'est tout.</h4>
-            <p>Un geste naturel, une réponse immédiate. Votre routine simplifiée pour de bon.</p>
-          </div>
-        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- USE CASES -->
-<section class="use-cases">
-  <div class="reveal">
-    <span class="section-label">Usages</span>
-    <h2 class="section-title">Un bouton,<br>des possibilités.</h2>
-    <p class="section-desc">Chaque Clic est unique. Programmez-le selon votre vie, pas l'inverse.</p>
-  </div>
-  <div class="cases-grid">
-    <div class="case-card reveal">
-      <span class="case-emoji">🌅</span>
-      <h4>Réveil doux</h4>
-      <p>Lumière progressive + café qui coule</p>
-    </div>
-    <div class="case-card reveal">
-      <span class="case-emoji">🎬</span>
-      <h4>Soirée cinéma</h4>
-      <p>Lumières tamisées + TV + son</p>
-    </div>
-    <div class="case-card reveal">
-      <span class="case-emoji">🔔</span>
-      <h4>Alerte famille</h4>
-      <p>Notification envoyée aux proches</p>
-    </div>
-    <div class="case-card reveal">
-      <span class="case-emoji">🎵</span>
-      <h4>Ma playlist</h4>
-      <p>Lancez votre musique préférée</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIAL -->
-<section class="testimonial-section">
-  <div class="reveal">
-    <span class="section-label">Ils en parlent</span>
-    <h2 class="section-title" style="color:white">Ce qu'ils en disent.</h2>
-    <p class="testimonial-quote">« J'ai remplacé trois télécommandes et deux apps par un seul petit bouton. Mes enfants savent s'en servir. Ma grand-mère aussi. »</p>
-    <div class="testimonial-author">
-      <div class="testimonial-avatar">M</div>
-      <div>
-        <div class="testimonial-name">Marie L.</div>
-        <div class="testimonial-role">Lyon · Utilisatrice depuis 6 mois</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="reveal">
-    <span class="section-label">Tarifs</span>
-    <h2 class="section-title">Choisissez votre pack.</h2>
-    <p class="section-desc">Livraison gratuite. Satisfait ou remboursé 30 jours.</p>
-  </div>
-  <div class="pricing-cards">
-    <div class="price-card reveal">
-      <h3>Clic Solo</h3>
-      <div class="price">29€</div>
-      <div class="price-note">Un bouton, toutes les fonctions</div>
-      <ul class="price-features">
-        <li>1 bouton Clic</li>
-        <li>Adhésif mural inclus</li>
-        <li>App iOS & Android</li>
-        <li>Mises à jour à vie</li>
-      </ul>
-      <button class="price-btn outline">Choisir</button>
-    </div>
-    <div class="price-card featured reveal">
-      <h3>Clic Duo</h3>
-      <div class="price">49€</div>
-      <div class="price-note">Deux boutons, encore plus de possibilités</div>
-      <ul class="price-features">
-        <li>2 boutons Clic</li>
-        <li>2 adhésifs muraux</li>
-        <li>App iOS & Android</li>
-        <li>Scénarios multi-boutons</li>
-        <li>Support prioritaire</li>
-      </ul>
-      <button class="price-btn filled">Choisir</button>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta" id="buy">
-  <div class="reveal">
-    <span class="section-label">Prêt ?</span>
-    <h2 class="section-title">Simplifiez votre quotidien<br>dès aujourd'hui.</h2>
-    <p>Rejoignez les 12 000 foyers qui ont déjà adopté Clic.</p>
-    <a href="#" class="btn-primary">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      Commander maintenant
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="nav-logo-icon" style="background:var(--dark-soft)">
-            <svg viewBox="0 0 100 100" fill="none" width="24" height="24">
-              <path d="M74 28 A38 38 0 1 0 74 72" stroke="white" stroke-width="9" stroke-linecap="round" fill="none"/>
-              <polygon points="46,36 68,50 46,64" fill="#E8734A"/>
-            </svg>
-          </div>
-          <span>Clic</span>
-        </div>
-        <p>Le bouton intelligent qui rend la technologie humaine. Conçu avec soin en France.</p>
-      </div>
-    </div>
-    <div class="footer-links">
-      <div class="footer-col">
-        <h5>Produit</h5>
-        <a href="#">Fonctionnalités</a>
-        <a href="#">Tarifs</a>
-        <a href="#">Compatibilité</a>
-      </div>
-      <div class="footer-col">
-        <h5>Support</h5>
-        <a href="#">FAQ</a>
-        <a href="#">Contact</a>
-        <a href="#">Guide d'installation</a>
-      </div>
-      <div class="footer-col">
-        <h5>Entreprise</h5>
-        <a href="#">À propos</a>
-        <a href="#">Blog</a>
-        <a href="#">Presse</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Clic. Tous droits réservés.</span>
-    <span>
-      <a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none;margin-right:20px">Confidentialité</a>
-      <a href="#" style="color:rgba(255,255,255,0.5);text-decoration:none">CGV</a>
-    </span>
-  </div>
-</footer>
+</main>
 
 <script>
-// Nav scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      observer.unobserve(entry.target);
-    }
+  // Tab navigation
+  const tabs = document.querySelectorAll('.tab');
+  const views = document.querySelectorAll('.view');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      views.forEach(v => v.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('view-' + tab.dataset.view).classList.add('active');
+    });
   });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(el => observer.observe(el));
 
-// Button press animation
-document.querySelectorAll('.desk-button, .product-showcase').forEach(btn => {
-  btn.addEventListener('click', function() {
-    this.style.transition = 'transform .15s ease';
-    this.style.transform = 'scale(.9)';
-    setTimeout(() => {
-      this.style.transform = '';
-    }, 200);
+  // Task selection
+  const taskCards = document.querySelectorAll('.task-card');
+  const launchBtn = document.getElementById('launchBtn');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  taskCards.forEach(card => {
+    card.addEventListener('click', () => {
+      taskCards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      launchBtn.disabled = false;
+      statusDot.classList.remove('inactive');
+      statusText.innerHTML = '<strong>' + card.querySelector('.task-name').textContent + '</strong> prête à être lancée';
+    });
   });
-});
+  document.getElementById('addTaskBtn').addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    views.forEach(v => v.classList.remove('active'));
+    document.querySelector('[data-view="prepare"]').classList.add('active');
+    document.getElementById('view-prepare').classList.add('active');
+  });
 
-// Smooth anchor scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  // Template selection
+  document.querySelectorAll('.template').forEach(tpl => {
+    tpl.addEventListener('click', () => {
+      document.querySelectorAll('.template').forEach(t => t.classList.remove('selected'));
+      tpl.classList.add('selected');
+    });
   });
-});
+
+  // Timer selection
+  document.querySelectorAll('.timer').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.timer').forEach(x => x.classList.remove('selected'));
+      t.classList.add('selected');
+    });
+  });
+
+  // Feedback selection
+  document.querySelectorAll('#feedbackOptions .config-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('#feedbackOptions .config-option').forEach(x => x.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+
+  // Press cards selection
+  document.querySelectorAll('.press-card').forEach(p => {
+    p.addEventListener('click', () => p.classList.toggle('selected'));
+  });
+
+  // Add step
+  document.getElementById('addStepBtn').addEventListener('click', () => {
+    const list = document.getElementById('stepsList');
+    const n = list.children.length + 1;
+    const item = document.createElement('div');
+    item.className = 'step-item';
+    item.innerHTML = '<span class="step-num">' + n + '</span><input type="text" class="step-text" placeholder="Nouvelle action…"><button class="step-remove" aria-label="Supprimer">×</button>';
+    list.appendChild(item);
+    item.querySelector('.step-remove').addEventListener('click', () => {
+      item.remove();
+      renumber();
+    });
+  });
+  document.querySelectorAll('.step-remove').forEach(b => {
+    b.addEventListener('click', e => {
+      e.target.closest('.step-item').remove();
+      renumber();
+    });
+  });
+  function renumber(){
+    document.querySelectorAll('#stepsList .step-item').forEach((it,i) => {
+      it.querySelector('.step-num').textContent = i + 1;
+    });
+  }
+
+  // Device button press
+  const deviceBtn = document.getElementById('deviceBtn');
+  deviceBtn.addEventListener('click', () => {
+    deviceBtn.classList.remove('pressed');
+    void deviceBtn.offsetWidth;
+    deviceBtn.classList.add('pressed');
+  });
 </script>
+
 </body>
 </html>
