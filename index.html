@@ -4,30 +4,34 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>START — Amorçage de tâches</title>
+<link rel="icon" type="image/png" href="./logo.png">
+<link rel="apple-touch-icon" href="./logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F7F5;
-    --surface: #FFFFFF;
-    --border: #E5E5E0;
-    --border-strong: #D4D4CE;
-    --text: #18181B;
+    --bg: #FFFFFF;
+    --bg-soft: #F4F4F6;
+    --bg-elevated: #FFFFFF;
+    --border: #E4E4E7;
+    --border-strong: #D4D4D8;
+    --text: #09090B;
+    --text-secondary: #52525B;
     --text-muted: #71717A;
     --text-soft: #A1A1AA;
-    --accent: #EA580C;
-    --accent-soft: #FFF1E8;
-    --accent-hover: #C2410C;
-    --success: #16A34A;
+    --accent: #FF4F00;
+    --accent-hover: #E64700;
+    --accent-soft: #FFF4EE;
+    --success: #10B981;
     --danger: #DC2626;
-    --shadow-sm: 0 1px 2px rgba(18, 18, 20, 0.04);
-    --shadow-md: 0 4px 12px rgba(18, 18, 20, 0.06);
-    --shadow-lg: 0 12px 32px rgba(18, 18, 20, 0.10);
-    --radius-sm: 10px;
-    --radius-md: 14px;
-    --radius-lg: 20px;
-    --radius-xl: 28px;
+    --shadow-sm: 0 1px 2px rgba(9, 9, 11, 0.04);
+    --shadow-md: 0 4px 12px rgba(9, 9, 11, 0.06);
+    --shadow-lg: 0 12px 32px rgba(9, 9, 11, 0.08);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
     --nav-height: 72px;
@@ -55,15 +59,15 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(247, 247, 245, 0.85);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--border);
   }
   .header-inner {
-    max-width: 1200px;
+    max-width: 720px;
     margin: 0 auto;
-    padding: 16px 20px;
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -72,375 +76,104 @@
   .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
-  .brand-mark {
-    width: 28px;
-    height: 28px;
+  .brand-logo {
+    width: 32px;
+    height: 32px;
     border-radius: 8px;
-    background: var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent);
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: -0.02em;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    background: var(--bg-soft);
   }
   .brand-name {
     font-weight: 600;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-  }
-  .brand-tag {
-    font-size: 12px;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    letter-spacing: 0.02em;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    color: var(--text);
   }
 
   /* ============ LAYOUT ============ */
   .app-main {
-    max-width: 1200px;
+    max-width: 720px;
     margin: 0 auto;
     padding: 24px 20px 40px;
   }
-  .view { display: none; animation: fadeIn 0.25s ease; }
+  .view { display: none; animation: fadeIn 0.2s ease; }
   .view.active { display: block; }
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .view-title {
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin-bottom: 4px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+    color: var(--text);
   }
   .view-subtitle {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 24px;
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 28px;
+    font-weight: 400;
   }
 
   /* ============ VIEW 1 : MES TÂCHES ============ */
-  .tasks-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  @media (min-width: 960px) {
-    .tasks-layout {
-      grid-template-columns: 380px 1fr;
-      gap: 32px;
-      align-items: start;
-    }
+  .tasks-content {
+    padding-bottom: 100px;
   }
 
-  /* ============ DEVICE SIMULATOR ============ */
-  .device-wrap {
-    position: sticky;
-    top: 96px;
-  }
-  .device {
-    background: linear-gradient(145deg, #2a2a2d 0%, #1a1a1c 100%);
-    border-radius: var(--radius-xl);
-    padding: 28px 24px 24px;
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.04) inset,
-      0 -1px 0 rgba(0,0,0,0.3) inset,
-      var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-  }
-  .device::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 50%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
-    pointer-events: none;
-  }
-  .device-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    padding: 0 4px;
-  }
-  .device-brand {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: #8a8a8e;
-    letter-spacing: 0.2em;
-    font-weight: 500;
-  }
-  .device-led {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #3a3a3d;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset;
-    transition: all 0.3s ease;
-  }
-  .device-led.ready {
-    background: var(--accent);
-    box-shadow: 0 0 8px rgba(234, 88, 12, 0.6), 0 0 0 1px rgba(255,255,255,0.1) inset;
-  }
-  .device-led.active {
-    background: #22c55e;
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6), 0 0 0 1px rgba(255,255,255,0.1) inset;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  .device-led.done {
-    background: #22c55e;
-    box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
-
-  .device-screen {
-    background: #0a0a0a;
-    border-radius: var(--radius-md);
-    padding: 24px 20px;
-    min-height: 180px;
+  .task-list {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.04) inset,
-      0 2px 8px rgba(0,0,0,0.4) inset;
-    position: relative;
-    overflow: hidden;
-  }
-  .device-screen::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 3px);
-    pointer-events: none;
-  }
-  .screen-status {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: #6a6a6e;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .screen-task-title {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: #a1a1aa;
-    margin-bottom: 16px;
-    line-height: 1.4;
-    min-height: 36px;
-    word-wrap: break-word;
-  }
-  .screen-action {
-    font-family: var(--font-mono);
-    font-size: 22px;
-    color: #fafafa;
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    min-height: 88px;
-    display: flex;
-    align-items: center;
-    word-wrap: break-word;
-  }
-  .screen-action.idle {
-    color: #6a6a6e;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  .screen-action.done {
-    color: #22c55e;
-    font-size: 16px;
-  }
-  .screen-timer {
-    font-family: var(--font-mono);
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-    text-align: center;
-    margin-top: 8px;
-    display: none;
-  }
-  .screen-timer.visible { display: block; }
-  .screen-footer {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: #4a4a4e;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .screen-progress {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
-  .progress-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #2a2a2d;
-    transition: background 0.3s ease;
-  }
-  .progress-dot.done { background: var(--accent); }
-  .progress-dot.current { background: #fafafa; }
-
-  .device-button-wrap {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-  }
-  .device-button {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #f97316, #ea580c 50%, #c2410c 100%);
-    box-shadow:
-      0 2px 0 rgba(255,255,255,0.2) inset,
-      0 -4px 8px rgba(0,0,0,0.3) inset,
-      0 8px 20px rgba(234, 88, 12, 0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.15em;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    position: relative;
-  }
-  .device-button::after {
-    content: '';
-    position: absolute;
-    inset: 6px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.15);
-    pointer-events: none;
-  }
-  .device-button:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      0 2px 0 rgba(255,255,255,0.2) inset,
-      0 -4px 8px rgba(0,0,0,0.3) inset,
-      0 12px 28px rgba(234, 88, 12, 0.45);
-  }
-  .device-button:active, .device-button.pressed {
-    transform: translateY(2px);
-    box-shadow:
-      0 2px 0 rgba(255,255,255,0.1) inset,
-      0 -2px 4px rgba(0,0,0,0.3) inset,
-      0 4px 12px rgba(234, 88, 12, 0.3);
-  }
-  .device-button:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
-  }
-  .device-hint {
-    text-align: center;
-    margin-top: 14px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-soft);
-    letter-spacing: 0.05em;
-  }
-  .device-hint kbd {
-    display: inline-block;
-    padding: 2px 6px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    margin: 0 2px;
-    box-shadow: 0 1px 0 var(--border-strong);
-  }
-
-  /* ============ TASKS LIST ============ */
-  .active-task-section {
-    margin-bottom: 28px;
-  }
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-label::before {
-    content: '';
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--accent);
+    gap: 12px;
   }
 
   .task-card {
-    background: var(--surface);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 18px;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    transition: all 0.15s ease;
   }
   .task-card:hover {
     border-color: var(--border-strong);
-  }
-  .task-card.active {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-soft);
+    box-shadow: var(--shadow-sm);
   }
   .task-card-head {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 16px;
+    margin-bottom: 14px;
   }
   .task-title {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     letter-spacing: -0.01em;
-    line-height: 1.3;
+    line-height: 1.35;
+    color: var(--text);
+    flex: 1;
   }
   .task-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .task-chip {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 4px 10px;
-    background: var(--bg);
+    padding: 5px 10px;
+    background: var(--bg-soft);
     border: 1px solid var(--border);
     border-radius: 999px;
     font-size: 12px;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    letter-spacing: 0.01em;
+    color: var(--text-secondary);
+    font-weight: 500;
   }
   .task-chip svg { width: 12px; height: 12px; }
   .task-actions {
@@ -479,7 +212,7 @@
     border-color: var(--border);
   }
   .btn-ghost:hover {
-    background: var(--bg);
+    background: var(--bg-soft);
     border-color: var(--border-strong);
   }
   .btn-danger-ghost {
@@ -491,65 +224,60 @@
     background: #FEF2F2;
     border-color: #FCA5A5;
   }
-  .btn-sm { padding: 7px 12px; font-size: 13px; }
+  .btn-sm { padding: 8px 14px; font-size: 13px; }
   .btn-sm svg { width: 14px; height: 14px; }
   .btn-block { width: 100%; }
 
-  .task-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
   .empty-state {
-    background: var(--surface);
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--radius-md);
-    padding: 40px 24px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 24px;
     text-align: center;
   }
   .empty-state-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 16px;
-    border-radius: 12px;
-    background: var(--bg);
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    border-radius: 14px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
   }
-  .empty-state-icon svg { width: 22px; height: 22px; }
+  .empty-state-icon svg { width: 24px; height: 24px; }
   .empty-state-title {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    color: var(--text);
   }
   .empty-state-text {
-    color: var(--text-muted);
-    font-size: 13px;
-    margin-bottom: 18px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
   }
 
   /* ============ VIEW 2 : PRÉPARER ============ */
   .prepare-wrap {
-    max-width: 640px;
-    margin: 0 auto;
+    padding-bottom: 110px;
   }
   .input-group {
-    background: var(--surface);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 14px 16px;
     display: flex;
     align-items: center;
     gap: 12px;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: all 0.15s ease;
     margin-bottom: 24px;
   }
   .input-group:focus-within {
     border-color: var(--text);
-    box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.06);
+    box-shadow: 0 0 0 3px rgba(9, 9, 11, 0.06);
   }
   .input-group svg {
     width: 18px;
@@ -565,13 +293,14 @@
     font-weight: 500;
     background: transparent;
     min-width: 0;
+    color: var(--text);
   }
   .task-input::placeholder { color: var(--text-soft); }
   .dictate-btn {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: var(--bg);
+    background: var(--bg-soft);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -586,8 +315,8 @@
     animation: pulseRing 1.5s ease-in-out infinite;
   }
   @keyframes pulseRing {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.4); }
-    50% { box-shadow: 0 0 0 8px rgba(234, 88, 12, 0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 79, 0, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 79, 0, 0); }
   }
   .dictate-btn.unsupported {
     opacity: 0.4;
@@ -598,7 +327,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    background: var(--bg);
+    background: var(--bg-soft);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 4px;
@@ -609,7 +338,7 @@
     border-radius: 10px;
     font-size: 13px;
     font-weight: 500;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     transition: all 0.15s ease;
     display: flex;
     align-items: center;
@@ -618,7 +347,7 @@
   }
   .method-tab svg { width: 14px; height: 14px; }
   .method-tab.active {
-    background: var(--surface);
+    background: var(--bg-elevated);
     color: var(--text);
     box-shadow: var(--shadow-sm);
   }
@@ -635,7 +364,7 @@
     .templates-grid { grid-template-columns: 1fr; }
   }
   .template-card {
-    background: var(--surface);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 16px;
@@ -669,7 +398,7 @@
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: var(--bg);
+    background: var(--bg-soft);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -686,15 +415,16 @@
     font-weight: 600;
     margin-bottom: 4px;
     letter-spacing: -0.01em;
+    color: var(--text);
   }
   .template-desc {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     line-height: 1.4;
   }
 
   .custom-steps {
-    background: var(--surface);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 4px;
@@ -733,6 +463,7 @@
     min-height: 20px;
     line-height: 1.4;
     font-family: var(--font-sans);
+    color: var(--text);
   }
   .step-input::placeholder { color: var(--text-soft); }
   .step-delete {
@@ -759,7 +490,7 @@
     border-radius: 10px;
     transition: all 0.15s ease;
   }
-  .add-step-btn:hover { background: var(--bg); color: var(--text); }
+  .add-step-btn:hover { background: var(--bg-soft); color: var(--text); }
   .add-step-btn svg { width: 14px; height: 14px; }
 
   .duration-selector {
@@ -769,10 +500,11 @@
   .duration-label {
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 10px;
+    font-weight: 500;
   }
   .duration-options {
     display: flex;
@@ -781,12 +513,12 @@
   }
   .duration-chip {
     padding: 8px 14px;
-    background: var(--surface);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: 999px;
     font-size: 13px;
     font-weight: 500;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     transition: all 0.15s ease;
   }
   .duration-chip:hover { border-color: var(--border-strong); }
@@ -804,25 +536,14 @@
 
   /* ============ VIEW 3 : APPAREIL ============ */
   .device-view-wrap {
-    max-width: 640px;
-    margin: 0 auto;
+    padding-bottom: 100px;
   }
   .device-status-card {
-    background: linear-gradient(145deg, #2a2a2d 0%, #1a1a1c 100%);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 28px;
-    color: #fff;
+    padding: 24px;
     margin-bottom: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  .device-status-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 50%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
-    pointer-events: none;
   }
   .device-status-head {
     display: flex;
@@ -834,52 +555,55 @@
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.01em;
+    color: var(--text);
   }
   .device-status-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 5px 10px;
-    background: rgba(34, 197, 94, 0.15);
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 999px;
     font-family: var(--font-mono);
     font-size: 11px;
-    color: #4ade80;
+    color: var(--success);
     letter-spacing: 0.05em;
+    font-weight: 500;
   }
   .device-status-badge::before {
     content: '';
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 6px #4ade80;
+    background: var(--success);
+    box-shadow: 0 0 6px var(--success);
   }
   .device-status-meta {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid var(--border);
   }
   .meta-item-label {
     font-family: var(--font-mono);
     font-size: 10px;
-    color: #8a8a8e;
+    color: var(--text-muted);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 4px;
+    font-weight: 500;
   }
   .meta-item-value {
     font-family: var(--font-mono);
     font-size: 13px;
-    color: #fafafa;
+    color: var(--text);
     font-weight: 500;
   }
 
   .settings-group {
-    background: var(--surface);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -888,10 +612,11 @@
   .settings-group-title {
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 16px 18px 8px;
+    font-weight: 500;
   }
   .setting-row {
     padding: 14px 18px;
@@ -907,15 +632,16 @@
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 2px;
+    color: var(--text);
   }
   .setting-desc {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--text-secondary);
   }
 
   .segmented {
     display: inline-flex;
-    background: var(--bg);
+    background: var(--bg-soft);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 3px;
@@ -925,33 +651,181 @@
     padding: 6px 12px;
     font-size: 12px;
     font-weight: 500;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     border-radius: 7px;
     transition: all 0.15s ease;
     white-space: nowrap;
   }
   .segmented button.active {
-    background: var(--surface);
+    background: var(--bg-elevated);
     color: var(--text);
     box-shadow: var(--shadow-sm);
   }
 
-  .danger-zone {
-    background: var(--surface);
+  .demo-zone {
+    background: var(--bg-soft);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 18px;
     margin-top: 24px;
   }
-  .danger-zone-title {
+  .demo-zone-title {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 4px;
+    color: var(--text);
   }
-  .danger-zone-desc {
+  .demo-zone-desc {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     margin-bottom: 14px;
+  }
+
+  /* ============ VIEW FOCUS : MODE PLEIN ÉCRAN ============ */
+  .view-focus {
+    position: fixed;
+    inset: 0;
+    background: #09090B;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .view-focus.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+  .focus-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    flex-shrink: 0;
+  }
+  .focus-quit-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+  }
+  .focus-quit-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+  .focus-quit-btn svg { width: 14px; height: 14px; }
+  .focus-progress {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .focus-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    overflow-y: auto;
+  }
+  .focus-task-title {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 24px;
+    font-weight: 400;
+    max-width: 600px;
+    line-height: 1.4;
+  }
+  .focus-action {
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+    margin-bottom: 32px;
+    word-wrap: break-word;
+  }
+  .focus-action.idle {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .focus-action.done {
+    color: var(--success);
+    font-size: 24px;
+  }
+  .focus-timer {
+    font-family: var(--font-mono);
+    font-size: clamp(48px, 10vw, 72px);
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    display: none;
+  }
+  .focus-timer.visible { display: block; }
+
+  .focus-footer {
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .focus-button {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 32px;
+    background: var(--accent);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: all 0.15s ease;
+    box-shadow: 0 8px 24px rgba(255, 79, 0, 0.3);
+  }
+  .focus-button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 32px rgba(255, 79, 0, 0.4);
+  }
+  .focus-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 16px rgba(255, 79, 0, 0.3);
+  }
+  .focus-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .focus-hint {
+    text-align: center;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.05em;
+  }
+  .focus-hint kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    margin: 0 2px;
   }
 
   /* ============ BOTTOM NAV ============ */
@@ -961,12 +835,15 @@
     left: 0;
     right: 0;
     height: var(--nav-height);
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-top: 1px solid var(--border);
     z-index: 100;
     padding-bottom: env(safe-area-inset-bottom);
+  }
+  .view-focus.active ~ .bottom-nav {
+    display: none;
   }
   .nav-inner {
     max-width: 640px;
@@ -1042,10 +919,9 @@
   ::-webkit-scrollbar-thumb:hover { background: var(--text-soft); }
 
   @media (max-width: 640px) {
-    .view-title { font-size: 22px; }
-    .device { padding: 22px 18px 20px; }
-    .screen-action { font-size: 18px; min-height: 72px; }
-    .device-button { width: 100px; height: 100px; font-size: 12px; }
+    .view-title { font-size: 24px; }
+    .focus-action { font-size: clamp(24px, 7vw, 36px); }
+    .focus-timer { font-size: clamp(40px, 12vw, 56px); }
   }
 </style>
 </head>
@@ -1055,12 +931,9 @@
 <header class="app-header">
   <div class="header-inner">
     <div class="brand">
-      <div class="brand-mark">S</div>
-      <div>
-        <div class="brand-name">START</div>
-      </div>
+      <img src="./logo.png" alt="START" class="brand-logo" onerror="this.style.display='none'" />
+      <div class="brand-name">START</div>
     </div>
-    <div class="brand-tag">v0.1 · maquette</div>
   </div>
 </header>
 
@@ -1070,45 +943,10 @@
   <!-- ============ VIEW 1 : MES TÂCHES ============ -->
   <section class="view active" id="view-tasks">
     <h1 class="view-title">Mes tâches</h1>
-    <p class="view-subtitle">Une tâche active, prête à démarrer sur le boîtier.</p>
+    <p class="view-subtitle">Prépare une tâche, puis lance-la en plein écran.</p>
 
-    <div class="tasks-layout">
-      <!-- Simulateur de boîtier -->
-      <div class="device-wrap">
-        <div class="device" id="device">
-          <div class="device-top">
-            <div class="device-brand">START · BUREAU</div>
-            <div class="device-led" id="device-led"></div>
-          </div>
-          <div class="device-screen">
-            <div class="screen-status">
-              <span id="screen-mode">EN ATTENTE</span>
-              <span id="screen-step">—</span>
-            </div>
-            <div>
-              <div class="screen-task-title" id="screen-task-title">Aucune tâche chargée</div>
-              <div class="screen-action idle" id="screen-action">Charge une tâche depuis la liste</div>
-              <div class="screen-timer" id="screen-timer">05:00</div>
-            </div>
-            <div class="screen-footer">
-              <div class="screen-progress" id="screen-progress"></div>
-              <span id="screen-hint">ESPACE · START</span>
-            </div>
-          </div>
-          <div class="device-button-wrap">
-            <button class="device-button" id="device-button" aria-label="Bouton START">START</button>
-          </div>
-          <div class="device-hint">Appuie sur le bouton ou <kbd>Espace</kbd></div>
-        </div>
-      </div>
-
-      <!-- Liste des tâches -->
-      <div class="tasks-content">
-        <div id="active-task-section"></div>
-
-        <div class="section-label">Tâches préparées</div>
-        <div class="task-list" id="task-list"></div>
-      </div>
+    <div class="tasks-content">
+      <div class="task-list" id="task-list"></div>
     </div>
   </section>
 
@@ -1131,11 +969,11 @@
       <div class="method-switcher">
         <button class="method-tab active" data-method="templates">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Modèles 1-clic
+          Modèles rapides
         </button>
         <button class="method-tab" data-method="custom">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          Mes étapes
+          Mes propres étapes
         </button>
       </div>
 
@@ -1168,7 +1006,7 @@
       <div class="prepare-footer">
         <button class="btn btn-accent btn-block" id="save-task-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          Enregistrer et charger sur START
+          Enregistrer la tâche
         </button>
       </div>
     </div>
@@ -1197,7 +1035,7 @@
           </div>
           <div>
             <div class="meta-item-label">Mode</div>
-            <div class="meta-item-value">Maquette</div>
+            <div class="meta-item-value">Connecté</div>
           </div>
         </div>
       </div>
@@ -1242,19 +1080,43 @@
         </div>
       </div>
 
-      <!-- Danger zone -->
-      <div class="danger-zone">
-        <div class="danger-zone-title">Mode de test rapide</div>
-        <div class="danger-zone-desc">Réinitialise les données avec 2 tâches d'exemple pour tester immédiatement le flux.</div>
-        <button class="btn btn-ghost" id="reset-demo-btn">
+      <!-- Demo zone -->
+      <div class="demo-zone">
+        <div class="demo-zone-title">Mode de test rapide</div>
+        <div class="demo-zone-desc">Charge 2 tâches d'exemple pour tester immédiatement le flux.</div>
+        <button class="btn btn-ghost" id="load-demo-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-          Réinitialiser les données de démonstration
+          Charger les tâches d'exemple
         </button>
       </div>
     </div>
   </section>
 
 </main>
+
+<!-- ============ VIEW FOCUS : MODE PLEIN ÉCRAN ============ -->
+<section class="view-focus" id="view-focus">
+  <div class="focus-header">
+    <button class="focus-quit-btn" id="focus-quit-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+      Quitter
+    </button>
+    <div class="focus-progress" id="focus-progress">Étape 0 / 0</div>
+  </div>
+
+  <div class="focus-content">
+    <div class="focus-task-title" id="focus-task-title"></div>
+    <div class="focus-action idle" id="focus-action">Prêt à démarrer</div>
+    <div class="focus-timer" id="focus-timer">05:00</div>
+  </div>
+
+  <div class="focus-footer">
+    <div>
+      <button class="focus-button" id="focus-button">START</button>
+      <div class="focus-hint">Appuie sur le bouton ou <kbd>Espace</kbd></div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ BOTTOM NAV ============ -->
 <nav class="bottom-nav">
@@ -1279,11 +1141,11 @@
 
 <script>
 /* ============================================================
-   START — Maquette interactive
+   START — Application complète
    ============================================================ */
 
-const STORAGE_KEY = 'start-maquette-v1';
-const SETTINGS_KEY = 'start-settings-v1';
+const STORAGE_KEY = 'start-app-v2';
+const SETTINGS_KEY = 'start-settings-v2';
 
 /* ---------- Modèles de micro-actions ---------- */
 const TEMPLATES = [
@@ -1329,7 +1191,7 @@ const TEMPLATES = [
     desc: 'Réinitialiser ton espace de travail',
     icon: 'layout',
     steps: [
-      'Debarrasser tasses et déchets',
+      'Débarrasser tasses et déchets',
       'Ranger les papiers qui traînent',
       'Essuyer la surface de travail',
       'Disposer l\'essentiel pour la tâche à venir'
@@ -1340,7 +1202,6 @@ const TEMPLATES = [
 /* ---------- État ---------- */
 let state = {
   tasks: [],
-  activeTaskId: null,
   deviceSettings: {
     shortPress: 'next',
     longPress: 'reset',
@@ -1348,15 +1209,14 @@ let state = {
   }
 };
 
-/* ---------- État du simulateur ---------- */
-let sim = {
+/* ---------- État du mode Focus ---------- */
+let focus = {
   taskId: null,
-  stepIndex: -1, // -1 = pas démarré, 0..N-1 = étapes, N = minuteur, N+1 = terminé
+  stepIndex: -1,
   totalSteps: 0,
   timerSeconds: 0,
   timerRemaining: 0,
-  timerInterval: null,
-  startedAt: null
+  timerInterval: null
 };
 
 /* ---------- État de préparation ---------- */
@@ -1372,10 +1232,7 @@ let prep = {
    ============================================================ */
 function saveState() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      tasks: state.tasks,
-      activeTaskId: state.activeTaskId
-    }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks: state.tasks }));
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(state.deviceSettings));
   } catch (e) { console.warn('Storage error', e); }
 }
@@ -1383,687 +1240,4 @@ function saveState() {
 function loadState() {
   try {
     const t = localStorage.getItem(STORAGE_KEY);
-    const s = localStorage.getItem(SETTINGS_KEY);
-    if (t) {
-      const data = JSON.parse(t);
-      state.tasks = data.tasks || [];
-      state.activeTaskId = data.activeTaskId || null;
-    }
-    if (s) {
-      state.deviceSettings = { ...state.deviceSettings, ...JSON.parse(s) };
-    }
-  } catch (e) { console.warn('Load error', e); }
-}
-
-function seedDemoData() {
-  state.tasks = [
-    {
-      id: uid(),
-      name: 'Réviser le chapitre de physique',
-      method: 'templates',
-      templateId: 'revise',
-      steps: [...TEMPLATES[0].steps],
-      duration: 300,
-      createdAt: Date.now()
-    },
-    {
-      id: uid(),
-      name: 'Ranger mon bureau avant de travailler',
-      method: 'templates',
-      templateId: 'tidy',
-      steps: [...TEMPLATES[3].steps],
-      duration: 180,
-      createdAt: Date.now() - 1000
-    }
-  ];
-  state.activeTaskId = state.tasks[0].id;
-  saveState();
-}
-
-function uid() {
-  return 't_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-}
-
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
-function switchView(viewName) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById('view-' + viewName).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => {
-    n.classList.toggle('active', n.dataset.view === viewName);
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-document.querySelectorAll('.nav-item').forEach(btn => {
-  btn.addEventListener('click', () => switchView(btn.dataset.view));
-});
-
-/* ============================================================
-   RENDU : LISTE DES TÂCHES
-   ============================================================ */
-function getTemplateMeta(templateId) {
-  return TEMPLATES.find(t => t.id === templateId);
-}
-
-function renderTasks() {
-  const activeSection = document.getElementById('active-task-section');
-  const listEl = document.getElementById('task-list');
-
-  const activeTask = state.tasks.find(t => t.id === state.activeTaskId);
-  const otherTasks = state.tasks.filter(t => t.id !== state.activeTaskId);
-
-  if (state.tasks.length === 0) {
-    activeSection.innerHTML = '';
-    listEl.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-        </div>
-        <div class="empty-state-title">Aucune tâche préparée</div>
-        <div class="empty-state-text">Prépare ta première tâche en quelques secondes pour la lancer sur le boîtier.</div>
-        <button class="btn btn-primary" onclick="switchView('prepare')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Préparer ma première tâche
-        </button>
-      </div>
-    `;
-    return;
-  }
-
-  // Section tâche active
-  if (activeTask) {
-    activeSection.innerHTML = `
-      <div class="section-label">Tâche active sur START</div>
-      ${renderTaskCard(activeTask, true)}
-    `;
-  } else {
-    activeSection.innerHTML = '';
-  }
-
-  // Liste autres tâches
-  if (otherTasks.length === 0) {
-    listEl.innerHTML = `<div style="color:var(--text-soft); font-size:13px; padding:12px 0;">Aucune autre tâche préparée.</div>`;
-  } else {
-    listEl.innerHTML = otherTasks.map(t => renderTaskCard(t, false)).join('');
-  }
-
-  // Attacher les événements
-  attachTaskCardEvents();
-}
-
-function renderTaskCard(task, isActive) {
-  const tpl = task.method === 'templates' ? getTemplateMeta(task.templateId) : null;
-  const methodLabel = task.method === 'templates' ? (tpl ? tpl.name : 'Modèle') : 'Étapes personnalisées';
-  const methodIcon = task.method === 'templates'
-    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'
-    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>';
-  const stepsCount = task.steps.length;
-  const durationLabel = task.duration === 0 ? 'Sans chrono' : Math.round(task.duration / 60) + ' min';
-
-  return `
-    <div class="task-card ${isActive ? 'active' : ''}" data-task-id="${task.id}">
-      <div class="task-card-head">
-        <div class="task-title">${escapeHtml(task.name)}</div>
-      </div>
-      <div class="task-meta">
-        <span class="task-chip">${methodIcon}${escapeHtml(methodLabel)}</span>
-        <span class="task-chip">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          ${durationLabel}
-        </span>
-        <span class="task-chip">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          ${stepsCount} micro-actions
-        </span>
-      </div>
-      <div class="task-actions">
-        ${isActive
-          ? `<button class="btn btn-ghost btn-sm" data-action="clear-active">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
-              Retirer du boîtier
-            </button>`
-          : `<button class="btn btn-accent btn-sm" data-action="send-to-start">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              Envoyer vers START
-            </button>`
-        }
-        <button class="btn btn-ghost btn-sm" data-action="delete-task">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
-          Supprimer
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function attachTaskCardEvents() {
-  document.querySelectorAll('.task-card').forEach(card => {
-    const taskId = card.dataset.taskId;
-    card.querySelectorAll('[data-action]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const action = btn.dataset.action;
-        if (action === 'send-to-start') {
-          state.activeTaskId = taskId;
-          saveState();
-          loadTaskToSimulator(taskId);
-          renderTasks();
-          showToast('Tâche chargée sur START', 'check');
-        } else if (action === 'clear-active') {
-          state.activeTaskId = null;
-          saveState();
-          resetSimulator();
-          renderTasks();
-        } else if (action === 'delete-task') {
-          state.tasks = state.tasks.filter(t => t.id !== taskId);
-          if (state.activeTaskId === taskId) {
-            state.activeTaskId = null;
-            resetSimulator();
-          }
-          saveState();
-          renderTasks();
-          showToast('Tâche supprimée', 'trash');
-        }
-      });
-    });
-  });
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-/* ============================================================
-   SIMULATEUR DE BOÎTIER
-   ============================================================ */
-const $led = document.getElementById('device-led');
-const $screenMode = document.getElementById('screen-mode');
-const $screenStep = document.getElementById('screen-step');
-const $screenTaskTitle = document.getElementById('screen-task-title');
-const $screenAction = document.getElementById('screen-action');
-const $screenTimer = document.getElementById('screen-timer');
-const $screenProgress = document.getElementById('screen-progress');
-const $screenHint = document.getElementById('screen-hint');
-const $deviceButton = document.getElementById('device-button');
-
-function loadTaskToSimulator(taskId) {
-  const task = state.tasks.find(t => t.id === taskId);
-  if (!task) return;
-
-  clearInterval(sim.timerInterval);
-  sim.taskId = taskId;
-  sim.stepIndex = -1;
-  sim.totalSteps = task.steps.length;
-  sim.timerSeconds = task.duration || 0;
-  sim.timerRemaining = task.duration || 0;
-  sim.startedAt = null;
-
-  updateSimulatorUI(task);
-}
-
-function resetSimulator() {
-  clearInterval(sim.timerInterval);
-  sim.taskId = null;
-  sim.stepIndex = -1;
-  sim.totalSteps = 0;
-  sim.timerSeconds = 0;
-  sim.timerRemaining = 0;
-  sim.startedAt = null;
-
-  $led.className = 'device-led';
-  $screenMode.textContent = 'EN ATTENTE';
-  $screenStep.textContent = '—';
-  $screenTaskTitle.textContent = 'Aucune tâche chargée';
-  $screenAction.textContent = 'Charge une tâche depuis la liste';
-  $screenAction.className = 'screen-action idle';
-  $screenTimer.classList.remove('visible');
-  $screenProgress.innerHTML = '';
-  $screenHint.textContent = 'ESPACE · START';
-  $deviceButton.disabled = false;
-}
-
-function updateSimulatorUI(task) {
-  if (!task) { resetSimulator(); return; }
-
-  $screenTaskTitle.textContent = task.name;
-  $screenTimer.classList.remove('visible');
-
-  // Progress dots
-  $screenProgress.innerHTML = '';
-  for (let i = 0; i < sim.totalSteps; i++) {
-    const dot = document.createElement('span');
-    dot.className = 'progress-dot';
-    if (i < sim.stepIndex) dot.classList.add('done');
-    else if (i === sim.stepIndex) dot.classList.add('current');
-    $screenProgress.appendChild(dot);
-  }
-
-  if (sim.stepIndex === -1) {
-    // Prêt
-    $led.className = 'device-led ready';
-    $screenMode.textContent = 'PRÊT';
-    $screenStep.textContent = '0/' + sim.totalSteps;
-    $screenAction.textContent = 'Appuie sur START pour commencer';
-    $screenAction.className = 'screen-action';
-    $screenHint.textContent = 'ESPACE · COMMENCER';
-    $deviceButton.disabled = false;
-  } else if (sim.stepIndex < sim.totalSteps) {
-    // Étape en cours
-    $led.className = 'device-led active';
-    $screenMode.textContent = 'EN COURS';
-    $screenStep.textContent = (sim.stepIndex + 1) + '/' + sim.totalSteps;
-    $screenAction.textContent = task.steps[sim.stepIndex];
-    $screenAction.className = 'screen-action';
-    $screenHint.textContent = 'ESPACE · ÉTAPE SUIVANTE';
-    $deviceButton.disabled = false;
-  } else if (sim.stepIndex === sim.totalSteps) {
-    // Minuteur
-    $led.className = 'device-led active';
-    $screenMode.textContent = 'AMORÇAGE';
-    $screenStep.textContent = sim.totalSteps + '/' + sim.totalSteps;
-    if (sim.timerSeconds > 0) {
-      $screenAction.textContent = 'Dernière étape validée. Reste encore ' + Math.round(sim.timerRemaining / 60) + ' min.';
-      $screenAction.className = 'screen-action';
-      $screenTimer.classList.add('visible');
-      $screenTimer.textContent = formatTime(sim.timerRemaining);
-      $screenHint.textContent = 'LANCEMENT AUTO';
-      $deviceButton.disabled = true;
-    } else {
-      // Sans chrono : terminé directement
-      finishSession();
-    }
-  } else {
-    // Terminé
-    finishSession();
-  }
-}
-
-function finishSession() {
-  clearInterval(sim.timerInterval);
-  $led.className = 'device-led done';
-  $screenMode.textContent = 'TERMINÉ';
-  $screenStep.textContent = sim.totalSteps + '/' + sim.totalSteps;
-  $screenAction.textContent = 'Tâche lancée. Tu es dans l\'action.';
-  $screenAction.className = 'screen-action done';
-  $screenTimer.classList.remove('visible');
-  $screenHint.textContent = 'ESPACE · RETOUR';
-  $deviceButton.disabled = false;
-  sim.stepIndex = sim.totalSteps + 1; // flag "terminé"
-}
-
-function startTimer() {
-  if (sim.timerSeconds <= 0) return;
-  clearInterval(sim.timerInterval);
-  sim.timerInterval = setInterval(() => {
-    sim.timerRemaining--;
-    if (sim.timerRemaining <= 0) {
-      clearInterval(sim.timerInterval);
-      sim.timerRemaining = 0;
-      $screenTimer.textContent = '00:00';
-      finishSession();
-    } else {
-      $screenTimer.textContent = formatTime(sim.timerRemaining);
-    }
-  }, 1000);
-}
-
-function formatTime(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
-}
-
-function handleStartPress() {
-  // Animation du bouton
-  $deviceButton.classList.add('pressed');
-  setTimeout(() => $deviceButton.classList.remove('pressed'), 120);
-
-  const task = state.tasks.find(t => t.id === sim.taskId);
-  if (!task) return;
-
-  // Cas "terminé" : retour à l'état prêt
-  if (sim.stepIndex > sim.totalSteps) {
-    sim.stepIndex = -1;
-    updateSimulatorUI(task);
-    return;
-  }
-
-  // Cas "pas démarré" : première étape
-  if (sim.stepIndex === -1) {
-    sim.stepIndex = 0;
-    updateSimulatorUI(task);
-    return;
-  }
-
-  // Cas "étape en cours" : étape suivante
-  if (sim.stepIndex < sim.totalSteps) {
-    sim.stepIndex++;
-    updateSimulatorUI(task);
-    // Si on vient d'atteindre le minuteur
-    if (sim.stepIndex === sim.totalSteps && sim.timerSeconds > 0) {
-      startTimer();
-    }
-    return;
-  }
-}
-
-$deviceButton.addEventListener('click', handleStartPress);
-
-// Touche Espace (globale, sauf si focus sur input)
-document.addEventListener('keydown', (e) => {
-  if (e.code === 'Space' && !isTyping(e.target)) {
-    e.preventDefault();
-    handleStartPress();
-  }
-});
-
-function isTyping(el) {
-  if (!el) return false;
-  const tag = el.tagName;
-  return tag === 'INPUT' || tag === 'TEXTAREA' || el.isContentEditable;
-}
-
-/* ============================================================
-   VIEW 2 : PRÉPARER UNE TÂCHE
-   ============================================================ */
-const $taskNameInput = document.getElementById('task-name-input');
-const $dictateBtn = document.getElementById('dictate-btn');
-const $templatesGrid = document.getElementById('templates-grid');
-const $customSteps = document.getElementById('custom-steps');
-const $addStepBtn = document.getElementById('add-step-btn');
-const $saveTaskBtn = document.getElementById('save-task-btn');
-const $durationOptions = document.getElementById('duration-options');
-
-// Icônes de templates
-function getTemplateIcon(name) {
-  const icons = {
-    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-    pencil: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',
-    file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
-    layout: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>'
-  };
-  return icons[name] || icons.file;
-}
-
-function renderTemplates() {
-  $templatesGrid.innerHTML = TEMPLATES.map(t => `
-    <button class="template-card ${prep.selectedTemplateId === t.id ? 'selected' : ''}" data-tpl-id="${t.id}">
-      <div class="template-icon">${getTemplateIcon(t.icon)}</div>
-      <div class="template-name">${escapeHtml(t.name)}</div>
-      <div class="template-desc">${escapeHtml(t.desc)}</div>
-    </button>
-  `).join('');
-
-  $templatesGrid.querySelectorAll('.template-card').forEach(card => {
-    card.addEventListener('click', () => {
-      prep.selectedTemplateId = card.dataset.tplId;
-      renderTemplates();
-    });
-  });
-}
-
-function renderCustomSteps() {
-  if (prep.customSteps.length === 0) prep.customSteps = [''];
-  $customSteps.innerHTML = prep.customSteps.map((step, i) => `
-    <div class="custom-step" data-index="${i}">
-      <div class="step-handle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
-      </div>
-      <div class="step-number">${String(i + 1).padStart(2, '0')}</div>
-      <textarea class="step-input" rows="1" placeholder="Micro-action concrète (ex : ouvrir le livre page 42)" data-index="${i}">${escapeHtml(step)}</textarea>
-      <button class="step-delete" data-index="${i}" title="Supprimer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
-      </button>
-    </div>
-  `).join('');
-
-  // Auto-resize textareas
-  $customSteps.querySelectorAll('.step-input').forEach(ta => {
-    autoResize(ta);
-    ta.addEventListener('input', () => {
-      autoResize(ta);
-      prep.customSteps[parseInt(ta.dataset.index)] = ta.value;
-    });
-  });
-
-  // Suppression
-  $customSteps.querySelectorAll('.step-delete').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = parseInt(btn.dataset.index);
-      if (prep.customSteps.length <= 1) {
-        prep.customSteps = [''];
-      } else {
-        prep.customSteps.splice(idx, 1);
-      }
-      renderCustomSteps();
-    });
-  });
-}
-
-function autoResize(ta) {
-  ta.style.height = 'auto';
-  ta.style.height = ta.scrollHeight + 'px';
-}
-
-$addStepBtn.addEventListener('click', () => {
-  prep.customSteps.push('');
-  renderCustomSteps();
-  // Focus sur le nouveau champ
-  setTimeout(() => {
-    const inputs = $customSteps.querySelectorAll('.step-input');
-    if (inputs.length) inputs[inputs.length - 1].focus();
-  }, 50);
-});
-
-// Méthode switcher
-document.querySelectorAll('.method-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    prep.method = tab.dataset.method;
-    document.getElementById('panel-templates').classList.toggle('active', prep.method === 'templates');
-    document.getElementById('panel-custom').classList.toggle('active', prep.method === 'custom');
-  });
-});
-
-// Durée
-$durationOptions.querySelectorAll('.duration-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    $durationOptions.querySelectorAll('.duration-chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    prep.duration = parseInt(chip.dataset.duration);
-  });
-});
-
-// Dictée vocale
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition = null;
-let isListening = false;
-
-if (SpeechRecognition) {
-  recognition = new SpeechRecognition();
-  recognition.lang = 'fr-FR';
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    $taskNameInput.value = transcript.trim();
-    stopDictation();
-  };
-  recognition.onerror = (event) => {
-    console.warn('Speech error', event.error);
-    stopDictation();
-    if (event.error === 'not-allowed' || event.error === 'no-speech') {
-      showToast('Dictée indisponible', 'mic-off');
-    }
-  };
-  recognition.onend = () => {
-    if (isListening) stopDictation();
-  };
-} else {
-  $dictateBtn.classList.add('unsupported');
-  $dictateBtn.title = 'Dictée non supportée par ce navigateur';
-}
-
-$dictateBtn.addEventListener('click', () => {
-  if (!recognition) {
-    showToast('Dictée non supportée', 'mic-off');
-    return;
-  }
-  if (isListening) {
-    stopDictation();
-  } else {
-    startDictation();
-  }
-});
-
-function startDictation() {
-  try {
-    recognition.start();
-    isListening = true;
-    $dictateBtn.classList.add('listening');
-    showToast('Écoute en cours…', 'mic');
-  } catch (e) {
-    console.warn(e);
-  }
-}
-
-function stopDictation() {
-  try { recognition.stop(); } catch (e) {}
-  isListening = false;
-  $dictateBtn.classList.remove('listening');
-}
-
-// Sauvegarde tâche
-$saveTaskBtn.addEventListener('click', () => {
-  const name = $taskNameInput.value.trim();
-  if (!name) {
-    showToast('Donne un nom à ta tâche', 'alert');
-    $taskNameInput.focus();
-    return;
-  }
-
-  let steps = [];
-  if (prep.method === 'templates') {
-    if (!prep.selectedTemplateId) {
-      showToast('Choisis un modèle', 'alert');
-      return;
-    }
-    const tpl = getTemplateMeta(prep.selectedTemplateId);
-    steps = [...tpl.steps];
-  } else {
-    steps = prep.customSteps.map(s => s.trim()).filter(s => s.length > 0);
-    if (steps.length === 0) {
-      showToast('Ajoute au moins une micro-action', 'alert');
-      return;
-    }
-  }
-
-  const newTask = {
-    id: uid(),
-    name,
-    method: prep.method,
-    templateId: prep.method === 'templates' ? prep.selectedTemplateId : null,
-    steps,
-    duration: prep.duration,
-    createdAt: Date.now()
-  };
-
-  state.tasks.unshift(newTask);
-  state.activeTaskId = newTask.id;
-  saveState();
-
-  // Reset form
-  $taskNameInput.value = '';
-  prep.selectedTemplateId = null;
-  prep.customSteps = [''];
-  renderTemplates();
-  renderCustomSteps();
-
-  // Load to simulator
-  loadTaskToSimulator(newTask.id);
-  renderTasks();
-
-  showToast('Tâche chargée sur START', 'check');
-  switchView('tasks');
-});
-
-/* ============================================================
-   VIEW 3 : APPAREIL
-   ============================================================ */
-function renderSettings() {
-  document.querySelectorAll('.segmented').forEach(seg => {
-    const key = seg.dataset.setting;
-    seg.querySelectorAll('button').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.value === state.deviceSettings[key]);
-      btn.addEventListener('click', () => {
-        state.deviceSettings[key] = btn.dataset.value;
-        saveState();
-        renderSettings();
-        showToast('Paramètre enregistré', 'check');
-      });
-    });
-  });
-}
-
-document.getElementById('reset-demo-btn').addEventListener('click', () => {
-  if (confirm('Réinitialiser avec les données de démonstration ? Les tâches actuelles seront remplacées.')) {
-    clearInterval(sim.timerInterval);
-    seedDemoData();
-    renderTasks();
-    loadTaskToSimulator(state.activeTaskId);
-    showToast('Données de démo chargées', 'check');
-  }
-});
-
-/* ============================================================
-   TOAST
-   ============================================================ */
-const $toast = document.getElementById('toast');
-let toastTimeout = null;
-
-function showToast(message, icon = 'check') {
-  const icons = {
-    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
-    trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>',
-    alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-    mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>',
-    'mic-off': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/></svg>'
-  };
-  $toast.innerHTML = (icons[icon] || '') + '<span>' + escapeHtml(message) + '</span>';
-  $toast.classList.add('show');
-  clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => $toast.classList.remove('show'), 2200);
-}
-
-/* ============================================================
-   INIT
-   ============================================================ */
-function init() {
-  loadState();
-  if (state.tasks.length === 0) {
-    seedDemoData();
-  }
-  renderTasks();
-  renderTemplates();
-  renderCustomSteps();
-  renderSettings();
-
-  // Charger la tâche active dans le simulateur si elle existe
-  if (state.activeTaskId && state.tasks.find(t => t.id === state.activeTaskId)) {
-    loadTaskToSimulator(state.activeTaskId);
-  } else {
-    resetSimulator();
-  }
-}
-
-init();
-</script>
-
-</body>
-</html>
+    const s = localStorage
