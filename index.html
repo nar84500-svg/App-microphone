@@ -9,6 +9,63 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Script inline : applique le thème AVANT le premier paint pour éviter le flash -->
+<script>
+(function() {
+  try {
+    const saved = localStorage.getItem('clic_app_fallback');
+    if (saved) {
+      const p = JSON.parse(saved);
+      if (p.settings && p.settings.theme) {
+        applyTheme(p.settings.theme, true);
+      }
+    }
+  } catch(e) {}
+  
+  function applyTheme(theme, silent) {
+    const root = document.documentElement;
+    const themes = {
+      light: {
+        '--bg': '#FAF6F1', '--bg-soft': '#F3ECE2', '--surface': '#FFFFFF',
+        '--surface-2': '#FDFBF8', '--ink': '#2B2A28', '--ink-2': '#5A564F',
+        '--ink-3': '#8A857E', '--line': '#EDE7DF', '--line-2': '#E3DBCF',
+        '--accent': '#E0856F', '--accent-2': '#C96E59', '--accent-soft': '#FCEAE3',
+        '--sage': '#A8B89A', '--sage-2': '#5C7050', '--sage-soft': '#E8EFE1'
+      },
+      night: {
+        '--bg': '#1a1816', '--bg-soft': '#252220', '--surface': '#2a2724',
+        '--surface-2': '#2f2c29', '--ink': '#F5E9DC', '--ink-2': '#D4C8B8',
+        '--ink-3': '#8A857E', '--line': '#3a3632', '--line-2': '#4a4540',
+        '--accent': '#E0856F', '--accent-2': '#F2A892', '--accent-soft': '#3d2a24',
+        '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3326'
+      },
+      galaxy: {
+        '--bg': '#1a1a2e', '--bg-soft': '#252540', '--surface': '#2a2a45',
+        '--surface-2': '#2f2f4a', '--ink': '#F5E9DC', '--ink-2': '#D4C8B8',
+        '--ink-3': '#9a95a8', '--line': '#3a3a55', '--line-2': '#4a4a65',
+        '--accent': '#E0856F', '--accent-2': '#F2A892', '--accent-soft': '#3d2a35',
+        '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3335'
+      },
+      warm: {
+        '--bg': '#F5EDE0', '--bg-soft': '#EDE0CC', '--surface': '#FFF8EE',
+        '--surface-2': '#FFF5E8', '--ink': '#3a2e22', '--ink-2': '#6b5a48',
+        '--ink-3': '#9a8870', '--line': '#E8D8C0', '--line-2': '#DCC8A8',
+        '--accent': '#C96E59', '--accent-2': '#A85845', '--accent-soft': '#F5D8C8',
+        '--sage': '#9a8a6a', '--sage-2': '#6b5e48', '--sage-soft': '#E8DCC0'
+      }
+    };
+    const t = themes[theme] || themes.light;
+    Object.entries(t).forEach(([k, v]) => root.style.setProperty(k, v));
+    if (!silent) {
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.content = t['--bg'];
+    }
+  }
+  window.applyTheme = applyTheme;
+})();
+</script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -46,6 +103,7 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    transition: background .4s var(--ease), color .4s var(--ease);
   }
   body::before {
     content: "";
@@ -56,6 +114,30 @@
     pointer-events: none;
     z-index: 0;
   }
+  body.theme-galaxy::before {
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(224,133,111,0.12), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
+  }
+  body.theme-galaxy::after {
+    content: "";
+    position: fixed; inset: 0;
+    background-image: 
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2), transparent),
+      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.25), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.15), transparent),
+      radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.2), transparent);
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+    animation: twinkle 8s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    body.theme-galaxy::after { animation: none; }
+  }
+  
   .app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 32px 24px 40px; }
 
   .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
@@ -86,7 +168,7 @@
   .task-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: transparent; transition: background .25s var(--ease); }
   .task-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--line-2); }
   .task-card:hover::before { background: var(--accent); }
-  .task-card.selected { border-color: var(--accent); background: linear-gradient(180deg, #FFF 0%, var(--accent-soft) 100%); box-shadow: var(--shadow-md); }
+  .task-card.selected { border-color: var(--accent); background: linear-gradient(180deg, var(--surface) 0%, var(--accent-soft) 100%); box-shadow: var(--shadow-md); }
   .task-card.selected::before { background: var(--accent); }
   .task-card.done { opacity: 0.55; }
   .task-card.done .task-title::after { content: ""; display: inline-block; width: 16px; height: 16px; margin-left: 6px; vertical-align: middle; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A8B89A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>"); background-size: contain; background-repeat: no-repeat; }
@@ -172,44 +254,13 @@
   }
   .device::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.04); pointer-events: none; }
 
-  .progress-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    pointer-events: none;
-    z-index: 1;
-  }
+  .progress-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; pointer-events: none; z-index: 1; }
   .progress-ring circle { fill: none; stroke-width: 4; }
   .progress-ring .track { stroke: rgba(255,255,255,0.08); }
-  .progress-ring .fill {
-    stroke: var(--accent);
-    stroke-linecap: round;
-    stroke-dasharray: 440;
-    stroke-dashoffset: 440;
-    transition: stroke-dashoffset 0.4s var(--ease);
-    transform: rotate(-90deg);
-    transform-origin: center;
-    filter: drop-shadow(0 0 6px rgba(224,133,111,0.4));
-  }
+  .progress-ring .fill { stroke: var(--accent); stroke-linecap: round; stroke-dasharray: 440; stroke-dashoffset: 440; transition: stroke-dashoffset 0.4s var(--ease); transform: rotate(-90deg); transform-origin: center; filter: drop-shadow(0 0 6px rgba(224,133,111,0.4)); }
   .progress-ring .fill.complete { stroke: var(--sage); filter: drop-shadow(0 0 6px rgba(168,184,154,0.4)); }
 
-  .device-screen {
-    width: 100%;
-    background: #0a0908;
-    border-radius: 24px;
-    padding: 18px 16px;
-    color: #F5E9DC;
-    text-align: center;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
-    min-height: 110px;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative;
-    overflow: hidden;
-    z-index: 2;
-  }
+  .device-screen { width: 100%; background: #0a0908; border-radius: 24px; padding: 18px 16px; color: #F5E9DC; text-align: center; box-shadow: inset 0 2px 6px rgba(0,0,0,0.6); min-height: 110px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; z-index: 2; }
   .device-screen::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent); pointer-events: none; }
   .device-label { font-size: 10px; letter-spacing: 2px; color: #8A857E; text-transform: uppercase; margin-bottom: 4px; }
   .device-task { font-family: 'Caveat', cursive; font-size: 22px; font-weight: 600; color: #F5E9DC; line-height: 1.2; margin-bottom: 6px; min-height: 28px; }
@@ -219,23 +270,7 @@
   .device-progress .pip.done { background: var(--accent); }
   .device-progress .pip.current { background: #F5E9DC; box-shadow: 0 0 8px rgba(245,233,220,0.6); }
 
-  .start-button {
-    width: 110px; height: 110px;
-    border-radius: 50%;
-    border: none;
-    background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%);
-    color: #fff;
-    font-family: 'Caveat', cursive;
-    font-size: 28px; font-weight: 700;
-    cursor: pointer;
-    position: relative;
-    z-index: 2;
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12);
-    transition: all .15s var(--ease);
-    letter-spacing: 1px;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
+  .start-button { width: 110px; height: 110px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: all .15s var(--ease); letter-spacing: 1px; user-select: none; -webkit-tap-highlight-color: transparent; }
   .start-button:hover { transform: scale(1.03); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.25), 0 12px 28px rgba(224,133,111,0.55), 0 0 0 10px rgba(224,133,111,0.18); }
   .start-button:active { transform: scale(0.96); box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 4px 12px rgba(224,133,111,0.4), 0 0 0 4px rgba(224,133,111,0.15); }
   .start-button.pulse { animation: btnPulse 1.6s ease-in-out infinite; }
@@ -244,13 +279,14 @@
   .start-button.breathing { animation: breathe 2.5s ease-in-out infinite; }
   @keyframes breathe { 0%, 100% { transform: scale(1); box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { transform: scale(1.08); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.2), 0 12px 32px rgba(224,133,111,0.6), 0 0 0 14px rgba(224,133,111,0.08); } }
 
-  .device-hint { margin-top: 20px; font-size: 13px; color: var(--ink-3); text-align: center; max-width: 280px; }
+  .device-hint { margin-top: 20px; font-size: 13px; color: var(--ink-3); text-align: center; max-width: 280px; line-height: 1.5; }
 
   .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
   .setting-row:last-child { border-bottom: none; }
   .setting-info { flex: 1; }
   .setting-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
   .setting-desc { font-size: 13px; color: var(--ink-3); }
+  .setting-desc-detail { font-size: 12px; color: var(--ink-3); margin-top: 4px; font-style: italic; }
 
   .toggle { position: relative; width: 48px; height: 28px; background: var(--line-2); border-radius: 999px; cursor: pointer; transition: background .25s var(--ease); flex-shrink: 0; border: none; }
   .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: transform .25s var(--ease); }
@@ -269,7 +305,6 @@
 
   .toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: all .3s var(--ease); z-index: 200; display: inline-flex; align-items: center; gap: 8px; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast svg { width: 16px; height: 16px; }
 
   .timer-display { display: flex; align-items: baseline; justify-content: center; gap: 2px; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; color: #F5E9DC; letter-spacing: 1px; margin-top: 4px; }
   .timer-display .colon { opacity: 0.5; }
@@ -277,203 +312,102 @@
   .pause-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--accent-soft); color: var(--accent-2); border-radius: 999px; font-size: 12px; font-weight: 600; margin-top: 12px; }
   .pause-badge svg { width: 12px; height: 12px; }
 
-  /* NOUVEAU : Parcours d'accueil refondu */
-  .onboarding-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 1000;
-    display: none;
-    overflow-y: auto;
-    padding: 40px 24px;
+  /* Thèmes d'apparence - cartes */
+  .theme-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .theme-card {
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    cursor: pointer;
+    transition: all .2s var(--ease);
+    font-family: inherit;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
+  .theme-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .theme-card.active { border-color: var(--accent); background: var(--accent-soft); }
+  .theme-preview {
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .theme-preview::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .theme-preview.light::before { background: linear-gradient(135deg, #FAF6F1 0%, #FFFFFF 100%); }
+  .theme-preview.night::before { background: linear-gradient(135deg, #1a1816 0%, #2a2724 100%); }
+  .theme-preview.galaxy::before { background: linear-gradient(135deg, #1a1a2e 0%, #2a2a45 100%); }
+  .theme-preview.warm::before { background: linear-gradient(135deg, #F5EDE0 0%, #FFF8EE 100%); }
+  .theme-preview::after {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-soft);
+  }
+  .theme-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .theme-desc { font-size: 11px; color: var(--ink-3); }
+
+  /* Parcours d'accueil */
+  .onboarding-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: none; overflow-y: auto; padding: 40px 24px; }
   .onboarding-overlay.active { display: block; animation: fadeIn .4s var(--ease); }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   
-  .onboarding-container {
-    max-width: 600px;
-    margin: 0 auto;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  .onboarding-container { max-width: 600px; margin: 0 auto; min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: center; }
   
-  .onboarding-progress {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 40px;
-  }
-  .onboarding-progress .bar {
-    flex: 1;
-    height: 4px;
-    background: var(--line);
-    border-radius: 2px;
-    transition: background .4s var(--ease);
-  }
+  .onboarding-progress { display: flex; gap: 8px; margin-bottom: 40px; }
+  .onboarding-progress .bar { flex: 1; height: 4px; background: var(--line); border-radius: 2px; transition: background .4s var(--ease); }
   .onboarding-progress .bar.filled { background: var(--accent); }
   .onboarding-progress .bar.current { background: linear-gradient(90deg, var(--accent) 50%, var(--line) 50%); }
   
-  .onboarding-screen {
-    display: none;
-    animation: slideUp .5s var(--ease);
-  }
+  .onboarding-screen { display: none; animation: slideUp .5s var(--ease); }
   .onboarding-screen.active { display: flex; flex-direction: column; align-items: center; }
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   
-  .onboarding-device {
-    width: 240px;
-    height: 240px;
-    background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 32px;
-    position: relative;
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.08), inset 0 -4px 12px rgba(0,0,0,0.4), 0 20px 50px rgba(40,30,20,0.3);
-  }
-  .onboarding-device::before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.04);
-  }
+  .onboarding-device { width: 240px; height: 240px; background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,0.08), inset 0 -4px 12px rgba(0,0,0,0.4), 0 20px 50px rgba(40,30,20,0.3); }
+  .onboarding-device::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.04); }
   
-  .onboarding-btn {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: none;
-    background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%);
-    color: #fff;
-    font-family: 'Caveat', cursive;
-    font-size: 24px;
-    font-weight: 700;
-    cursor: pointer;
-    position: relative;
-    z-index: 2;
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12);
-    transition: all .15s var(--ease);
-    user-select: none;
-  }
+  .onboarding-btn { width: 100px; height: 100px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 24px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: all .15s var(--ease); user-select: none; }
   .onboarding-btn:active { transform: scale(0.95); }
   .onboarding-btn.breathing { animation: breathe 2.5s ease-in-out infinite; }
   .onboarding-btn.glow { animation: glow 0.6s ease-out; }
   @keyframes glow { 0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.2), 0 12px 32px rgba(224,133,111,0.7), 0 0 0 20px rgba(224,133,111,0.15); } 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } }
   
-  .onboarding-hint {
-    font-size: 13px;
-    color: var(--ink-3);
-    margin-top: 16px;
-    text-align: center;
-  }
+  .onboarding-hint { font-size: 13px; color: var(--ink-3); margin-top: 16px; text-align: center; }
   
-  .onboarding-message {
-    font-family: 'Caveat', cursive;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--ink);
-    text-align: center;
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
+  .onboarding-message { font-family: 'Caveat', cursive; font-size: 32px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 16px; line-height: 1.2; word-wrap: break-word; overflow-wrap: break-word; }
   
-  .onboarding-submessage {
-    font-size: 16px;
-    color: var(--ink-2);
-    text-align: center;
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
+  .onboarding-submessage { font-size: 16px; color: var(--ink-2); text-align: center; margin-bottom: 32px; line-height: 1.5; }
+  .onboarding-submessage.multi-hint { font-size: 13px; color: var(--ink-3); font-style: italic; margin-top: -8px; margin-bottom: 20px; }
   
-  .onboarding-reaction {
-    background: var(--accent-soft);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    margin: 20px 0;
-    font-size: 15px;
-    color: var(--accent-2);
-    text-align: center;
-    line-height: 1.5;
-    animation: fadeIn .4s var(--ease);
-  }
+  .onboarding-reaction { background: var(--accent-soft); border-radius: var(--radius-md); padding: 16px 20px; margin: 20px 0; font-size: 15px; color: var(--accent-2); text-align: center; line-height: 1.5; animation: fadeIn .4s var(--ease); }
   
-  .onboarding-choices {
-    display: grid;
-    gap: 12px;
-    width: 100%;
-    margin-bottom: 24px;
-  }
-  .onboarding-choice {
-    background: var(--surface);
-    border: 2px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 18px 20px;
-    cursor: pointer;
-    transition: all .2s var(--ease);
-    font-family: inherit;
-    font-size: 15px;
-    color: var(--ink);
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .onboarding-choice:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    transform: translateY(-2px);
-  }
-  .onboarding-choice.selected {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-  }
-  .onboarding-choice svg {
-    width: 24px;
-    height: 24px;
-    color: var(--ink-2);
-    flex-shrink: 0;
-  }
-  .onboarding-choice.selected svg { color: var(--accent-2); }
+  .onboarding-choices { display: grid; gap: 12px; width: 100%; margin-bottom: 24px; }
+  .onboarding-choice { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 18px 20px; cursor: pointer; transition: all .2s var(--ease); font-family: inherit; font-size: 15px; color: var(--ink); text-align: left; display: flex; align-items: center; gap: 12px; position: relative; }
+  .onboarding-choice:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+  .onboarding-choice.selected { border-color: var(--accent); background: var(--accent-soft); }
+  .onboarding-choice .check-mark { position: absolute; top: 12px; right: 12px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); display: none; align-items: center; justify-content: center; }
+  .onboarding-choice.selected .check-mark { display: flex; }
+  .onboarding-choice .check-mark svg { width: 12px; height: 12px; color: #fff; }
+  .onboarding-choice svg.choice-icon { width: 24px; height: 24px; color: var(--ink-2); flex-shrink: 0; }
+  .onboarding-choice.selected svg.choice-icon { color: var(--accent-2); }
   
-  .onboarding-input {
-    width: 100%;
-    padding: 16px 20px;
-    border: 2px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--surface);
-    font-family: inherit;
-    font-size: 16px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color .2s var(--ease);
-    margin-bottom: 16px;
-  }
+  .onboarding-input { width: 100%; padding: 16px 20px; border: 2px solid var(--line); border-radius: var(--radius-md); background: var(--surface); font-family: inherit; font-size: 16px; color: var(--ink); outline: none; transition: border-color .2s var(--ease); margin-bottom: 16px; }
   .onboarding-input:focus { border-color: var(--accent); }
   .onboarding-input::placeholder { color: var(--ink-3); }
   
-  .onboarding-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .onboarding-final {
-    text-align: center;
-  }
-  .onboarding-final .device {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 24px;
-  }
-  .onboarding-final .start-button {
-    width: 90px;
-    height: 90px;
-    font-size: 22px;
-  }
+  .onboarding-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   
   @media (max-width: 600px) {
     .app { padding: 20px 16px 40px; }
@@ -618,6 +552,7 @@
             <div class="setting-info">
               <div class="setting-title">Appui simple</div>
               <div class="setting-desc">Action effectuée sur un appui court</div>
+              <div class="setting-desc-detail" id="shortPressDesc">Suivant : passe à l'étape suivante</div>
             </div>
             <div class="segmented" id="shortPressSeg">
               <button class="seg-opt active" data-act="next">Suivant</button>
@@ -628,6 +563,7 @@
             <div class="setting-info">
               <div class="setting-title">Appui long</div>
               <div class="setting-desc">Action effectuée sur un appui prolongé</div>
+              <div class="setting-desc-detail" id="longPressDesc">Pause : met la session en pause, tu peux reprendre quand tu veux</div>
             </div>
             <div class="segmented" id="longPressSeg">
               <button class="seg-opt active" data-act="pause">Pause</button>
@@ -653,17 +589,6 @@
           <div class="section-label">Préférences</div>
           <div class="setting-row">
             <div class="setting-info">
-              <div class="setting-title">Ton des messages</div>
-              <div class="setting-desc">Comment Clic vous parle</div>
-            </div>
-            <div class="segmented" id="toneSeg">
-              <button class="seg-opt" data-tone="soft">Doux</button>
-              <button class="seg-opt active" data-tone="warm">Chaleureux</button>
-              <button class="seg-opt" data-tone="neutral">Neutre</button>
-            </div>
-          </div>
-          <div class="setting-row">
-            <div class="setting-info">
               <div class="setting-title">Durée par défaut des étapes</div>
               <div class="setting-desc">Pour les nouvelles tâches</div>
             </div>
@@ -687,9 +612,37 @@
             </div>
             <button class="toggle" id="wakeLockToggle" aria-label="Écran allumé"></button>
           </div>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <div class="section-label">Apparence</div>
+          <div class="theme-grid" id="themeGrid">
+            <button class="theme-card active" data-theme="light">
+              <div class="theme-preview light"></div>
+              <div class="theme-name">Clair</div>
+              <div class="theme-desc">Style par défaut</div>
+            </button>
+            <button class="theme-card" data-theme="night">
+              <div class="theme-preview night"></div>
+              <div class="theme-name">Nuit</div>
+              <div class="theme-desc">Fond noir doux</div>
+            </button>
+            <button class="theme-card" data-theme="galaxy">
+              <div class="theme-preview galaxy"></div>
+              <div class="theme-name">Galaxie</div>
+              <div class="theme-desc">Bleu nuit étoilé</div>
+            </button>
+            <button class="theme-card" data-theme="warm">
+              <div class="theme-preview warm"></div>
+              <div class="theme-name">Chaleureux</div>
+              <div class="theme-desc">Tons miel dorés</div>
+            </button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <div class="section-label">Parcours</div>
           <div class="setting-row">
             <div class="setting-info">
-              <div class="setting-title">Refaire le parcours d'accueil</div>
+              <div class="setting-title">Revoir l'accueil</div>
               <div class="setting-desc">Redécouvrir comment utiliser Clic</div>
             </div>
             <button class="btn btn-ghost" id="redoOnboardingBtn" style="padding:10px 16px; font-size:13px;">Recommencer</button>
@@ -708,7 +661,6 @@
 
 </div>
 
-<!-- NOUVEAU : Parcours d'accueil refondu -->
 <div class="onboarding-overlay" id="onboardingOverlay">
   <div class="onboarding-container">
     <div class="onboarding-progress" id="onboardingProgress"></div>
@@ -734,8 +686,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const CACHE_VERSION = 'clic-v1.1.0';
-
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').then((reg) => {
     reg.addEventListener('updatefound', () => {
@@ -761,11 +711,13 @@ const DEFAULT_STATE = {
     feedback: 'light', 
     demo: true, 
     wakeLock: false,
-    tone: 'warm',
-    defaultDuration: 2
+    defaultDuration: 2,
+    theme: 'light',
+    tone: 'warm'
   },
   session: { taskId: null, stepIndex: 0, remainingTime: 0, totalDuration: 0, isPaused: false, startedAt: null, lastSaved: null },
-  onboarding: { completed: false, answers: {} }
+  onboarding: { completed: false, currentScreen: 0, answers: {} },
+  demoCreated: false
 };
 
 let state = structuredClone(DEFAULT_STATE);
@@ -903,9 +855,10 @@ const ICONS = {
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
   x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
   pause: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`,
+  check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
   mountain: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>`,
   compass: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
-  sparkles: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>`,
+  sparkles: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`,
   sun: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
   moon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
   coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`
@@ -1014,6 +967,7 @@ let isProcessing = false;
 const LONG_PRESS_MS = 500;
 const DOUBLE_TAP_MS = 300;
 
+// CORRECTION : les handlers lisent les réglages en temps réel
 function onPointerDown(e) {
   e.preventDefault();
   if (isProcessing) return;
@@ -1036,7 +990,12 @@ function onPointerUp(e) {
     const now = Date.now();
     const timeSinceLastTap = now - lastTapTime;
     if (timeSinceLastTap < DOUBLE_TAP_MS && timeSinceLastTap > 0) { completeTask(); lastTapTime = 0; }
-    else { const act = state.settings.shortPress; if (act === 'next') advanceStep(); else if (act === 'prev') previousStep(); lastTapTime = now; }
+    else { 
+      const act = state.settings.shortPress; 
+      if (act === 'next') advanceStep(); 
+      else if (act === 'prev') previousStep(); 
+      lastTapTime = now; 
+    }
   }
 }
 
@@ -1072,6 +1031,13 @@ function loadTask(id) {
 
 function getCurrentTask() { return state.tasks.find(t => t.id === state.session.taskId) || null; }
 
+// CORRECTION : le texte sous le bouton se met à jour selon les réglages
+function getDeviceHintText() {
+  const shortLabel = state.settings.shortPress === 'next' ? 'étape suivante' : 'étape précédente';
+  const longLabel = state.settings.longPress === 'pause' ? 'pause' : 'étape précédente';
+  return `1 appui : ${shortLabel}. 2 appuis : terminer. Appui long : ${longLabel}.`;
+}
+
 function renderDevice() {
   const task = getCurrentTask();
   if (!task && state.settings.demo) {
@@ -1086,7 +1052,7 @@ function renderDevice() {
     startBtn.textContent = 'START';
     updateProgressRing(0);
     pauseBadgeContainer.innerHTML = '';
-    deviceHint.textContent = '1 appui : étape suivante. 2 appuis : terminer. Appui long : pause.';
+    deviceHint.textContent = getDeviceHintText();
     return;
   }
   if (!task) {
@@ -1139,7 +1105,7 @@ function renderDevice() {
     pauseBadgeContainer.innerHTML = '';
   }
 
-  deviceHint.textContent = '1 appui : étape suivante. 2 appuis : terminer. Appui long : ' + (state.settings.longPress === 'pause' ? 'pause' : 'précédent') + '.';
+  deviceHint.textContent = getDeviceHintText();
 }
 
 function startTimer() {
@@ -1234,14 +1200,36 @@ async function requestWakeLock() {
 }
 function releaseWakeLock() { if (wakeLock) { wakeLock.release(); wakeLock = null; } }
 
-function bindSegmented(containerId, settingKey, callback) {
+// CORRECTION : les réglages de boutons mettent à jour les descriptions et le hint
+const SHORT_PRESS_DESCRIPTIONS = {
+  next: 'Suivant : passe à l\'étape suivante',
+  prev: 'Précédent : revient à l\'étape précédente'
+};
+const LONG_PRESS_DESCRIPTIONS = {
+  pause: 'Pause : met la session en pause, tu peux reprendre quand tu veux',
+  prev: 'Précédent : revient à l\'étape précédente'
+};
+
+function bindSegmented(containerId, settingKey, onChange) {
   const container = document.getElementById(containerId);
-  container.addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings[settingKey] = opt.dataset[settingKey] || opt.dataset.act || opt.dataset.tone || opt.dataset.dur; if (callback) callback(); saveSettings(); });
+  container.addEventListener('click', (e) => { 
+    const opt = e.target.closest('.seg-opt'); 
+    if (!opt) return; 
+    container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); 
+    opt.classList.add('active'); 
+    state.settings[settingKey] = opt.dataset.act || opt.dataset.fb || opt.dataset.dur;
+    if (onChange) onChange();
+    saveSettings(); 
+  });
 }
-bindSegmented('shortPressSeg', 'shortPress');
-bindSegmented('longPressSeg', 'longPress');
+bindSegmented('shortPressSeg', 'shortPress', () => {
+  document.getElementById('shortPressDesc').textContent = SHORT_PRESS_DESCRIPTIONS[state.settings.shortPress] || '';
+});
+bindSegmented('longPressSeg', 'longPress', () => {
+  document.getElementById('longPressDesc').textContent = LONG_PRESS_DESCRIPTIONS[state.settings.longPress] || '';
+  renderDevice();
+});
 bindSegmented('feedbackSeg', 'feedback');
-bindSegmented('toneSeg', 'tone');
 bindSegmented('defaultDurationSeg', 'defaultDuration');
 
 document.getElementById('demoToggle').addEventListener('click', () => { state.settings.demo = !state.settings.demo; document.getElementById('demoToggle').classList.toggle('on', state.settings.demo); saveSettings(); renderDevice(); });
@@ -1252,7 +1240,28 @@ document.getElementById('wakeLockToggle').addEventListener('click', async () => 
   if (state.settings.wakeLock && getCurrentTask()) await requestWakeLock();
   else releaseWakeLock();
 });
-document.getElementById('redoOnboardingBtn').addEventListener('click', () => { startOnboarding(); });
+
+// CORRECTION : gestion des thèmes
+const themeGrid = document.getElementById('themeGrid');
+themeGrid.addEventListener('click', (e) => {
+  const card = e.target.closest('.theme-card');
+  if (!card) return;
+  const theme = card.dataset.theme;
+  if (!theme) return;
+  themeGrid.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  state.settings.theme = theme;
+  applyTheme(theme);
+  saveSettings();
+});
+
+document.getElementById('redoOnboardingBtn').addEventListener('click', () => { 
+  state.onboarding.completed = false;
+  state.onboarding.currentScreen = 0;
+  state.onboarding.answers = {};
+  saveOnboarding();
+  startOnboarding(); 
+});
 document.getElementById('resetBtn').addEventListener('click', async () => {
   if (!confirm('Réinitialiser toutes les tâches et réglages ?')) return;
   state = structuredClone(DEFAULT_STATE);
@@ -1265,11 +1274,18 @@ function applySettingsToUI() {
   document.querySelectorAll('#shortPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.shortPress));
   document.querySelectorAll('#longPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.longPress));
   document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.fb === state.settings.feedback));
-  document.querySelectorAll('#toneSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.tone === state.settings.tone));
   document.querySelectorAll('#defaultDurationSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.dur == state.settings.defaultDuration));
+  document.getElementById('shortPressDesc').textContent = SHORT_PRESS_DESCRIPTIONS[state.settings.shortPress] || '';
+  document.getElementById('longPressDesc').textContent = LONG_PRESS_DESCRIPTIONS[state.settings.longPress] || '';
   document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
   document.getElementById('wakeLockToggle').classList.toggle('on', state.settings.wakeLock);
   durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.toggle('active', parseInt(o.dataset.dur,10) === 5));
+  
+  // Thème
+  themeGrid.querySelectorAll('.theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === state.settings.theme));
+  if (state.settings.theme && state.settings.theme !== 'light') {
+    applyTheme(state.settings.theme);
+  }
 }
 
 async function resumeSessionAfterReload() {
@@ -1285,15 +1301,23 @@ async function resumeSessionAfterReload() {
   if (state.settings.wakeLock) await requestWakeLock();
 }
 
-/* NOUVEAU : Parcours d'accueil refondu */
+// CORRECTION : persistance complète de l'accueil
 const ONBOARDING_SCREENS = 7;
 let currentScreen = 0;
 let onboardingAnswers = {};
 let tutorialTaps = 0;
 
 function startOnboarding() {
-  currentScreen = 0;
-  onboardingAnswers = { ...state.onboarding.answers };
+  // Reprendre à l'écran sauvegardé si en cours
+  currentScreen = state.onboarding.currentScreen || 0;
+  onboardingAnswers = { ...(state.onboarding.answers || {}) };
+  // Normaliser blocker en tableau pour le multi-choix
+  if (onboardingAnswers.blocker && !Array.isArray(onboardingAnswers.blocker)) {
+    onboardingAnswers.blocker = [onboardingAnswers.blocker];
+  }
+  if (!Array.isArray(onboardingAnswers.blocker)) {
+    onboardingAnswers.blocker = [];
+  }
   tutorialTaps = 0;
   document.getElementById('onboardingOverlay').classList.add('active');
   renderOnboardingScreen();
@@ -1303,7 +1327,6 @@ function renderOnboardingScreen() {
   const progressContainer = document.getElementById('onboardingProgress');
   const screensContainer = document.getElementById('onboardingScreens');
   
-  // Barre de progression
   progressContainer.innerHTML = '';
   for (let i = 0; i < ONBOARDING_SCREENS; i++) {
     const bar = document.createElement('div');
@@ -1316,7 +1339,6 @@ function renderOnboardingScreen() {
   screensContainer.innerHTML = '';
   
   if (currentScreen === 0) {
-    // Écran 1 : Bienvenue + bouton qui respire
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
@@ -1331,7 +1353,6 @@ function renderOnboardingScreen() {
     `;
     screensContainer.appendChild(screen);
   } else if (currentScreen === 1) {
-    // Écran 2 : Tutoriel 1 appui
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
@@ -1346,11 +1367,8 @@ function renderOnboardingScreen() {
       </div>
     `;
     screensContainer.appendChild(screen);
-    setupTutorialButton('onboardingBtn2', 1, () => {
-      setTimeout(() => nextOnboardingScreen(), 600);
-    });
+    setupTutorialButton('onboardingBtn2', 1, () => { setTimeout(() => nextOnboardingScreen(), 600); });
   } else if (currentScreen === 2) {
-    // Écran 3 : Tutoriel 2 appuis
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
@@ -1365,11 +1383,8 @@ function renderOnboardingScreen() {
       </div>
     `;
     screensContainer.appendChild(screen);
-    setupTutorialButton('onboardingBtn3', 2, () => {
-      setTimeout(() => nextOnboardingScreen(), 600);
-    });
+    setupTutorialButton('onboardingBtn3', 2, () => { setTimeout(() => nextOnboardingScreen(), 600); });
   } else if (currentScreen === 3) {
-    // Écran 4 : Tutoriel appui long
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
@@ -1384,75 +1399,69 @@ function renderOnboardingScreen() {
       </div>
     `;
     screensContainer.appendChild(screen);
-    setupTutorialButton('onboardingBtn4', 3, () => {
-      setTimeout(() => nextOnboardingScreen(), 600);
-    });
+    setupTutorialButton('onboardingBtn4', 3, () => { setTimeout(() => nextOnboardingScreen(), 600); });
   } else if (currentScreen === 4) {
-    // Écran 5 : Q1
+    // CORRECTION : Q1 à choix multiples
+    const blockers = [
+      { key: 'tooBig', icon: ICONS.mountain, label: "C'est trop gros" },
+      { key: 'noIdea', icon: ICONS.compass, label: "Je ne sais pas par où commencer" },
+      { key: 'distracted', icon: ICONS.sparkles, label: "Je me laisse distraire" },
+      { key: 'tired', icon: ICONS.coffee, label: "Je suis à plat" }
+    ];
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
       <div class="onboarding-message">Qu'est-ce qui t'arrête, quand tu dois t'y mettre ?</div>
+      <div class="onboarding-submessage multi-hint">(plusieurs choix possibles)</div>
       <div class="onboarding-choices">
-        <button class="onboarding-choice ${onboardingAnswers.blocker === 'tooBig' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'tooBig')">
-          ${ICONS.mountain}
-          <span>C'est trop gros</span>
-        </button>
-        <button class="onboarding-choice ${onboardingAnswers.blocker === 'noIdea' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'noIdea')">
-          ${ICONS.compass}
-          <span>Je ne sais pas par où commencer</span>
-        </button>
-        <button class="onboarding-choice ${onboardingAnswers.blocker === 'distracted' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'distracted')">
-          ${ICONS.sparkles}
-          <span>Je me laisse distraire</span>
-        </button>
-        <button class="onboarding-choice ${onboardingAnswers.blocker === 'tired' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'tired')">
-          ${ICONS.coffee}
-          <span>Je suis à plat</span>
-        </button>
+        ${blockers.map(b => `
+          <button class="onboarding-choice ${onboardingAnswers.blocker.includes(b.key) ? 'selected' : ''}" onclick="toggleOnboardingAnswer('blocker', '${b.key}')">
+            <span class="check-mark">${ICONS.check}</span>
+            ${b.icon.replace('<svg', '<svg class="choice-icon"')}
+            <span>${b.label}</span>
+          </button>
+        `).join('')}
       </div>
       <div id="onboardingReaction1"></div>
       <div class="onboarding-actions">
         <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
         <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
-        <button class="btn btn-primary" onclick="nextOnboardingScreen()" ${!onboardingAnswers.blocker ? 'disabled style="opacity:0.5"' : ''}>Suivant</button>
+        <button class="btn btn-primary" onclick="nextOnboardingScreen()">Suivant</button>
       </div>
     `;
     screensContainer.appendChild(screen);
-    if (onboardingAnswers.blocker) showReaction(1);
+    if (onboardingAnswers.blocker.length > 0) showReaction(1);
   } else if (currentScreen === 5) {
-    // Écran 6 : Q2
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
       <div class="onboarding-message">Quand est-ce que tu veux un petit coup de pouce ?</div>
       <div class="onboarding-choices">
         <button class="onboarding-choice ${onboardingAnswers.time === 'morning' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'morning')">
-          ${ICONS.sun}
+          ${ICONS.sun.replace('<svg', '<svg class="choice-icon"')}
           <span>Matin</span>
         </button>
         <button class="onboarding-choice ${onboardingAnswers.time === 'afternoon' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'afternoon')">
-          ${ICONS.sun}
+          ${ICONS.sun.replace('<svg', '<svg class="choice-icon"')}
           <span>Après-midi</span>
         </button>
         <button class="onboarding-choice ${onboardingAnswers.time === 'evening' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'evening')">
-          ${ICONS.moon}
+          ${ICONS.moon.replace('<svg', '<svg class="choice-icon"')}
           <span>Soir</span>
         </button>
         <button class="onboarding-choice ${onboardingAnswers.time === 'flow' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'flow')">
-          ${ICONS.compass}
+          ${ICONS.compass.replace('<svg', '<svg class="choice-icon"')}
           <span>Je décide au fil de l'eau</span>
         </button>
       </div>
       <div class="onboarding-actions">
         <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
         <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
-        <button class="btn btn-primary" onclick="nextOnboardingScreen()" ${!onboardingAnswers.time ? 'disabled style="opacity:0.5"' : ''}>Suivant</button>
+        <button class="btn btn-primary" onclick="nextOnboardingScreen()">Suivant</button>
       </div>
     `;
     screensContainer.appendChild(screen);
   } else if (currentScreen === 6) {
-    // Écran 7 : Q3
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
@@ -1467,13 +1476,16 @@ function renderOnboardingScreen() {
     `;
     screensContainer.appendChild(screen);
   }
+  
+  // Sauvegarder l'étape en cours
+  state.onboarding.currentScreen = currentScreen;
+  state.onboarding.answers = onboardingAnswers;
+  saveOnboarding();
 }
 
 function setupTutorialButton(btnId, type, onComplete) {
   const btn = document.getElementById(btnId);
   if (!btn) return;
-  
-  let tapCount = 0;
   let longPressTimer = null;
   let lastTapTime = 0;
   
@@ -1495,10 +1507,8 @@ function setupTutorialButton(btnId, type, onComplete) {
     if (longPressTimer) {
       clearTimeout(longPressTimer);
       longPressTimer = null;
-      
       const now = Date.now();
       const timeSinceLastTap = now - lastTapTime;
-      
       if (type === 1) {
         btn.classList.add('glow');
         setTimeout(() => btn.classList.remove('glow'), 600);
@@ -1510,7 +1520,6 @@ function setupTutorialButton(btnId, type, onComplete) {
         if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
         onComplete();
       }
-      
       lastTapTime = now;
     }
   });
@@ -1519,27 +1528,53 @@ function setupTutorialButton(btnId, type, onComplete) {
   btn.addEventListener('pointerleave', () => { if (longPressTimer) clearTimeout(longPressTimer); });
 }
 
+// CORRECTION : toggle pour multi-choix
+window.toggleOnboardingAnswer = function(key, value) {
+  if (!Array.isArray(onboardingAnswers[key])) {
+    onboardingAnswers[key] = [];
+  }
+  const idx = onboardingAnswers[key].indexOf(value);
+  if (idx > -1) {
+    onboardingAnswers[key].splice(idx, 1);
+  } else {
+    onboardingAnswers[key].push(value);
+  }
+  renderOnboardingScreen();
+  if (key === 'blocker') showReaction(1);
+};
+
 window.selectOnboardingAnswer = function(key, value) {
   onboardingAnswers[key] = value;
   renderOnboardingScreen();
-  if (key === 'blocker') showReaction(1);
 };
 
 function showReaction(screenNum) {
   const reactionEl = document.getElementById(`onboardingReaction${screenNum}`);
   if (!reactionEl) return;
   
-  const reactions = {
-    tooBig: "C'est très courant. On va y aller par toutes petites marches.",
-    noIdea: "Pas de souci. On va découper ensemble, étape par étape.",
-    distracted: "Je comprends. On va faire des étapes si courtes que c'est difficile de s'arrêter.",
-    tired: "C'est okay. On va commencer tout doux, vraiment tout petit."
-  };
-  
-  const answer = onboardingAnswers.blocker;
-  if (answer && reactions[answer]) {
-    reactionEl.innerHTML = `<div class="onboarding-reaction">${reactions[answer]}</div>`;
+  const selected = onboardingAnswers.blocker || [];
+  if (selected.length === 0) {
+    reactionEl.innerHTML = '';
+    return;
   }
+  
+  // Une phrase unique qui reprend tout
+  const parts = [];
+  if (selected.includes('tooBig')) parts.push("c'est trop gros");
+  if (selected.includes('noIdea')) parts.push("tu ne sais pas par où commencer");
+  if (selected.includes('distracted')) parts.push("tu te laisses distraire");
+  if (selected.includes('tired')) parts.push("tu es à plat");
+  
+  let reaction = "Merci de me le dire. ";
+  if (selected.length === 1) {
+    reaction += "On va y aller par toutes petites marches, à ton rythme.";
+  } else if (selected.length === 2) {
+    reaction += `Je comprends que ${parts.join(' et ')}. On va découper ensemble, tout doucement.`;
+  } else {
+    reaction += "Je comprends. On va faire des étapes si petites et si douces que c'est difficile de s'arrêter.";
+  }
+  
+  reactionEl.innerHTML = `<div class="onboarding-reaction">${reaction}</div>`;
 }
 
 window.nextOnboardingScreen = function() {
@@ -1565,17 +1600,17 @@ function finishOnboarding() {
   const taskName = taskInput ? taskInput.value.trim() : '';
   
   state.onboarding.completed = true;
+  state.onboarding.currentScreen = ONBOARDING_SCREENS;
   state.onboarding.answers = onboardingAnswers;
   saveOnboarding();
   
-  // Créer la première micro-étape si une tâche a été saisie
   if (taskName) {
     const firstStep = `Commencer : ${taskName}`;
     const task = {
       id: 't_' + Date.now(),
       name: taskName,
       steps: [firstStep],
-      duration: 1, // 1 minute pour la première étape
+      duration: 1,
       done: false,
       createdAt: Date.now()
     };
@@ -1585,7 +1620,6 @@ function finishOnboarding() {
     document.getElementById('onboardingOverlay').classList.remove('active');
     renderTasks();
     
-    // Charger automatiquement la tâche
     setTimeout(() => {
       loadTask(task.id);
       toast('Première étape prête ! Appuie sur START');
@@ -1605,6 +1639,7 @@ async function init() {
   renderDevice();
   await resumeSessionAfterReload();
   
+  // CORRECTION : l'accueil ne s'affiche que si pas terminé
   if (!state.onboarding.completed) {
     setTimeout(() => startOnboarding(), 500);
   }
