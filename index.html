@@ -4,26 +4,23 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#FAF6F1" />
-<title>Clic — Commencez simplement</title>
+<title>START — Commencez simplement</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Script inline : applique le thème AVANT le premier paint pour éviter le flash -->
+<!-- Applique le thème AVANT le premier paint (zéro flash) -->
 <script>
 (function() {
   try {
-    const saved = localStorage.getItem('clic_app_fallback');
+    const saved = localStorage.getItem('start_app_fallback');
     if (saved) {
       const p = JSON.parse(saved);
-      if (p.settings && p.settings.theme) {
-        applyTheme(p.settings.theme, true);
-      }
+      if (p.settings && p.settings.theme) applyTheme(p.settings.theme, true);
     }
   } catch(e) {}
-  
-  function applyTheme(theme, silent) {
+  window.applyTheme = function(theme, silent) {
     const root = document.documentElement;
     const themes = {
       light: {
@@ -31,28 +28,36 @@
         '--surface-2': '#FDFBF8', '--ink': '#2B2A28', '--ink-2': '#5A564F',
         '--ink-3': '#8A857E', '--line': '#EDE7DF', '--line-2': '#E3DBCF',
         '--accent': '#E0856F', '--accent-2': '#C96E59', '--accent-soft': '#FCEAE3',
-        '--sage': '#A8B89A', '--sage-2': '#5C7050', '--sage-soft': '#E8EFE1'
+        '--sage': '#A8B89A', '--sage-2': '#5C7050', '--sage-soft': '#E8EFE1',
+        '--nav-bg': 'rgba(255,255,255,0.85)', '--nav-border': '#EDE7DF',
+        '--nav-text': '#5A564F', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#2B2A28'
       },
       night: {
         '--bg': '#1a1816', '--bg-soft': '#252220', '--surface': '#2a2724',
         '--surface-2': '#2f2c29', '--ink': '#F5E9DC', '--ink-2': '#D4C8B8',
         '--ink-3': '#8A857E', '--line': '#3a3632', '--line-2': '#4a4540',
         '--accent': '#E0856F', '--accent-2': '#F2A892', '--accent-soft': '#3d2a24',
-        '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3326'
+        '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3326',
+        '--nav-bg': 'rgba(24,24,27,0.92)', '--nav-border': '#27272A',
+        '--nav-text': '#A1A1AA', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#E0856F'
       },
       galaxy: {
         '--bg': '#1a1a2e', '--bg-soft': '#252540', '--surface': '#2a2a45',
         '--surface-2': '#2f2f4a', '--ink': '#F5E9DC', '--ink-2': '#D4C8B8',
         '--ink-3': '#9a95a8', '--line': '#3a3a55', '--line-2': '#4a4a65',
         '--accent': '#E0856F', '--accent-2': '#F2A892', '--accent-soft': '#3d2a35',
-        '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3335'
+        '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3335',
+        '--nav-bg': 'rgba(22,25,44,0.92)', '--nav-border': '#2E3454',
+        '--nav-text': '#CBD5E1', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#E0856F'
       },
       warm: {
         '--bg': '#F5EDE0', '--bg-soft': '#EDE0CC', '--surface': '#FFF8EE',
         '--surface-2': '#FFF5E8', '--ink': '#3a2e22', '--ink-2': '#6b5a48',
         '--ink-3': '#9a8870', '--line': '#E8D8C0', '--line-2': '#DCC8A8',
         '--accent': '#C96E59', '--accent-2': '#A85845', '--accent-soft': '#F5D8C8',
-        '--sage': '#9a8a6a', '--sage-2': '#6b5e48', '--sage-soft': '#E8DCC0'
+        '--sage': '#9a8a6a', '--sage-2': '#6b5e48', '--sage-soft': '#E8DCC0',
+        '--nav-bg': 'rgba(255,248,238,0.9)', '--nav-border': '#E8D8C0',
+        '--nav-text': '#6b5a48', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#3a2e22'
       }
     };
     const t = themes[theme] || themes.light;
@@ -61,8 +66,8 @@
       const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.content = t['--bg'];
     }
-  }
-  window.applyTheme = applyTheme;
+    document.body.className = theme === 'light' ? '' : 'theme-' + theme;
+  };
 })();
 </script>
 
@@ -70,49 +75,35 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
   :root {
-    --bg: #FAF6F1;
-    --bg-soft: #F3ECE2;
-    --surface: #FFFFFF;
-    --surface-2: #FDFBF8;
-    --ink: #2B2A28;
-    --ink-2: #5A564F;
-    --ink-3: #8A857E;
-    --line: #EDE7DF;
-    --line-2: #E3DBCF;
-    --accent: #E0856F;
-    --accent-2: #C96E59;
-    --accent-soft: #FCEAE3;
-    --sage: #A8B89A;
-    --sage-2: #5C7050;
-    --sage-soft: #E8EFE1;
-    --shadow-sm: 0 1px 2px rgba(60, 45, 30, 0.04), 0 2px 8px rgba(60, 45, 30, 0.04);
-    --shadow-md: 0 2px 6px rgba(60, 45, 30, 0.05), 0 10px 28px rgba(60, 45, 30, 0.08);
-    --shadow-lg: 0 8px 24px rgba(60, 45, 30, 0.08), 0 24px 60px rgba(60, 45, 30, 0.12);
-    --radius-sm: 12px;
-    --radius-md: 18px;
-    --radius-lg: 28px;
+    --bg: #FAF6F1; --bg-soft: #F3ECE2; --surface: #FFFFFF; --surface-2: #FDFBF8;
+    --ink: #2B2A28; --ink-2: #5A564F; --ink-3: #8A857E;
+    --line: #EDE7DF; --line-2: #E3DBCF;
+    --accent: #E0856F; --accent-2: #C96E59; --accent-soft: #FCEAE3;
+    --sage: #A8B89A; --sage-2: #5C7050; --sage-soft: #E8EFE1;
+    --nav-bg: rgba(255,255,255,0.85); --nav-border: #EDE7DF;
+    --nav-text: #5A564F; --nav-text-active: #FFFFFF; --nav-bg-active: #2B2A28;
+    --shadow-sm: 0 1px 2px rgba(60,45,30,0.04), 0 2px 8px rgba(60,45,30,0.04);
+    --shadow-md: 0 2px 6px rgba(60,45,30,0.05), 0 10px 28px rgba(60,45,30,0.08);
+    --shadow-lg: 0 8px 24px rgba(60,45,30,0.08), 0 24px 60px rgba(60,45,30,0.12);
+    --radius-sm: 12px; --radius-md: 18px; --radius-lg: 28px;
     --ease: cubic-bezier(.2,.7,.2,1);
   }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.55;
+    background: var(--bg); color: var(--ink);
+    font-size: 16px; line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     padding-bottom: calc(96px + env(safe-area-inset-bottom));
     transition: background .4s var(--ease), color .4s var(--ease);
   }
   body::before {
-    content: "";
-    position: fixed; inset: 0;
+    content: ""; position: fixed; inset: 0;
     background:
       radial-gradient(1200px 600px at 85% -10%, rgba(224,133,111,0.08), transparent 60%),
       radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
   body.theme-galaxy::before {
     background:
@@ -120,27 +111,23 @@
       radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
   }
   body.theme-galaxy::after {
-    content: "";
-    position: fixed; inset: 0;
-    background-image: 
+    content: ""; position: fixed; inset: 0;
+    background-image:
       radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3), transparent),
       radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2), transparent),
       radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.25), transparent),
       radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.15), transparent),
       radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.2), transparent);
     background-size: 100% 100%;
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
     animation: twinkle 8s ease-in-out infinite;
   }
   @keyframes twinkle { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-  @media (prefers-reduced-motion: reduce) {
-    body.theme-galaxy::after { animation: none; }
-  }
-  
+  @media (prefers-reduced-motion: reduce) { body.theme-galaxy::after { animation: none; } }
+
   .app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 32px 24px 40px; }
 
-  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; flex-wrap: wrap; gap: 12px; }
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-mark { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; }
   .brand-mark svg { width: 100%; height: 100%; }
@@ -173,7 +160,7 @@
   .task-card.done { opacity: 0.55; }
   .task-card.done .task-title::after { content: ""; display: inline-block; width: 16px; height: 16px; margin-left: 6px; vertical-align: middle; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A8B89A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>"); background-size: contain; background-repeat: no-repeat; }
   .task-title { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-  .task-meta { display: flex; gap: 14px; align-items: center; font-size: 13px; color: var(--ink-3); }
+  .task-meta { display: flex; gap: 14px; align-items: center; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
   .task-meta span { display: inline-flex; align-items: center; gap: 6px; }
   .task-actions { display: flex; gap: 8px; margin-top: 14px; opacity: 0; transform: translateY(4px); transition: all .25s var(--ease); }
   .task-card:hover .task-actions, .task-card.selected .task-actions { opacity: 1; transform: translateY(0); }
@@ -254,39 +241,58 @@
   }
   .device::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.04); pointer-events: none; }
 
-  .progress-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; pointer-events: none; z-index: 1; }
-  .progress-ring circle { fill: none; stroke-width: 4; }
+  .progress-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; pointer-events: none; z-index: 1; }
+  .progress-ring circle { fill: none; stroke-width: 5; }
   .progress-ring .track { stroke: rgba(255,255,255,0.08); }
-  .progress-ring .fill { stroke: var(--accent); stroke-linecap: round; stroke-dasharray: 440; stroke-dashoffset: 440; transition: stroke-dashoffset 0.4s var(--ease); transform: rotate(-90deg); transform-origin: center; filter: drop-shadow(0 0 6px rgba(224,133,111,0.4)); }
-  .progress-ring .fill.complete { stroke: var(--sage); filter: drop-shadow(0 0 6px rgba(168,184,154,0.4)); }
+  .progress-ring .fill { stroke: var(--accent); stroke-linecap: round; stroke-dasharray: 565; stroke-dashoffset: 565; transition: stroke-dashoffset 0.3s linear; transform: rotate(-90deg); transform-origin: center; filter: drop-shadow(0 0 6px rgba(224,133,111,0.5)); }
+  .progress-ring .fill.complete { stroke: var(--sage); filter: drop-shadow(0 0 6px rgba(168,184,154,0.5)); }
 
   .device-screen { width: 100%; background: #0a0908; border-radius: 24px; padding: 18px 16px; color: #F5E9DC; text-align: center; box-shadow: inset 0 2px 6px rgba(0,0,0,0.6); min-height: 110px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; z-index: 2; }
   .device-screen::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent); pointer-events: none; }
   .device-label { font-size: 10px; letter-spacing: 2px; color: #8A857E; text-transform: uppercase; margin-bottom: 4px; }
   .device-task { font-family: 'Caveat', cursive; font-size: 22px; font-weight: 600; color: #F5E9DC; line-height: 1.2; margin-bottom: 6px; min-height: 28px; }
-  .device-step { font-size: 13px; color: #B8AFA2; margin-bottom: 8px; }
+  .device-step { font-size: 13px; color: #B8AFA2; margin-bottom: 8px; min-height: 18px; }
   .device-progress { display: flex; gap: 4px; justify-content: center; }
   .device-progress .pip { width: 6px; height: 6px; border-radius: 50%; background: #3a3632; transition: all .3s var(--ease); }
   .device-progress .pip.done { background: var(--accent); }
   .device-progress .pip.current { background: #F5E9DC; box-shadow: 0 0 8px rgba(245,233,220,0.6); }
 
-  .start-button { width: 110px; height: 110px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: all .15s var(--ease); letter-spacing: 1px; user-select: none; -webkit-tap-highlight-color: transparent; }
+  .start-button { width: 110px; height: 110px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: transform .1s var(--ease), box-shadow .2s var(--ease); letter-spacing: 1px; user-select: none; -webkit-tap-highlight-color: transparent; }
   .start-button:hover { transform: scale(1.03); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.25), 0 12px 28px rgba(224,133,111,0.55), 0 0 0 10px rgba(224,133,111,0.18); }
-  .start-button:active { transform: scale(0.96); box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 4px 12px rgba(224,133,111,0.4), 0 0 0 4px rgba(224,133,111,0.15); }
+  .start-button:active { transform: scale(0.94); box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 4px 12px rgba(224,133,111,0.4), 0 0 0 4px rgba(224,133,111,0.15); }
   .start-button.pulse { animation: btnPulse 1.6s ease-in-out infinite; }
   @keyframes btnPulse { 0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 18px rgba(224,133,111,0); } }
-  .start-button.paused { background: radial-gradient(circle at 30% 30%, #B8AFA2 0%, #8A857E 45%, #5A564F 100%); box-shadow: inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -4px 10px rgba(0,0,0,0.3), 0 8px 20px rgba(138,133,126,0.4), 0 0 0 6px rgba(138,133,126,0.15); }
   .start-button.breathing { animation: breathe 2.5s ease-in-out infinite; }
-  @keyframes breathe { 0%, 100% { transform: scale(1); box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { transform: scale(1.08); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.2), 0 12px 32px rgba(224,133,111,0.6), 0 0 0 14px rgba(224,133,111,0.08); } }
+  @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+  .start-button.glow { animation: glow 0.5s ease-out; }
+  @keyframes glow { 0% { filter: brightness(1); } 50% { filter: brightness(1.4); } 100% { filter: brightness(1); } }
 
   .device-hint { margin-top: 20px; font-size: 13px; color: var(--ink-3); text-align: center; max-width: 280px; line-height: 1.5; }
+
+  /* Boutons Pause/Quitter au-dessus du boîtier */
+  .session-controls {
+    display: flex; gap: 8px; margin-bottom: 16px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s var(--ease);
+  }
+  .session-controls.visible { opacity: 1; pointer-events: auto; }
+  .session-ctrl-btn {
+    padding: 8px 16px; border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-2);
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    transition: all .2s var(--ease);
+  }
+  .session-ctrl-btn:hover { background: var(--bg-soft); color: var(--ink); }
+  .session-ctrl-btn.quit:hover { background: #FBEAEA; color: #B84A4A; border-color: #F5D5D5; }
 
   .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
   .setting-row:last-child { border-bottom: none; }
   .setting-info { flex: 1; }
   .setting-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
   .setting-desc { font-size: 13px; color: var(--ink-3); }
-  .setting-desc-detail { font-size: 12px; color: var(--ink-3); margin-top: 4px; font-style: italic; }
 
   .toggle { position: relative; width: 48px; height: 28px; background: var(--line-2); border-radius: 999px; cursor: pointer; transition: background .25s var(--ease); flex-shrink: 0; border: none; }
   .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: transform .25s var(--ease); }
@@ -297,10 +303,34 @@
   .seg-opt { padding: 8px 14px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
   .seg-opt.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
 
-  .bottom-nav { position: fixed; bottom: calc(12px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.85); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid var(--line); border-radius: 999px; padding: 6px; display: flex; gap: 4px; box-shadow: var(--shadow-lg); z-index: 100; }
-  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .25s var(--ease); }
+  /* CORRECTION : barre de navigation adaptative au thème */
+  .bottom-nav {
+    position: fixed; bottom: calc(12px + env(safe-area-inset-bottom)); left: 50%;
+    transform: translateX(-50%);
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid var(--nav-border);
+    border-radius: 999px;
+    padding: 6px;
+    display: flex; gap: 4px;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+    transition: background .4s var(--ease), border-color .4s var(--ease);
+  }
+  .nav-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--nav-text);
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    transition: all .25s var(--ease);
+  }
   .nav-btn:hover { color: var(--ink); }
-  .nav-btn.active { background: var(--ink); color: #fff; }
+  .nav-btn.active { background: var(--nav-bg-active); color: var(--nav-text-active); }
   .nav-btn svg { width: 18px; height: 18px; }
 
   .toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: all .3s var(--ease); z-index: 200; display: inline-flex; align-items: center; gap: 8px; }
@@ -309,11 +339,38 @@
   .timer-display { display: flex; align-items: baseline; justify-content: center; gap: 2px; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; color: #F5E9DC; letter-spacing: 1px; margin-top: 4px; }
   .timer-display .colon { opacity: 0.5; }
 
-  .pause-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--accent-soft); color: var(--accent-2); border-radius: 999px; font-size: 12px; font-weight: 600; margin-top: 12px; }
-  .pause-badge svg { width: 12px; height: 12px; }
+  /* Écran de fin de session */
+  .end-screen {
+    position: fixed; inset: 0;
+    background: rgba(26,24,22,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 500;
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .end-screen.active { display: flex; animation: fadeIn .3s var(--ease); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .end-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+  }
+  .end-card h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 36px; color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .end-card p { color: var(--ink-2); margin-bottom: 28px; line-height: 1.5; }
+  .end-actions { display: flex; flex-direction: column; gap: 10px; }
+  .end-actions .btn { width: 100%; padding: 16px; font-size: 15px; }
 
-  /* Thèmes d'apparence - cartes */
-  .theme-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  /* Thèmes - cartes (CORRECTION : 2 colonnes) */
+  .theme-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
   .theme-card {
     background: var(--surface);
     border: 2px solid var(--line);
@@ -329,70 +386,38 @@
   }
   .theme-card:hover { border-color: var(--accent); transform: translateY(-1px); }
   .theme-card.active { border-color: var(--accent); background: var(--accent-soft); }
-  .theme-preview {
-    width: 100%;
-    height: 48px;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-  }
-  .theme-preview::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-  }
+  .theme-preview { width: 100%; height: 48px; border-radius: 10px; position: relative; overflow: hidden; }
+  .theme-preview::before { content: ""; position: absolute; inset: 0; }
   .theme-preview.light::before { background: linear-gradient(135deg, #FAF6F1 0%, #FFFFFF 100%); }
   .theme-preview.night::before { background: linear-gradient(135deg, #1a1816 0%, #2a2724 100%); }
   .theme-preview.galaxy::before { background: linear-gradient(135deg, #1a1a2e 0%, #2a2a45 100%); }
   .theme-preview.warm::before { background: linear-gradient(135deg, #F5EDE0 0%, #FFF8EE 100%); }
-  .theme-preview::after {
-    content: "";
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-soft);
-  }
+  .theme-preview::after { content: ""; position: absolute; bottom: 8px; left: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
   .theme-name { font-size: 13px; font-weight: 600; color: var(--ink); }
   .theme-desc { font-size: 11px; color: var(--ink-3); }
 
   /* Parcours d'accueil */
   .onboarding-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: none; overflow-y: auto; padding: 40px 24px; }
   .onboarding-overlay.active { display: block; animation: fadeIn .4s var(--ease); }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  
   .onboarding-container { max-width: 600px; margin: 0 auto; min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: center; }
-  
   .onboarding-progress { display: flex; gap: 8px; margin-bottom: 40px; }
   .onboarding-progress .bar { flex: 1; height: 4px; background: var(--line); border-radius: 2px; transition: background .4s var(--ease); }
   .onboarding-progress .bar.filled { background: var(--accent); }
   .onboarding-progress .bar.current { background: linear-gradient(90deg, var(--accent) 50%, var(--line) 50%); }
-  
   .onboarding-screen { display: none; animation: slideUp .5s var(--ease); }
   .onboarding-screen.active { display: flex; flex-direction: column; align-items: center; }
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  
   .onboarding-device { width: 240px; height: 240px; background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,0.08), inset 0 -4px 12px rgba(0,0,0,0.4), 0 20px 50px rgba(40,30,20,0.3); }
   .onboarding-device::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.04); }
-  
-  .onboarding-btn { width: 100px; height: 100px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 24px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: all .15s var(--ease); user-select: none; }
-  .onboarding-btn:active { transform: scale(0.95); }
+  .onboarding-btn { width: 100px; height: 100px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 24px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: transform .1s var(--ease); user-select: none; }
+  .onboarding-btn:active { transform: scale(0.94); }
   .onboarding-btn.breathing { animation: breathe 2.5s ease-in-out infinite; }
-  .onboarding-btn.glow { animation: glow 0.6s ease-out; }
-  @keyframes glow { 0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.2), 0 12px 32px rgba(224,133,111,0.7), 0 0 0 20px rgba(224,133,111,0.15); } 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } }
-  
+  .onboarding-btn.glow { animation: glow 0.5s ease-out; }
   .onboarding-hint { font-size: 13px; color: var(--ink-3); margin-top: 16px; text-align: center; }
-  
-  .onboarding-message { font-family: 'Caveat', cursive; font-size: 32px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 16px; line-height: 1.2; word-wrap: break-word; overflow-wrap: break-word; }
-  
+  .onboarding-message { font-family: 'Caveat', cursive; font-size: 32px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 16px; line-height: 1.2; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; }
   .onboarding-submessage { font-size: 16px; color: var(--ink-2); text-align: center; margin-bottom: 32px; line-height: 1.5; }
   .onboarding-submessage.multi-hint { font-size: 13px; color: var(--ink-3); font-style: italic; margin-top: -8px; margin-bottom: 20px; }
-  
   .onboarding-reaction { background: var(--accent-soft); border-radius: var(--radius-md); padding: 16px 20px; margin: 20px 0; font-size: 15px; color: var(--accent-2); text-align: center; line-height: 1.5; animation: fadeIn .4s var(--ease); }
-  
   .onboarding-choices { display: grid; gap: 12px; width: 100%; margin-bottom: 24px; }
   .onboarding-choice { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 18px 20px; cursor: pointer; transition: all .2s var(--ease); font-family: inherit; font-size: 15px; color: var(--ink); text-align: left; display: flex; align-items: center; gap: 12px; position: relative; }
   .onboarding-choice:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
@@ -402,13 +427,11 @@
   .onboarding-choice .check-mark svg { width: 12px; height: 12px; color: #fff; }
   .onboarding-choice svg.choice-icon { width: 24px; height: 24px; color: var(--ink-2); flex-shrink: 0; }
   .onboarding-choice.selected svg.choice-icon { color: var(--accent-2); }
-  
   .onboarding-input { width: 100%; padding: 16px 20px; border: 2px solid var(--line); border-radius: var(--radius-md); background: var(--surface); font-family: inherit; font-size: 16px; color: var(--ink); outline: none; transition: border-color .2s var(--ease); margin-bottom: 16px; }
   .onboarding-input:focus { border-color: var(--accent); }
   .onboarding-input::placeholder { color: var(--ink-3); }
-  
   .onboarding-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  
+
   @media (max-width: 600px) {
     .app { padding: 20px 16px 40px; }
     .page-title { font-size: 40px; }
@@ -416,7 +439,7 @@
     .brand-mark { width: 38px; height: 38px; }
     .status-pill { font-size: 11px; padding: 6px 10px; }
     .device { width: 240px; padding: 22px; }
-    .progress-ring { width: 170px; height: 170px; }
+    .progress-ring { width: 190px; height: 190px; }
     .start-button { width: 96px; height: 96px; font-size: 24px; }
     .device-task { font-size: 18px; }
     .nav-btn { padding: 10px 14px; font-size: 12px; }
@@ -425,6 +448,8 @@
     .onboarding-message { font-size: 26px; }
     .onboarding-device { width: 200px; height: 200px; }
     .onboarding-btn { width: 85px; height: 85px; font-size: 20px; }
+    .end-card { padding: 32px 24px; }
+    .end-card h2 { font-size: 30px; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -442,20 +467,20 @@
     <div class="brand">
       <div class="brand-mark">
         <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="44" height="44" rx="12" fill="#FDFBF8" stroke="#EDE7DF" stroke-width="1"/>
-          <path d="M28 15A10 10 0 1 0 28 29" stroke="#2B2A28" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M20 17L27 22L20 27V17Z" fill="#E0856F"/>
+          <rect width="44" height="44" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="1"/>
+          <path d="M28 15A10 10 0 1 0 28 29" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M20 17L27 22L20 27V17Z" fill="var(--accent)"/>
         </svg>
       </div>
       <div>
-        <div class="brand-name">Clic</div>
+        <div class="brand-name">start</div>
         <div class="brand-tag">Commencez simplement</div>
       </div>
     </div>
     <div class="topbar-right">
-      <div class="status-pill" id="statusPill">
+      <div class="status-pill">
         <span class="status-dot"></span>
-        <span id="statusText">Boîtier simulé</span>
+        <span>Boîtier simulé</span>
       </div>
     </div>
   </header>
@@ -471,7 +496,7 @@
   <section class="view" id="view-prepare">
     <div class="page-head">
       <h1 class="page-title">Préparer</h1>
-      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. Clic découpera la tâche en petites actions claires.</p>
+      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. START découpera la tâche en petites actions claires.</p>
     </div>
     <div class="prepare-layout">
       <div>
@@ -518,15 +543,20 @@
   <section class="view" id="view-device">
     <div class="page-head">
       <h1 class="page-title">Appareil</h1>
-      <p class="page-subtitle">Votre boîtier Clic simulé. Personnalisez les sensations et le comportement des boutons.</p>
+      <p class="page-subtitle">Votre boîtier START simulé. Personnalisez les sensations et le comportement.</p>
     </div>
     <div class="device-layout">
       <div class="card" style="padding: 32px 20px;">
         <div class="device-stage">
-          <div class="device" role="group" aria-label="Boîtier Clic simulé">
+          <!-- Boutons Pause/Quitter (visibles uniquement en session active) -->
+          <div class="session-controls" id="sessionControls">
+            <button class="session-ctrl-btn" id="pauseBtn">Pause</button>
+            <button class="session-ctrl-btn quit" id="quitBtn">Quitter</button>
+          </div>
+          <div class="device" role="group" aria-label="Boîtier START simulé">
             <svg class="progress-ring" viewBox="0 0 200 200" aria-hidden="true">
-              <circle class="track" cx="100" cy="100" r="70"/>
-              <circle class="fill" id="progressFill" cx="100" cy="100" r="70"/>
+              <circle class="track" cx="100" cy="100" r="90"/>
+              <circle class="fill" id="progressFill" cx="100" cy="100" r="90"/>
             </svg>
             <div class="device-screen">
               <div class="device-label" id="devLabel">Bienvenue</div>
@@ -537,66 +567,48 @@
                 <span id="timerMin">05</span><span class="colon">:</span><span id="timerSec">00</span>
               </div>
             </div>
-            <button class="start-button pulse" id="startBtn" aria-label="Bouton START">
-              START
-            </button>
+            <button class="start-button pulse" id="startBtn" aria-label="Bouton START">START</button>
           </div>
-          <div id="pauseBadgeContainer"></div>
-          <p class="device-hint" id="deviceHint">1 appui : étape suivante. 2 appuis : terminer. Appui long : pause.</p>
+          <p class="device-hint" id="deviceHint">Appuyez sur START pour avancer d'une étape.</p>
         </div>
       </div>
       <div>
         <div class="card">
-          <div class="section-label">Comportement des boutons</div>
+          <div class="section-label">Alerte de fin de session</div>
           <div class="setting-row">
             <div class="setting-info">
-              <div class="setting-title">Appui simple</div>
-              <div class="setting-desc">Action effectuée sur un appui court</div>
-              <div class="setting-desc-detail" id="shortPressDesc">Suivant : passe à l'étape suivante</div>
+              <div class="setting-title">Son de fin</div>
+              <div class="setting-desc">Choisissez une alerte douce</div>
             </div>
-            <div class="segmented" id="shortPressSeg">
-              <button class="seg-opt active" data-act="next">Suivant</button>
-              <button class="seg-opt" data-act="prev">Précédent</button>
+            <div class="segmented" id="soundSeg">
+              <button class="seg-opt active" data-sound="bell">Bol doux</button>
+              <button class="seg-opt" data-sound="pulse">Impulsion</button>
+              <button class="seg-opt" data-sound="silent">Silencieux</button>
             </div>
           </div>
           <div class="setting-row">
             <div class="setting-info">
-              <div class="setting-title">Appui long</div>
-              <div class="setting-desc">Action effectuée sur un appui prolongé</div>
-              <div class="setting-desc-detail" id="longPressDesc">Pause : met la session en pause, tu peux reprendre quand tu veux</div>
+              <div class="setting-title">Tester le son</div>
+              <div class="setting-desc">Écouter l'alerte choisie</div>
             </div>
-            <div class="segmented" id="longPressSeg">
-              <button class="seg-opt active" data-act="pause">Pause</button>
-              <button class="seg-opt" data-act="prev">Précédent</button>
-            </div>
+            <button class="btn btn-ghost" id="testSoundBtn" style="padding:10px 16px; font-size:13px;">Écouter</button>
           </div>
-        </div>
-        <div class="card" style="margin-top:16px;">
-          <div class="section-label">Retour haptique</div>
           <div class="setting-row">
             <div class="setting-info">
-              <div class="setting-title">Mode de retour</div>
-              <div class="setting-desc">Feedback à chaque appui</div>
+              <div class="setting-title">Vibration</div>
+              <div class="setting-desc">Retour haptique à chaque appui</div>
             </div>
-            <div class="segmented" id="feedbackSeg">
-              <button class="seg-opt active" data-fb="light">Lumière</button>
-              <button class="seg-opt" data-fb="vibration">Vibration</button>
-              <button class="seg-opt" data-fb="silent">Silencieux</button>
-            </div>
+            <button class="toggle on" id="vibrationToggle" aria-label="Vibration"></button>
           </div>
         </div>
         <div class="card" style="margin-top:16px;">
-          <div class="section-label">Préférences</div>
+          <div class="section-label">Session</div>
           <div class="setting-row">
             <div class="setting-info">
-              <div class="setting-title">Durée par défaut des étapes</div>
-              <div class="setting-desc">Pour les nouvelles tâches</div>
+              <div class="setting-title">Écran allumé pendant la session</div>
+              <div class="setting-desc">Empêche le téléphone de se verrouiller</div>
             </div>
-            <div class="segmented" id="defaultDurationSeg">
-              <button class="seg-opt" data-dur="1">1 min</button>
-              <button class="seg-opt active" data-dur="2">2 min</button>
-              <button class="seg-opt" data-dur="5">5 min</button>
-            </div>
+            <button class="toggle" id="wakeLockToggle" aria-label="Écran allumé"></button>
           </div>
           <div class="setting-row">
             <div class="setting-info">
@@ -604,13 +616,6 @@
               <div class="setting-desc">Affiche une tâche d'exemple au démarrage</div>
             </div>
             <button class="toggle on" id="demoToggle" aria-label="Mode démonstration"></button>
-          </div>
-          <div class="setting-row">
-            <div class="setting-info">
-              <div class="setting-title">Écran allumé pendant la session</div>
-              <div class="setting-desc">Empêche le téléphone de se verrouiller</div>
-            </div>
-            <button class="toggle" id="wakeLockToggle" aria-label="Écran allumé"></button>
           </div>
         </div>
         <div class="card" style="margin-top:16px;">
@@ -639,11 +644,26 @@
           </div>
         </div>
         <div class="card" style="margin-top:16px;">
-          <div class="section-label">Parcours</div>
+          <div class="section-label">Données</div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Exporter les données</div>
+              <div class="setting-desc">Télécharger un fichier JSON</div>
+            </div>
+            <button class="btn btn-ghost" id="exportBtn" style="padding:10px 16px; font-size:13px;">Exporter</button>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Importer des données</div>
+              <div class="setting-desc">Restaurer depuis un fichier JSON</div>
+            </div>
+            <button class="btn btn-ghost" id="importBtn" style="padding:10px 16px; font-size:13px;">Importer</button>
+            <input type="file" id="importFile" accept="application/json" style="display:none;" />
+          </div>
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Revoir l'accueil</div>
-              <div class="setting-desc">Redécouvrir comment utiliser Clic</div>
+              <div class="setting-desc">Redécouvrir comment utiliser START</div>
             </div>
             <button class="btn btn-ghost" id="redoOnboardingBtn" style="padding:10px 16px; font-size:13px;">Recommencer</button>
           </div>
@@ -661,6 +681,19 @@
 
 </div>
 
+<!-- Écran de fin de session -->
+<div class="end-screen" id="endScreen">
+  <div class="end-card">
+    <h2>Session terminée</h2>
+    <p id="endMessage">Bravo. Vous avez avancé. Que souhaitez-vous faire maintenant ?</p>
+    <div class="end-actions">
+      <button class="btn btn-primary btn-lg" id="continueBtn">Continuer (+10 min)</button>
+      <button class="btn btn-ghost btn-lg" id="finishBtn">Terminer la tâche</button>
+    </div>
+  </div>
+</div>
+
+<!-- Parcours d'accueil -->
 <div class="onboarding-overlay" id="onboardingOverlay">
   <div class="onboarding-container">
     <div class="onboarding-progress" id="onboardingProgress"></div>
@@ -686,6 +719,13 @@
 <div class="toast" id="toast"></div>
 
 <script>
+/* ============================================================
+   START — Application
+   Interaction simplifiée : un seul geste (appui simple)
+   Minuteur fiable : Date.now()
+   Web Audio API pour les sons
+   ============================================================ */
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').then((reg) => {
     reg.addEventListener('updatefound', () => {
@@ -699,35 +739,34 @@ if ('serviceWorker' in navigator) {
   }).catch((err) => console.log('SW failed:', err));
 }
 
-const DB_NAME = 'clic_app';
-const DB_VERSION = 1;
-const STORAGE_KEY_FALLBACK = 'clic_app_fallback';
+const DB_NAME = 'start_app';
+const STORAGE_KEY = 'start_app_fallback';
 
 const DEFAULT_STATE = {
   tasks: [],
-  settings: { 
-    shortPress: 'next', 
-    longPress: 'pause', 
-    feedback: 'light', 
-    demo: true, 
+  settings: {
+    sound: 'bell',
+    vibration: true,
     wakeLock: false,
-    defaultDuration: 2,
+    demo: true,
     theme: 'light',
+    defaultDuration: 2,
     tone: 'warm'
   },
-  session: { taskId: null, stepIndex: 0, remainingTime: 0, totalDuration: 0, isPaused: false, startedAt: null, lastSaved: null },
-  onboarding: { completed: false, currentScreen: 0, answers: {} },
-  demoCreated: false
+  session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null },
+  onboarding: { completed: false, currentScreen: 0, answers: {} }
 };
 
 let state = structuredClone(DEFAULT_STATE);
 let db = null;
 let wakeLock = null;
 let timerInterval = null;
+let audioCtx = null;
 
+/* ---------- IndexedDB ---------- */
 function openDB() {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    const req = indexedDB.open(DB_NAME, 1);
     req.onupgradeneeded = (e) => {
       const d = e.target.result;
       if (!d.objectStoreNames.contains('tasks')) d.createObjectStore('tasks', { keyPath: 'id' });
@@ -739,7 +778,6 @@ function openDB() {
     req.onerror = (e) => reject(e);
   });
 }
-
 async function dbGet(store, key) {
   if (!db) return null;
   return new Promise((resolve) => {
@@ -749,7 +787,6 @@ async function dbGet(store, key) {
     req.onerror = () => resolve(null);
   });
 }
-
 async function dbPut(store, key, value) {
   if (!db) return;
   return new Promise((resolve) => {
@@ -758,7 +795,6 @@ async function dbPut(store, key, value) {
     tx.oncomplete = () => resolve();
   });
 }
-
 async function dbClear(store) {
   if (!db) return;
   return new Promise((resolve) => {
@@ -767,7 +803,6 @@ async function dbClear(store) {
     tx.oncomplete = () => resolve();
   });
 }
-
 async function dbGetAllTasks() {
   if (!db) return [];
   return new Promise((resolve) => {
@@ -781,11 +816,10 @@ async function dbGetAllTasks() {
 async function loadState() {
   try {
     db = await openDB();
-    const tasks = await dbGetAllTasks();
+    state.tasks = (await dbGetAllTasks()) || [];
     const settings = await dbGet('settings', 'main');
     const session = await dbGet('session', 'main');
     const onboarding = await dbGet('onboarding', 'main');
-    state.tasks = tasks || [];
     if (settings) state.settings = { ...DEFAULT_STATE.settings, ...settings };
     if (session) state.session = { ...DEFAULT_STATE.session, ...session };
     if (onboarding) state.onboarding = { ...DEFAULT_STATE.onboarding, ...onboarding };
@@ -795,36 +829,37 @@ async function loadState() {
     }
   } catch(e) {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY_FALLBACK);
+      const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const p = JSON.parse(raw);
-        state = { ...structuredClone(DEFAULT_STATE), ...p, settings: { ...DEFAULT_STATE.settings, ...(p.settings||{}) }, session: { ...DEFAULT_STATE.session, ...(p.session||{}) }, onboarding: { ...DEFAULT_STATE.onboarding, ...(p.onboarding||{}) } };
+        state = { ...structuredClone(DEFAULT_STATE), ...p,
+          settings: { ...DEFAULT_STATE.settings, ...(p.settings||{}) },
+          session: { ...DEFAULT_STATE.session, ...(p.session||{}) },
+          onboarding: { ...DEFAULT_STATE.onboarding, ...(p.onboarding||{}) } };
       }
     } catch(e2) {}
   }
 }
 
 async function saveTasks() {
-  if (db) { await dbClear('tasks'); for (const task of state.tasks) { await dbPut('tasks', task.id, task); } }
-  try { localStorage.setItem(STORAGE_KEY_FALLBACK, JSON.stringify({ tasks: state.tasks })); } catch(e) {}
+  if (db) { await dbClear('tasks'); for (const t of state.tasks) await dbPut('tasks', t.id, t); }
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks: state.tasks })); } catch(e) {}
 }
-
 async function saveSettings() {
   if (db) await dbPut('settings', 'main', state.settings);
-  try { const raw = JSON.parse(localStorage.getItem(STORAGE_KEY_FALLBACK)||'{}'); raw.settings = state.settings; localStorage.setItem(STORAGE_KEY_FALLBACK, JSON.stringify(raw)); } catch(e) {}
+  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.settings = state.settings; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
 }
-
 async function saveSession() {
   state.session.lastSaved = Date.now();
   if (db) await dbPut('session', 'main', state.session);
-  try { const raw = JSON.parse(localStorage.getItem(STORAGE_KEY_FALLBACK)||'{}'); raw.session = state.session; localStorage.setItem(STORAGE_KEY_FALLBACK, JSON.stringify(raw)); } catch(e) {}
+  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.session = state.session; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
 }
-
 async function saveOnboarding() {
   if (db) await dbPut('onboarding', 'main', state.onboarding);
-  try { const raw = JSON.parse(localStorage.getItem(STORAGE_KEY_FALLBACK)||'{}'); raw.onboarding = state.onboarding; localStorage.setItem(STORAGE_KEY_FALLBACK, JSON.stringify(raw)); } catch(e) {}
+  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.onboarding = state.onboarding; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
 }
 
+/* ---------- Navigation ---------- */
 const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device') };
 document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
 function switchView(name) {
@@ -842,6 +877,7 @@ function toast(msg) {
   toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
 }
 
+/* ---------- Icônes ---------- */
 const ICONS = {
   book: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
   target: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
@@ -854,7 +890,6 @@ const ICONS = {
   trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>`,
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
   x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
-  pause: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`,
   check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
   mountain: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>`,
   compass: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
@@ -871,6 +906,7 @@ const TEMPLATES = [
   { name: "Ranger mon bureau", icon: ICONS.archive, sub: "Un espace clair", steps: ["Tout retirer du bureau", "Jeter ce qui est inutile", "Essuyer la surface", "Remettre l'essentiel seulement", "Profiler le résultat"] }
 ];
 
+/* ---------- Tâches ---------- */
 const tasksContainer = document.getElementById('tasksContainer');
 function renderTasks() {
   tasksContainer.innerHTML = '';
@@ -894,10 +930,11 @@ function renderTasks() {
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
 function deleteTask(id) {
   state.tasks = state.tasks.filter(t => t.id !== id);
-  if (state.session.taskId === id) { state.session.taskId = null; state.session.stepIndex = 0; state.session.remainingTime = 0; }
+  if (state.session.taskId === id) { state.session.taskId = null; state.session.stepIndex = 0; state.session.endTime = 0; }
   saveTasks(); saveSession(); renderTasks(); renderDevice(); toast('Tâche supprimée');
 }
 
+/* ---------- Préparation ---------- */
 const taskNameInput = document.getElementById('taskNameInput'), stepsEditor = document.getElementById('stepsEditor'), addStepBtn = document.getElementById('addStepBtn'), templatesGrid = document.getElementById('templatesGrid'), durationPicker = document.getElementById('durationPicker'), saveTaskBtn = document.getElementById('saveTaskBtn'), clearPrepareBtn = document.getElementById('clearPrepareBtn');
 let prepareSteps = [];
 
@@ -945,6 +982,55 @@ micBtn.addEventListener('click', () => {
   rec.onend = () => micBtn.classList.remove('listening');
 });
 
+/* ---------- Web Audio API ---------- */
+function getAudioContext() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playBell() {
+  const ctx = getAudioContext(); if (!ctx) return;
+  const now = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(523.25, now); // Do5
+  osc.frequency.exponentialRampToValueAtTime(261.63, now + 1.2); // Do4
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(0.3, now + 0.05);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start(now); osc.stop(now + 1.5);
+}
+
+function playPulse() {
+  const ctx = getAudioContext(); if (!ctx) return;
+  const now = ctx.currentTime;
+  for (let i = 0; i < 3; i++) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = 880;
+    const t = now + i * 0.15;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.25, t + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(t); osc.stop(t + 0.15);
+  }
+}
+
+function playAlert() {
+  const sound = state.settings.sound;
+  if (sound === 'bell') playBell();
+  else if (sound === 'pulse') playPulse();
+  // silent = rien
+}
+
+/* ---------- Device / START (UN SEUL GESTE) ---------- */
 const startBtn = document.getElementById('startBtn');
 const devLabel = document.getElementById('devLabel');
 const devTask = document.getElementById('devTask');
@@ -955,91 +1041,228 @@ const timerMin = document.getElementById('timerMin');
 const timerSec = document.getElementById('timerSec');
 const deviceHint = document.getElementById('deviceHint');
 const progressFill = document.getElementById('progressFill');
-const pauseBadgeContainer = document.getElementById('pauseBadgeContainer');
+const sessionControls = document.getElementById('sessionControls');
+const pauseBtn = document.getElementById('pauseBtn');
+const quitBtn = document.getElementById('quitBtn');
+const endScreen = document.getElementById('endScreen');
+const continueBtn = document.getElementById('continueBtn');
+const finishBtn = document.getElementById('finishBtn');
+const endMessage = document.getElementById('endMessage');
 
-const CIRCUMFERENCE = 2 * Math.PI * 70;
+const CIRCUMFERENCE = 2 * Math.PI * 90; // ~565
 progressFill.style.strokeDasharray = CIRCUMFERENCE;
 progressFill.style.strokeDashoffset = CIRCUMFERENCE;
 
-let lastTapTime = 0;
-let longPressTimer = null;
-let isProcessing = false;
-const LONG_PRESS_MS = 500;
-const DOUBLE_TAP_MS = 300;
+// UN SEUL GESTE : appui simple
+startBtn.addEventListener('click', handleStartClick);
+startBtn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); handleStartClick(); } });
 
-// CORRECTION : les handlers lisent les réglages en temps réel
-function onPointerDown(e) {
-  e.preventDefault();
-  if (isProcessing) return;
-  if (state.session.isPaused) { resumeSession(); return; }
-  longPressTimer = setTimeout(() => {
-    longPressTimer = null;
-    const act = state.settings.longPress;
-    if (act === 'pause') togglePause();
-    else if (act === 'prev') previousStep();
-    isProcessing = true;
-    setTimeout(() => isProcessing = false, 200);
-  }, LONG_PRESS_MS);
+function handleStartClick() {
+  const task = getCurrentTask();
+  if (!task) return;
+  
+  // Si en pause → reprendre
+  if (state.session.isPaused) {
+    resumeSession();
+    return;
+  }
+  
+  // Si session prête (endTime === 0) → démarrer
+  if (state.session.endTime === 0) {
+    startSession();
+    return;
+  }
+  
+  // Si session en cours → valider l'étape
+  validateStep();
 }
 
-function onPointerUp(e) {
-  e.preventDefault();
-  if (longPressTimer) {
-    clearTimeout(longPressTimer);
-    longPressTimer = null;
-    const now = Date.now();
-    const timeSinceLastTap = now - lastTapTime;
-    if (timeSinceLastTap < DOUBLE_TAP_MS && timeSinceLastTap > 0) { completeTask(); lastTapTime = 0; }
-    else { 
-      const act = state.settings.shortPress; 
-      if (act === 'next') advanceStep(); 
-      else if (act === 'prev') previousStep(); 
-      lastTapTime = now; 
+function startSession() {
+  const task = getCurrentTask(); if (!task) return;
+  const duration = task.duration > 0 ? task.duration * 60 : 0;
+  state.session.endTime = duration > 0 ? Date.now() + duration * 1000 : 0;
+  state.session.duration = duration;
+  state.session.isPaused = false;
+  state.session.startedAt = Date.now();
+  saveSession();
+  renderDevice();
+  if (duration > 0) startTimer();
+  if (state.settings.wakeLock) requestWakeLock();
+  if (state.settings.vibration && navigator.vibrate) navigator.vibrate(30);
+  startBtn.classList.add('glow');
+  setTimeout(() => startBtn.classList.remove('glow'), 500);
+}
+
+function validateStep() {
+  const task = getCurrentTask(); if (!task) return;
+  
+  // Arrêter le timer avant de passer à la suite
+  stopTimer();
+  
+  if (state.session.stepIndex < task.steps.length - 1) {
+    state.session.stepIndex++;
+    // Nouvelle étape : reset du minuteur
+    if (task.duration > 0) {
+      state.session.endTime = Date.now() + task.duration * 60 * 1000;
+      state.session.duration = task.duration * 60;
     }
+    saveSession();
+    renderDevice();
+    if (task.duration > 0) startTimer();
+    if (state.settings.vibration && navigator.vibrate) navigator.vibrate(30);
+    startBtn.classList.add('glow');
+    setTimeout(() => startBtn.classList.remove('glow'), 500);
+  } else {
+    // Dernière étape validée → écran de fin
+    showEndScreen();
   }
 }
 
-function onPointerCancel() { if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } }
+function showEndScreen() {
+  const task = getCurrentTask();
+  endMessage.textContent = task ? `Bravo. Vous avez avancé sur "${task.name}". Que souhaitez-vous faire maintenant ?` : 'Bravo. Vous avez avancé. Que souhaitez-vous faire maintenant ?';
+  endScreen.classList.add('active');
+  playAlert();
+  if (state.settings.vibration && navigator.vibrate) navigator.vibrate([120, 80, 120]);
+}
 
-startBtn.addEventListener('pointerdown', onPointerDown);
-startBtn.addEventListener('pointerup', onPointerUp);
-startBtn.addEventListener('pointercancel', onPointerCancel);
-startBtn.addEventListener('pointerleave', onPointerCancel);
-startBtn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); advanceStep(); } });
+continueBtn.addEventListener('click', () => {
+  endScreen.classList.remove('active');
+  const task = getCurrentTask();
+  if (task) {
+    // Reprendre à la dernière étape avec +10 min
+    state.session.endTime = Date.now() + 10 * 60 * 1000;
+    state.session.duration = 10 * 60;
+    state.session.isPaused = false;
+    saveSession();
+    renderDevice();
+    startTimer();
+    toast('Session prolongée de 10 minutes');
+  }
+});
 
-function updateProgressRing(percent, isComplete = false) {
-  const offset = CIRCUMFERENCE * (1 - Math.max(0, Math.min(1, percent)));
+finishBtn.addEventListener('click', () => {
+  endScreen.classList.remove('active');
+  completeTask();
+});
+
+function pauseSession() {
+  if (state.session.endTime === 0) return;
+  state.session.isPaused = true;
+  state.session.pausedAt = Date.now();
+  state.session.pausedRemaining = Math.max(0, state.session.endTime - Date.now());
+  stopTimer();
+  saveSession();
+  renderDevice();
+  toast('Session en pause');
+}
+
+function resumeSession() {
+  if (!state.session.isPaused) return;
+  state.session.isPaused = false;
+  state.session.endTime = Date.now() + state.session.pausedRemaining;
+  state.session.duration = Math.ceil(state.session.pausedRemaining / 1000);
+  saveSession();
+  renderDevice();
+  startTimer();
+  if (state.settings.wakeLock) requestWakeLock();
+  toast('Session reprise');
+}
+
+function quitSession() {
+  stopTimer();
+  releaseWakeLock();
+  state.session.endTime = 0;
+  state.session.duration = 0;
+  state.session.isPaused = false;
+  state.session.pausedRemaining = 0;
+  saveSession();
+  renderDevice();
+  toast('Session quittée');
+}
+
+pauseBtn.addEventListener('click', pauseSession);
+quitBtn.addEventListener('click', quitSession);
+
+/* ---------- Minuteur FIABLE (Date.now()) ---------- */
+function startTimer() {
+  stopTimer();
+  // Mettre à jour immédiatement l'affichage
+  updateTimerFromEndTime();
+  timerInterval = setInterval(() => {
+    if (state.session.isPaused) return;
+    updateTimerFromEndTime();
+    const remaining = Math.max(0, state.session.endTime - Date.now());
+    if (remaining <= 0) {
+      stopTimer();
+      onTimerEnd();
+    }
+  }, 200); // 200ms pour fluidité de l'anneau
+}
+
+function stopTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+}
+
+function updateTimerFromEndTime() {
+  const remaining = Math.max(0, state.session.endTime - Date.now());
+  const total = state.session.duration > 0 ? state.session.duration * 1000 : 1;
+  const percent = remaining / total;
+  const offset = CIRCUMFERENCE * (1 - percent);
   progressFill.style.strokeDashoffset = offset;
-  if (isComplete) progressFill.classList.add('complete');
-  else progressFill.classList.remove('complete');
+  
+  const m = Math.floor(remaining / 60000);
+  const s = Math.floor((remaining % 60000) / 1000);
+  timerMin.textContent = String(m).padStart(2, '0');
+  timerSec.textContent = String(s).padStart(2, '0');
+}
+
+function onTimerEnd() {
+  const task = getCurrentTask();
+  if (task && state.session.stepIndex < task.steps.length - 1) {
+    // Minuteur fini mais étapes restantes → passer à la suivante automatiquement
+    state.session.stepIndex++;
+    if (task.duration > 0) {
+      state.session.endTime = Date.now() + task.duration * 60 * 1000;
+      state.session.duration = task.duration * 60;
+    }
+    saveSession();
+    renderDevice();
+    startTimer();
+    playAlert();
+    if (state.settings.vibration && navigator.vibrate) navigator.vibrate([120, 80, 120]);
+    toast('Étape suivante');
+  } else {
+    showEndScreen();
+  }
 }
 
 function loadTask(id) {
   const task = state.tasks.find(t => t.id === id); if (!task) return;
+  stopTimer();
   state.session.taskId = id;
   state.session.stepIndex = 0;
-  state.session.totalDuration = task.duration * 60;
-  state.session.remainingTime = state.session.totalDuration;
+  state.session.endTime = 0;
+  state.session.duration = 0;
   state.session.isPaused = false;
+  state.session.pausedRemaining = 0;
   state.session.startedAt = Date.now();
   saveSession();
   renderTasks();
   renderDevice();
-  toast('Tâche chargée');
-  if (state.settings.wakeLock) requestWakeLock();
+  toast('Tâche chargée. Appuyez sur START.');
 }
 
 function getCurrentTask() { return state.tasks.find(t => t.id === state.session.taskId) || null; }
 
-// CORRECTION : le texte sous le bouton se met à jour selon les réglages
-function getDeviceHintText() {
-  const shortLabel = state.settings.shortPress === 'next' ? 'étape suivante' : 'étape précédente';
-  const longLabel = state.settings.longPress === 'pause' ? 'pause' : 'étape précédente';
-  return `1 appui : ${shortLabel}. 2 appuis : terminer. Appui long : ${longLabel}.`;
-}
-
 function renderDevice() {
   const task = getCurrentTask();
+  
+  // Afficher/masquer les boutons Pause/Quitter
+  const sessionActive = task && state.session.endTime > 0;
+  sessionControls.classList.toggle('visible', sessionActive && !state.session.isPaused);
+  pauseBtn.textContent = state.session.isPaused ? 'Reprendre' : 'Pause';
+  
   if (!task && state.settings.demo) {
     devLabel.textContent = 'Démonstration';
     devTask.textContent = 'Bienvenue';
@@ -1048,11 +1271,10 @@ function renderDevice() {
     devTimer.style.display = 'none';
     stopTimer();
     startBtn.classList.add('pulse');
-    startBtn.classList.remove('paused');
     startBtn.textContent = 'START';
-    updateProgressRing(0);
-    pauseBadgeContainer.innerHTML = '';
-    deviceHint.textContent = getDeviceHintText();
+    progressFill.style.strokeDashoffset = CIRCUMFERENCE;
+    progressFill.classList.remove('complete');
+    deviceHint.textContent = 'Appuyez sur START pour avancer d\'une étape.';
     return;
   }
   if (!task) {
@@ -1062,10 +1284,10 @@ function renderDevice() {
     devProgress.innerHTML = '';
     devTimer.style.display = 'none';
     stopTimer();
-    startBtn.classList.remove('pulse', 'paused');
+    startBtn.classList.remove('pulse');
     startBtn.textContent = 'START';
-    updateProgressRing(0);
-    pauseBadgeContainer.innerHTML = '';
+    progressFill.style.strokeDashoffset = CIRCUMFERENCE;
+    progressFill.classList.remove('complete');
     deviceHint.textContent = 'Aucune tâche chargée.';
     return;
   }
@@ -1083,242 +1305,219 @@ function renderDevice() {
     devProgress.appendChild(pip);
   });
 
-  if (task.duration > 0) {
+  if (task.duration > 0 && state.session.endTime > 0) {
     devTimer.style.display = 'flex';
-    const percent = state.session.totalDuration > 0 ? state.session.remainingTime / state.session.totalDuration : 0;
-    updateProgressRing(percent);
     if (!timerInterval && !state.session.isPaused) startTimer();
   } else {
     devTimer.style.display = 'none';
+    // Mode libre : anneau basé sur les étapes
     const percent = task.steps.length > 0 ? (state.session.stepIndex + 1) / task.steps.length : 0;
-    updateProgressRing(percent);
+    progressFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - percent);
     stopTimer();
   }
 
   if (state.session.isPaused) {
-    startBtn.classList.add('paused');
     startBtn.textContent = 'PAUSE';
-    pauseBadgeContainer.innerHTML = `<div class="pause-badge">${ICONS.pause} En pause — appuyez pour reprendre</div>`;
-  } else {
-    startBtn.classList.remove('paused');
+    deviceHint.textContent = 'Session en pause. Appuyez sur START pour reprendre.';
+  } else if (state.session.endTime === 0) {
     startBtn.textContent = 'START';
-    pauseBadgeContainer.innerHTML = '';
-  }
-
-  deviceHint.textContent = getDeviceHintText();
-}
-
-function startTimer() {
-  stopTimer();
-  updateTimerDisplay();
-  timerInterval = setInterval(() => {
-    if (state.session.isPaused) return;
-    state.session.remainingTime--;
-    saveSession();
-    updateTimerDisplay();
-    const task = getCurrentTask();
-    if (task && task.duration > 0 && state.session.totalDuration > 0) {
-      updateProgressRing(state.session.remainingTime / state.session.totalDuration);
-    }
-    if (state.session.remainingTime <= 0) {
-      stopTimer();
-      toast('Session terminée');
-      if (navigator.vibrate && state.settings.feedback === 'vibration') navigator.vibrate([200, 100, 200]);
-      updateProgressRing(0, true);
-    }
-  }, 1000);
-}
-function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
-function updateTimerDisplay() {
-  const m = Math.max(0, Math.floor(state.session.remainingTime / 60)), s = Math.max(0, state.session.remainingTime % 60);
-  timerMin.textContent = String(m).padStart(2, '0');
-  timerSec.textContent = String(s).padStart(2, '0');
-}
-
-function advanceStep() {
-  const task = getCurrentTask(); if (!task) return;
-  if (state.session.isPaused) return;
-  if (state.session.stepIndex < task.steps.length - 1) {
-    state.session.stepIndex++;
-    if (task.duration > 0) { state.session.remainingTime = task.duration * 60; state.session.totalDuration = task.duration * 60; }
-    saveSession();
-    renderDevice();
-    feedback();
-  } else { completeTask(); }
-}
-
-function previousStep() {
-  const task = getCurrentTask(); if (!task) return;
-  if (state.session.isPaused) return;
-  if (state.session.stepIndex > 0) {
-    state.session.stepIndex--;
-    if (task.duration > 0) { state.session.remainingTime = task.duration * 60; state.session.totalDuration = task.duration * 60; }
-    saveSession();
-    renderDevice();
-    feedback();
+    deviceHint.textContent = 'Appuyez sur START pour commencer.';
+  } else {
+    startBtn.textContent = 'START';
+    deviceHint.textContent = 'Appuyez sur START pour valider cette étape.';
   }
 }
-
-function togglePause() {
-  const task = getCurrentTask(); if (!task) return;
-  state.session.isPaused = !state.session.isPaused;
-  if (state.session.isPaused) { stopTimer(); toast('Session en pause'); }
-  else { if (task.duration > 0) startTimer(); toast('Session reprise'); }
-  saveSession();
-  renderDevice();
-}
-
-function resumeSession() { if (state.session.isPaused) togglePause(); }
 
 function completeTask() {
   const task = getCurrentTask(); if (!task) return;
   task.done = true;
+  stopTimer();
+  releaseWakeLock();
   state.session.taskId = null;
   state.session.stepIndex = 0;
-  state.session.remainingTime = 0;
+  state.session.endTime = 0;
+  state.session.duration = 0;
   state.session.isPaused = false;
+  state.session.pausedRemaining = 0;
   saveTasks();
   saveSession();
   renderTasks();
   renderDevice();
   toast('Tâche terminée');
-  updateProgressRing(1, true);
-  releaseWakeLock();
+  progressFill.classList.add('complete');
 }
 
-function feedback() {
-  const fb = state.settings.feedback;
-  if (fb === 'vibration' && navigator.vibrate) navigator.vibrate(30);
-  if (fb === 'light') {
-    startBtn.animate([{ filter: 'brightness(1.4)' }, { filter: 'brightness(1)' }], { duration: 300, easing: 'ease-out' });
-  }
-}
-
+/* ---------- Wake Lock ---------- */
 async function requestWakeLock() {
   if (!navigator.wakeLock) return;
-  try { wakeLock = await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release', () => { wakeLock = null; }); } catch(e) {}
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    wakeLock.addEventListener('release', () => { wakeLock = null; });
+  } catch(e) {}
 }
-function releaseWakeLock() { if (wakeLock) { wakeLock.release(); wakeLock = null; } }
+function releaseWakeLock() { if (wakeLock) { try { wakeLock.release(); } catch(e) {} wakeLock = null; } }
 
-// CORRECTION : les réglages de boutons mettent à jour les descriptions et le hint
-const SHORT_PRESS_DESCRIPTIONS = {
-  next: 'Suivant : passe à l\'étape suivante',
-  prev: 'Précédent : revient à l\'étape précédente'
-};
-const LONG_PRESS_DESCRIPTIONS = {
-  pause: 'Pause : met la session en pause, tu peux reprendre quand tu veux',
-  prev: 'Précédent : revient à l\'étape précédente'
-};
-
+/* ---------- Réglages ---------- */
 function bindSegmented(containerId, settingKey, onChange) {
   const container = document.getElementById(containerId);
-  container.addEventListener('click', (e) => { 
-    const opt = e.target.closest('.seg-opt'); 
-    if (!opt) return; 
-    container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); 
-    opt.classList.add('active'); 
-    state.settings[settingKey] = opt.dataset.act || opt.dataset.fb || opt.dataset.dur;
+  container.addEventListener('click', (e) => {
+    const opt = e.target.closest('.seg-opt'); if (!opt) return;
+    container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+    state.settings[settingKey] = opt.dataset.sound || opt.dataset.act;
     if (onChange) onChange();
-    saveSettings(); 
+    saveSettings();
   });
 }
-bindSegmented('shortPressSeg', 'shortPress', () => {
-  document.getElementById('shortPressDesc').textContent = SHORT_PRESS_DESCRIPTIONS[state.settings.shortPress] || '';
-});
-bindSegmented('longPressSeg', 'longPress', () => {
-  document.getElementById('longPressDesc').textContent = LONG_PRESS_DESCRIPTIONS[state.settings.longPress] || '';
-  renderDevice();
-});
-bindSegmented('feedbackSeg', 'feedback');
-bindSegmented('defaultDurationSeg', 'defaultDuration');
+bindSegmented('soundSeg', 'sound', () => {});
 
-document.getElementById('demoToggle').addEventListener('click', () => { state.settings.demo = !state.settings.demo; document.getElementById('demoToggle').classList.toggle('on', state.settings.demo); saveSettings(); renderDevice(); });
+document.getElementById('testSoundBtn').addEventListener('click', () => {
+  playAlert();
+  toast('Son testé');
+});
+
+document.getElementById('vibrationToggle').addEventListener('click', () => {
+  state.settings.vibration = !state.settings.vibration;
+  document.getElementById('vibrationToggle').classList.toggle('on', state.settings.vibration);
+  saveSettings();
+  if (state.settings.vibration && navigator.vibrate) navigator.vibrate(30);
+});
+
 document.getElementById('wakeLockToggle').addEventListener('click', async () => {
   state.settings.wakeLock = !state.settings.wakeLock;
   document.getElementById('wakeLockToggle').classList.toggle('on', state.settings.wakeLock);
   saveSettings();
-  if (state.settings.wakeLock && getCurrentTask()) await requestWakeLock();
+  if (state.settings.wakeLock && getCurrentTask() && state.session.endTime > 0) await requestWakeLock();
   else releaseWakeLock();
 });
 
-// CORRECTION : gestion des thèmes
-const themeGrid = document.getElementById('themeGrid');
-themeGrid.addEventListener('click', (e) => {
-  const card = e.target.closest('.theme-card');
-  if (!card) return;
-  const theme = card.dataset.theme;
-  if (!theme) return;
-  themeGrid.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+document.getElementById('demoToggle').addEventListener('click', () => {
+  state.settings.demo = !state.settings.demo;
+  document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
+  saveSettings();
+  renderDevice();
+});
+
+document.getElementById('themeGrid').addEventListener('click', (e) => {
+  const card = e.target.closest('.theme-card'); if (!card) return;
+  const theme = card.dataset.theme; if (!theme) return;
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
   card.classList.add('active');
   state.settings.theme = theme;
   applyTheme(theme);
   saveSettings();
 });
 
-document.getElementById('redoOnboardingBtn').addEventListener('click', () => { 
+/* Export / Import JSON */
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const data = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    tasks: state.tasks,
+    settings: state.settings,
+    onboarding: state.onboarding
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `start-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Données exportées');
+});
+
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importFile').click();
+});
+document.getElementById('importFile').addEventListener('change', async (e) => {
+  const file = e.target.files[0]; if (!file) return;
+  try {
+    const text = await file.text();
+    const data = JSON.parse(text);
+    if (data.tasks) state.tasks = data.tasks;
+    if (data.settings) state.settings = { ...DEFAULT_STATE.settings, ...data.settings };
+    if (data.onboarding) state.onboarding = { ...DEFAULT_STATE.onboarding, ...data.onboarding };
+    await saveTasks(); await saveSettings(); await saveOnboarding();
+    renderTasks(); renderDevice(); applySettingsToUI();
+    toast('Données importées');
+  } catch(err) {
+    toast('Fichier invalide');
+  }
+  e.target.value = '';
+});
+
+document.getElementById('redoOnboardingBtn').addEventListener('click', () => {
   state.onboarding.completed = false;
   state.onboarding.currentScreen = 0;
   state.onboarding.answers = {};
   saveOnboarding();
-  startOnboarding(); 
+  startOnboarding();
 });
+
 document.getElementById('resetBtn').addEventListener('click', async () => {
   if (!confirm('Réinitialiser toutes les tâches et réglages ?')) return;
+  stopTimer();
+  releaseWakeLock();
   state = structuredClone(DEFAULT_STATE);
   if (db) { await dbClear('tasks'); await dbClear('settings'); await dbClear('session'); await dbClear('onboarding'); }
-  try { localStorage.removeItem(STORAGE_KEY_FALLBACK); } catch(e) {}
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
   renderTasks(); renderDevice(); applySettingsToUI(); toast('Données réinitialisées');
 });
 
 function applySettingsToUI() {
-  document.querySelectorAll('#shortPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.shortPress));
-  document.querySelectorAll('#longPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.longPress));
-  document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.fb === state.settings.feedback));
-  document.querySelectorAll('#defaultDurationSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.dur == state.settings.defaultDuration));
-  document.getElementById('shortPressDesc').textContent = SHORT_PRESS_DESCRIPTIONS[state.settings.shortPress] || '';
-  document.getElementById('longPressDesc').textContent = LONG_PRESS_DESCRIPTIONS[state.settings.longPress] || '';
-  document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
+  document.querySelectorAll('#soundSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.sound === state.settings.sound));
+  document.getElementById('vibrationToggle').classList.toggle('on', state.settings.vibration);
   document.getElementById('wakeLockToggle').classList.toggle('on', state.settings.wakeLock);
+  document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === state.settings.theme));
+  if (state.settings.theme && state.settings.theme !== 'light') applyTheme(state.settings.theme);
   durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.toggle('active', parseInt(o.dataset.dur,10) === 5));
-  
-  // Thème
-  themeGrid.querySelectorAll('.theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === state.settings.theme));
-  if (state.settings.theme && state.settings.theme !== 'light') {
-    applyTheme(state.settings.theme);
-  }
 }
 
+/* ---------- Reprise après rechargement ---------- */
 async function resumeSessionAfterReload() {
   if (!state.session.taskId) return;
   const task = getCurrentTask();
   if (!task) return;
-  if (state.session.lastSaved && state.session.totalDuration > 0 && !state.session.isPaused) {
-    const elapsed = Math.floor((Date.now() - state.session.lastSaved) / 1000);
-    state.session.remainingTime = Math.max(0, state.session.remainingTime - elapsed);
+  
+  // Si session en pause → reprendre le temps restant
+  if (state.session.isPaused && state.session.pausedRemaining > 0) {
+    renderDevice();
+    return;
   }
+  
+  // Si session active (endTime dans le futur) → recalculer
+  if (state.session.endTime > Date.now()) {
+    renderDevice();
+    startTimer();
+    if (state.settings.wakeLock) await requestWakeLock();
+    return;
+  }
+  
+  // Si endTime passé → session terminée entre-temps
+  if (state.session.endTime > 0 && state.session.endTime < Date.now()) {
+    state.session.endTime = 0;
+    saveSession();
+    renderDevice();
+    return;
+  }
+  
   renderDevice();
-  if (task.duration > 0 && state.session.remainingTime > 0 && !state.session.isPaused) startTimer();
-  if (state.settings.wakeLock) await requestWakeLock();
 }
 
-// CORRECTION : persistance complète de l'accueil
+/* ---------- Parcours d'accueil ---------- */
 const ONBOARDING_SCREENS = 7;
 let currentScreen = 0;
 let onboardingAnswers = {};
-let tutorialTaps = 0;
 
 function startOnboarding() {
-  // Reprendre à l'écran sauvegardé si en cours
   currentScreen = state.onboarding.currentScreen || 0;
   onboardingAnswers = { ...(state.onboarding.answers || {}) };
-  // Normaliser blocker en tableau pour le multi-choix
   if (onboardingAnswers.blocker && !Array.isArray(onboardingAnswers.blocker)) {
     onboardingAnswers.blocker = [onboardingAnswers.blocker];
   }
-  if (!Array.isArray(onboardingAnswers.blocker)) {
-    onboardingAnswers.blocker = [];
-  }
-  tutorialTaps = 0;
+  if (!Array.isArray(onboardingAnswers.blocker)) onboardingAnswers.blocker = [];
   document.getElementById('onboardingOverlay').classList.add('active');
   renderOnboardingScreen();
 }
@@ -1367,23 +1566,23 @@ function renderOnboardingScreen() {
       </div>
     `;
     screensContainer.appendChild(screen);
-    setupTutorialButton('onboardingBtn2', 1, () => { setTimeout(() => nextOnboardingScreen(), 600); });
+    setupTutorialButton('onboardingBtn2', () => { setTimeout(() => nextOnboardingScreen(), 500); });
   } else if (currentScreen === 2) {
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
     screen.innerHTML = `
       <div class="onboarding-device">
-        <button class="onboarding-btn" id="onboardingBtn3">START</button>
+        <button class="onboarding-btn breathing" id="onboardingBtn3">START</button>
       </div>
-      <div class="onboarding-message">2 appuis : tu as terminé, bravo.</div>
-      <div class="onboarding-hint">Double-appuie sur le bouton →</div>
+      <div class="onboarding-message">Quand le minuteur se termine, un écran apaisant apparaît.</div>
+      <div class="onboarding-submessage">Tu peux continuer (+10 min) ou terminer la tâche. Sans culpabilité.</div>
       <div class="onboarding-actions" style="margin-top:24px;">
         <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
         <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
+        <button class="btn btn-primary" onclick="nextOnboardingScreen()">Suivant</button>
       </div>
     `;
     screensContainer.appendChild(screen);
-    setupTutorialButton('onboardingBtn3', 2, () => { setTimeout(() => nextOnboardingScreen(), 600); });
   } else if (currentScreen === 3) {
     const screen = document.createElement('div');
     screen.className = 'onboarding-screen active';
@@ -1391,17 +1590,16 @@ function renderOnboardingScreen() {
       <div class="onboarding-device">
         <button class="onboarding-btn" id="onboardingBtn4">START</button>
       </div>
-      <div class="onboarding-message">Appui long : une pause, sans pression.</div>
-      <div class="onboarding-hint">Maintiens le bouton enfoncé →</div>
+      <div class="onboarding-message">Pendant la session, deux petits boutons discrets apparaissent.</div>
+      <div class="onboarding-submessage">« Pause » pour mettre en pause, « Quitter » pour arrêter. Sans geste caché.</div>
       <div class="onboarding-actions" style="margin-top:24px;">
         <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
         <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
+        <button class="btn btn-primary" onclick="nextOnboardingScreen()">Suivant</button>
       </div>
     `;
     screensContainer.appendChild(screen);
-    setupTutorialButton('onboardingBtn4', 3, () => { setTimeout(() => nextOnboardingScreen(), 600); });
   } else if (currentScreen === 4) {
-    // CORRECTION : Q1 à choix multiples
     const blockers = [
       { key: 'tooBig', icon: ICONS.mountain, label: "C'est trop gros" },
       { key: 'noIdea', icon: ICONS.compass, label: "Je ne sais pas par où commencer" },
@@ -1477,68 +1675,30 @@ function renderOnboardingScreen() {
     screensContainer.appendChild(screen);
   }
   
-  // Sauvegarder l'étape en cours
   state.onboarding.currentScreen = currentScreen;
   state.onboarding.answers = onboardingAnswers;
   saveOnboarding();
 }
 
-function setupTutorialButton(btnId, type, onComplete) {
+function setupTutorialButton(btnId, onComplete) {
   const btn = document.getElementById(btnId);
   if (!btn) return;
-  let longPressTimer = null;
-  let lastTapTime = 0;
-  
-  btn.addEventListener('pointerdown', (e) => {
+  const handler = (e) => {
     e.preventDefault();
-    longPressTimer = setTimeout(() => {
-      if (type === 3) {
-        btn.classList.add('glow');
-        setTimeout(() => btn.classList.remove('glow'), 600);
-        if (navigator.vibrate) navigator.vibrate(30);
-        onComplete();
-      }
-      longPressTimer = null;
-    }, 500);
-  });
-  
-  btn.addEventListener('pointerup', (e) => {
-    e.preventDefault();
-    if (longPressTimer) {
-      clearTimeout(longPressTimer);
-      longPressTimer = null;
-      const now = Date.now();
-      const timeSinceLastTap = now - lastTapTime;
-      if (type === 1) {
-        btn.classList.add('glow');
-        setTimeout(() => btn.classList.remove('glow'), 600);
-        if (navigator.vibrate) navigator.vibrate(30);
-        onComplete();
-      } else if (type === 2 && timeSinceLastTap < 300 && timeSinceLastTap > 0) {
-        btn.classList.add('glow');
-        setTimeout(() => btn.classList.remove('glow'), 600);
-        if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
-        onComplete();
-      }
-      lastTapTime = now;
-    }
-  });
-  
-  btn.addEventListener('pointercancel', () => { if (longPressTimer) clearTimeout(longPressTimer); });
-  btn.addEventListener('pointerleave', () => { if (longPressTimer) clearTimeout(longPressTimer); });
+    btn.removeEventListener('click', handler);
+    btn.classList.add('glow');
+    setTimeout(() => btn.classList.remove('glow'), 500);
+    if (navigator.vibrate) navigator.vibrate(30);
+    onComplete();
+  };
+  btn.addEventListener('click', handler);
 }
 
-// CORRECTION : toggle pour multi-choix
 window.toggleOnboardingAnswer = function(key, value) {
-  if (!Array.isArray(onboardingAnswers[key])) {
-    onboardingAnswers[key] = [];
-  }
+  if (!Array.isArray(onboardingAnswers[key])) onboardingAnswers[key] = [];
   const idx = onboardingAnswers[key].indexOf(value);
-  if (idx > -1) {
-    onboardingAnswers[key].splice(idx, 1);
-  } else {
-    onboardingAnswers[key].push(value);
-  }
+  if (idx > -1) onboardingAnswers[key].splice(idx, 1);
+  else onboardingAnswers[key].push(value);
   renderOnboardingScreen();
   if (key === 'blocker') showReaction(1);
 };
@@ -1551,85 +1711,57 @@ window.selectOnboardingAnswer = function(key, value) {
 function showReaction(screenNum) {
   const reactionEl = document.getElementById(`onboardingReaction${screenNum}`);
   if (!reactionEl) return;
-  
   const selected = onboardingAnswers.blocker || [];
-  if (selected.length === 0) {
-    reactionEl.innerHTML = '';
-    return;
-  }
-  
-  // Une phrase unique qui reprend tout
+  if (selected.length === 0) { reactionEl.innerHTML = ''; return; }
   const parts = [];
   if (selected.includes('tooBig')) parts.push("c'est trop gros");
   if (selected.includes('noIdea')) parts.push("tu ne sais pas par où commencer");
   if (selected.includes('distracted')) parts.push("tu te laisses distraire");
   if (selected.includes('tired')) parts.push("tu es à plat");
-  
   let reaction = "Merci de me le dire. ";
-  if (selected.length === 1) {
-    reaction += "On va y aller par toutes petites marches, à ton rythme.";
-  } else if (selected.length === 2) {
-    reaction += `Je comprends que ${parts.join(' et ')}. On va découper ensemble, tout doucement.`;
-  } else {
-    reaction += "Je comprends. On va faire des étapes si petites et si douces que c'est difficile de s'arrêter.";
-  }
-  
+  if (selected.length === 1) reaction += "On va y aller par toutes petites marches, à ton rythme.";
+  else if (selected.length === 2) reaction += `Je comprends que ${parts.join(' et ')}. On va découper ensemble, tout doucement.`;
+  else reaction += "Je comprends. On va faire des étapes si petites et si douces que c'est difficile de s'arrêter.";
   reactionEl.innerHTML = `<div class="onboarding-reaction">${reaction}</div>`;
 }
 
 window.nextOnboardingScreen = function() {
-  if (currentScreen < ONBOARDING_SCREENS - 1) {
-    currentScreen++;
-    renderOnboardingScreen();
-  }
+  if (currentScreen < ONBOARDING_SCREENS - 1) { currentScreen++; renderOnboardingScreen(); }
 };
-
 window.prevOnboardingScreen = function() {
-  if (currentScreen > 0) {
-    currentScreen--;
-    renderOnboardingScreen();
-  }
+  if (currentScreen > 0) { currentScreen--; renderOnboardingScreen(); }
 };
-
-window.skipOnboarding = function() {
-  finishOnboarding();
-};
+window.skipOnboarding = function() { finishOnboarding(); };
 
 function finishOnboarding() {
   const taskInput = document.getElementById('taskInput');
   const taskName = taskInput ? taskInput.value.trim() : '';
-  
   state.onboarding.completed = true;
   state.onboarding.currentScreen = ONBOARDING_SCREENS;
   state.onboarding.answers = onboardingAnswers;
   saveOnboarding();
   
   if (taskName) {
-    const firstStep = `Commencer : ${taskName}`;
     const task = {
       id: 't_' + Date.now(),
       name: taskName,
-      steps: [firstStep],
+      steps: [`Commencer : ${taskName}`],
       duration: 1,
       done: false,
       createdAt: Date.now()
     };
     state.tasks.unshift(task);
     saveTasks();
-    
     document.getElementById('onboardingOverlay').classList.remove('active');
     renderTasks();
-    
-    setTimeout(() => {
-      loadTask(task.id);
-      toast('Première étape prête ! Appuie sur START');
-    }, 500);
+    setTimeout(() => { loadTask(task.id); toast('Première étape prête ! Appuie sur START'); }, 500);
   } else {
     document.getElementById('onboardingOverlay').classList.remove('active');
-    toast('Bienvenue dans Clic !');
+    toast('Bienvenue dans START !');
   }
 }
 
+/* ---------- Init ---------- */
 async function init() {
   await loadState();
   renderTemplates();
@@ -1638,17 +1770,26 @@ async function init() {
   applySettingsToUI();
   renderDevice();
   await resumeSessionAfterReload();
-  
-  // CORRECTION : l'accueil ne s'affiche que si pas terminé
-  if (!state.onboarding.completed) {
-    setTimeout(() => startOnboarding(), 500);
-  }
+  if (!state.onboarding.completed) setTimeout(() => startOnboarding(), 500);
 }
 init();
 window.switchView = switchView;
 
 window.addEventListener('beforeunload', () => { saveSession(); });
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveSession(); });
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    saveSession();
+    // Recalculer au retour : le timer se mettra à jour via Date.now()
+  } else {
+    if (state.session.endTime > Date.now() && !state.session.isPaused && state.session.taskId) {
+      // Reprendre le timer si nécessaire
+      if (!timerInterval) {
+        const task = getCurrentTask();
+        if (task && task.duration > 0) startTimer();
+      }
+    }
+  }
+});
 </script>
 
 </body>
