@@ -241,6 +241,8 @@
   .start-button.pulse { animation: btnPulse 1.6s ease-in-out infinite; }
   @keyframes btnPulse { 0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 18px rgba(224,133,111,0); } }
   .start-button.paused { background: radial-gradient(circle at 30% 30%, #B8AFA2 0%, #8A857E 45%, #5A564F 100%); box-shadow: inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -4px 10px rgba(0,0,0,0.3), 0 8px 20px rgba(138,133,126,0.4), 0 0 0 6px rgba(138,133,126,0.15); }
+  .start-button.breathing { animation: breathe 2.5s ease-in-out infinite; }
+  @keyframes breathe { 0%, 100% { transform: scale(1); box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { transform: scale(1.08); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.2), 0 12px 32px rgba(224,133,111,0.6), 0 0 0 14px rgba(224,133,111,0.08); } }
 
   .device-hint { margin-top: 20px; font-size: 13px; color: var(--ink-3); text-align: center; max-width: 280px; }
 
@@ -275,7 +277,7 @@
   .pause-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--accent-soft); color: var(--accent-2); border-radius: 999px; font-size: 12px; font-weight: 600; margin-top: 12px; }
   .pause-badge svg { width: 12px; height: 12px; }
 
-  /* NOUVEAU : Questionnaire d'accueil */
+  /* NOUVEAU : Parcours d'accueil refondu */
   .onboarding-overlay {
     position: fixed;
     inset: 0;
@@ -285,11 +287,18 @@
     overflow-y: auto;
     padding: 40px 24px;
   }
-  .onboarding-overlay.active { display: block; }
+  .onboarding-overlay.active { display: block; animation: fadeIn .4s var(--ease); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  
   .onboarding-container {
     max-width: 600px;
     margin: 0 auto;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
+  
   .onboarding-progress {
     display: flex;
     gap: 8px;
@@ -300,33 +309,117 @@
     height: 4px;
     background: var(--line);
     border-radius: 2px;
-    transition: background .3s var(--ease);
+    transition: background .4s var(--ease);
   }
   .onboarding-progress .bar.filled { background: var(--accent); }
-  .onboarding-question {
+  .onboarding-progress .bar.current { background: linear-gradient(90deg, var(--accent) 50%, var(--line) 50%); }
+  
+  .onboarding-screen {
+    display: none;
+    animation: slideUp .5s var(--ease);
+  }
+  .onboarding-screen.active { display: flex; flex-direction: column; align-items: center; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  
+  .onboarding-device {
+    width: 240px;
+    height: 240px;
+    background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.08), inset 0 -4px 12px rgba(0,0,0,0.4), 0 20px 50px rgba(40,30,20,0.3);
+  }
+  .onboarding-device::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  
+  .onboarding-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    background: radial-gradient(circle at 30% 30%, #F2A892 0%, var(--accent) 45%, var(--accent-2) 100%);
+    color: #fff;
     font-family: 'Caveat', cursive;
-    font-size: 36px;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12);
+    transition: all .15s var(--ease);
+    user-select: none;
+  }
+  .onboarding-btn:active { transform: scale(0.95); }
+  .onboarding-btn.breathing { animation: breathe 2.5s ease-in-out infinite; }
+  .onboarding-btn.glow { animation: glow 0.6s ease-out; }
+  @keyframes glow { 0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.2), 0 12px 32px rgba(224,133,111,0.7), 0 0 0 20px rgba(224,133,111,0.15); } 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } }
+  
+  .onboarding-hint {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 16px;
+    text-align: center;
+  }
+  
+  .onboarding-message {
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 32px;
+    text-align: center;
+    margin-bottom: 16px;
     line-height: 1.2;
   }
+  
+  .onboarding-submessage {
+    font-size: 16px;
+    color: var(--ink-2);
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+  
+  .onboarding-reaction {
+    background: var(--accent-soft);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 15px;
+    color: var(--accent-2);
+    text-align: center;
+    line-height: 1.5;
+    animation: fadeIn .4s var(--ease);
+  }
+  
   .onboarding-choices {
     display: grid;
     gap: 12px;
-    margin-bottom: 40px;
+    width: 100%;
+    margin-bottom: 24px;
   }
   .onboarding-choice {
     background: var(--surface);
     border: 2px solid var(--line);
     border-radius: var(--radius-md);
-    padding: 20px;
+    padding: 18px 20px;
     cursor: pointer;
     transition: all .2s var(--ease);
     font-family: inherit;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--ink);
     text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
   .onboarding-choice:hover {
     border-color: var(--accent);
@@ -337,74 +430,51 @@
     border-color: var(--accent);
     background: var(--accent-soft);
   }
+  .onboarding-choice svg {
+    width: 24px;
+    height: 24px;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+  .onboarding-choice.selected svg { color: var(--accent-2); }
+  
+  .onboarding-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .2s var(--ease);
+    margin-bottom: 16px;
+  }
+  .onboarding-input:focus { border-color: var(--accent); }
+  .onboarding-input::placeholder { color: var(--ink-3); }
+  
   .onboarding-actions {
     display: flex;
     gap: 12px;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
   }
-  .onboarding-welcome {
-    text-align: center;
-    padding: 60px 20px;
-  }
-  .onboarding-welcome h2 {
-    font-family: 'Caveat', cursive;
-    font-size: 48px;
-    color: var(--ink);
-    margin-bottom: 16px;
-  }
-  .onboarding-welcome p {
-    font-size: 18px;
-    color: var(--ink-2);
-    margin-bottom: 40px;
-    line-height: 1.6;
-  }
-
-  /* NOUVEAU : Check-in énergie */
-  .checkin-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(250, 246, 241, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 999;
-    display: none;
-    overflow-y: auto;
-    padding: 40px 24px;
-  }
-  .checkin-overlay.active { display: block; }
-  .checkin-container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .checkin-question {
-    font-family: 'Caveat', cursive;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 32px;
+  
+  .onboarding-final {
     text-align: center;
   }
-  .checkin-choices {
-    display: grid;
-    gap: 12px;
-    margin-bottom: 40px;
+  .onboarding-final .device {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
   }
-  .checkin-choice {
-    background: var(--surface);
-    border: 2px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    cursor: pointer;
-    transition: all .2s var(--ease);
-    font-family: inherit;
-    font-size: 18px;
-    color: var(--ink);
-    text-align: center;
+  .onboarding-final .start-button {
+    width: 90px;
+    height: 90px;
+    font-size: 22px;
   }
-  .checkin-choice:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-  }
-
+  
   @media (max-width: 600px) {
     .app { padding: 20px 16px 40px; }
     .page-title { font-size: 40px; }
@@ -418,8 +488,9 @@
     .nav-btn { padding: 10px 14px; font-size: 12px; }
     .nav-btn span.nav-label { display: none; }
     .card { padding: 18px; }
-    .onboarding-question { font-size: 28px; }
-    .onboarding-welcome h2 { font-size: 36px; }
+    .onboarding-message { font-size: 26px; }
+    .onboarding-device { width: 200px; height: 200px; }
+    .onboarding-btn { width: 85px; height: 85px; font-size: 20px; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -579,7 +650,29 @@
           </div>
         </div>
         <div class="card" style="margin-top:16px;">
-          <div class="section-label">Options avancées</div>
+          <div class="section-label">Préférences</div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Ton des messages</div>
+              <div class="setting-desc">Comment Clic vous parle</div>
+            </div>
+            <div class="segmented" id="toneSeg">
+              <button class="seg-opt" data-tone="soft">Doux</button>
+              <button class="seg-opt active" data-tone="warm">Chaleureux</button>
+              <button class="seg-opt" data-tone="neutral">Neutre</button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Durée par défaut des étapes</div>
+              <div class="setting-desc">Pour les nouvelles tâches</div>
+            </div>
+            <div class="segmented" id="defaultDurationSeg">
+              <button class="seg-opt" data-dur="1">1 min</button>
+              <button class="seg-opt active" data-dur="2">2 min</button>
+              <button class="seg-opt" data-dur="5">5 min</button>
+            </div>
+          </div>
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Mode démonstration</div>
@@ -596,8 +689,8 @@
           </div>
           <div class="setting-row">
             <div class="setting-info">
-              <div class="setting-title">Refaites le questionnaire d'accueil</div>
-              <div class="setting-desc">Modifiez vos préférences initiales</div>
+              <div class="setting-title">Refaire le parcours d'accueil</div>
+              <div class="setting-desc">Redécouvrir comment utiliser Clic</div>
             </div>
             <button class="btn btn-ghost" id="redoOnboardingBtn" style="padding:10px 16px; font-size:13px;">Recommencer</button>
           </div>
@@ -615,19 +708,11 @@
 
 </div>
 
-<!-- NOUVEAU : Questionnaire d'accueil -->
+<!-- NOUVEAU : Parcours d'accueil refondu -->
 <div class="onboarding-overlay" id="onboardingOverlay">
   <div class="onboarding-container">
     <div class="onboarding-progress" id="onboardingProgress"></div>
-    <div id="onboardingContent"></div>
-  </div>
-</div>
-
-<!-- NOUVEAU : Check-in énergie -->
-<div class="checkin-overlay" id="checkinOverlay">
-  <div class="checkin-container">
-    <div class="checkin-question" id="checkinQuestion">Comment tu te sens maintenant ?</div>
-    <div class="checkin-choices" id="checkinChoices"></div>
+    <div id="onboardingScreens"></div>
   </div>
 </div>
 
@@ -649,13 +734,10 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const CACHE_VERSION = 'clic-v1.0.1';
+const CACHE_VERSION = 'clic-v1.1.0';
 
-// Enregistrement du service worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').then((reg) => {
-    console.log('Service Worker enregistré');
-    // Vérifier les mises à jour
     reg.addEventListener('updatefound', () => {
       const newWorker = reg.installing;
       newWorker.addEventListener('statechange', () => {
@@ -664,9 +746,7 @@ if ('serviceWorker' in navigator) {
         }
       });
     });
-  }).catch((err) => {
-    console.log('SW registration failed:', err);
-  });
+  }).catch((err) => console.log('SW failed:', err));
 }
 
 const DB_NAME = 'clic_app';
@@ -675,10 +755,17 @@ const STORAGE_KEY_FALLBACK = 'clic_app_fallback';
 
 const DEFAULT_STATE = {
   tasks: [],
-  settings: { shortPress: 'next', longPress: 'pause', feedback: 'light', demo: true, wakeLock: false },
+  settings: { 
+    shortPress: 'next', 
+    longPress: 'pause', 
+    feedback: 'light', 
+    demo: true, 
+    wakeLock: false,
+    tone: 'warm',
+    defaultDuration: 2
+  },
   session: { taskId: null, stepIndex: 0, remainingTime: 0, totalDuration: 0, isPaused: false, startedAt: null, lastSaved: null },
-  onboarding: { completed: false, answers: {} },
-  checkin: { lastCheck: null, energy: null }
+  onboarding: { completed: false, answers: {} }
 };
 
 let state = structuredClone(DEFAULT_STATE);
@@ -815,7 +902,13 @@ const ICONS = {
   trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>`,
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
   x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
-  pause: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`
+  pause: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`,
+  mountain: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>`,
+  compass: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
+  sparkles: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>`,
+  sun: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
+  moon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
+  coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`
 };
 
 const TEMPLATES = [
@@ -879,7 +972,7 @@ durationPicker.addEventListener('click', (e) => { const opt = e.target.closest('
 saveTaskBtn.addEventListener('click', () => {
   const name = taskNameInput.value.trim(), steps = prepareSteps.filter(s => s && s.trim());
   const durOpt = durationPicker.querySelector('.dur-opt.active');
-  const duration = durOpt ? parseInt(durOpt.dataset.dur, 10) : 5;
+  const duration = durOpt ? parseInt(durOpt.dataset.dur, 10) : state.settings.defaultDuration;
   if (!name) { toast('Donnez un nom à votre tâche'); taskNameInput.focus(); return; }
   if (steps.length === 0) { toast('Ajoutez au moins une étape'); return; }
   state.tasks.unshift({ id: 't_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), name, steps, duration, done: false, createdAt: Date.now() });
@@ -1141,13 +1234,16 @@ async function requestWakeLock() {
 }
 function releaseWakeLock() { if (wakeLock) { wakeLock.release(); wakeLock = null; } }
 
-function bindSegmented(containerId, settingKey) {
+function bindSegmented(containerId, settingKey, callback) {
   const container = document.getElementById(containerId);
-  container.addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings[settingKey] = opt.dataset.act; saveSettings(); renderDevice(); });
+  container.addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings[settingKey] = opt.dataset[settingKey] || opt.dataset.act || opt.dataset.tone || opt.dataset.dur; if (callback) callback(); saveSettings(); });
 }
 bindSegmented('shortPressSeg', 'shortPress');
 bindSegmented('longPressSeg', 'longPress');
-document.getElementById('feedbackSeg').addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings.feedback = opt.dataset.fb; saveSettings(); });
+bindSegmented('feedbackSeg', 'feedback');
+bindSegmented('toneSeg', 'tone');
+bindSegmented('defaultDurationSeg', 'defaultDuration');
+
 document.getElementById('demoToggle').addEventListener('click', () => { state.settings.demo = !state.settings.demo; document.getElementById('demoToggle').classList.toggle('on', state.settings.demo); saveSettings(); renderDevice(); });
 document.getElementById('wakeLockToggle').addEventListener('click', async () => {
   state.settings.wakeLock = !state.settings.wakeLock;
@@ -1169,6 +1265,8 @@ function applySettingsToUI() {
   document.querySelectorAll('#shortPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.shortPress));
   document.querySelectorAll('#longPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.longPress));
   document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.fb === state.settings.feedback));
+  document.querySelectorAll('#toneSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.tone === state.settings.tone));
+  document.querySelectorAll('#defaultDurationSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.dur == state.settings.defaultDuration));
   document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
   document.getElementById('wakeLockToggle').classList.toggle('on', state.settings.wakeLock);
   durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.toggle('active', parseInt(o.dataset.dur,10) === 5));
@@ -1187,103 +1285,274 @@ async function resumeSessionAfterReload() {
   if (state.settings.wakeLock) await requestWakeLock();
 }
 
-/* NOUVEAU : Questionnaire d'accueil */
-const ONBOARDING_QUESTIONS = [
-  {
-    question: "Qu'est-ce qui te bloque le plus au moment de commencer ?",
-    choices: ["C'est trop gros", "Je ne sais pas par où commencer", "Je me laisse distraire", "Je manque d'énergie"],
-    key: "blocker"
-  },
-  {
-    question: "À quel moment de la journée c'est le plus difficile ?",
-    choices: ["Matin", "Après-midi", "Soir", "Ça dépend"],
-    key: "difficultTime"
-  },
-  {
-    question: "Quelle taille de première étape te convient ?",
-    choices: ["30 secondes", "2 minutes", "5 minutes"],
-    key: "stepSize"
-  },
-  {
-    question: "Comment veux-tu qu'on te parle ?",
-    choices: ["Très doux", "Neutre", "Encourageant"],
-    key: "tone"
-  }
-];
-
-let currentOnboardingStep = 0;
+/* NOUVEAU : Parcours d'accueil refondu */
+const ONBOARDING_SCREENS = 7;
+let currentScreen = 0;
 let onboardingAnswers = {};
+let tutorialTaps = 0;
 
 function startOnboarding() {
-  currentOnboardingStep = 0;
+  currentScreen = 0;
   onboardingAnswers = { ...state.onboarding.answers };
+  tutorialTaps = 0;
   document.getElementById('onboardingOverlay').classList.add('active');
-  renderOnboardingStep();
+  renderOnboardingScreen();
 }
 
-function renderOnboardingStep() {
+function renderOnboardingScreen() {
   const progressContainer = document.getElementById('onboardingProgress');
-  const contentContainer = document.getElementById('onboardingContent');
+  const screensContainer = document.getElementById('onboardingScreens');
   
   // Barre de progression
   progressContainer.innerHTML = '';
-  for (let i = 0; i < ONBOARDING_QUESTIONS.length; i++) {
+  for (let i = 0; i < ONBOARDING_SCREENS; i++) {
     const bar = document.createElement('div');
-    bar.className = 'bar' + (i < currentOnboardingStep ? ' filled' : '');
+    bar.className = 'bar';
+    if (i < currentScreen) bar.classList.add('filled');
+    else if (i === currentScreen) bar.classList.add('current');
     progressContainer.appendChild(bar);
   }
   
-  if (currentOnboardingStep === 0) {
-    // Écran de bienvenue
-    contentContainer.innerHTML = `
-      <div class="onboarding-welcome">
-        <h2>Bienvenue dans Clic</h2>
-        <p>Quelques questions pour personnaliser votre expérience. Vous pourrez y revenir à tout moment dans les réglages.</p>
-        <button class="btn btn-primary btn-lg" onclick="nextOnboardingStep()">Commencer</button>
+  screensContainer.innerHTML = '';
+  
+  if (currentScreen === 0) {
+    // Écran 1 : Bienvenue + bouton qui respire
+    const screen = document.createElement('div');
+    screen.className = 'onboarding-screen active';
+    screen.innerHTML = `
+      <div class="onboarding-device">
+        <button class="onboarding-btn breathing" id="onboardingBtn1">START</button>
+      </div>
+      <div class="onboarding-message">Salut. Moi, je suis là pour t'aider à commencer, doucement.</div>
+      <div class="onboarding-submessage">Un seul bouton. Pas de pression. On y va à ton rythme.</div>
+      <div class="onboarding-actions">
+        <button class="btn btn-primary btn-lg" onclick="nextOnboardingScreen()">Découvrir</button>
       </div>
     `;
-  } else if (currentOnboardingStep <= ONBOARDING_QUESTIONS.length) {
-    // Questions
-    const q = ONBOARDING_QUESTIONS[currentOnboardingStep - 1];
-    contentContainer.innerHTML = `
-      <div class="onboarding-question">${q.question}</div>
+    screensContainer.appendChild(screen);
+  } else if (currentScreen === 1) {
+    // Écran 2 : Tutoriel 1 appui
+    const screen = document.createElement('div');
+    screen.className = 'onboarding-screen active';
+    screen.innerHTML = `
+      <div class="onboarding-device">
+        <button class="onboarding-btn" id="onboardingBtn2">START</button>
+      </div>
+      <div class="onboarding-message">1 appui : on passe à l'étape suivante.</div>
+      <div class="onboarding-hint">Essaie maintenant → appuie sur le bouton</div>
+      <div class="onboarding-actions" style="margin-top:24px;">
+        <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
+        <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
+      </div>
+    `;
+    screensContainer.appendChild(screen);
+    setupTutorialButton('onboardingBtn2', 1, () => {
+      setTimeout(() => nextOnboardingScreen(), 600);
+    });
+  } else if (currentScreen === 2) {
+    // Écran 3 : Tutoriel 2 appuis
+    const screen = document.createElement('div');
+    screen.className = 'onboarding-screen active';
+    screen.innerHTML = `
+      <div class="onboarding-device">
+        <button class="onboarding-btn" id="onboardingBtn3">START</button>
+      </div>
+      <div class="onboarding-message">2 appuis : tu as terminé, bravo.</div>
+      <div class="onboarding-hint">Double-appuie sur le bouton →</div>
+      <div class="onboarding-actions" style="margin-top:24px;">
+        <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
+        <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
+      </div>
+    `;
+    screensContainer.appendChild(screen);
+    setupTutorialButton('onboardingBtn3', 2, () => {
+      setTimeout(() => nextOnboardingScreen(), 600);
+    });
+  } else if (currentScreen === 3) {
+    // Écran 4 : Tutoriel appui long
+    const screen = document.createElement('div');
+    screen.className = 'onboarding-screen active';
+    screen.innerHTML = `
+      <div class="onboarding-device">
+        <button class="onboarding-btn" id="onboardingBtn4">START</button>
+      </div>
+      <div class="onboarding-message">Appui long : une pause, sans pression.</div>
+      <div class="onboarding-hint">Maintiens le bouton enfoncé →</div>
+      <div class="onboarding-actions" style="margin-top:24px;">
+        <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
+        <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
+      </div>
+    `;
+    screensContainer.appendChild(screen);
+    setupTutorialButton('onboardingBtn4', 3, () => {
+      setTimeout(() => nextOnboardingScreen(), 600);
+    });
+  } else if (currentScreen === 4) {
+    // Écran 5 : Q1
+    const screen = document.createElement('div');
+    screen.className = 'onboarding-screen active';
+    screen.innerHTML = `
+      <div class="onboarding-message">Qu'est-ce qui t'arrête, quand tu dois t'y mettre ?</div>
       <div class="onboarding-choices">
-        ${q.choices.map((choice, i) => `
-          <button class="onboarding-choice ${onboardingAnswers[q.key] === choice ? 'selected' : ''}" onclick="selectOnboardingChoice('${q.key}', '${choice}')">${choice}</button>
-        `).join('')}
+        <button class="onboarding-choice ${onboardingAnswers.blocker === 'tooBig' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'tooBig')">
+          ${ICONS.mountain}
+          <span>C'est trop gros</span>
+        </button>
+        <button class="onboarding-choice ${onboardingAnswers.blocker === 'noIdea' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'noIdea')">
+          ${ICONS.compass}
+          <span>Je ne sais pas par où commencer</span>
+        </button>
+        <button class="onboarding-choice ${onboardingAnswers.blocker === 'distracted' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'distracted')">
+          ${ICONS.sparkles}
+          <span>Je me laisse distraire</span>
+        </button>
+        <button class="onboarding-choice ${onboardingAnswers.blocker === 'tired' ? 'selected' : ''}" onclick="selectOnboardingAnswer('blocker', 'tired')">
+          ${ICONS.coffee}
+          <span>Je suis à plat</span>
+        </button>
+      </div>
+      <div id="onboardingReaction1"></div>
+      <div class="onboarding-actions">
+        <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
+        <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
+        <button class="btn btn-primary" onclick="nextOnboardingScreen()" ${!onboardingAnswers.blocker ? 'disabled style="opacity:0.5"' : ''}>Suivant</button>
+      </div>
+    `;
+    screensContainer.appendChild(screen);
+    if (onboardingAnswers.blocker) showReaction(1);
+  } else if (currentScreen === 5) {
+    // Écran 6 : Q2
+    const screen = document.createElement('div');
+    screen.className = 'onboarding-screen active';
+    screen.innerHTML = `
+      <div class="onboarding-message">Quand est-ce que tu veux un petit coup de pouce ?</div>
+      <div class="onboarding-choices">
+        <button class="onboarding-choice ${onboardingAnswers.time === 'morning' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'morning')">
+          ${ICONS.sun}
+          <span>Matin</span>
+        </button>
+        <button class="onboarding-choice ${onboardingAnswers.time === 'afternoon' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'afternoon')">
+          ${ICONS.sun}
+          <span>Après-midi</span>
+        </button>
+        <button class="onboarding-choice ${onboardingAnswers.time === 'evening' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'evening')">
+          ${ICONS.moon}
+          <span>Soir</span>
+        </button>
+        <button class="onboarding-choice ${onboardingAnswers.time === 'flow' ? 'selected' : ''}" onclick="selectOnboardingAnswer('time', 'flow')">
+          ${ICONS.compass}
+          <span>Je décide au fil de l'eau</span>
+        </button>
       </div>
       <div class="onboarding-actions">
-        <button class="btn btn-ghost" onclick="prevOnboardingStep()">Retour</button>
+        <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
         <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
-        <button class="btn btn-primary" onclick="nextOnboardingStep()" ${!onboardingAnswers[q.key] ? 'disabled style="opacity:0.5"' : ''}>Suivant</button>
+        <button class="btn btn-primary" onclick="nextOnboardingScreen()" ${!onboardingAnswers.time ? 'disabled style="opacity:0.5"' : ''}>Suivant</button>
       </div>
     `;
-  } else {
-    // Fin
-    contentContainer.innerHTML = `
-      <div class="onboarding-welcome">
-        <h2>C'est prêt !</h2>
-        <p>Vos préférences sont enregistrées. Le bouton START vous attend.</p>
-        <button class="btn btn-primary btn-lg" onclick="finishOnboarding()">Commencer</button>
+    screensContainer.appendChild(screen);
+  } else if (currentScreen === 6) {
+    // Écran 7 : Q3
+    const screen = document.createElement('div');
+    screen.className = 'onboarding-screen active';
+    screen.innerHTML = `
+      <div class="onboarding-message">Il y a une chose que tu repousses depuis un moment ?</div>
+      <div class="onboarding-submessage" style="margin-bottom:20px;">(facultatif — on peut toujours dire "plus tard")</div>
+      <input type="text" class="onboarding-input" id="taskInput" placeholder="Ex. Réviser mon cours de maths" value="${escapeHtml(onboardingAnswers.task || '')}" maxlength="80" />
+      <div class="onboarding-actions">
+        <button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button>
+        <button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button>
+        <button class="btn btn-primary" onclick="finishOnboarding()">Créer ma première étape</button>
       </div>
     `;
+    screensContainer.appendChild(screen);
   }
 }
 
-window.selectOnboardingChoice = function(key, choice) {
-  onboardingAnswers[key] = choice;
-  renderOnboardingStep();
+function setupTutorialButton(btnId, type, onComplete) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  
+  let tapCount = 0;
+  let longPressTimer = null;
+  let lastTapTime = 0;
+  
+  btn.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    longPressTimer = setTimeout(() => {
+      if (type === 3) {
+        btn.classList.add('glow');
+        setTimeout(() => btn.classList.remove('glow'), 600);
+        if (navigator.vibrate) navigator.vibrate(30);
+        onComplete();
+      }
+      longPressTimer = null;
+    }, 500);
+  });
+  
+  btn.addEventListener('pointerup', (e) => {
+    e.preventDefault();
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+      
+      const now = Date.now();
+      const timeSinceLastTap = now - lastTapTime;
+      
+      if (type === 1) {
+        btn.classList.add('glow');
+        setTimeout(() => btn.classList.remove('glow'), 600);
+        if (navigator.vibrate) navigator.vibrate(30);
+        onComplete();
+      } else if (type === 2 && timeSinceLastTap < 300 && timeSinceLastTap > 0) {
+        btn.classList.add('glow');
+        setTimeout(() => btn.classList.remove('glow'), 600);
+        if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+        onComplete();
+      }
+      
+      lastTapTime = now;
+    }
+  });
+  
+  btn.addEventListener('pointercancel', () => { if (longPressTimer) clearTimeout(longPressTimer); });
+  btn.addEventListener('pointerleave', () => { if (longPressTimer) clearTimeout(longPressTimer); });
+}
+
+window.selectOnboardingAnswer = function(key, value) {
+  onboardingAnswers[key] = value;
+  renderOnboardingScreen();
+  if (key === 'blocker') showReaction(1);
 };
 
-window.nextOnboardingStep = function() {
-  currentOnboardingStep++;
-  renderOnboardingStep();
+function showReaction(screenNum) {
+  const reactionEl = document.getElementById(`onboardingReaction${screenNum}`);
+  if (!reactionEl) return;
+  
+  const reactions = {
+    tooBig: "C'est très courant. On va y aller par toutes petites marches.",
+    noIdea: "Pas de souci. On va découper ensemble, étape par étape.",
+    distracted: "Je comprends. On va faire des étapes si courtes que c'est difficile de s'arrêter.",
+    tired: "C'est okay. On va commencer tout doux, vraiment tout petit."
+  };
+  
+  const answer = onboardingAnswers.blocker;
+  if (answer && reactions[answer]) {
+    reactionEl.innerHTML = `<div class="onboarding-reaction">${reactions[answer]}</div>`;
+  }
+}
+
+window.nextOnboardingScreen = function() {
+  if (currentScreen < ONBOARDING_SCREENS - 1) {
+    currentScreen++;
+    renderOnboardingScreen();
+  }
 };
 
-window.prevOnboardingStep = function() {
-  if (currentOnboardingStep > 0) {
-    currentOnboardingStep--;
-    renderOnboardingStep();
+window.prevOnboardingScreen = function() {
+  if (currentScreen > 0) {
+    currentScreen--;
+    renderOnboardingScreen();
   }
 };
 
@@ -1292,46 +1561,40 @@ window.skipOnboarding = function() {
 };
 
 function finishOnboarding() {
+  const taskInput = document.getElementById('taskInput');
+  const taskName = taskInput ? taskInput.value.trim() : '';
+  
   state.onboarding.completed = true;
   state.onboarding.answers = onboardingAnswers;
   saveOnboarding();
-  document.getElementById('onboardingOverlay').classList.remove('active');
-  toast('Préférences enregistrées');
-}
-
-/* NOUVEAU : Check-in énergie */
-const CHECKIN_CHOICES = [
-  { label: "En forme", value: "high", icon: "☀️" },
-  { label: "Moyen", value: "medium", icon: "⛅" },
-  { label: "À plat", value: "low", icon: "🌧️" }
-];
-
-function showCheckin() {
-  const overlay = document.getElementById('checkinOverlay');
-  const choicesContainer = document.getElementById('checkinChoices');
   
-  choicesContainer.innerHTML = CHECKIN_CHOICES.map(choice => `
-    <button class="checkin-choice" onclick="selectCheckin('${choice.value}')">${choice.label}</button>
-  `).join('');
-  
-  overlay.classList.add('active');
-}
-
-window.selectCheckin = function(energy) {
-  state.checkin.lastCheck = Date.now();
-  state.checkin.energy = energy;
-  
-  document.getElementById('checkinOverlay').classList.remove('active');
-  
-  if (energy === 'low') {
-    toast('On y va doucement — 2 minutes max');
-    // Forcer la durée à 2 minutes pour la prochaine tâche
-    state.settings.defaultDuration = 2;
-    saveSettings();
+  // Créer la première micro-étape si une tâche a été saisie
+  if (taskName) {
+    const firstStep = `Commencer : ${taskName}`;
+    const task = {
+      id: 't_' + Date.now(),
+      name: taskName,
+      steps: [firstStep],
+      duration: 1, // 1 minute pour la première étape
+      done: false,
+      createdAt: Date.now()
+    };
+    state.tasks.unshift(task);
+    saveTasks();
+    
+    document.getElementById('onboardingOverlay').classList.remove('active');
+    renderTasks();
+    
+    // Charger automatiquement la tâche
+    setTimeout(() => {
+      loadTask(task.id);
+      toast('Première étape prête ! Appuie sur START');
+    }, 500);
   } else {
-    toast('Check-in enregistré');
+    document.getElementById('onboardingOverlay').classList.remove('active');
+    toast('Bienvenue dans Clic !');
   }
-};
+}
 
 async function init() {
   await loadState();
@@ -1342,16 +1605,8 @@ async function init() {
   renderDevice();
   await resumeSessionAfterReload();
   
-  // Afficher le questionnaire si premier lancement
   if (!state.onboarding.completed) {
     setTimeout(() => startOnboarding(), 500);
-  }
-  
-  // Afficher le check-in si pas fait aujourd'hui
-  const today = new Date().toDateString();
-  const lastCheckDate = state.checkin.lastCheck ? new Date(state.checkin.lastCheck).toDateString() : null;
-  if (lastCheckDate !== today) {
-    setTimeout(() => showCheckin(), 2000);
   }
 }
 init();
