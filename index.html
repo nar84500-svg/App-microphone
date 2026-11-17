@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>START — Commencez simplement</title>
+<meta name="theme-color" content="#FAF6F1" />
+<title>Clic — Commencez simplement</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ============ RESET & BASE ============ */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
   :root {
@@ -33,7 +33,6 @@
     --radius-sm: 12px;
     --radius-md: 18px;
     --radius-lg: 28px;
-    --radius-xl: 36px;
     --ease: cubic-bezier(.2,.7,.2,1);
   }
 
@@ -44,11 +43,9 @@
     font-size: 16px;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     padding-bottom: calc(96px + env(safe-area-inset-bottom));
   }
-
   body::before {
     content: "";
     position: fixed; inset: 0;
@@ -58,400 +55,150 @@
     pointer-events: none;
     z-index: 0;
   }
-
   .app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 32px 24px 40px; }
 
-  /* ============ HEADER ============ */
-  .topbar {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 36px;
-  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
   .brand { display: flex; align-items: center; gap: 12px; }
-  
-  /* NOUVEAU LOGO CLIC EXACT */
-  .brand-mark {
-    width: 44px; height: 44px;
-    display: grid; place-items: center;
-    flex-shrink: 0;
-  }
+  .brand-mark { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; }
   .brand-mark svg { width: 100%; height: 100%; }
-  
-  .brand-name {
-    font-family: 'Caveat', cursive;
-    font-size: 36px; 
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: 0.5px;
-    line-height: 1;
-  }
-  .brand-tag {
-    font-size: 12px; color: var(--ink-3);
-    font-weight: 500; letter-spacing: 0.5px;
-    margin-top: 2px;
-  }
-  .topbar-right {
-    display: flex; align-items: center; gap: 10px;
-  }
-  .status-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 8px 14px; border-radius: 999px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    font-size: 13px; color: var(--ink-2);
-    font-weight: 500;
-  }
-  .status-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--sage);
-    box-shadow: 0 0 0 3px var(--sage-soft);
-  }
+  .brand-name { font-family: 'Caveat', cursive; font-size: 36px; font-weight: 700; color: var(--ink); letter-spacing: 0.5px; line-height: 1; }
+  .brand-tag { font-size: 12px; color: var(--ink-3); font-weight: 500; letter-spacing: 0.5px; margin-top: 2px; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 13px; color: var(--ink-2); font-weight: 500; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); box-shadow: 0 0 0 3px var(--sage-soft); }
 
-  /* ============ PAGE TITLES ============ */
   .page-head { margin-bottom: 28px; }
-  .page-title {
-    font-family: 'Caveat', cursive;
-    font-size: 52px;
-    font-weight: 700;
-    line-height: 1.05;
-    color: var(--ink);
-    margin-bottom: 8px;
-  }
-  .page-subtitle {
-    font-size: 16px; color: var(--ink-3);
-    max-width: 520px;
-  }
+  .page-title { font-family: 'Caveat', cursive; font-size: 52px; font-weight: 700; line-height: 1.05; color: var(--ink); margin-bottom: 8px; }
+  .page-subtitle { font-size: 16px; color: var(--ink-3); max-width: 520px; }
 
-  /* ============ SECTIONS / VIEWS ============ */
   .view { display: none; animation: fadeUp .45s var(--ease); }
   .view.active { display: block; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ============ CARDS ============ */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    box-shadow: var(--shadow-sm);
-    transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-  }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease); }
   .card + .card { margin-top: 16px; }
   .card:hover { box-shadow: var(--shadow-md); }
+  .section-label { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 14px; }
 
-  .section-label {
-    font-size: 12px; font-weight: 600; letter-spacing: 1.2px;
-    color: var(--ink-3); text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-
-  /* ============ TASKS LIST ============ */
-  .tasks-grid {
-    display: grid; gap: 14px;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  }
-  .task-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    cursor: pointer;
-    transition: all .25s var(--ease);
-    position: relative;
-    overflow: hidden;
-  }
-  .task-card::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 4px; background: transparent;
-    transition: background .25s var(--ease);
-  }
-  .task-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--line-2);
-  }
+  .tasks-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .task-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; cursor: pointer; transition: all .25s var(--ease); position: relative; overflow: hidden; }
+  .task-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: transparent; transition: background .25s var(--ease); }
+  .task-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--line-2); }
   .task-card:hover::before { background: var(--accent); }
-  .task-card.selected {
-    border-color: var(--accent);
-    background: linear-gradient(180deg, #FFF 0%, var(--accent-soft) 100%);
-    box-shadow: var(--shadow-md);
-  }
+  .task-card.selected { border-color: var(--accent); background: linear-gradient(180deg, #FFF 0%, var(--accent-soft) 100%); box-shadow: var(--shadow-md); }
   .task-card.selected::before { background: var(--accent); }
   .task-card.done { opacity: 0.55; }
-  .task-card.done .task-title::after {
-    content: "";
-    display: inline-block;
-    width: 16px; height: 16px;
-    margin-left: 6px;
-    vertical-align: middle;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A8B89A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  .task-title {
-    font-size: 17px; font-weight: 600; color: var(--ink);
-    margin-bottom: 6px;
-  }
-  .task-meta {
-    display: flex; gap: 14px; align-items: center;
-    font-size: 13px; color: var(--ink-3);
-  }
-  .task-meta span {
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .task-actions {
-    display: flex; gap: 8px; margin-top: 14px;
-    opacity: 0; transform: translateY(4px);
-    transition: all .25s var(--ease);
-  }
-  .task-card:hover .task-actions,
-  .task-card.selected .task-actions { opacity: 1; transform: translateY(0); }
-
-  .icon-btn {
-    width: 32px; height: 32px; border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--surface-2);
-    color: var(--ink-2);
-    cursor: pointer;
-    display: grid; place-items: center;
-    transition: all .2s var(--ease);
-  }
+  .task-card.done .task-title::after { content: ""; display: inline-block; width: 16px; height: 16px; margin-left: 6px; vertical-align: middle; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A8B89A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>"); background-size: contain; background-repeat: no-repeat; }
+  .task-title { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .task-meta { display: flex; gap: 14px; align-items: center; font-size: 13px; color: var(--ink-3); }
+  .task-meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .task-actions { display: flex; gap: 8px; margin-top: 14px; opacity: 0; transform: translateY(4px); transition: all .25s var(--ease); }
+  .task-card:hover .task-actions, .task-card.selected .task-actions { opacity: 1; transform: translateY(0); }
+  .icon-btn { width: 32px; height: 32px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-2); cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); }
   .icon-btn:hover { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
   .icon-btn.danger:hover { background: #FBEAEA; color: #B84A4A; border-color: #F5D5D5; }
   .icon-btn svg { width: 14px; height: 14px; }
 
-  .empty-state {
-    text-align: center; padding: 60px 24px;
-    background: var(--surface);
-    border: 1px dashed var(--line-2);
-    border-radius: var(--radius-lg);
-  }
-  .empty-state .empty-icon {
-    width: 56px; height: 56px;
-    margin: 0 auto 16px;
-    border-radius: 50%;
-    background: var(--sage-soft);
-    display: grid; place-items: center;
-    color: var(--sage-2);
-  }
+  .empty-state { text-align: center; padding: 60px 24px; background: var(--surface); border: 1px dashed var(--line-2); border-radius: var(--radius-lg); }
+  .empty-state .empty-icon { width: 56px; height: 56px; margin: 0 auto 16px; border-radius: 50%; background: var(--sage-soft); display: grid; place-items: center; color: var(--sage-2); }
   .empty-state .empty-icon svg { width: 28px; height: 28px; }
-  .empty-state h3 {
-    font-family: 'Caveat', cursive;
-    font-size: 28px; color: var(--ink); margin-bottom: 6px;
-  }
+  .empty-state h3 { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); margin-bottom: 6px; }
   .empty-state p { color: var(--ink-3); font-size: 14px; }
 
-  /* ============ BUTTONS ============ */
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 12px 22px;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    font-family: inherit;
-    font-size: 14px; font-weight: 600;
-    cursor: pointer;
-    transition: all .2s var(--ease);
-    text-decoration: none;
-    white-space: nowrap;
-  }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s var(--ease); text-decoration: none; white-space: nowrap; }
   .btn:active { transform: translateY(1px); }
-  .btn-primary {
-    background: var(--accent); color: #fff;
-    box-shadow: 0 4px 14px rgba(224,133,111,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
-  }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 14px rgba(224,133,111,0.35), inset 0 1px 0 rgba(255,255,255,0.25); }
   .btn-primary:hover { background: var(--accent-2); box-shadow: 0 6px 18px rgba(201,110,89,0.4); }
-  .btn-ghost {
-    background: var(--surface); color: var(--ink);
-    border-color: var(--line);
-  }
+  .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
   .btn-ghost:hover { background: var(--bg-soft); border-color: var(--line-2); }
   .btn-lg { padding: 16px 30px; font-size: 15px; }
   .btn svg { width: 16px; height: 16px; }
 
-  /* ============ PREPARE VIEW ============ */
-  .prepare-layout {
-    display: grid; gap: 20px;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 860px) {
-    .prepare-layout { grid-template-columns: 1.1fr 1fr; }
-  }
+  .prepare-layout { display: grid; gap: 20px; grid-template-columns: 1fr; }
+  @media (min-width: 860px) { .prepare-layout { grid-template-columns: 1.1fr 1fr; } }
 
-  .input-row {
-    display: flex; gap: 10px; align-items: stretch;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 6px 6px 6px 18px;
-    transition: all .2s var(--ease);
-  }
-  .input-row:focus-within {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(224,133,111,0.12);
-  }
-  .input-row input {
-    flex: 1; border: none; outline: none; background: transparent;
-    font-family: inherit; font-size: 16px; color: var(--ink);
-    padding: 10px 0;
-  }
+  .input-row { display: flex; gap: 10px; align-items: stretch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 6px 6px 6px 18px; transition: all .2s var(--ease); }
+  .input-row:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,133,111,0.12); }
+  .input-row input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 16px; color: var(--ink); padding: 10px 0; }
   .input-row input::placeholder { color: var(--ink-3); }
-  .mic-btn {
-    width: 44px; height: 44px; border-radius: 50%;
-    border: none; background: var(--bg-soft);
-    color: var(--ink-2); cursor: pointer;
-    display: grid; place-items: center;
-    transition: all .2s var(--ease);
-    flex-shrink: 0;
-  }
+  .mic-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--bg-soft); color: var(--ink-2); cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); flex-shrink: 0; }
   .mic-btn:hover { background: var(--accent-soft); color: var(--accent-2); }
-  .mic-btn.listening {
-    background: var(--accent); color: #fff;
-    animation: pulse 1.4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(224,133,111,0.4); }
-    50% { box-shadow: 0 0 0 12px rgba(224,133,111,0); }
-  }
+  .mic-btn.listening { background: var(--accent); color: #fff; animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(224,133,111,0.4); } 50% { box-shadow: 0 0 0 12px rgba(224,133,111,0); } }
   .mic-btn svg { width: 18px; height: 18px; }
 
-  .templates-grid {
-    display: grid; gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-  .template-chip {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 14px 16px;
-    cursor: pointer;
-    text-align: left;
-    transition: all .2s var(--ease);
-    font-family: inherit;
-    display: flex; flex-direction: column; gap: 4px;
-  }
-  .template-chip:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    transform: translateY(-1px);
-  }
-  .template-chip .t-icon {
-    width: 32px; height: 32px; border-radius: 10px;
-    background: var(--bg-soft);
-    display: grid; place-items: center;
-    color: var(--ink-2);
-    margin-bottom: 4px;
-  }
+  .templates-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .template-chip { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 14px 16px; cursor: pointer; text-align: left; transition: all .2s var(--ease); font-family: inherit; display: flex; flex-direction: column; gap: 4px; }
+  .template-chip:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
+  .template-chip .t-icon { width: 32px; height: 32px; border-radius: 10px; background: var(--bg-soft); display: grid; place-items: center; color: var(--ink-2); margin-bottom: 4px; }
   .template-chip .t-icon svg { width: 18px; height: 18px; }
   .template-chip .t-name { font-size: 14px; font-weight: 600; color: var(--ink); }
   .template-chip .t-sub { font-size: 12px; color: var(--ink-3); }
 
-  .duration-picker {
-    display: flex; gap: 8px; flex-wrap: wrap;
-  }
-  .dur-opt {
-    flex: 1; min-width: 80px;
-    padding: 14px 10px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--line);
-    background: var(--surface);
-    cursor: pointer;
-    text-align: center;
-    transition: all .2s var(--ease);
-    font-family: inherit;
-  }
+  .duration-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+  .dur-opt { flex: 1; min-width: 80px; padding: 14px 10px; border-radius: var(--radius-md); border: 1px solid var(--line); background: var(--surface); cursor: pointer; text-align: center; transition: all .2s var(--ease); font-family: inherit; }
   .dur-opt:hover { border-color: var(--line-2); }
-  .dur-opt.active {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent-2);
-  }
+  .dur-opt.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-2); }
   .dur-opt .dur-val { font-size: 18px; font-weight: 700; display: block; }
   .dur-opt .dur-lbl { font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; }
   .dur-opt.active .dur-lbl { color: var(--accent-2); }
 
   .steps-editor { margin-top: 8px; }
-  .step-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 12px;
-    background: var(--surface-2);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    margin-bottom: 8px;
-    transition: all .2s var(--ease);
-  }
+  .step-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); margin-bottom: 8px; transition: all .2s var(--ease); }
   .step-item:hover { border-color: var(--line-2); }
-  .step-num {
-    width: 26px; height: 26px; border-radius: 50%;
-    background: var(--accent-soft); color: var(--accent-2);
-    font-size: 12px; font-weight: 700;
-    display: grid; place-items: center;
-    flex-shrink: 0;
-  }
-  .step-text {
-    flex: 1; border: none; background: transparent;
-    font-family: inherit; font-size: 14px; color: var(--ink);
-    outline: none;
-  }
-  .step-remove {
-    width: 26px; height: 26px; border-radius: 8px;
-    border: none; background: transparent;
-    color: var(--ink-3); cursor: pointer;
-    display: grid; place-items: center;
-    transition: all .2s var(--ease);
-  }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-2); font-size: 12px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
+  .step-text { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--ink); outline: none; }
+  .step-remove { width: 26px; height: 26px; border-radius: 8px; border: none; background: transparent; color: var(--ink-3); cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); }
   .step-remove:hover { background: #FBEAEA; color: #B84A4A; }
   .step-remove svg { width: 14px; height: 14px; }
-
-  .add-step-btn {
-    width: 100%; padding: 10px;
-    border: 1px dashed var(--line-2);
-    border-radius: var(--radius-sm);
-    background: transparent;
-    color: var(--ink-3);
-    font-family: inherit; font-size: 13px; font-weight: 500;
-    cursor: pointer;
-    transition: all .2s var(--ease);
-  }
+  .add-step-btn { width: 100%; padding: 10px; border: 1px dashed var(--line-2); border-radius: var(--radius-sm); background: transparent; color: var(--ink-3); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
   .add-step-btn:hover { border-color: var(--accent); color: var(--accent-2); background: var(--accent-soft); }
 
-  /* ============ DEVICE VIEW ============ */
-  .device-layout {
-    display: grid; gap: 28px;
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-  @media (min-width: 860px) {
-    .device-layout { grid-template-columns: 1fr 1fr; }
-  }
+  .device-layout { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 860px) { .device-layout { grid-template-columns: 1fr 1fr; } }
 
-  .device-stage {
-    display: flex; flex-direction: column; align-items: center;
-    padding: 20px 10px;
-  }
+  .device-stage { display: flex; flex-direction: column; align-items: center; padding: 20px 10px; }
   .device {
     width: 280px;
     background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%);
     border-radius: 50%;
     aspect-ratio: 1;
     padding: 28px;
-    box-shadow:
-      inset 0 2px 4px rgba(255,255,255,0.08),
-      inset 0 -4px 12px rgba(0,0,0,0.4),
-      0 20px 50px rgba(40,30,20,0.3),
-      0 4px 12px rgba(40,30,20,0.2);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.08), inset 0 -4px 12px rgba(0,0,0,0.4), 0 20px 50px rgba(40,30,20,0.3), 0 4px 12px rgba(40,30,20,0.2);
     position: relative;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 18px;
   }
-  .device::before {
-    content: ""; position: absolute; inset: 8px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.04);
+  .device::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.04); pointer-events: none; }
+
+  /* NOUVEAU : Anneau de progression */
+  .progress-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
     pointer-events: none;
+    z-index: 1;
   }
+  .progress-ring circle {
+    fill: none;
+    stroke-width: 4;
+  }
+  .progress-ring .track { stroke: rgba(255,255,255,0.08); }
+  .progress-ring .fill {
+    stroke: var(--accent);
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    transition: stroke-dashoffset 0.4s var(--ease);
+    transform: rotate(-90deg);
+    transform-origin: center;
+    filter: drop-shadow(0 0 6px rgba(224,133,111,0.4));
+  }
+  .progress-ring .fill.complete { stroke: var(--sage); filter: drop-shadow(0 0 6px rgba(168,184,154,0.4)); }
+
   .device-screen {
     width: 100%;
     background: #0a0908;
@@ -464,37 +211,14 @@
     display: flex; flex-direction: column; justify-content: center;
     position: relative;
     overflow: hidden;
+    z-index: 2;
   }
-  .device-screen::after {
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
-    pointer-events: none;
-  }
-  .device-label {
-    font-size: 10px; letter-spacing: 2px;
-    color: #8A857E; text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .device-task {
-    font-family: 'Caveat', cursive;
-    font-size: 22px; font-weight: 600;
-    color: #F5E9DC;
-    line-height: 1.2;
-    margin-bottom: 6px;
-    min-height: 28px;
-  }
-  .device-step {
-    font-size: 13px; color: #B8AFA2;
-    margin-bottom: 8px;
-  }
-  .device-progress {
-    display: flex; gap: 4px; justify-content: center;
-  }
-  .device-progress .pip {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #3a3632;
-    transition: all .3s var(--ease);
-  }
+  .device-screen::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent); pointer-events: none; }
+  .device-label { font-size: 10px; letter-spacing: 2px; color: #8A857E; text-transform: uppercase; margin-bottom: 4px; }
+  .device-task { font-family: 'Caveat', cursive; font-size: 22px; font-weight: 600; color: #F5E9DC; line-height: 1.2; margin-bottom: 6px; min-height: 28px; }
+  .device-step { font-size: 13px; color: #B8AFA2; margin-bottom: 8px; }
+  .device-progress { display: flex; gap: 4px; justify-content: center; }
+  .device-progress .pip { width: 6px; height: 6px; border-radius: 50%; background: #3a3632; transition: all .3s var(--ease); }
   .device-progress .pip.done { background: var(--accent); }
   .device-progress .pip.current { background: #F5E9DC; box-shadow: 0 0 8px rgba(245,233,220,0.6); }
 
@@ -508,182 +232,63 @@
     font-size: 28px; font-weight: 700;
     cursor: pointer;
     position: relative;
-    box-shadow:
-      inset 0 2px 4px rgba(255,255,255,0.35),
-      inset 0 -4px 10px rgba(0,0,0,0.25),
-      0 8px 20px rgba(224,133,111,0.5),
-      0 0 0 6px rgba(224,133,111,0.12);
+    z-index: 2;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12);
     transition: all .15s var(--ease);
     letter-spacing: 1px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
-  .start-button:hover {
-    transform: scale(1.03);
-    box-shadow:
-      inset 0 2px 4px rgba(255,255,255,0.4),
-      inset 0 -4px 10px rgba(0,0,0,0.25),
-      0 12px 28px rgba(224,133,111,0.55),
-      0 0 0 10px rgba(224,133,111,0.18);
-  }
-  .start-button:active {
-    transform: scale(0.96);
-    box-shadow:
-      inset 0 4px 10px rgba(0,0,0,0.3),
-      0 4px 12px rgba(224,133,111,0.4),
-      0 0 0 4px rgba(224,133,111,0.15);
-  }
-  .start-button.pulse {
-    animation: btnPulse 1.6s ease-in-out infinite;
-  }
-  @keyframes btnPulse {
-    0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); }
-    50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 18px rgba(224,133,111,0); }
-  }
+  .start-button:hover { transform: scale(1.03); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.25), 0 12px 28px rgba(224,133,111,0.55), 0 0 0 10px rgba(224,133,111,0.18); }
+  .start-button:active { transform: scale(0.96); box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 4px 12px rgba(224,133,111,0.4), 0 0 0 4px rgba(224,133,111,0.15); }
+  .start-button.pulse { animation: btnPulse 1.6s ease-in-out infinite; }
+  @keyframes btnPulse { 0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 18px rgba(224,133,111,0); } }
+  .start-button.paused { background: radial-gradient(circle at 30% 30%, #B8AFA2 0%, #8A857E 45%, #5A564F 100%); box-shadow: inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -4px 10px rgba(0,0,0,0.3), 0 8px 20px rgba(138,133,126,0.4), 0 0 0 6px rgba(138,133,126,0.15); }
 
-  .device-hint {
-    margin-top: 20px;
-    font-size: 13px; color: var(--ink-3);
-    text-align: center;
-    max-width: 280px;
-  }
+  .device-hint { margin-top: 20px; font-size: 13px; color: var(--ink-3); text-align: center; max-width: 280px; }
 
-  /* ============ SETTINGS ============ */
-  .setting-row {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line);
-  }
+  .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
   .setting-row:last-child { border-bottom: none; }
   .setting-info { flex: 1; }
-  .setting-title {
-    font-size: 15px; font-weight: 600; color: var(--ink);
-    margin-bottom: 2px;
-  }
-  .setting-desc {
-    font-size: 13px; color: var(--ink-3);
-  }
+  .setting-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .setting-desc { font-size: 13px; color: var(--ink-3); }
 
-  .toggle {
-    position: relative;
-    width: 48px; height: 28px;
-    background: var(--line-2);
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background .25s var(--ease);
-    flex-shrink: 0;
-    border: none;
-  }
-  .toggle::after {
-    content: ""; position: absolute;
-    top: 3px; left: 3px;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    transition: transform .25s var(--ease);
-  }
+  .toggle { position: relative; width: 48px; height: 28px; background: var(--line-2); border-radius: 999px; cursor: pointer; transition: background .25s var(--ease); flex-shrink: 0; border: none; }
+  .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: transform .25s var(--ease); }
   .toggle.on { background: var(--accent); }
   .toggle.on::after { transform: translateX(20px); }
 
-  .segmented {
-    display: inline-flex;
-    background: var(--bg-soft);
-    border-radius: 999px;
-    padding: 4px;
-    gap: 2px;
-  }
-  .seg-opt {
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: none;
-    background: transparent;
-    color: var(--ink-2);
-    font-family: inherit;
-    font-size: 13px; font-weight: 500;
-    cursor: pointer;
-    transition: all .2s var(--ease);
-  }
-  .seg-opt.active {
-    background: var(--surface);
-    color: var(--ink);
-    box-shadow: var(--shadow-sm);
-  }
+  .segmented { display: inline-flex; background: var(--bg-soft); border-radius: 999px; padding: 4px; gap: 2px; }
+  .seg-opt { padding: 8px 14px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
+  .seg-opt.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
 
-  /* ============ BOTTOM NAV ============ */
-  .bottom-nav {
-    position: fixed;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 6px;
-    display: flex; gap: 4px;
-    box-shadow: var(--shadow-lg);
-    z-index: 100;
-  }
-  .nav-btn {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 18px;
-    border-radius: 999px;
-    border: none;
-    background: transparent;
-    color: var(--ink-2);
-    font-family: inherit;
-    font-size: 13px; font-weight: 600;
-    cursor: pointer;
-    transition: all .25s var(--ease);
-  }
+  .bottom-nav { position: fixed; bottom: calc(12px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.85); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid var(--line); border-radius: 999px; padding: 6px; display: flex; gap: 4px; box-shadow: var(--shadow-lg); z-index: 100; }
+  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .25s var(--ease); }
   .nav-btn:hover { color: var(--ink); }
-  .nav-btn.active {
-    background: var(--ink);
-    color: #fff;
-  }
+  .nav-btn.active { background: var(--ink); color: #fff; }
   .nav-btn svg { width: 18px; height: 18px; }
 
-  /* ============ TOAST ============ */
-  .toast {
-    position: fixed;
-    bottom: 110px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--ink);
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 999px;
-    font-size: 14px; font-weight: 500;
-    box-shadow: var(--shadow-lg);
-    opacity: 0;
-    pointer-events: none;
-    transition: all .3s var(--ease);
-    z-index: 200;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: all .3s var(--ease); z-index: 200; display: inline-flex; align-items: center; gap: 8px; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   .toast svg { width: 16px; height: 16px; }
 
-  /* ============ TIMER DISPLAY ============ */
-  .timer-display {
-    display: flex; align-items: baseline; justify-content: center;
-    gap: 2px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 22px;
-    color: #F5E9DC;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
+  .timer-display { display: flex; align-items: baseline; justify-content: center; gap: 2px; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; color: #F5E9DC; letter-spacing: 1px; margin-top: 4px; }
   .timer-display .colon { opacity: 0.5; }
 
-  /* ============ RESPONSIVE ============ */
+  .pause-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--accent-soft);
+    color: var(--accent-2);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .pause-badge svg { width: 12px; height: 12px; }
+
   @media (max-width: 600px) {
     .app { padding: 20px 16px 40px; }
     .page-title { font-size: 40px; }
@@ -691,6 +296,7 @@
     .brand-mark { width: 38px; height: 38px; }
     .status-pill { font-size: 11px; padding: 6px 10px; }
     .device { width: 240px; padding: 22px; }
+    .progress-ring { width: 170px; height: 170px; }
     .start-button { width: 96px; height: 96px; font-size: 24px; }
     .device-task { font-size: 18px; }
     .nav-btn { padding: 10px 14px; font-size: 12px; }
@@ -698,11 +304,7 @@
     .card { padding: 18px; }
   }
 
-  button:focus-visible, input:focus-visible, .task-card:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
+  button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 4px; }
@@ -713,11 +315,9 @@
 
 <div class="app">
 
-  <!-- TOP BAR AVEC NOUVEAU LOGO CLIC -->
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark">
-        <!-- Icône exacte de l'image : Carré arrondi, C gris, triangle terracotta -->
         <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="44" height="44" rx="12" fill="#FDFBF8" stroke="#EDE7DF" stroke-width="1"/>
           <path d="M28 15A10 10 0 1 0 28 29" stroke="#2B2A28" stroke-width="3.5" stroke-linecap="round"/>
@@ -737,25 +337,20 @@
     </div>
   </header>
 
-  <!-- ============ VIEW : MES TÂCHES ============ -->
   <section class="view active" id="view-tasks">
     <div class="page-head">
       <h1 class="page-title">Mes tâches</h1>
       <p class="page-subtitle">Choisissez une tâche, chargez-la sur le boîtier, et avancez pas à pas avec le bouton START.</p>
     </div>
-
     <div id="tasksContainer"></div>
   </section>
 
-  <!-- ============ VIEW : PRÉPARER ============ -->
   <section class="view" id="view-prepare">
     <div class="page-head">
       <h1 class="page-title">Préparer</h1>
-      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. START découpera la tâche en petites actions claires.</p>
+      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. Clic découpera la tâche en petites actions claires.</p>
     </div>
-
     <div class="prepare-layout">
-
       <div>
         <div class="card">
           <div class="section-label">Nom de la tâche</div>
@@ -766,42 +361,26 @@
             </button>
           </div>
         </div>
-
         <div class="card" style="margin-top:16px;">
           <div class="section-label">Étapes de la tâche</div>
           <div class="steps-editor" id="stepsEditor"></div>
           <button class="add-step-btn" id="addStepBtn">+ Ajouter une étape</button>
         </div>
       </div>
-
       <div>
         <div class="card">
           <div class="section-label">Modèles rapides</div>
           <div class="templates-grid" id="templatesGrid"></div>
         </div>
-
         <div class="card" style="margin-top:16px;">
           <div class="section-label">Durée de la session</div>
           <div class="duration-picker" id="durationPicker">
-            <button class="dur-opt" data-dur="0">
-              <span class="dur-val">∞</span>
-              <span class="dur-lbl">Libre</span>
-            </button>
-            <button class="dur-opt" data-dur="3">
-              <span class="dur-val">3</span>
-              <span class="dur-lbl">Minutes</span>
-            </button>
-            <button class="dur-opt active" data-dur="5">
-              <span class="dur-val">5</span>
-              <span class="dur-lbl">Minutes</span>
-            </button>
-            <button class="dur-opt" data-dur="10">
-              <span class="dur-val">10</span>
-              <span class="dur-lbl">Minutes</span>
-            </button>
+            <button class="dur-opt" data-dur="0"><span class="dur-val">∞</span><span class="dur-lbl">Libre</span></button>
+            <button class="dur-opt" data-dur="3"><span class="dur-val">3</span><span class="dur-lbl">Minutes</span></button>
+            <button class="dur-opt active" data-dur="5"><span class="dur-val">5</span><span class="dur-lbl">Minutes</span></button>
+            <button class="dur-opt" data-dur="10"><span class="dur-val">10</span><span class="dur-lbl">Minutes</span></button>
           </div>
         </div>
-
         <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn btn-ghost" id="clearPrepareBtn">Effacer</button>
           <button class="btn btn-primary btn-lg" id="saveTaskBtn" style="flex:1;">
@@ -810,22 +389,23 @@
           </button>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ============ VIEW : APPAREIL ============ -->
   <section class="view" id="view-device">
     <div class="page-head">
       <h1 class="page-title">Appareil</h1>
-      <p class="page-subtitle">Votre boîtier START simulé. Personnalisez les sensations et le comportement des boutons.</p>
+      <p class="page-subtitle">Votre boîtier Clic simulé. Personnalisez les sensations et le comportement des boutons.</p>
     </div>
-
     <div class="device-layout">
-
       <div class="card" style="padding: 32px 20px;">
         <div class="device-stage">
-          <div class="device" role="group" aria-label="Boîtier START simulé">
+          <div class="device" role="group" aria-label="Boîtier Clic simulé">
+            <!-- NOUVEAU : Anneau de progression -->
+            <svg class="progress-ring" viewBox="0 0 200 200" aria-hidden="true">
+              <circle class="track" cx="100" cy="100" r="70"/>
+              <circle class="fill" id="progressFill" cx="100" cy="100" r="70"/>
+            </svg>
             <div class="device-screen">
               <div class="device-label" id="devLabel">Bienvenue</div>
               <div class="device-task" id="devTask">—</div>
@@ -839,14 +419,13 @@
               START
             </button>
           </div>
-          <p class="device-hint" id="deviceHint">Appuyez sur START pour avancer d'une étape. Appui long pour revenir en arrière.</p>
+          <div id="pauseBadgeContainer"></div>
+          <p class="device-hint" id="deviceHint">1 appui : étape suivante. 2 appuis : terminer. Appui long : pause.</p>
         </div>
       </div>
-
       <div>
         <div class="card">
           <div class="section-label">Comportement des boutons</div>
-
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Appui simple</div>
@@ -857,22 +436,19 @@
               <button class="seg-opt" data-act="prev">Précédent</button>
             </div>
           </div>
-
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Appui long</div>
               <div class="setting-desc">Action effectuée sur un appui prolongé</div>
             </div>
             <div class="segmented" id="longPressSeg">
-              <button class="seg-opt" data-act="next">Suivant</button>
-              <button class="seg-opt active" data-act="prev">Précédent</button>
+              <button class="seg-opt active" data-act="pause">Pause</button>
+              <button class="seg-opt" data-act="prev">Précédent</button>
             </div>
           </div>
         </div>
-
         <div class="card" style="margin-top:16px;">
           <div class="section-label">Retour haptique</div>
-
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Mode de retour</div>
@@ -885,10 +461,8 @@
             </div>
           </div>
         </div>
-
         <div class="card" style="margin-top:16px;">
           <div class="section-label">Options avancées</div>
-
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Mode démonstration</div>
@@ -896,7 +470,13 @@
             </div>
             <button class="toggle on" id="demoToggle" aria-label="Mode démonstration"></button>
           </div>
-
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Écran allumé pendant la session</div>
+              <div class="setting-desc">Empêche le téléphone de se verrouiller</div>
+            </div>
+            <button class="toggle" id="wakeLockToggle" aria-label="Écran allumé"></button>
+          </div>
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Réinitialiser les données</div>
@@ -905,14 +485,12 @@
             <button class="btn btn-ghost" id="resetBtn" style="padding:10px 16px; font-size:13px;">Réinitialiser</button>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
 </div>
 
-<!-- BOTTOM NAV -->
 <nav class="bottom-nav" aria-label="Navigation principale">
   <button class="nav-btn active" data-view="tasks">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -931,14 +509,154 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const STORAGE_KEY = 'start_app_v1';
+/* ============================================================
+   CLIC — Application
+   Lot 1 : Persistance robuste + Gestes + Anneau de progression
+   ============================================================ */
+
+const DB_NAME = 'clic_app';
+const DB_VERSION = 1;
+const STORAGE_KEY_FALLBACK = 'clic_app_fallback';
 
 const DEFAULT_STATE = {
   tasks: [],
-  settings: { shortPress: 'next', longPress: 'prev', feedback: 'light', demo: true },
-  currentTaskId: null, currentStepIndex: 0, duration: 5
+  settings: { shortPress: 'next', longPress: 'pause', feedback: 'light', demo: true, wakeLock: false },
+  session: { taskId: null, stepIndex: 0, remainingTime: 0, totalDuration: 0, isPaused: false, startedAt: null, lastSaved: null }
 };
 
+let state = structuredClone(DEFAULT_STATE);
+let db = null;
+let wakeLock = null;
+let timerInterval = null;
+
+/* ---------- IndexedDB ---------- */
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const d = e.target.result;
+      if (!d.objectStoreNames.contains('tasks')) d.createObjectStore('tasks', { keyPath: 'id' });
+      if (!d.objectStoreNames.contains('settings')) d.createObjectStore('settings', { keyPath: 'key' });
+      if (!d.objectStoreNames.contains('session')) d.createObjectStore('session', { keyPath: 'key' });
+    };
+    req.onsuccess = (e) => resolve(e.target.result);
+    req.onerror = (e) => reject(e);
+  });
+}
+
+async function dbGet(store, key) {
+  if (!db) return null;
+  return new Promise((resolve) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).get(key);
+    req.onsuccess = () => resolve(req.result?.value ?? null);
+    req.onerror = () => resolve(null);
+  });
+}
+
+async function dbPut(store, key, value) {
+  if (!db) return;
+  return new Promise((resolve) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).put({ key, value });
+    tx.oncomplete = () => resolve();
+  });
+}
+
+async function dbClear(store) {
+  if (!db) return;
+  return new Promise((resolve) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).clear();
+    tx.oncomplete = () => resolve();
+  });
+}
+
+async function dbGetAllTasks() {
+  if (!db) return [];
+  return new Promise((resolve) => {
+    const tx = db.transaction('tasks', 'readonly');
+    const req = tx.objectStore('tasks').getAll();
+    req.onsuccess = () => resolve(req.result.map(r => r.value));
+    req.onerror = () => resolve([]);
+  });
+}
+
+/* ---------- Persistance ---------- */
+async function loadState() {
+  try {
+    db = await openDB();
+    const tasks = await dbGetAllTasks();
+    const settings = await dbGet('settings', 'main');
+    const session = await dbGet('session', 'main');
+    state.tasks = tasks || [];
+    if (settings) state.settings = { ...DEFAULT_STATE.settings, ...settings };
+    if (session) state.session = { ...DEFAULT_STATE.session, ...session };
+    
+    // Demander le stockage persistant
+    if (navigator.storage?.persist) {
+      const persisted = await navigator.storage.persisted();
+      if (!persisted) {
+        try { await navigator.storage.persist(); } catch(e) {}
+      }
+    }
+  } catch(e) {
+    // Fallback localStorage
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_FALLBACK);
+      if (raw) {
+        const p = JSON.parse(raw);
+        state = { ...structuredClone(DEFAULT_STATE), ...p, settings: { ...DEFAULT_STATE.settings, ...(p.settings||{}) }, session: { ...DEFAULT_STATE.session, ...(p.session||{}) } };
+      }
+    } catch(e2) {}
+  }
+}
+
+async function saveTasks() {
+  if (db) {
+    await dbClear('tasks');
+    for (const task of state.tasks) {
+      await dbPut('tasks', task.id, task);
+    }
+  }
+  try { localStorage.setItem(STORAGE_KEY_FALLBACK, JSON.stringify({ tasks: state.tasks })); } catch(e) {}
+}
+
+async function saveSettings() {
+  if (db) await dbPut('settings', 'main', state.settings);
+  try { localStorage.setItem(STORAGE_KEY_FALLBACK, JSON.stringify({ ...JSON.parse(localStorage.getItem(STORAGE_KEY_FALLBACK)||'{}'), settings: state.settings })); } catch(e) {}
+}
+
+async function saveSession() {
+  state.session.lastSaved = Date.now();
+  if (db) await dbPut('session', 'main', state.session);
+  try {
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY_FALLBACK)||'{}');
+    raw.session = state.session;
+    localStorage.setItem(STORAGE_KEY_FALLBACK, JSON.stringify(raw));
+  } catch(e) {}
+}
+
+/* ---------- Navigation ---------- */
+const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device') };
+document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
+function switchView(name) {
+  Object.entries(views).forEach(([k, el]) => el.classList.toggle('active', k === name));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ---------- Toast ---------- */
+const toastEl = document.getElementById('toast');
+let toastTimer;
+function toast(msg, iconKey = 'check') {
+  toastEl.innerHTML = `${ICONS[iconKey] || ICONS.check}<span>${msg}</span>`;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+}
+
+/* ---------- Icônes ---------- */
 const ICONS = {
   book: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
   target: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
@@ -952,7 +670,8 @@ const ICONS = {
   arrowRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
   trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>`,
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
-  x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+  x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  pause: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`
 };
 
 const TEMPLATES = [
@@ -962,27 +681,7 @@ const TEMPLATES = [
   { name: "Ranger mon bureau", icon: ICONS.archive, sub: "Un espace clair", steps: ["Tout retirer du bureau", "Jeter ce qui est inutile", "Essuyer la surface", "Remettre l'essentiel seulement", "Profiler le résultat"] }
 ];
 
-let state = loadState();
-function loadState() {
-  try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return structuredClone(DEFAULT_STATE); const p = JSON.parse(raw); return { ...structuredClone(DEFAULT_STATE), ...p, settings: { ...DEFAULT_STATE.settings, ...(p.settings||{}) } }; } catch(e) { return structuredClone(DEFAULT_STATE); }
-}
-function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {} }
-
-const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device') };
-document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
-function switchView(name) {
-  Object.entries(views).forEach(([k, el]) => el.classList.toggle('active', k === name));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-const toastEl = document.getElementById('toast'); let toastTimer;
-function toast(msg, iconKey = 'check') {
-  toastEl.innerHTML = `${ICONS[iconKey] || ICONS.check}<span>${msg}</span>`;
-  toastEl.classList.add('show'); clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
-}
-
+/* ---------- Rendu tâches ---------- */
 const tasksContainer = document.getElementById('tasksContainer');
 function renderTasks() {
   tasksContainer.innerHTML = '';
@@ -993,7 +692,7 @@ function renderTasks() {
   const grid = document.createElement('div'); grid.className = 'tasks-grid';
   state.tasks.forEach(task => {
     const card = document.createElement('div'); card.className = 'task-card'; card.tabIndex = 0;
-    if (task.id === state.currentTaskId) card.classList.add('selected');
+    if (task.id === state.session.taskId) card.classList.add('selected');
     if (task.done) card.classList.add('done');
     card.innerHTML = `<div class="task-title">${escapeHtml(task.name)}</div><div class="task-meta"><span>${ICONS.list} ${task.steps.length} étapes</span><span>${ICONS.clock} ${task.duration === 0 ? 'Libre' : task.duration + ' min'}</span></div><div class="task-actions"><button class="icon-btn" data-act="load" title="Charger" aria-label="Charger">${ICONS.arrowRight}</button><button class="icon-btn danger" data-act="delete" title="Supprimer" aria-label="Supprimer">${ICONS.trash}</button></div>`;
     card.addEventListener('click', (e) => { if (e.target.closest('[data-act]')) return; loadTask(task.id); });
@@ -1006,10 +705,11 @@ function renderTasks() {
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
 function deleteTask(id) {
   state.tasks = state.tasks.filter(t => t.id !== id);
-  if (state.currentTaskId === id) { state.currentTaskId = null; state.currentStepIndex = 0; }
-  saveState(); renderTasks(); renderDevice(); toast('Tâche supprimée');
+  if (state.session.taskId === id) { state.session.taskId = null; state.session.stepIndex = 0; state.session.remainingTime = 0; }
+  saveTasks(); saveSession(); renderTasks(); renderDevice(); toast('Tâche supprimée');
 }
 
+/* ---------- Préparation ---------- */
 const taskNameInput = document.getElementById('taskNameInput'), stepsEditor = document.getElementById('stepsEditor'), addStepBtn = document.getElementById('addStepBtn'), templatesGrid = document.getElementById('templatesGrid'), durationPicker = document.getElementById('durationPicker'), saveTaskBtn = document.getElementById('saveTaskBtn'), clearPrepareBtn = document.getElementById('clearPrepareBtn');
 let prepareSteps = [];
 
@@ -1033,13 +733,15 @@ function renderSteps() {
   });
 }
 addStepBtn.addEventListener('click', () => { prepareSteps.push(''); renderSteps(); stepsEditor.querySelectorAll('.step-text')[stepsEditor.querySelectorAll('.step-text').length-1].focus(); });
-durationPicker.addEventListener('click', (e) => { const opt = e.target.closest('.dur-opt'); if (!opt) return; durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.duration = parseInt(opt.dataset.dur, 10); });
+durationPicker.addEventListener('click', (e) => { const opt = e.target.closest('.dur-opt'); if (!opt) return; durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); });
 saveTaskBtn.addEventListener('click', () => {
   const name = taskNameInput.value.trim(), steps = prepareSteps.filter(s => s && s.trim());
+  const durOpt = durationPicker.querySelector('.dur-opt.active');
+  const duration = durOpt ? parseInt(durOpt.dataset.dur, 10) : 5;
   if (!name) { toast('Donnez un nom à votre tâche'); taskNameInput.focus(); return; }
   if (steps.length === 0) { toast('Ajoutez au moins une étape'); return; }
-  state.tasks.unshift({ id: 't_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), name, steps, duration: state.duration, done: false, createdAt: Date.now() });
-  saveState(); renderTasks(); resetPrepare(); toast('Tâche enregistrée', 'sparkle'); switchView('tasks');
+  state.tasks.unshift({ id: 't_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), name, steps, duration, done: false, createdAt: Date.now() });
+  saveTasks(); renderTasks(); resetPrepare(); toast('Tâche enregistrée', 'sparkle'); switchView('tasks');
 });
 clearPrepareBtn.addEventListener('click', resetPrepare);
 function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; renderSteps(); }
@@ -1055,55 +757,358 @@ micBtn.addEventListener('click', () => {
   rec.onend = () => micBtn.classList.remove('listening');
 });
 
-const startBtn = document.getElementById('startBtn'), devLabel = document.getElementById('devLabel'), devTask = document.getElementById('devTask'), devStep = document.getElementById('devStep'), devProgress = document.getElementById('devProgress'), devTimer = document.getElementById('devTimer'), timerMin = document.getElementById('timerMin'), timerSec = document.getElementById('timerSec'), deviceHint = document.getElementById('deviceHint');
-let timerInterval = null, timerRemaining = 0;
+/* ---------- NOUVEAU : Gestes du bouton (1 appui, 2 appuis, appui long) ---------- */
+const startBtn = document.getElementById('startBtn');
+const devLabel = document.getElementById('devLabel');
+const devTask = document.getElementById('devTask');
+const devStep = document.getElementById('devStep');
+const devProgress = document.getElementById('devProgress');
+const devTimer = document.getElementById('devTimer');
+const timerMin = document.getElementById('timerMin');
+const timerSec = document.getElementById('timerSec');
+const deviceHint = document.getElementById('deviceHint');
+const progressFill = document.getElementById('progressFill');
+const pauseBadgeContainer = document.getElementById('pauseBadgeContainer');
 
-function loadTask(id) {
-  const task = state.tasks.find(t => t.id === id); if (!task) return;
-  state.currentTaskId = id; state.currentStepIndex = 0; saveState(); renderTasks(); renderDevice(); toast('Tâche chargée sur le boîtier');
-}
-function getCurrentTask() { return state.tasks.find(t => t.id === state.currentTaskId) || null; }
-function renderDevice() {
-  const task = getCurrentTask();
-  if (!task && state.settings.demo) { devLabel.textContent = 'Démonstration'; devTask.textContent = 'Bienvenue'; devStep.textContent = 'Chargez une tâche pour commencer'; devProgress.innerHTML = ''; devTimer.style.display = 'none'; stopTimer(); startBtn.classList.add('pulse'); deviceHint.textContent = 'Mode démonstration. Chargez une tâche depuis l\'écran Tâches.'; return; }
-  if (!task) { devLabel.textContent = 'Aucune tâche'; devTask.textContent = '—'; devStep.textContent = 'Préparez une tâche d\'abord'; devProgress.innerHTML = ''; devTimer.style.display = 'none'; stopTimer(); startBtn.classList.remove('pulse'); deviceHint.textContent = 'Aucune tâche chargée.'; return; }
-  startBtn.classList.remove('pulse'); devLabel.textContent = 'Étape ' + (state.currentStepIndex + 1) + ' / ' + task.steps.length; devTask.textContent = task.name; devStep.textContent = task.steps[state.currentStepIndex] || 'Terminé';
-  devProgress.innerHTML = ''; task.steps.forEach((_, i) => { const pip = document.createElement('span'); pip.className = 'pip'; if (i < state.currentStepIndex) pip.classList.add('done'); else if (i === state.currentStepIndex) pip.classList.add('current'); devProgress.appendChild(pip); });
-  if (task.duration > 0) { devTimer.style.display = 'flex'; if (!timerInterval) startTimer(task.duration * 60); } else { devTimer.style.display = 'none'; stopTimer(); }
-  deviceHint.textContent = 'Appui simple : ' + (state.settings.shortPress === 'next' ? 'étape suivante' : 'étape précédente') + '. Appui long : ' + (state.settings.longPress === 'next' ? 'étape suivante' : 'étape précédente') + '.';
-}
-function startTimer(totalSeconds) { stopTimer(); timerRemaining = totalSeconds; updateTimerDisplay(); timerInterval = setInterval(() => { timerRemaining--; updateTimerDisplay(); if (timerRemaining <= 0) { stopTimer(); toast('Session terminée', 'sparkle'); if (navigator.vibrate && state.settings.feedback === 'vibration') navigator.vibrate([200, 100, 200]); } }, 1000); }
-function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
-function updateTimerDisplay() { const m = Math.max(0, Math.floor(timerRemaining / 60)), s = Math.max(0, timerRemaining % 60); timerMin.textContent = String(m).padStart(2, '0'); timerSec.textContent = String(s).padStart(2, '0'); }
-function advanceStep() { const task = getCurrentTask(); if (!task) return; if (state.currentStepIndex < task.steps.length - 1) { state.currentStepIndex++; saveState(); renderDevice(); feedback(); } else { task.done = true; saveState(); renderTasks(); toast('Tâche terminée', 'sparkle'); feedback(); } }
-function previousStep() { const task = getCurrentTask(); if (!task) return; if (state.currentStepIndex > 0) { state.currentStepIndex--; saveState(); renderDevice(); feedback(); } }
-function feedback() { const fb = state.settings.feedback; if (fb === 'vibration' && navigator.vibrate) navigator.vibrate(30); if (fb === 'light') startBtn.animate([{ filter: 'brightness(1.4)' }, { filter: 'brightness(1)' }], { duration: 300, easing: 'ease-out' }); }
+const CIRCUMFERENCE = 2 * Math.PI * 70; // ~440
+progressFill.style.strokeDasharray = CIRCUMFERENCE;
+progressFill.style.strokeDashoffset = CIRCUMFERENCE;
 
-let pressTimer = null, longFired = false;
-function onPointerDown(e) { e.preventDefault(); longFired = false; pressTimer = setTimeout(() => { longFired = true; const act = state.settings.longPress; if (act === 'next') advanceStep(); else previousStep(); }, 500); }
-function onPointerUp(e) { e.preventDefault(); clearTimeout(pressTimer); if (longFired) return; const act = state.settings.shortPress; if (act === 'next') advanceStep(); else previousStep(); }
-function onPointerCancel() { clearTimeout(pressTimer); }
-startBtn.addEventListener('pointerdown', onPointerDown); startBtn.addEventListener('pointerup', onPointerUp); startBtn.addEventListener('pointercancel', onPointerCancel); startBtn.addEventListener('pointerleave', onPointerCancel);
+let lastTapTime = 0;
+let longPressTimer = null;
+let isProcessing = false;
+const LONG_PRESS_MS = 500;
+const DOUBLE_TAP_MS = 300;
+
+function onPointerDown(e) {
+  e.preventDefault();
+  if (isProcessing) return;
+  if (state.session.isPaused) {
+    // Si en pause, un appui simple reprend
+    resumeSession();
+    return;
+  }
+  longPressTimer = setTimeout(() => {
+    longPressTimer = null;
+    const act = state.settings.longPress;
+    if (act === 'pause') togglePause();
+    else if (act === 'prev') previousStep();
+    isProcessing = true;
+    setTimeout(() => isProcessing = false, 200);
+  }, LONG_PRESS_MS);
+}
+
+function onPointerUp(e) {
+  e.preventDefault();
+  if (longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+    
+    const now = Date.now();
+    const timeSinceLastTap = now - lastTapTime;
+    
+    if (timeSinceLastTap < DOUBLE_TAP_MS && timeSinceLastTap > 0) {
+      // Double appui = terminer la tâche
+      completeTask();
+      lastTapTime = 0;
+    } else {
+      // Simple appui
+      const act = state.settings.shortPress;
+      if (act === 'next') advanceStep();
+      else if (act === 'prev') previousStep();
+      lastTapTime = now;
+    }
+  }
+}
+
+function onPointerCancel() { if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } }
+
+startBtn.addEventListener('pointerdown', onPointerDown);
+startBtn.addEventListener('pointerup', onPointerUp);
+startBtn.addEventListener('pointercancel', onPointerCancel);
+startBtn.addEventListener('pointerleave', onPointerCancel);
 startBtn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); advanceStep(); } });
 
+/* ---------- NOUVEAU : Anneau de progression ---------- */
+function updateProgressRing(percent, isComplete = false) {
+  const offset = CIRCUMFERENCE * (1 - Math.max(0, Math.min(1, percent)));
+  progressFill.style.strokeDashoffset = offset;
+  if (isComplete) progressFill.classList.add('complete');
+  else progressFill.classList.remove('complete');
+}
+
+/* ---------- Session & Timer ---------- */
+function loadTask(id) {
+  const task = state.tasks.find(t => t.id === id); if (!task) return;
+  state.session.taskId = id;
+  state.session.stepIndex = 0;
+  state.session.totalDuration = task.duration * 60;
+  state.session.remainingTime = state.session.totalDuration;
+  state.session.isPaused = false;
+  state.session.startedAt = Date.now();
+  saveSession();
+  renderTasks();
+  renderDevice();
+  toast('Tâche chargée sur le boîtier');
+  if (state.settings.wakeLock) requestWakeLock();
+}
+
+function getCurrentTask() { return state.tasks.find(t => t.id === state.session.taskId) || null; }
+
+function renderDevice() {
+  const task = getCurrentTask();
+  if (!task && state.settings.demo) {
+    devLabel.textContent = 'Démonstration';
+    devTask.textContent = 'Bienvenue';
+    devStep.textContent = 'Chargez une tâche pour commencer';
+    devProgress.innerHTML = '';
+    devTimer.style.display = 'none';
+    stopTimer();
+    startBtn.classList.add('pulse');
+    startBtn.classList.remove('paused');
+    startBtn.textContent = 'START';
+    updateProgressRing(0);
+    pauseBadgeContainer.innerHTML = '';
+    deviceHint.textContent = '1 appui : étape suivante. 2 appuis : terminer. Appui long : pause.';
+    return;
+  }
+  if (!task) {
+    devLabel.textContent = 'Aucune tâche';
+    devTask.textContent = '—';
+    devStep.textContent = 'Préparez une tâche d\'abord';
+    devProgress.innerHTML = '';
+    devTimer.style.display = 'none';
+    stopTimer();
+    startBtn.classList.remove('pulse', 'paused');
+    startBtn.textContent = 'START';
+    updateProgressRing(0);
+    pauseBadgeContainer.innerHTML = '';
+    deviceHint.textContent = 'Aucune tâche chargée.';
+    return;
+  }
+
+  startBtn.classList.remove('pulse');
+  devLabel.textContent = 'Étape ' + (state.session.stepIndex + 1) + ' / ' + task.steps.length;
+  devTask.textContent = task.name;
+  devStep.textContent = task.steps[state.session.stepIndex] || 'Terminé';
+
+  devProgress.innerHTML = '';
+  task.steps.forEach((_, i) => {
+    const pip = document.createElement('span'); pip.className = 'pip';
+    if (i < state.session.stepIndex) pip.classList.add('done');
+    else if (i === state.session.stepIndex) pip.classList.add('current');
+    devProgress.appendChild(pip);
+  });
+
+  // Anneau : basé sur le temps si durée > 0, sinon sur les étapes
+  if (task.duration > 0) {
+    devTimer.style.display = 'flex';
+    const percent = state.session.totalDuration > 0 ? state.session.remainingTime / state.session.totalDuration : 0;
+    updateProgressRing(percent);
+    if (!timerInterval && !state.session.isPaused) startTimer();
+  } else {
+    devTimer.style.display = 'none';
+    const percent = task.steps.length > 0 ? (state.session.stepIndex + 1) / task.steps.length : 0;
+    updateProgressRing(percent);
+    stopTimer();
+  }
+
+  // Badge pause
+  if (state.session.isPaused) {
+    startBtn.classList.add('paused');
+    startBtn.textContent = 'PAUSE';
+    pauseBadgeContainer.innerHTML = `<div class="pause-badge">${ICONS.pause} En pause — appuyez pour reprendre</div>`;
+  } else {
+    startBtn.classList.remove('paused');
+    startBtn.textContent = 'START';
+    pauseBadgeContainer.innerHTML = '';
+  }
+
+  deviceHint.textContent = '1 appui : étape suivante. 2 appuis : terminer. Appui long : ' + (state.settings.longPress === 'pause' ? 'pause' : 'précédent') + '.';
+}
+
+function startTimer() {
+  stopTimer();
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    if (state.session.isPaused) return;
+    state.session.remainingTime--;
+    saveSession();
+    updateTimerDisplay();
+    const task = getCurrentTask();
+    if (task && task.duration > 0 && state.session.totalDuration > 0) {
+      updateProgressRing(state.session.remainingTime / state.session.totalDuration);
+    }
+    if (state.session.remainingTime <= 0) {
+      stopTimer();
+      toast('Session terminée', 'sparkle');
+      if (navigator.vibrate && state.settings.feedback === 'vibration') navigator.vibrate([200, 100, 200]);
+      updateProgressRing(0, true);
+    }
+  }, 1000);
+}
+function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
+function updateTimerDisplay() {
+  const m = Math.max(0, Math.floor(state.session.remainingTime / 60)), s = Math.max(0, state.session.remainingTime % 60);
+  timerMin.textContent = String(m).padStart(2, '0');
+  timerSec.textContent = String(s).padStart(2, '0');
+}
+
+function advanceStep() {
+  const task = getCurrentTask(); if (!task) return;
+  if (state.session.isPaused) return;
+  if (state.session.stepIndex < task.steps.length - 1) {
+    state.session.stepIndex++;
+    // Reset timer pour la nouvelle étape si durée définie
+    if (task.duration > 0) {
+      state.session.remainingTime = task.duration * 60;
+      state.session.totalDuration = task.duration * 60;
+    }
+    saveSession();
+    renderDevice();
+    feedback();
+  } else {
+    completeTask();
+  }
+}
+
+function previousStep() {
+  const task = getCurrentTask(); if (!task) return;
+  if (state.session.isPaused) return;
+  if (state.session.stepIndex > 0) {
+    state.session.stepIndex--;
+    if (task.duration > 0) {
+      state.session.remainingTime = task.duration * 60;
+      state.session.totalDuration = task.duration * 60;
+    }
+    saveSession();
+    renderDevice();
+    feedback();
+  }
+}
+
+function togglePause() {
+  const task = getCurrentTask(); if (!task) return;
+  state.session.isPaused = !state.session.isPaused;
+  if (state.session.isPaused) {
+    stopTimer();
+    toast('Session en pause', 'pause');
+  } else {
+    if (task.duration > 0) startTimer();
+    toast('Session reprise');
+  }
+  saveSession();
+  renderDevice();
+}
+
+function resumeSession() {
+  if (state.session.isPaused) togglePause();
+}
+
+function completeTask() {
+  const task = getCurrentTask(); if (!task) return;
+  task.done = true;
+  state.session.taskId = null;
+  state.session.stepIndex = 0;
+  state.session.remainingTime = 0;
+  state.session.isPaused = false;
+  saveTasks();
+  saveSession();
+  renderTasks();
+  renderDevice();
+  toast('Tâche terminée', 'sparkle');
+  updateProgressRing(1, true);
+  releaseWakeLock();
+}
+
+function feedback() {
+  const fb = state.settings.feedback;
+  if (fb === 'vibration' && navigator.vibrate) navigator.vibrate(30);
+  if (fb === 'light') {
+    startBtn.animate([{ filter: 'brightness(1.4)' }, { filter: 'brightness(1)' }], { duration: 300, easing: 'ease-out' });
+  }
+}
+
+/* ---------- Wake Lock ---------- */
+async function requestWakeLock() {
+  if (!navigator.wakeLock) return;
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    wakeLock.addEventListener('release', () => { wakeLock = null; });
+  } catch(e) {}
+}
+function releaseWakeLock() {
+  if (wakeLock) { wakeLock.release(); wakeLock = null; }
+}
+
+/* ---------- Réglages ---------- */
 function bindSegmented(containerId, settingKey) {
   const container = document.getElementById(containerId);
-  container.addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings[settingKey] = opt.dataset.act; saveState(); renderDevice(); });
+  container.addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; container.querySelectorAll('.seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings[settingKey] = opt.dataset.act; saveSettings(); renderDevice(); });
 }
-bindSegmented('shortPressSeg', 'shortPress'); bindSegmented('longPressSeg', 'longPress');
-document.getElementById('feedbackSeg').addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings.feedback = opt.dataset.fb; saveState(); });
-document.getElementById('demoToggle').addEventListener('click', () => { state.settings.demo = !state.settings.demo; document.getElementById('demoToggle').classList.toggle('on', state.settings.demo); saveState(); renderDevice(); });
-document.getElementById('resetBtn').addEventListener('click', () => { if (!confirm('Réinitialiser toutes les tâches et réglages ?')) return; state = structuredClone(DEFAULT_STATE); saveState(); renderTasks(); renderDevice(); applySettingsToUI(); toast('Données réinitialisées'); });
+bindSegmented('shortPressSeg', 'shortPress');
+bindSegmented('longPressSeg', 'longPress');
+document.getElementById('feedbackSeg').addEventListener('click', (e) => { const opt = e.target.closest('.seg-opt'); if (!opt) return; document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.remove('active')); opt.classList.add('active'); state.settings.feedback = opt.dataset.fb; saveSettings(); });
+document.getElementById('demoToggle').addEventListener('click', () => { state.settings.demo = !state.settings.demo; document.getElementById('demoToggle').classList.toggle('on', state.settings.demo); saveSettings(); renderDevice(); });
+document.getElementById('wakeLockToggle').addEventListener('click', async () => {
+  state.settings.wakeLock = !state.settings.wakeLock;
+  document.getElementById('wakeLockToggle').classList.toggle('on', state.settings.wakeLock);
+  saveSettings();
+  if (state.settings.wakeLock && getCurrentTask()) await requestWakeLock();
+  else releaseWakeLock();
+});
+document.getElementById('resetBtn').addEventListener('click', async () => {
+  if (!confirm('Réinitialiser toutes les tâches et réglages ?')) return;
+  state = structuredClone(DEFAULT_STATE);
+  if (db) { await dbClear('tasks'); await dbClear('settings'); await dbClear('session'); }
+  try { localStorage.removeItem(STORAGE_KEY_FALLBACK); } catch(e) {}
+  renderTasks(); renderDevice(); applySettingsToUI(); toast('Données réinitialisées');
+});
+
 function applySettingsToUI() {
   document.querySelectorAll('#shortPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.shortPress));
   document.querySelectorAll('#longPressSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.act === state.settings.longPress));
   document.querySelectorAll('#feedbackSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.fb === state.settings.feedback));
   document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
-  durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.toggle('active', parseInt(o.dataset.dur,10) === state.duration));
+  document.getElementById('wakeLockToggle').classList.toggle('on', state.settings.wakeLock);
+  durationPicker.querySelectorAll('.dur-opt').forEach(o => o.classList.toggle('active', parseInt(o.dataset.dur,10) === 5));
 }
 
-function init() { renderTemplates(); renderSteps(); renderTasks(); applySettingsToUI(); renderDevice(); }
-init(); window.switchView = switchView;
+/* ---------- Reprise de session après fermeture ---------- */
+async function resumeSessionAfterReload() {
+  if (!state.session.taskId) return;
+  const task = getCurrentTask();
+  if (!task) return;
+  
+  // Calculer le temps écoulé depuis la dernière sauvegarde
+  if (state.session.lastSaved && state.session.totalDuration > 0 && !state.session.isPaused) {
+    const elapsed = Math.floor((Date.now() - state.session.lastSaved) / 1000);
+    state.session.remainingTime = Math.max(0, state.session.remainingTime - elapsed);
+  }
+  
+  renderDevice();
+  if (task.duration > 0 && state.session.remainingTime > 0 && !state.session.isPaused) {
+    startTimer();
+  }
+  if (state.settings.wakeLock) await requestWakeLock();
+}
+
+/* ---------- Init ---------- */
+async function init() {
+  await loadState();
+  renderTemplates();
+  renderSteps();
+  renderTasks();
+  applySettingsToUI();
+  renderDevice();
+  await resumeSessionAfterReload();
+}
+init();
+window.switchView = switchView;
+
+/* ---------- Sauvegarde avant fermeture ---------- */
+window.addEventListener('beforeunload', () => { saveSession(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveSession(); });
 </script>
 
 </body>
