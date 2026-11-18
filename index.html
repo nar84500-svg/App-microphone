@@ -139,7 +139,6 @@
   .topbar-right { display: flex; align-items: center; gap: 10px; }
   .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 13px; color: var(--ink-2); font-weight: 500; }
   .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); box-shadow: 0 0 0 3px var(--sage-soft); }
-  /* Badge "Clic" en police START */
   .status-brand {
     font-family: 'Caveat', cursive;
     font-weight: 700;
@@ -193,8 +192,6 @@
   .btn-primary:hover { background: var(--accent-2); box-shadow: 0 6px 18px rgba(201,110,89,0.4); }
   .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
   .btn-ghost:hover { background: var(--bg-soft); border-color: var(--line-2); }
-  .btn-danger { background: transparent; color: #B84A4A; border-color: #F5D5D5; }
-  .btn-danger:hover { background: #FBEAEA; border-color: #F5D5D5; }
   .btn-lg { padding: 16px 30px; font-size: 15px; }
   .btn svg { width: 16px; height: 16px; }
 
@@ -219,96 +216,25 @@
   .template-chip .t-name { font-size: 14px; font-weight: 600; color: var(--ink); }
   .template-chip .t-sub { font-size: 12px; color: var(--ink-3); }
 
-  /* NOUVEAU : Cadran de durée */
-  .duration-dial-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding: 8px 0;
-  }
-  .duration-dial {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    touch-action: none;
-  }
+  .duration-dial-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 8px 0; }
+  .duration-dial { position: relative; width: 220px; height: 220px; touch-action: none; }
   .duration-dial svg { width: 100%; height: 100%; display: block; }
   .dial-track { fill: none; stroke: var(--line); stroke-width: 10; }
-  .dial-fill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset .15s var(--ease); filter: drop-shadow(0 0 4px rgba(224,133,111,0.3)); }
-  .dial-handle { fill: var(--accent); stroke: var(--surface); stroke-width: 3; cursor: grab; transition: transform .15s var(--ease); }
-  .dial-handle:active { cursor: grabbing; transform: scale(1.15); }
-  .dial-center {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    pointer-events: none;
-  }
-  .dial-label {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--ink-3);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .dial-value {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 36px;
-    color: var(--ink);
-    letter-spacing: 1px;
-    line-height: 1;
-  }
-  .dial-value .dial-unit {
-    font-size: 14px;
-    color: var(--ink-3);
-    margin-left: 2px;
-    font-weight: 500;
-  }
-  .dial-controls {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .dial-btn {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink);
-    font-size: 22px;
-    font-weight: 500;
-    cursor: pointer;
-    display: grid; place-items: center;
-    transition: all .2s var(--ease);
-    font-family: inherit;
-    line-height: 1;
-  }
+  .dial-fill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset .3s var(--ease); filter: drop-shadow(0 0 4px rgba(224,133,111,0.3)); }
+  .dial-handle { fill: var(--accent); stroke: var(--surface); stroke-width: 3; cursor: grab; transition: transform .3s var(--ease); }
+  .dial-handle:active { cursor: grabbing; }
+  .dial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
+  .dial-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 4px; }
+  .dial-value { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 36px; color: var(--ink); letter-spacing: 1px; line-height: 1; }
+  .dial-value .dial-unit { font-size: 14px; color: var(--ink-3); margin-left: 2px; font-weight: 500; }
+  .dial-controls { display: flex; align-items: center; gap: 16px; }
+  .dial-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 22px; font-weight: 500; cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); font-family: inherit; line-height: 1; }
   .dial-btn:hover { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
   .dial-btn:active { transform: scale(0.95); }
   .dial-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .dial-free {
-    font-size: 13px;
-    color: var(--ink-3);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px 12px;
-    border-radius: 999px;
-    transition: all .2s var(--ease);
-    font-family: inherit;
-    text-decoration: underline;
-    text-decoration-color: var(--line-2);
-    text-underline-offset: 3px;
-  }
+  .dial-free { font-size: 13px; color: var(--ink-3); background: none; border: none; cursor: pointer; padding: 6px 12px; border-radius: 999px; transition: all .2s var(--ease); font-family: inherit; text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
   .dial-free:hover { color: var(--accent-2); text-decoration-color: var(--accent); }
-  .dial-free.active {
-    color: var(--accent-2);
-    background: var(--accent-soft);
-    text-decoration: none;
-    font-weight: 600;
-  }
+  .dial-free.active { color: var(--accent-2); background: var(--accent-soft); text-decoration: none; font-weight: 600; }
 
   .steps-editor { margin-top: 8px; }
   .step-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); margin-bottom: 8px; transition: all .2s var(--ease); }
@@ -470,16 +396,6 @@
   .onboarding-input::placeholder { color: var(--ink-3); }
   .onboarding-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-  /* Confirmation modale */
-  .confirm-overlay { position: fixed; inset: 0; background: rgba(26,24,22,0.7); backdrop-filter: blur(6px); z-index: 600; display: none; align-items: center; justify-content: center; padding: 24px; }
-  .confirm-overlay.active { display: flex; animation: fadeIn .25s var(--ease); }
-  .confirm-card { background: var(--surface); border-radius: var(--radius-lg); padding: 32px 28px; max-width: 380px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); }
-  .confirm-card h3 { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); margin-bottom: 12px; }
-  .confirm-card p { color: var(--ink-2); margin-bottom: 8px; line-height: 1.5; font-size: 14px; }
-  .confirm-card .warn { color: #B84A4A; font-weight: 600; font-size: 13px; margin-bottom: 24px; }
-  .confirm-actions { display: flex; gap: 10px; }
-  .confirm-actions .btn { flex: 1; }
-
   @media (max-width: 600px) {
     .app { padding: 20px 16px 40px; }
     .page-title { font-size: 40px; }
@@ -577,7 +493,7 @@
             <div class="duration-dial" id="durationDial" role="slider" aria-label="Durée de la session" aria-valuemin="1" aria-valuemax="30" aria-valuenow="5" tabindex="0">
               <svg viewBox="0 0 220 220">
                 <circle class="dial-track" cx="110" cy="110" r="90"/>
-                <circle class="dial-fill" id="dialFill" cx="110" cy="110" r="90"/>
+                <circle class="dial-fill" id="dialFill" cx="110" cy="110" r="90" transform="rotate(-90 110 110)"/>
                 <circle class="dial-handle" id="dialHandle" cx="110" cy="20" r="12" tabindex="-1" aria-hidden="true"/>
               </svg>
               <div class="dial-center">
@@ -706,14 +622,7 @@
           </div>
         </div>
         <div class="card" style="margin-top:16px;">
-          <div class="section-label">Données</div>
-          <div class="setting-row">
-            <div class="setting-info">
-              <div class="setting-title">Supprimer toutes mes données</div>
-              <div class="setting-desc">Efface toutes les tâches et réglages stockés localement</div>
-            </div>
-            <button class="btn btn-danger" id="deleteAllBtn" style="padding:10px 16px; font-size:13px;">Supprimer</button>
-          </div>
+          <div class="section-label">Aide</div>
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Revoir l'accueil</div>
@@ -735,18 +644,6 @@
     <div class="end-actions">
       <button class="btn btn-primary btn-lg" id="continueBtn">Continuer (+10 min)</button>
       <button class="btn btn-ghost btn-lg" id="finishBtn">Terminer la tâche</button>
-    </div>
-  </div>
-</div>
-
-<div class="confirm-overlay" id="confirmOverlay">
-  <div class="confirm-card">
-    <h3>Supprimer toutes les données ?</h3>
-    <p>Cette action effacera toutes vos tâches, réglages et préférences stockés sur cet appareil.</p>
-    <p class="warn">Cette action est définitive.</p>
-    <div class="confirm-actions">
-      <button class="btn btn-ghost" id="confirmCancel">Annuler</button>
-      <button class="btn btn-danger" id="confirmDelete">Supprimer</button>
     </div>
   </div>
 </div>
@@ -969,7 +866,7 @@ function deleteTask(id) {
 
 const taskNameInput = document.getElementById('taskNameInput'), stepsEditor = document.getElementById('stepsEditor'), addStepBtn = document.getElementById('addStepBtn'), templatesGrid = document.getElementById('templatesGrid'), saveTaskBtn = document.getElementById('saveTaskBtn'), clearPrepareBtn = document.getElementById('clearPrepareBtn');
 let prepareSteps = [];
-let prepareDuration = 5; // minutes, 0 = libre
+let prepareDuration = 5;
 let prepareFree = false;
 
 function renderTemplates() {
@@ -1014,7 +911,7 @@ micBtn.addEventListener('click', () => {
   rec.onend = () => micBtn.classList.remove('listening');
 });
 
-/* ---------- NOUVEAU : Cadran de durée ---------- */
+/* ---------- Cadran de durée ---------- */
 const DIAL_MIN = 1, DIAL_MAX = 30, DIAL_STEP = 1;
 const DIAL_RADIUS = 90, DIAL_CENTER = 110;
 const DIAL_CIRC = 2 * Math.PI * DIAL_RADIUS;
@@ -1029,7 +926,6 @@ const durationDial = document.getElementById('durationDial');
 dialFill.style.strokeDasharray = DIAL_CIRC;
 
 function valueToAngle(v) {
-  // 1 min = -90° (en haut), 30 min = 270° (tour complet moins un cran)
   const frac = (v - DIAL_MIN) / (DIAL_MAX - DIAL_MIN);
   return -90 + frac * 360;
 }
@@ -1043,7 +939,6 @@ function updateDial(v, skipSave) {
   const hy = DIAL_CENTER + DIAL_RADIUS * Math.sin(rad);
   dialHandle.setAttribute('cx', hx);
   dialHandle.setAttribute('cy', hy);
-  // Arc de 0 à angle (en partant du haut, sens horaire)
   const frac = (v - DIAL_MIN) / (DIAL_MAX - DIAL_MIN);
   const offset = DIAL_CIRC * (1 - frac);
   dialFill.style.strokeDashoffset = offset;
@@ -1063,8 +958,7 @@ function setDialFromPointer(clientX, clientY) {
   const cy = rect.top + rect.height / 2;
   const dx = clientX - cx;
   const dy = clientY - cy;
-  let angle = Math.atan2(dy, dx) * 180 / Math.PI; // -180..180, 0 = droite
-  // Convertir : on veut 0 en haut (-90° math), sens horaire
+  let angle = Math.atan2(dy, dx) * 180 / Math.PI;
   angle = angle + 90;
   if (angle < 0) angle += 360;
   const frac = angle / 360;
@@ -1085,7 +979,6 @@ dialHandle.addEventListener('pointermove', (e) => {
 dialHandle.addEventListener('pointerup', (e) => { dialDragging = false; });
 dialHandle.addEventListener('pointercancel', () => { dialDragging = false; });
 
-// Clic sur la piste pour déplacer la poignée
 durationDial.addEventListener('pointerdown', (e) => {
   if (e.target === dialHandle || e.target.closest('.dial-btn') || e.target.closest('.dial-free')) return;
   setDialFromPointer(e.clientX, e.clientY);
@@ -1102,13 +995,9 @@ dialPlus.addEventListener('click', () => { if (prepareDuration < DIAL_MAX) { upd
 dialFreeBtn.addEventListener('click', () => {
   prepareFree = !prepareFree;
   dialFreeBtn.classList.toggle('active', prepareFree);
-  if (prepareFree) {
-    // Mode libre : on garde la valeur mais on n'utilise pas le minuteur
-    toast('Session libre activée');
-  }
+  if (prepareFree) toast('Session libre activée');
 });
 
-// Accessibilité clavier
 durationDial.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
   else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
@@ -1436,21 +1325,6 @@ document.getElementById('themeGrid').addEventListener('click', (e) => {
   saveSettings();
 });
 
-/* Confirmation suppression */
-const confirmOverlay = document.getElementById('confirmOverlay');
-document.getElementById('deleteAllBtn').addEventListener('click', () => { confirmOverlay.classList.add('active'); });
-document.getElementById('confirmCancel').addEventListener('click', () => { confirmOverlay.classList.remove('active'); });
-document.getElementById('confirmDelete').addEventListener('click', async () => {
-  stopTimer(); releaseWakeLock();
-  state = structuredClone(DEFAULT_STATE);
-  if (db) { await dbClear('tasks'); await dbClear('settings'); await dbClear('session'); await dbClear('onboarding'); }
-  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
-  confirmOverlay.classList.remove('active');
-  renderTasks(); renderDevice(); applySettingsToUI();
-  toast('Toutes les données ont été supprimées');
-});
-confirmOverlay.addEventListener('click', (e) => { if (e.target === confirmOverlay) confirmOverlay.classList.remove('active'); });
-
 document.getElementById('redoOnboardingBtn').addEventListener('click', () => {
   state.onboarding.completed = false;
   state.onboarding.currentScreen = 0;
@@ -1466,7 +1340,6 @@ function applySettingsToUI() {
   document.getElementById('demoToggle').classList.toggle('on', state.settings.demo);
   document.querySelectorAll('.theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === state.settings.theme));
   if (state.settings.theme && state.settings.theme !== 'light') applyTheme(state.settings.theme);
-  // Cadran : valeur initiale = defaultDuration
   prepareDuration = state.settings.defaultDuration || 5;
   updateDial(prepareDuration, true);
 }
