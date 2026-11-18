@@ -428,11 +428,11 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark">
-        <!-- NOUVEAU LOGO : S arrondi + triangle terracotta -->
+        <!-- LOGO : C arrondi + triangle terracotta -->
         <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="44" height="44" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="1"/>
-          <path d="M27 16 C 24 14, 20 14, 19 17 C 18 20, 22 21, 23 22 C 24 23, 26 24, 25 27 C 24 30, 20 30, 17 28" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-          <path d="M20 19L26 22L20 25V19Z" fill="var(--accent)"/>
+          <path d="M28 15A10 10 0 1 0 28 29" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M20 17L27 22L20 27V17Z" fill="var(--accent)"/>
         </svg>
       </div>
       <div>
@@ -901,7 +901,7 @@ saveTaskBtn.addEventListener('click', () => {
 clearPrepareBtn.addEventListener('click', resetPrepare);
 function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; prepareFree = false; prepareDuration = state.settings.defaultDuration || 5; renderSteps(); updateDial(prepareDuration); document.getElementById('dialFree').classList.remove('active'); }
 
-/* ---------- NOUVEAU : Cadran de durée jusqu'à 120 min, paliers de 5 ---------- */
+/* ---------- Cadran de durée jusqu'à 120 min, paliers de 5 ---------- */
 const DIAL_MIN = 5, DIAL_MAX = 120, DIAL_STEP = 5;
 const DIAL_RADIUS = 90, DIAL_CENTER = 110;
 const DIAL_CIRC = 2 * Math.PI * DIAL_RADIUS;
