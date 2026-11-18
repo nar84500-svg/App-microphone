@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#FAF6F1" />
-<title>Clic — Commencez simplement</title>
+<title>Start — Commencez simplement</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,15 +198,10 @@
   .prepare-layout { display: grid; gap: 20px; grid-template-columns: 1fr; }
   @media (min-width: 860px) { .prepare-layout { grid-template-columns: 1.1fr 1fr; } }
 
-  .input-row { display: flex; gap: 10px; align-items: stretch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 6px 6px 6px 18px; transition: all .2s var(--ease); }
+  .input-row { display: flex; align-items: stretch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 12px 18px; transition: all .2s var(--ease); }
   .input-row:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,133,111,0.12); }
-  .input-row input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 16px; color: var(--ink); padding: 10px 0; }
+  .input-row input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 16px; color: var(--ink); padding: 0; }
   .input-row input::placeholder { color: var(--ink-3); }
-  .mic-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--bg-soft); color: var(--ink-2); cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); flex-shrink: 0; }
-  .mic-btn:hover { background: var(--accent-soft); color: var(--accent-2); }
-  .mic-btn.listening { background: var(--accent); color: #fff; animation: pulse 1.4s ease-in-out infinite; }
-  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(224,133,111,0.4); } 50% { box-shadow: 0 0 0 12px rgba(224,133,111,0); } }
-  .mic-btn svg { width: 18px; height: 18px; }
 
   .templates-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
   .template-chip { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 14px 16px; cursor: pointer; text-align: left; transition: all .2s var(--ease); font-family: inherit; display: flex; flex-direction: column; gap: 4px; }
@@ -221,12 +216,12 @@
   .duration-dial svg { width: 100%; height: 100%; display: block; }
   .dial-track { fill: none; stroke: var(--line); stroke-width: 10; }
   .dial-fill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset .3s var(--ease); filter: drop-shadow(0 0 4px rgba(224,133,111,0.3)); }
-  .dial-handle { fill: var(--accent); stroke: var(--surface); stroke-width: 3; cursor: grab; transition: transform .3s var(--ease); }
+  .dial-handle { fill: var(--accent); stroke: var(--surface); stroke-width: 3; cursor: grab; }
   .dial-handle:active { cursor: grabbing; }
   .dial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
   .dial-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 4px; }
-  .dial-value { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 36px; color: var(--ink); letter-spacing: 1px; line-height: 1; }
-  .dial-value .dial-unit { font-size: 14px; color: var(--ink-3); margin-left: 2px; font-weight: 500; }
+  .dial-value { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 32px; color: var(--ink); letter-spacing: 1px; line-height: 1; }
+  .dial-value .dial-unit { font-size: 13px; color: var(--ink-3); margin-left: 2px; font-weight: 500; }
   .dial-controls { display: flex; align-items: center; gap: 16px; }
   .dial-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 22px; font-weight: 500; cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); font-family: inherit; line-height: 1; }
   .dial-btn:hover { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
@@ -416,7 +411,7 @@
     .end-card { padding: 32px 24px; }
     .end-card h2 { font-size: 30px; }
     .duration-dial { width: 200px; height: 200px; }
-    .dial-value { font-size: 32px; }
+    .dial-value { font-size: 28px; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible, .dial-handle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -433,21 +428,22 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark">
+        <!-- NOUVEAU LOGO : S arrondi + triangle terracotta -->
         <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="44" height="44" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="1"/>
-          <path d="M28 15A10 10 0 1 0 28 29" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M20 17L27 22L20 27V17Z" fill="var(--accent)"/>
+          <path d="M27 16 C 24 14, 20 14, 19 17 C 18 20, 22 21, 23 22 C 24 23, 26 24, 25 27 C 24 30, 20 30, 17 28" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M20 19L26 22L20 25V19Z" fill="var(--accent)"/>
         </svg>
       </div>
       <div>
-        <div class="brand-name">Clic</div>
+        <div class="brand-name">Start</div>
         <div class="brand-tag">Commencez simplement</div>
       </div>
     </div>
     <div class="topbar-right">
       <div class="status-pill">
         <span class="status-dot"></span>
-        <span class="status-brand">Clic</span>
+        <span class="status-brand">Start</span>
       </div>
     </div>
   </header>
@@ -463,7 +459,7 @@
   <section class="view" id="view-prepare">
     <div class="page-head">
       <h1 class="page-title">Préparer</h1>
-      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. Clic découpera la tâche en petites actions claires.</p>
+      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. Start découpera la tâche en petites actions claires.</p>
     </div>
     <div class="prepare-layout">
       <div>
@@ -471,9 +467,6 @@
           <div class="section-label">Nom de la tâche</div>
           <div class="input-row">
             <input type="text" id="taskNameInput" placeholder="Ex. Réviser mon cours de mathématiques" maxlength="80" />
-            <button class="mic-btn" id="micBtn" title="Saisie vocale" aria-label="Saisie vocale">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
-            </button>
           </div>
         </div>
         <div class="card" style="margin-top:16px;">
@@ -490,7 +483,7 @@
         <div class="card" style="margin-top:16px;">
           <div class="section-label">Choisir la durée</div>
           <div class="duration-dial-wrap">
-            <div class="duration-dial" id="durationDial" role="slider" aria-label="Durée de la session" aria-valuemin="1" aria-valuemax="30" aria-valuenow="5" tabindex="0">
+            <div class="duration-dial" id="durationDial" role="slider" aria-label="Durée de la session" aria-valuemin="5" aria-valuemax="120" aria-valuenow="5" tabindex="0">
               <svg viewBox="0 0 220 220">
                 <circle class="dial-track" cx="110" cy="110" r="90"/>
                 <circle class="dial-fill" id="dialFill" cx="110" cy="110" r="90" transform="rotate(-90 110 110)"/>
@@ -522,7 +515,7 @@
   <section class="view" id="view-device">
     <div class="page-head">
       <h1 class="page-title">Appareil</h1>
-      <p class="page-subtitle">Votre boîtier Clic simulé. Personnalisez les sensations et le comportement.</p>
+      <p class="page-subtitle">Votre boîtier Start simulé. Personnalisez les sensations et le comportement.</p>
     </div>
     <div class="device-layout">
       <div class="card" style="padding: 32px 20px;">
@@ -531,7 +524,7 @@
             <button class="session-ctrl-btn" id="pauseBtn">Pause</button>
             <button class="session-ctrl-btn quit" id="quitBtn">Quitter</button>
           </div>
-          <div class="device" role="group" aria-label="Boîtier Clic simulé">
+          <div class="device" role="group" aria-label="Boîtier Start simulé">
             <svg class="progress-ring" viewBox="0 0 200 200" aria-hidden="true">
               <circle class="track" cx="100" cy="100" r="90"/>
               <circle class="fill" id="progressFill" cx="100" cy="100" r="90"/>
@@ -626,7 +619,7 @@
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Revoir l'accueil</div>
-              <div class="setting-desc">Redécouvrir comment utiliser Clic</div>
+              <div class="setting-desc">Redécouvrir comment utiliser Start</div>
             </div>
             <button class="btn btn-ghost" id="redoOnboardingBtn" style="padding:10px 16px; font-size:13px;">Recommencer</button>
           </div>
@@ -849,13 +842,21 @@ function renderTasks() {
     const card = document.createElement('div'); card.className = 'task-card'; card.tabIndex = 0;
     if (task.id === state.session.taskId) card.classList.add('selected');
     if (task.done) card.classList.add('done');
-    card.innerHTML = `<div class="task-title">${escapeHtml(task.name)}</div><div class="task-meta"><span>${ICONS.list} ${task.steps.length} étapes</span><span>${ICONS.clock} ${task.duration === 0 ? 'Libre' : task.duration + ' min'}</span></div><div class="task-actions"><button class="icon-btn" data-act="load" title="Charger" aria-label="Charger">${ICONS.arrowRight}</button><button class="icon-btn danger" data-act="delete" title="Supprimer" aria-label="Supprimer">${ICONS.trash}</button></div>`;
+    card.innerHTML = `<div class="task-title">${escapeHtml(task.name)}</div><div class="task-meta"><span>${ICONS.list} ${task.steps.length} étapes</span><span>${ICONS.clock} ${task.duration === 0 ? 'Libre' : formatDuration(task.duration)}</span></div><div class="task-actions"><button class="icon-btn" data-act="load" title="Charger" aria-label="Charger">${ICONS.arrowRight}</button><button class="icon-btn danger" data-act="delete" title="Supprimer" aria-label="Supprimer">${ICONS.trash}</button></div>`;
     card.addEventListener('click', (e) => { if (e.target.closest('[data-act]')) return; loadTask(task.id); });
     card.querySelector('[data-act="load"]').addEventListener('click', (e) => { e.stopPropagation(); loadTask(task.id); switchView('device'); });
     card.querySelector('[data-act="delete"]').addEventListener('click', (e) => { e.stopPropagation(); deleteTask(task.id); });
     grid.appendChild(card);
   });
   tasksContainer.appendChild(grid);
+}
+function formatDuration(min) {
+  if (min >= 60) {
+    const h = Math.floor(min / 60);
+    const m = min % 60;
+    return m > 0 ? `${h}h${String(m).padStart(2,'0')}` : `${h}h`;
+  }
+  return min + ' min';
 }
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
 function deleteTask(id) {
@@ -898,21 +899,10 @@ saveTaskBtn.addEventListener('click', () => {
   saveTasks(); renderTasks(); resetPrepare(); toast('Tâche enregistrée'); switchView('tasks');
 });
 clearPrepareBtn.addEventListener('click', resetPrepare);
-function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; prepareFree = false; prepareDuration = state.settings.defaultDuration; renderSteps(); updateDial(prepareDuration); document.getElementById('dialFree').classList.remove('active'); }
+function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; prepareFree = false; prepareDuration = state.settings.defaultDuration || 5; renderSteps(); updateDial(prepareDuration); document.getElementById('dialFree').classList.remove('active'); }
 
-const micBtn = document.getElementById('micBtn');
-micBtn.addEventListener('click', () => {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { toast('Saisie vocale non disponible'); return; }
-  const rec = new SR(); rec.lang = 'fr-FR'; rec.interimResults = false;
-  micBtn.classList.add('listening'); rec.start();
-  rec.onresult = (e) => { taskNameInput.value = e.results[0][0].transcript; toast('Texte reconnu'); };
-  rec.onerror = () => toast('Erreur de reconnaissance');
-  rec.onend = () => micBtn.classList.remove('listening');
-});
-
-/* ---------- Cadran de durée ---------- */
-const DIAL_MIN = 1, DIAL_MAX = 30, DIAL_STEP = 1;
+/* ---------- NOUVEAU : Cadran de durée jusqu'à 120 min, paliers de 5 ---------- */
+const DIAL_MIN = 5, DIAL_MAX = 120, DIAL_STEP = 5;
 const DIAL_RADIUS = 90, DIAL_CENTER = 110;
 const DIAL_CIRC = 2 * Math.PI * DIAL_RADIUS;
 const dialFill = document.getElementById('dialFill');
@@ -930,8 +920,13 @@ function valueToAngle(v) {
   return -90 + frac * 360;
 }
 
+function snapToStep(v) {
+  return Math.round(v / DIAL_STEP) * DIAL_STEP;
+}
+
 function updateDial(v, skipSave) {
   v = Math.max(DIAL_MIN, Math.min(DIAL_MAX, v));
+  v = snapToStep(v);
   prepareDuration = v;
   const angle = valueToAngle(v);
   const rad = (angle * Math.PI) / 180;
@@ -962,7 +957,8 @@ function setDialFromPointer(clientX, clientY) {
   angle = angle + 90;
   if (angle < 0) angle += 360;
   const frac = angle / 360;
-  const v = Math.round(DIAL_MIN + frac * (DIAL_MAX - DIAL_MIN));
+  const raw = DIAL_MIN + frac * (DIAL_MAX - DIAL_MIN);
+  const v = snapToStep(raw);
   updateDial(v);
 }
 
@@ -989,8 +985,8 @@ durationDial.addEventListener('pointerdown', (e) => {
   document.addEventListener('pointerup', upHandler);
 });
 
-dialMinus.addEventListener('click', () => { if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
-dialPlus.addEventListener('click', () => { if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
+dialMinus.addEventListener('click', () => { if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
+dialPlus.addEventListener('click', () => { if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
 
 dialFreeBtn.addEventListener('click', () => {
   prepareFree = !prepareFree;
@@ -999,8 +995,8 @@ dialFreeBtn.addEventListener('click', () => {
 });
 
 durationDial.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
-  else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
   else if (e.key === 'Home') { e.preventDefault(); updateDial(DIAL_MIN); }
   else if (e.key === 'End') { e.preventDefault(); updateDial(DIAL_MAX); }
 });
@@ -1469,14 +1465,14 @@ function finishOnboarding() {
   state.onboarding.answers = onboardingAnswers;
   saveOnboarding();
   if (taskName) {
-    const task = { id: 't_' + Date.now(), name: taskName, steps: [`Commencer : ${taskName}`], duration: 1, done: false, createdAt: Date.now() };
+    const task = { id: 't_' + Date.now(), name: taskName, steps: [`Commencer : ${taskName}`], duration: 5, done: false, createdAt: Date.now() };
     state.tasks.unshift(task); saveTasks();
     document.getElementById('onboardingOverlay').classList.remove('active');
     renderTasks();
     setTimeout(() => { loadTask(task.id); toast('Première étape prête ! Appuie sur START'); }, 500);
   } else {
     document.getElementById('onboardingOverlay').classList.remove('active');
-    toast('Bienvenue dans Clic !');
+    toast('Bienvenue dans Start !');
   }
 }
 
