@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#FAF6F1" />
-<title>Start — Commencez simplement</title>
+<title>Clic — Commencez simplement</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,6 +90,7 @@
     --shadow-lg: 0 8px 24px rgba(60,45,30,0.08), 0 24px 60px rgba(60,45,30,0.12);
     --radius-sm: 12px; --radius-md: 18px; --radius-lg: 28px;
     --ease: cubic-bezier(.2,.7,.2,1);
+    --nav-height: 64px;
   }
 
   body {
@@ -98,7 +99,7 @@
     font-size: 16px; line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom));
     transition: background .4s var(--ease), color .4s var(--ease);
   }
   body::before {
@@ -152,7 +153,7 @@
   .page-title { font-family: 'Caveat', cursive; font-size: 52px; font-weight: 700; line-height: 1.05; color: var(--ink); margin-bottom: 8px; }
   .page-subtitle { font-size: 16px; color: var(--ink-3); max-width: 520px; }
 
-  .view { display: none; animation: fadeUp .45s var(--ease); }
+  .view { display: none; animation: fadeUp .45s var(--ease); padding-bottom: calc(var(--nav-height) + 24px + env(safe-area-inset-bottom)); scroll-padding-bottom: calc(var(--nav-height) + 24px + env(safe-area-inset-bottom)); }
   .view.active { display: block; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -186,7 +187,7 @@
   .empty-state h3 { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); margin-bottom: 6px; }
   .empty-state p { color: var(--ink-3); font-size: 14px; }
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s var(--ease); text-decoration: none; white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s var(--ease); text-decoration: none; white-space: nowrap; min-height: 44px; }
   .btn:active { transform: translateY(1px); }
   .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 14px rgba(224,133,111,0.35), inset 0 1px 0 rgba(255,255,255,0.25); }
   .btn-primary:hover { background: var(--accent-2); box-shadow: 0 6px 18px rgba(201,110,89,0.4); }
@@ -195,7 +196,7 @@
   .btn-lg { padding: 16px 30px; font-size: 15px; }
   .btn svg { width: 16px; height: 16px; }
 
-  .prepare-layout { display: grid; gap: 20px; grid-template-columns: 1fr; }
+  .prepare-layout { display: grid; gap: 20px; grid-template-columns: 1fr; padding-bottom: calc(var(--nav-height) + 80px + env(safe-area-inset-bottom)); }
   @media (min-width: 860px) { .prepare-layout { grid-template-columns: 1.1fr 1fr; } }
 
   .input-row { display: flex; align-items: stretch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 12px 18px; transition: all .2s var(--ease); }
@@ -212,7 +213,7 @@
   .template-chip .t-sub { font-size: 12px; color: var(--ink-3); }
   .template-chip .quick-start {
     position: absolute; top: 10px; right: 10px;
-    width: 28px; height: 28px; border-radius: 50%;
+    width: 32px; height: 32px; border-radius: 50%;
     background: var(--accent); color: #fff;
     border: none; cursor: pointer;
     display: grid; place-items: center;
@@ -223,6 +224,20 @@
   .template-chip .quick-start:hover { background: var(--accent-2); transform: scale(1.1); }
   .template-chip .quick-start svg { width: 14px; height: 14px; }
 
+  /* Barre d'action sticky sur Préparer */
+  .prepare-actions {
+    position: sticky;
+    bottom: calc(var(--nav-height) + 12px + env(safe-area-inset-bottom));
+    background: var(--bg);
+    padding: 12px 0;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    z-index: 10;
+    border-top: 1px solid var(--line);
+  }
+
   .duration-dial-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 8px 0; }
   .duration-dial { position: relative; width: 220px; height: 220px; touch-action: none; }
   .duration-dial svg { width: 100%; height: 100%; display: block; }
@@ -232,7 +247,7 @@
   .dial-handle:active { cursor: grabbing; }
   .dial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
   .dial-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 4px; }
-  .dial-value { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 28px; color: var(--ink); letter-spacing: 1px; line-height: 1; cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: background .2s var(--ease); pointer-events: auto; }
+  .dial-value { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 28px; color: var(--ink); letter-spacing: 1px; line-height: 1; cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: background .2s var(--ease); pointer-events: auto; display: inline-block; }
   .dial-value:hover { background: var(--accent-soft); }
   .dial-value .dial-unit { font-size: 12px; color: var(--ink-3); margin-left: 2px; font-weight: 500; }
   .dial-hint { font-size: 11px; color: var(--ink-3); font-style: italic; }
@@ -303,7 +318,7 @@
 
   .session-controls { display: flex; gap: 8px; margin-bottom: 16px; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); flex-wrap: wrap; justify-content: center; }
   .session-controls.visible { opacity: 1; pointer-events: auto; }
-  .session-ctrl-btn { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
+  .session-ctrl-btn { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); min-height: 44px; }
   .session-ctrl-btn:hover { background: var(--bg-soft); color: var(--ink); }
   .session-ctrl-btn.quit:hover { background: #FBEAEA; color: #B84A4A; border-color: #F5D5D5; }
   .session-ctrl-btn.block-btn { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
@@ -315,15 +330,16 @@
   .setting-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
   .setting-desc { font-size: 13px; color: var(--ink-3); }
 
-  .toggle { position: relative; width: 48px; height: 28px; background: var(--line-2); border-radius: 999px; cursor: pointer; transition: background .25s var(--ease); flex-shrink: 0; border: none; }
+  .toggle { position: relative; width: 48px; height: 28px; background: var(--line-2); border-radius: 999px; cursor: pointer; transition: background .25s var(--ease); flex-shrink: 0; border: none; min-height: 28px; }
   .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: transform .25s var(--ease); }
   .toggle.on { background: var(--accent); }
   .toggle.on::after { transform: translateX(20px); }
 
   .segmented { display: inline-flex; background: var(--bg-soft); border-radius: 999px; padding: 4px; gap: 2px; }
-  .seg-opt { padding: 8px 14px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
+  .seg-opt { padding: 8px 14px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); min-height: 36px; }
   .seg-opt.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
 
+  /* NOUVEAU : Nav à 4 entrées */
   .bottom-nav {
     position: fixed; bottom: calc(12px + env(safe-area-inset-bottom)); left: 50%;
     transform: translateX(-50%);
@@ -333,35 +349,40 @@
     border: 1px solid var(--nav-border);
     border-radius: 999px;
     padding: 6px;
-    display: flex; gap: 4px;
+    display: flex; gap: 2px;
     box-shadow: var(--shadow-lg);
     z-index: 100;
     transition: background .4s var(--ease), border-color .4s var(--ease);
+    max-width: calc(100vw - 24px);
   }
-  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: none; background: transparent; color: var(--nav-text); font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .25s var(--ease); }
+  .nav-btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; border-radius: 999px; border: none; background: transparent; color: var(--nav-text); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .25s var(--ease); min-width: 44px; min-height: 44px; }
   .nav-btn:hover { color: var(--ink); }
   .nav-btn.active { background: var(--nav-bg-active); color: var(--nav-text-active); }
-  .nav-btn svg { width: 18px; height: 18px; }
+  .nav-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  @media (max-width: 480px) {
+    .nav-btn span.nav-label { display: none; }
+    .nav-btn { padding: 10px 12px; }
+  }
 
-  .toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: all .3s var(--ease); z-index: 200; display: inline-flex; align-items: center; gap: 8px; }
+  .toast { position: fixed; bottom: calc(var(--nav-height) + 20px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: all .3s var(--ease); z-index: 200; display: inline-flex; align-items: center; gap: 8px; max-width: calc(100vw - 32px); }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   .timer-display { display: flex; align-items: baseline; justify-content: center; gap: 2px; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; color: #F5E9DC; letter-spacing: 1px; margin-top: 4px; }
   .timer-display .colon { opacity: 0.5; }
 
-  .end-screen, .block-overlay, .resume-overlay, .duration-input-overlay { position: fixed; inset: 0; background: rgba(26,24,22,0.85); backdrop-filter: blur(8px); z-index: 500; display: none; align-items: center; justify-content: center; padding: 24px; }
-  .end-screen.active, .block-overlay.active, .resume-overlay.active, .duration-input-overlay.active { display: flex; animation: fadeIn .3s var(--ease); }
+  .end-screen, .block-overlay, .resume-overlay, .duration-input-overlay, .about-overlay, .unstuck-modal { position: fixed; inset: 0; background: rgba(26,24,22,0.85); backdrop-filter: blur(8px); z-index: 500; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .end-screen.active, .block-overlay.active, .resume-overlay.active, .duration-input-overlay.active, .about-overlay.active, .unstuck-modal.active { display: flex; animation: fadeIn .3s var(--ease); }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .end-card, .block-card, .resume-card, .duration-input-card { background: var(--surface); border-radius: var(--radius-lg); padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); }
-  .end-card h2, .resume-card h3 { font-family: 'Caveat', cursive; font-size: 36px; color: var(--ink); margin-bottom: 12px; }
+  .end-card, .block-card, .resume-card, .duration-input-card, .about-card, .unstuck-card { background: var(--surface); border-radius: var(--radius-lg); padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); max-height: 85vh; overflow-y: auto; }
+  .end-card h2, .resume-card h3, .about-card h2 { font-family: 'Caveat', cursive; font-size: 36px; color: var(--ink); margin-bottom: 12px; }
   .end-card p, .resume-card p { color: var(--ink-2); margin-bottom: 28px; line-height: 1.5; }
   .end-actions, .resume-actions { display: flex; flex-direction: column; gap: 10px; }
   .end-actions .btn, .resume-actions .btn { width: 100%; padding: 16px; font-size: 15px; }
 
-  /* Mode Je bloque */
-  .block-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 12px; }
-  .block-text { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); line-height: 1.3; margin-bottom: 24px; }
-  .block-card .btn { width: 100%; padding: 16px; font-size: 15px; }
+  /* Mode Je bloque / Unstuck */
+  .block-label, .unstuck-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 12px; }
+  .block-text, .unstuck-text { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); line-height: 1.3; margin-bottom: 24px; }
+  .block-card .btn, .unstuck-card .btn { width: 100%; padding: 16px; font-size: 15px; margin-top: 8px; }
 
   /* Saisie durée */
   .duration-input-card h3 { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); margin-bottom: 8px; }
@@ -372,6 +393,71 @@
   .duration-input-error { font-size: 12px; color: #B84A4A; margin-bottom: 12px; min-height: 16px; }
   .duration-input-actions { display: flex; gap: 10px; }
   .duration-input-actions .btn { flex: 1; }
+
+  /* À propos */
+  .about-card h2 { margin-bottom: 20px; }
+  .about-tabs { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
+  .about-tab { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
+  .about-tab.active { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
+  .about-content { text-align: left; font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+  .about-content h4 { font-family: 'Caveat', cursive; font-size: 22px; color: var(--ink); margin: 16px 0 8px; }
+  .about-content h4:first-child { margin-top: 0; }
+  .about-content p { margin-bottom: 12px; }
+  .about-content a { color: var(--accent-2); text-decoration: underline; }
+
+  /* Unstuck page */
+  .unstuck-intro { text-align: center; margin-bottom: 28px; }
+  .unstuck-intro .page-title { font-size: 48px; margin-bottom: 8px; }
+  .unstuck-intro .page-subtitle { margin: 0 auto; }
+  .unstuck-question { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 20px; }
+  .unstuck-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 600px) { .unstuck-grid { grid-template-columns: repeat(2, 1fr); } }
+  .unstuck-card-item { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 20px; cursor: pointer; transition: all .2s var(--ease); text-align: left; display: flex; gap: 14px; align-items: flex-start; }
+  .unstuck-card-item:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+  .unstuck-card-item .uc-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--bg-soft); display: grid; place-items: center; color: var(--ink-2); flex-shrink: 0; }
+  .unstuck-card-item .uc-icon svg { width: 22px; height: 22px; }
+  .unstuck-card-item:hover .uc-icon { background: var(--accent-soft); color: var(--accent-2); }
+  .unstuck-card-item .uc-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .unstuck-card-item .uc-desc { font-size: 13px; color: var(--ink-3); line-height: 1.4; }
+  .unstuck-disclaimer { text-align: center; font-size: 12px; color: var(--ink-3); margin-top: 32px; line-height: 1.5; font-style: italic; }
+
+  /* Unstuck action sub-views */
+  .unstuck-action { display: none; }
+  .unstuck-action.active { display: block; animation: fadeUp .4s var(--ease); }
+  .unstuck-back { margin-bottom: 20px; }
+  .unstuck-subtitle { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 8px; }
+  .unstuck-subtext { text-align: center; color: var(--ink-2); margin-bottom: 24px; line-height: 1.5; }
+  .micro-steps-list { display: grid; gap: 10px; margin-bottom: 20px; }
+  .micro-step-item { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); }
+  .micro-step-item .ms-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-2); font-size: 11px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
+  .micro-step-item input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--ink); outline: none; }
+  .checklist { display: grid; gap: 10px; margin: 20px 0; }
+  .checklist-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); cursor: pointer; transition: all .2s var(--ease); }
+  .checklist-item:hover { border-color: var(--accent); }
+  .checklist-item.checked { background: var(--accent-soft); border-color: var(--accent); }
+  .checklist-item .check-box { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--line); display: grid; place-items: center; flex-shrink: 0; transition: all .2s var(--ease); }
+  .checklist-item.checked .check-box { background: var(--accent); border-color: var(--accent); }
+  .checklist-item.checked .check-box svg { display: block; }
+  .checklist-item .check-box svg { width: 14px; height: 14px; color: #fff; display: none; }
+  .checklist-item .check-text { font-size: 14px; color: var(--ink); }
+
+  /* Respiration */
+  .breathe-circle-wrap { display: flex; justify-content: center; margin: 24px 0; }
+  .breathe-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--accent-halo), var(--accent));
+    box-shadow: 0 0 30px rgba(224,133,111,0.3);
+    animation: breatheCircle 6s ease-in-out infinite;
+  }
+  @keyframes breatheCircle {
+    0%, 100% { transform: scale(0.7); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .breathe-circle { animation: none; transform: scale(1); }
+  }
+  .breathe-label { text-align: center; font-family: 'Caveat', cursive; font-size: 22px; color: var(--ink); margin-bottom: 16px; min-height: 28px; }
 
   .theme-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
   .theme-card { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 14px; cursor: pointer; transition: all .2s var(--ease); font-family: inherit; text-align: left; display: flex; flex-direction: column; gap: 8px; }
@@ -386,6 +472,9 @@
   .theme-preview::after { content: ""; position: absolute; bottom: 8px; left: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
   .theme-name { font-size: 13px; font-weight: 600; color: var(--ink); }
   .theme-desc { font-size: 11px; color: var(--ink-3); }
+
+  .about-link { display: inline-block; margin-top: 16px; font-size: 12px; color: var(--ink-3); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; cursor: pointer; background: none; border: none; font-family: inherit; }
+  .about-link:hover { color: var(--accent-2); text-decoration-color: var(--accent); }
 
   .onboarding-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: none; overflow-y: auto; padding: 40px 24px; }
   .onboarding-overlay.active { display: block; animation: fadeIn .4s var(--ease); }
@@ -433,17 +522,16 @@
     .progress-ring { width: 190px; height: 190px; }
     .start-button { width: 96px; height: 96px; font-size: 24px; }
     .device-task { font-size: 18px; }
-    .nav-btn { padding: 10px 14px; font-size: 12px; }
-    .nav-btn span.nav-label { display: none; }
     .card { padding: 18px; }
     .onboarding-message { font-size: 26px; }
     .onboarding-device { width: 200px; height: 200px; }
     .onboarding-btn { width: 85px; height: 85px; font-size: 20px; }
-    .end-card, .block-card, .resume-card, .duration-input-card { padding: 32px 24px; }
-    .end-card h2, .resume-card h3 { font-size: 30px; }
+    .end-card, .block-card, .resume-card, .duration-input-card, .about-card, .unstuck-card { padding: 32px 24px; }
+    .end-card h2, .resume-card h3, .about-card h2 { font-size: 30px; }
     .duration-dial { width: 200px; height: 200px; }
     .dial-value { font-size: 24px; }
-    .block-text { font-size: 24px; }
+    .block-text, .unstuck-text { font-size: 24px; }
+    .unstuck-intro .page-title { font-size: 40px; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible, .dial-handle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -467,14 +555,14 @@
         </svg>
       </div>
       <div>
-        <div class="brand-name">Start</div>
+        <div class="brand-name">Clic</div>
         <div class="brand-tag">Commencez simplement</div>
       </div>
     </div>
     <div class="topbar-right">
       <div class="status-pill">
         <span class="status-dot"></span>
-        <span class="status-brand">Start</span>
+        <span class="status-brand">Clic</span>
       </div>
     </div>
   </header>
@@ -490,7 +578,7 @@
   <section class="view" id="view-prepare">
     <div class="page-head">
       <h1 class="page-title">Préparer</h1>
-      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. Start découpera la tâche en petites actions claires.</p>
+      <p class="page-subtitle">Décrivez ce que vous voulez accomplir. Clic découpera la tâche en petites actions claires.</p>
     </div>
     <div class="prepare-layout">
       <div>
@@ -514,7 +602,7 @@
         <div class="card" style="margin-top:16px;">
           <div class="section-label">Choisir la durée</div>
           <div class="duration-dial-wrap">
-            <div class="duration-dial" id="durationDial" role="slider" aria-label="Durée de la session" aria-valuemin="1" aria-valuemax="1440" aria-valuenow="5" tabindex="0">
+            <div class="duration-dial" id="durationDial" role="slider" aria-label="Durée de la session" aria-valuemin="1" aria-valuemax="60" aria-valuenow="5" tabindex="0">
               <svg viewBox="0 0 220 220">
                 <circle class="dial-track" cx="110" cy="110" r="90"/>
                 <circle class="dial-fill" id="dialFill" cx="110" cy="110" r="90" transform="rotate(-90 110 110)"/>
@@ -533,13 +621,14 @@
             <button class="dial-free" id="dialFree">Session libre (sans minuteur)</button>
           </div>
         </div>
-        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn btn-ghost" id="clearPrepareBtn">Effacer</button>
-          <button class="btn btn-primary btn-lg" id="saveTaskBtn" style="flex:1;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-            Enregistrer la tâche
-          </button>
-        </div>
+      </div>
+      <!-- NOUVEAU : barre d'action sticky -->
+      <div class="prepare-actions" id="prepareActions">
+        <button class="btn btn-ghost" id="clearPrepareBtn">Effacer</button>
+        <button class="btn btn-primary btn-lg" id="saveTaskBtn" style="flex:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Enregistrer la tâche
+        </button>
       </div>
     </div>
   </section>
@@ -547,7 +636,7 @@
   <section class="view" id="view-device">
     <div class="page-head">
       <h1 class="page-title">Appareil</h1>
-      <p class="page-subtitle">Votre boîtier Start simulé. Personnalisez les sensations et le comportement.</p>
+      <p class="page-subtitle">Votre boîtier Clic simulé. Personnalisez les sensations et le comportement.</p>
     </div>
     <div class="device-layout">
       <div class="card" style="padding: 32px 20px;">
@@ -557,7 +646,7 @@
             <button class="session-ctrl-btn block-btn" id="blockBtn">Je bloque</button>
             <button class="session-ctrl-btn quit" id="quitBtn">Quitter</button>
           </div>
-          <div class="device" role="group" aria-label="Boîtier Start simulé">
+          <div class="device" role="group" aria-label="Boîtier Clic simulé">
             <svg class="progress-ring" viewBox="0 0 200 200" aria-hidden="true">
               <circle class="track" cx="100" cy="100" r="90"/>
               <circle class="fill" id="progressFill" cx="100" cy="100" r="90"/>
@@ -652,17 +741,42 @@
           <div class="setting-row">
             <div class="setting-info">
               <div class="setting-title">Revoir l'accueil</div>
-              <div class="setting-desc">Redécouvrir comment utiliser Start</div>
+              <div class="setting-desc">Redécouvrir comment utiliser Clic</div>
             </div>
             <button class="btn btn-ghost" id="redoOnboardingBtn" style="padding:10px 16px; font-size:13px;">Recommencer</button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <div class="section-label">À propos</div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <div class="setting-title">Mentions & confidentialité</div>
+              <div class="setting-desc">Informations légales</div>
+            </div>
+            <button class="btn btn-ghost" id="aboutBtn" style="padding:10px 16px; font-size:13px;">Ouvrir</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- NOUVEAU : Onglet Unstuck -->
+  <section class="view" id="view-unstuck">
+    <div class="unstuck-intro">
+      <h1 class="page-title">Unstuck</h1>
+      <p class="page-subtitle">Tu n'y arrives pas ? Ça arrive. On fait plus petit.</p>
+    </div>
+    <div id="unstuckMain">
+      <div class="unstuck-question">Qu'est-ce qui se passe ?</div>
+      <div class="unstuck-grid" id="unstuckGrid"></div>
+      <p class="unstuck-disclaimer">Clic aide à démarrer, ce n'est pas un outil médical. En période difficile, parle à un proche ou à un professionnel.</p>
+    </div>
+    <div id="unstuckActions"></div>
+  </section>
+
 </div>
 
+<!-- Modales -->
 <div class="end-screen" id="endScreen">
   <div class="end-card">
     <h2>Session terminée</h2>
@@ -674,16 +788,15 @@
   </div>
 </div>
 
-<!-- NOUVEAU : Modal "Je bloque" -->
 <div class="block-overlay" id="blockOverlay">
   <div class="block-card">
     <div class="block-label">Micro-action</div>
     <div class="block-text" id="blockText">—</div>
     <button class="btn btn-primary" id="blockBack">Revenir à mon étape</button>
+    <button class="btn btn-ghost" id="blockUnstuck" style="margin-top:8px;">Ouvrir Unstuck</button>
   </div>
 </div>
 
-<!-- NOUVEAU : Modal de reprise -->
 <div class="resume-overlay" id="resumeOverlay">
   <div class="resume-card">
     <h3>Reprendre là où vous en étiez ?</h3>
@@ -695,17 +808,28 @@
   </div>
 </div>
 
-<!-- NOUVEAU : Modal de saisie de durée -->
 <div class="duration-input-overlay" id="durationInputOverlay">
   <div class="duration-input-card">
     <h3>Durée de la session</h3>
-    <p class="duration-input-hint">Exemples : 30, 150, 2h30, 4h, 2:30</p>
-    <input type="text" class="duration-input-field" id="durationInputField" placeholder="2h30" inputmode="text" autocomplete="off" />
+    <p class="duration-input-hint">Nombre de minutes (1 à 180)</p>
+    <input type="text" class="duration-input-field" id="durationInputField" placeholder="30" inputmode="numeric" autocomplete="off" />
     <div class="duration-input-error" id="durationInputError"></div>
     <div class="duration-input-actions">
       <button class="btn btn-ghost" id="durationInputCancel">Annuler</button>
       <button class="btn btn-primary" id="durationInputConfirm">Valider</button>
     </div>
+  </div>
+</div>
+
+<div class="about-overlay" id="aboutOverlay">
+  <div class="about-card">
+    <h2>À propos</h2>
+    <div class="about-tabs">
+      <button class="about-tab active" data-tab="legal">Mentions légales</button>
+      <button class="about-tab" data-tab="privacy">Confidentialité</button>
+    </div>
+    <div class="about-content" id="aboutContent"></div>
+    <button class="btn btn-ghost" id="aboutClose" style="margin-top:20px; width:100%;">Fermer</button>
   </div>
 </div>
 
@@ -729,6 +853,13 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
     <span class="nav-label">Appareil</span>
   </button>
+  <button class="nav-btn" data-view="unstuck">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+      <circle cx="12" cy="12" r="4"/>
+    </svg>
+    <span class="nav-label">Unstuck</span>
+  </button>
 </nav>
 
 <div class="toast" id="toast"></div>
@@ -751,12 +882,14 @@ const STORAGE_KEY = 'clic_app_fallback';
 const DEFAULT_STATE = {
   tasks: [],
   settings: { sound: 'bell', vibration: true, wakeLock: false, demo: true, theme: 'light', defaultDuration: 5, tone: 'warm' },
-  session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, totalDuration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null, lastActiveDay: null },
-  onboarding: { completed: false, currentScreen: 0, answers: {} }
+  session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, totalDuration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null },
+  onboarding: { completed: false, currentScreen: 0, answers: {} },
+  unstuckUsage: { tooBig: 0, noIdea: 0, distracted: 0, tired: 0, twoMin: 0 }
 };
 
 let state = structuredClone(DEFAULT_STATE);
 let db = null, wakeLock = null, timerInterval = null, audioCtx = null;
+let unstuckBreatheTimer = null, unstuckMiniTimer = null;
 
 function openDB() {
   return new Promise((resolve, reject) => {
@@ -817,6 +950,8 @@ async function loadState() {
     if (settings) state.settings = { ...DEFAULT_STATE.settings, ...settings };
     if (session) state.session = { ...DEFAULT_STATE.session, ...session };
     if (onboarding) state.onboarding = { ...DEFAULT_STATE.onboarding, ...onboarding };
+    // Ramener les durées > 180 à la valeur par défaut
+    if (state.settings.defaultDuration > 180) state.settings.defaultDuration = 5;
     if (navigator.storage?.persist) {
       const persisted = await navigator.storage.persisted();
       if (!persisted) { try { await navigator.storage.persist(); } catch(e) {} }
@@ -829,7 +964,9 @@ async function loadState() {
         state = { ...structuredClone(DEFAULT_STATE), ...p,
           settings: { ...DEFAULT_STATE.settings, ...(p.settings||{}) },
           session: { ...DEFAULT_STATE.session, ...(p.session||{}) },
-          onboarding: { ...DEFAULT_STATE.onboarding, ...(p.onboarding||{}) } };
+          onboarding: { ...DEFAULT_STATE.onboarding, ...(p.onboarding||{}) },
+          unstuckUsage: { ...DEFAULT_STATE.unstuckUsage, ...(p.unstuckUsage||{}) } };
+        if (state.settings.defaultDuration > 180) state.settings.defaultDuration = 5;
       }
     } catch(e2) {}
   }
@@ -852,8 +989,11 @@ async function saveOnboarding() {
   if (db) await dbPut('onboarding', 'main', state.onboarding);
   try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.onboarding = state.onboarding; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
 }
+async function saveUnstuckUsage() {
+  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.unstuckUsage = state.unstuckUsage; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
+}
 
-const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device') };
+const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device'), unstuck: document.getElementById('view-unstuck') };
 document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
 function switchView(name) {
   Object.entries(views).forEach(([k, el]) => el.classList.toggle('active', k === name));
@@ -889,7 +1029,13 @@ const ICONS = {
   sparkles: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`,
   sun: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
   moon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
-  coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`
+  coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
+  // NOUVEAU : icônes Unstuck
+  scissor: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`,
+  flag: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
+  wind: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
+  leaf: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
+  timer2: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></svg>`
 };
 
 const TEMPLATES = [
@@ -899,7 +1045,6 @@ const TEMPLATES = [
   { name: "Ranger mon bureau", icon: ICONS.archive, sub: "Un espace clair", steps: ["Tout retirer du bureau", "Jeter ce qui est inutile", "Essuyer la surface", "Remettre l'essentiel seulement", "Profiter du résultat"], type: 'ranger' }
 ];
 
-/* ---------- Micro-actions "Je bloque" ---------- */
 const MICRO_ACTIONS = {
   reviser: ["Ouvre ton cours à la bonne page", "Lis le titre du chapitre à voix haute", "Lis la première phrase du résumé", "Regarde un seul exemple", "Note un mot-clé sur une feuille"],
   exercice: ["Lis l'énoncé en entier, sans crayon", "Surligne une seule donnée importante", "Écris ce qu'on te demande en une phrase", "Fais un schéma rapide au brouillon", "Relis la première ligne de l'énoncé"],
@@ -942,14 +1087,28 @@ function renderTasks() {
   });
   tasksContainer.appendChild(grid);
 }
+
 function formatDuration(min) {
   if (min >= 60) {
     const h = Math.floor(min / 60);
     const m = min % 60;
-    return m > 0 ? `${h}h${String(m).padStart(2,'0')}` : `${h}h`;
+    return m > 0 ? `${h} h ${m}` : `${h} h`;
   }
   return min + ' min';
 }
+
+function formatTimerDisplay(totalSeconds) {
+  if (totalSeconds < 3600) {
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    return { min: String(m).padStart(2, '0'), sec: String(s).padStart(2, '0'), colon: true, hour: null };
+  }
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  return { min: String(m).padStart(2, '0'), sec: String(s).padStart(2, '0'), colon: true, hour: String(h) };
+}
+
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
 function deleteTask(id) {
   state.tasks = state.tasks.filter(t => t.id !== id);
@@ -985,7 +1144,6 @@ function renderTemplates() {
 }
 function applyTemplate(t) { taskNameInput.value = t.name; prepareSteps = t.steps.slice(); renderSteps(); toast('Modèle appliqué'); }
 
-/* NOUVEAU : Démarrage rapide */
 function quickStart(t) {
   const duration = prepareFree ? 0 : (prepareDuration || state.settings.defaultDuration || 5);
   const task = {
@@ -1029,8 +1187,8 @@ saveTaskBtn.addEventListener('click', () => {
 clearPrepareBtn.addEventListener('click', resetPrepare);
 function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; prepareFree = false; prepareDuration = state.settings.defaultDuration || 5; renderSteps(); updateDial(prepareDuration); document.getElementById('dialFree').classList.remove('active'); }
 
-/* ---------- NOUVEAU : Cadran de durée illimité (1 min → 24h) ---------- */
-const DIAL_MIN = 1, DIAL_MAX = 1440;
+/* ---------- Cadran de durée 1-60 min + saisie manuelle 1-180 ---------- */
+const DIAL_MIN = 1, DIAL_MAX = 60, MANUAL_MAX = 180;
 const DIAL_RADIUS = 90, DIAL_CENTER = 110;
 const DIAL_CIRC = 2 * Math.PI * DIAL_RADIUS;
 const dialFill = document.getElementById('dialFill');
@@ -1053,7 +1211,7 @@ function formatDialDisplay(v) {
   if (v >= 60) {
     const h = Math.floor(v / 60);
     const m = v % 60;
-    return { main: m > 0 ? `${h}h${String(m).padStart(2,'0')}` : `${h}h`, unit: '' };
+    return { main: m > 0 ? `${h} h ${m}` : `${h} h`, unit: '' };
   }
   return { main: String(v).padStart(2, '0'), unit: 'min' };
 }
@@ -1135,7 +1293,7 @@ durationDial.addEventListener('keydown', (e) => {
   else if (e.key === 'End') { e.preventDefault(); updateDial(DIAL_MAX); }
 });
 
-/* NOUVEAU : Saisie directe de la durée */
+/* Saisie directe de la durée (1-180 min) */
 const durationInputOverlay = document.getElementById('durationInputOverlay');
 const durationInputField = document.getElementById('durationInputField');
 const durationInputError = document.getElementById('durationInputError');
@@ -1143,11 +1301,11 @@ const durationInputError = document.getElementById('durationInputError');
 dialValueWrap.addEventListener('click', (e) => {
   e.stopPropagation();
   if (prepareFree) return;
-  durationInputField.value = formatDialDisplay(prepareDuration).main;
+  durationInputField.value = String(prepareDuration);
   durationInputError.textContent = '';
   durationInputField.classList.remove('error');
   durationInputOverlay.classList.add('active');
-  setTimeout(() => durationInputField.focus(), 100);
+  setTimeout(() => { durationInputField.focus(); durationInputField.select(); }, 100);
 });
 
 document.getElementById('durationInputCancel').addEventListener('click', () => {
@@ -1155,13 +1313,26 @@ document.getElementById('durationInputCancel').addEventListener('click', () => {
 });
 
 document.getElementById('durationInputConfirm').addEventListener('click', () => {
-  const v = parseDurationInput(durationInputField.value);
-  if (v === null) {
-    durationInputError.textContent = 'Durée invalide. Exemples : 30, 2h30, 4h, 150';
+  const raw = durationInputField.value.trim();
+  const v = parseInt(raw, 10);
+  if (isNaN(v) || v < 1 || v > MANUAL_MAX || raw !== String(v)) {
+    durationInputError.textContent = `Durée invalide. Entre 1 et ${MANUAL_MAX} minutes.`;
     durationInputField.classList.add('error');
     return;
   }
-  updateDial(v);
+  if (v <= DIAL_MAX) {
+    updateDial(v);
+  } else {
+    // Valeur > 60 : on garde en mémoire mais le cadran reste à 60
+    prepareDuration = v;
+    state.settings.defaultDuration = v;
+    saveSettings();
+    const display = formatDialDisplay(v);
+    dialValueEl.textContent = display.main;
+    dialValueEl.nextElementSibling.textContent = display.unit;
+    dialMinus.disabled = false;
+    dialPlus.disabled = true;
+  }
   if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); }
   durationInputOverlay.classList.remove('active');
   toast('Durée : ' + formatDuration(v));
@@ -1175,42 +1346,6 @@ durationInputField.addEventListener('keydown', (e) => {
 durationInputOverlay.addEventListener('click', (e) => {
   if (e.target === durationInputOverlay) durationInputOverlay.classList.remove('active');
 });
-
-function parseDurationInput(str) {
-  if (!str) return null;
-  str = str.trim().toLowerCase().replace(',', '.');
-  let total = 0;
-  let matched = false;
-  
-  const colonMatch = str.match(/^(\d{1,3}):(\d{1,2})$/);
-  if (colonMatch) {
-    const h = parseInt(colonMatch[1]);
-    const m = parseInt(colonMatch[2]);
-    if (m >= 0 && m < 60 && h >= 0) { total = h * 60 + m; matched = true; }
-  }
-  
-  if (!matched) {
-    const hMatch = str.match(/(\d+(?:\.\d+)?)\s*h/);
-    const mMatch = str.match(/(\d+(?:\.\d+)?)\s*m(in)?/);
-    const pureNum = str.match(/^(\d+(?:\.\d+)?)$/);
-    
-    if (hMatch) {
-      total += Math.round(parseFloat(hMatch[1]) * 60);
-      matched = true;
-    }
-    if (mMatch) {
-      total += Math.round(parseFloat(mMatch[1]));
-      matched = true;
-    }
-    if (pureNum && !hMatch && !mMatch) {
-      total = Math.round(parseFloat(pureNum[1]));
-      matched = true;
-    }
-  }
-  
-  if (!matched || total < 1) return null;
-  return Math.min(DIAL_MAX, Math.max(1, total));
-}
 
 /* ---------- Web Audio ---------- */
 function getAudioContext() {
@@ -1285,13 +1420,12 @@ function handleStartClick() {
   validateStep();
 }
 
-/* CORRECTION : startSession fixe la durée totale une seule fois */
 function startSession() {
   const task = getCurrentTask(); if (!task) return;
   const duration = task.duration > 0 ? task.duration * 60 : 0;
   state.session.endTime = duration > 0 ? Date.now() + duration * 1000 : 0;
   state.session.duration = duration;
-  state.session.totalDuration = duration; // Durée totale figée
+  state.session.totalDuration = duration;
   state.session.isPaused = false;
   state.session.startedAt = Date.now();
   saveSession();
@@ -1303,13 +1437,10 @@ function startSession() {
   setTimeout(() => startBtn.classList.remove('glow'), 500);
 }
 
-/* CORRECTION : validateStep n'altère PAS le timer */
 function validateStep() {
   const task = getCurrentTask(); if (!task) return;
-  // On ne stoppe pas le timer en mode chronométré — il continue
   if (state.session.stepIndex < task.steps.length - 1) {
     state.session.stepIndex++;
-    // NE PAS reset endTime ni duration
     saveSession();
     renderDevice();
     if (state.settings.vibration && navigator.vibrate) navigator.vibrate(30);
@@ -1342,7 +1473,7 @@ continueBtn.addEventListener('click', () => {
 finishBtn.addEventListener('click', () => { endScreen.classList.remove('active'); completeTask(); });
 
 function pauseSession() {
-  if (state.session.duration === 0) return; // Mode libre : pas de pause timer
+  if (state.session.duration === 0) return;
   state.session.isPaused = true;
   state.session.pausedAt = Date.now();
   state.session.pausedRemaining = Math.max(0, state.session.endTime - Date.now());
@@ -1363,24 +1494,18 @@ function quitSession() {
   saveSession(); renderDevice(); toast('Session quittée');
 }
 
-/* NOUVEAU : Mode "Je bloque" */
-const blockOverlay = document.getElementById('blockOverlay');
-const blockText = document.getElementById('blockText');
-const blockBack = document.getElementById('blockBack');
-
+/* Mode Je bloque → ouvre Unstuck */
 blockBtn.addEventListener('click', () => {
   const task = getCurrentTask();
-  const action = getRandomMicroAction(task ? task.name : '');
-  blockText.textContent = action;
-  blockOverlay.classList.add('active');
-});
-
-blockBack.addEventListener('click', () => {
-  blockOverlay.classList.remove('active');
-});
-
-blockOverlay.addEventListener('click', (e) => {
-  if (e.target === blockOverlay) blockOverlay.classList.remove('active');
+  if (task) {
+    // Ouvre directement Unstuck avec la tâche en contexte
+    switchView('unstuck');
+    renderUnstuckMain();
+    toast('On va faire plus petit');
+  } else {
+    switchView('unstuck');
+    renderUnstuckMain();
+  }
 });
 
 pauseBtn.addEventListener('click', pauseSession);
@@ -1402,10 +1527,14 @@ function updateTimerFromEndTime() {
   const total = state.session.totalDuration > 0 ? state.session.totalDuration * 1000 : 1;
   const percent = remaining / total;
   progressFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - percent);
-  const m = Math.floor(remaining / 60000);
-  const s = Math.floor((remaining % 60000) / 1000);
-  timerMin.textContent = String(m).padStart(2, '0');
-  timerSec.textContent = String(s).padStart(2, '0');
+  const display = formatTimerDisplay(Math.floor(remaining / 1000));
+  if (display.hour !== null) {
+    timerMin.textContent = display.hour + ':' + display.min;
+    timerSec.textContent = display.sec;
+  } else {
+    timerMin.textContent = display.min;
+    timerSec.textContent = display.sec;
+  }
 }
 function onTimerEnd() {
   const task = getCurrentTask();
@@ -1468,7 +1597,6 @@ function renderDevice() {
     devProgress.appendChild(pip);
   });
 
-  // Mode chronométré OU mode libre
   if (task.duration > 0 && state.session.endTime > 0) {
     devTimer.style.display = 'flex';
     if (!timerInterval && !state.session.isPaused) startTimer();
@@ -1561,6 +1689,43 @@ document.getElementById('redoOnboardingBtn').addEventListener('click', () => {
   startOnboarding();
 });
 
+/* NOUVEAU : À propos */
+const aboutOverlay = document.getElementById('aboutOverlay');
+const aboutContent = document.getElementById('aboutContent');
+const ABOUT_TEXTS = {
+  legal: `<h4>Éditeur</h4>
+<p>Site édité à titre non professionnel par une personne physique, qui a choisi de préserver son anonymat conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN). Les éléments d'identification de l'éditeur sont détenus par l'hébergeur.</p>
+<h4>Hébergeur</h4>
+<p>GitHub, Inc.<br>88 Colin P. Kelly Jr. Street<br>San Francisco, CA 94107, États-Unis<br>Téléphone : +1 877 448 4820</p>`,
+  privacy: `<h4>Tes données</h4>
+<p>Clic ne crée pas de compte et n'envoie aucune donnée à un serveur. Tes tâches, tes réglages et tes réponses restent sur ton appareil (stockage local du navigateur).</p>
+<h4>Pas de pub, pas de traceur</h4>
+<p>Pas de publicité, pas de traceur. Pour tout effacer, vide les données du site dans les réglages de ton navigateur.</p>
+<h4>Hébergeur</h4>
+<p>L'hébergeur du site (GitHub) peut conserver des données techniques de connexion selon sa propre politique.</p>
+<h4>Avertissement</h4>
+<p>Clic aide à démarrer une tâche : ce n'est pas un outil médical.</p>
+<h4>Contact</h4>
+<p><a href="#">[À REMPLIR]</a></p>`
+};
+
+document.getElementById('aboutBtn').addEventListener('click', () => {
+  renderAboutTab('legal');
+  aboutOverlay.classList.add('active');
+});
+document.getElementById('aboutClose').addEventListener('click', () => { aboutOverlay.classList.remove('active'); });
+aboutOverlay.addEventListener('click', (e) => { if (e.target === aboutOverlay) aboutOverlay.classList.remove('active'); });
+document.querySelectorAll('.about-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.about-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderAboutTab(tab.dataset.tab);
+  });
+});
+function renderAboutTab(tab) {
+  aboutContent.innerHTML = ABOUT_TEXTS[tab] || '';
+}
+
 function applySettingsToUI() {
   document.querySelectorAll('#soundSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.sound === state.settings.sound));
   document.getElementById('vibrationToggle').classList.toggle('on', state.settings.vibration);
@@ -1569,10 +1734,32 @@ function applySettingsToUI() {
   document.querySelectorAll('.theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === state.settings.theme));
   if (state.settings.theme && state.settings.theme !== 'light') applyTheme(state.settings.theme);
   prepareDuration = state.settings.defaultDuration || 5;
-  updateDial(prepareDuration, true);
+  if (prepareDuration > DIAL_MAX) {
+    // Valeur > 60 : affichage spécial, cadran à 60
+    updateDial(DIAL_MAX, true);
+    const display = formatDialDisplay(prepareDuration);
+    dialValueEl.textContent = display.main;
+    dialValueEl.nextElementSibling.textContent = display.unit;
+    dialPlus.disabled = true;
+  } else {
+    updateDial(prepareDuration, true);
+  }
 }
 
-/* NOUVEAU : Modal de reprise */
+async function resumeSessionAfterReload() {
+  if (!state.session.taskId) return;
+  const task = getCurrentTask(); if (!task) return;
+  if (!state.session.isPaused && state.session.duration > 0 && state.session.endTime > 0) {
+    if (state.session.endTime < Date.now()) {
+      state.session.endTime = 0;
+      state.session.duration = 0;
+      state.session.totalDuration = 0;
+      saveSession();
+    }
+  }
+  showResumeModal(task);
+}
+
 const resumeOverlay = document.getElementById('resumeOverlay');
 const resumeInfo = document.getElementById('resumeInfo');
 
@@ -1600,7 +1787,6 @@ document.getElementById('resumeYes').addEventListener('click', () => {
   if (!task) return;
   switchView('device');
   if (state.session.isPaused) {
-    // Reste en pause, l'utilisateur doit appuyer sur START
     renderDevice();
   } else if (state.session.duration > 0 && state.session.endTime > Date.now()) {
     renderDevice();
@@ -1615,24 +1801,258 @@ resumeOverlay.addEventListener('click', (e) => {
   if (e.target === resumeOverlay) resumeOverlay.classList.remove('active');
 });
 
-async function resumeSessionAfterReload() {
-  if (!state.session.taskId) return;
-  const task = getCurrentTask(); if (!task) return;
-  
-  // Ajuster le temps restant si session active non-pause
-  if (!state.session.isPaused && state.session.duration > 0 && state.session.endTime > 0) {
-    if (state.session.endTime < Date.now()) {
-      // Temps écoulé pendant l'absence
-      state.session.endTime = 0;
-      state.session.duration = 0;
-      state.session.totalDuration = 0;
-      saveSession();
-    }
-  }
-  
-  // Proposer la reprise
-  showResumeModal(task);
+/* ---------- NOUVEAU : Unstuck ---------- */
+const UNSTUCK_CARDS = [
+  { key: 'tooBig', icon: ICONS.scissor, title: "C'est trop gros", desc: "On découpe en 3 micro-étapes" },
+  { key: 'noIdea', icon: ICONS.flag, title: "Je ne sais pas par où commencer", desc: "On trouve la toute première chose" },
+  { key: 'distracted', icon: ICONS.wind, title: "Je me laisse distraire", desc: "1 minute pour se recentrer" },
+  { key: 'tired', icon: ICONS.leaf, title: "Je suis à plat", desc: "Un tout petit pas + respiration" },
+  { key: 'twoMin', icon: ICONS.timer2, title: "Juste 2 minutes", desc: "Tu peux t'arrêter après" }
+];
+
+const unstuckGrid = document.getElementById('unstuckGrid');
+const unstuckMain = document.getElementById('unstuckMain');
+const unstuckActions = document.getElementById('unstuckActions');
+
+function renderUnstuckMain() {
+  unstuckMain.style.display = 'block';
+  unstuckActions.innerHTML = '';
+  unstuckGrid.innerHTML = '';
+  UNSTUCK_CARDS.forEach(c => {
+    const card = document.createElement('button');
+    card.className = 'unstuck-card-item';
+    card.innerHTML = `<div class="uc-icon">${c.icon}</div><div><div class="uc-title">${c.title}</div><div class="uc-desc">${c.desc}</div></div>`;
+    card.addEventListener('click', () => openUnstuckAction(c.key));
+    unstuckGrid.appendChild(card);
+  });
 }
+
+function trackUnstuckUsage(key) {
+  if (state.unstuckUsage[key] !== undefined) {
+    state.unstuckUsage[key]++;
+    saveUnstuckUsage();
+  }
+}
+
+function openUnstuckAction(key) {
+  trackUnstuckUsage(key);
+  unstuckMain.style.display = 'none';
+  unstuckActions.innerHTML = '';
+  
+  if (key === 'tooBig') renderUnstuckTooBig();
+  else if (key === 'noIdea') renderUnstuckNoIdea();
+  else if (key === 'distracted') renderUnstuckDistracted();
+  else if (key === 'tired') renderUnstuckTired();
+  else if (key === 'twoMin') renderUnstuckTwoMin();
+}
+
+function unstuckBackButton() {
+  return `<button class="btn btn-ghost unstuck-back" onclick="renderUnstuckMain()">← Retour</button>`;
+}
+
+function unstuckEndCard(message) {
+  return `
+    <div style="text-align:center; margin-top:24px;">
+      <p style="font-family:'Caveat',cursive; font-size:22px; color:var(--accent-2); margin-bottom:16px;">${message}</p>
+      <button class="btn btn-primary" onclick="renderUnstuckMain()" style="width:100%; margin-bottom:8px;">Reprendre ma tâche</button>
+      <button class="btn btn-ghost" onclick="renderUnstuckMain()" style="width:100%;">Mettre de côté</button>
+    </div>
+  `;
+}
+
+function renderUnstuckTooBig() {
+  const task = getCurrentTask();
+  const taskName = task ? task.name : 'ma tâche';
+  const currentStep = task ? (task.steps[state.session.stepIndex] || task.steps[0]) : 'commencer';
+  const suggestions = [
+    `Lire "${currentStep}" à voix haute`,
+    `Noter 3 mots-clés sur un papier`,
+    `Faire une première version très moche`
+  ];
+  
+  unstuckActions.innerHTML = `
+    <div class="unstuck-action active">
+      ${unstuckBackButton()}
+      <div class="unstuck-subtitle">On découpe "${escapeHtml(currentStep)}"</div>
+      <p class="unstuck-subtext">3 micro-étapes de 30 secondes à 2 minutes. Modifiables.</p>
+      <div class="micro-steps-list">
+        ${suggestions.map((s, i) => `<div class="micro-step-item"><span class="ms-num">${i+1}</span><input type="text" value="${escapeHtml(s)}" data-idx="${i}" /></div>`).join('')}
+      </div>
+      <button class="btn btn-primary" id="addMicroSteps" style="width:100%; margin-bottom:8px;">Ajouter à ma tâche</button>
+      ${unstuckEndCard("Bien joué. Trois petits pas, c'est déjà avancé.")}
+    </div>
+  `;
+  
+  document.getElementById('addMicroSteps').addEventListener('click', () => {
+    if (!task) { toast('Aucune tâche en cours'); return; }
+    const inputs = unstuckActions.querySelectorAll('.micro-step-item input');
+    const newSteps = Array.from(inputs).map(i => i.value.trim()).filter(s => s);
+    if (newSteps.length === 0) { toast('Au moins une étape'); return; }
+    // Insérer après l'étape courante
+    const insertAt = state.session.stepIndex + 1;
+    task.steps.splice(insertAt, 0, ...newSteps);
+    saveTasks();
+    renderTasks();
+    toast(`${newSteps.length} micro-étapes ajoutées`);
+  });
+}
+
+function renderUnstuckNoIdea() {
+  const suggestions = ["Ouvrir le document ou le cahier", "Écrire le titre", "Lire la première phrase", "Sortir une feuille blanche"];
+  
+  unstuckActions.innerHTML = `
+    <div class="unstuck-action active">
+      ${unstuckBackButton()}
+      <div class="unstuck-subtitle">Quelle est la toute première chose ?</div>
+      <p class="unstuck-subtext">Même minuscule. On commence par là.</p>
+      <div class="micro-steps-list">
+        ${suggestions.map((s, i) => `<div class="micro-step-item"><span class="ms-num">${i+1}</span><input type="text" value="${escapeHtml(s)}" data-idx="${i}" /></div>`).join('')}
+      </div>
+      <button class="btn btn-primary" id="setFirstStep" style="width:100%; margin-bottom:8px;">En faire l'étape 1 (1 min)</button>
+      ${unstuckEndCard("Premier pas fait. Le reste suivra.")}
+    </div>
+  `;
+  
+  document.getElementById('setFirstStep').addEventListener('click', () => {
+    const inputs = unstuckActions.querySelectorAll('.micro-step-item input');
+    const first = inputs[0].value.trim();
+    if (!first) { toast('Une étape au moins'); return; }
+    const task = getCurrentTask();
+    if (task) {
+      task.steps[0] = first;
+      state.session.stepIndex = 0;
+      task.duration = 1;
+      saveTasks(); saveSession();
+      renderTasks();
+      toast('Nouvelle étape 1 : 1 minute');
+    } else {
+      const newTask = { id: 't_' + Date.now(), name: 'Premier pas', steps: [first], duration: 1, done: false, createdAt: Date.now() };
+      state.tasks.unshift(newTask);
+      saveTasks();
+      loadTask(newTask.id);
+      toast('Nouvelle tâche créée');
+    }
+  });
+}
+
+function renderUnstuckDistracted() {
+  const checklist = [
+    "Poser le téléphone à l'envers",
+    "Fermer l'onglet qui distraie",
+    "Boire un verre d'eau",
+    "Respirer 3 fois calmement"
+  ];
+  
+  unstuckActions.innerHTML = `
+    <div class="unstuck-action active">
+      ${unstuckBackButton()}
+      <div class="unstuck-subtitle">On se recentre — 1 minute</div>
+      <p class="unstuck-subtext">Coche ce que tu peux faire maintenant.</p>
+      <div class="checklist" id="distraChecklist">
+        ${checklist.map((item, i) => `<div class="checklist-item" data-idx="${i}"><div class="check-box">${ICONS.check}</div><div class="check-text">${item}</div></div>`).join('')}
+      </div>
+      <div class="timer-display" id="distraTimer" style="color:var(--ink); font-size:28px; margin:16px 0;"><span id="distraMin">01</span><span class="colon" style="color:var(--ink-3);">:</span><span id="distraSec">00</span></div>
+      <button class="btn btn-primary" id="startDistraTimer" style="width:100%; margin-bottom:8px;">Lancer 1 minute</button>
+      ${unstuckEndCard("Recentré·e. On y retourne doucement.")}
+    </div>
+  `;
+  
+  unstuckActions.querySelectorAll('.checklist-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('checked');
+    });
+  });
+  
+  document.getElementById('startDistraTimer').addEventListener('click', () => {
+    startUnstuckMiniTimer(60, 'distraMin', 'distraSec', 'startDistraTimer', 'Temps écoulé');
+  });
+}
+
+function renderUnstuckTired() {
+  const action = getRandomMicroAction(getCurrentTask()?.name);
+  
+  unstuckActions.innerHTML = `
+    <div class="unstuck-action active">
+      ${unstuckBackButton()}
+      <div class="unstuck-subtitle">Aujourd'hui, un tout petit pas suffit.</div>
+      <p class="unstuck-subtext">Une seule action, puis on respire.</p>
+      <div class="micro-steps-list">
+        <div class="micro-step-item"><span class="ms-num">1</span><input type="text" value="${escapeHtml(action)}" readonly /></div>
+      </div>
+      <div class="breathe-label" id="breatheLabel">Inspire...</div>
+      <div class="breathe-circle-wrap"><div class="breathe-circle"></div></div>
+      <div class="timer-display" id="breatheTimer" style="color:var(--ink); font-size:22px; margin-bottom:16px;"><span id="breatheMin">00</span><span class="colon" style="color:var(--ink-3);">:</span><span id="breatheSec">30</span></div>
+      <button class="btn btn-primary" id="startBreathe" style="width:100%; margin-bottom:8px;">Commencer la respiration (30 s)</button>
+      ${unstuckEndCard("Bravo. Même petit, c'est un pas.")}
+    </div>
+  `;
+  
+  document.getElementById('startBreathe').addEventListener('click', () => {
+    const label = document.getElementById('breatheLabel');
+    let phase = 0;
+    const phases = ['Inspire...', 'Bloque...', 'Expire...'];
+    unstuckBreatheTimer = setInterval(() => {
+      phase = (phase + 1) % 3;
+      if (label) label.textContent = phases[phase];
+    }, 2000);
+    startUnstuckMiniTimer(30, 'breatheMin', 'breatheSec', 'startBreathe', 'Respiration terminée', () => {
+      if (unstuckBreatheTimer) { clearInterval(unstuckBreatheTimer); unstuckBreatheTimer = null; }
+      if (label) label.textContent = 'Terminé';
+    });
+  });
+}
+
+function renderUnstuckTwoMin() {
+  unstuckActions.innerHTML = `
+    <div class="unstuck-action active">
+      ${unstuckBackButton()}
+      <div class="unstuck-subtitle">Juste 2 minutes</div>
+      <p class="unstuck-subtext">Après 2 minutes, tu peux t'arrêter. Sans culpabilité.</p>
+      <div class="timer-display" id="twoMinTimer" style="color:var(--ink); font-size:36px; margin:20px 0;"><span id="twoMinMin">02</span><span class="colon" style="color:var(--ink-3);">:</span><span id="twoMinSec">00</span></div>
+      <button class="btn btn-primary" id="startTwoMin" style="width:100%; margin-bottom:8px;">Lancer 2 minutes</button>
+      ${unstuckEndCard("2 minutes, c'est déjà quelque chose.")}
+    </div>
+  `;
+  
+  document.getElementById('startTwoMin').addEventListener('click', () => {
+    startUnstuckMiniTimer(120, 'twoMinMin', 'twoMinSec', 'startTwoMin', '2 minutes écoulées');
+  });
+}
+
+function startUnstuckMiniTimer(seconds, minElId, secElId, btnId, endMessage, onEnd) {
+  if (unstuckMiniTimer) { clearInterval(unstuckMiniTimer); unstuckMiniTimer = null; }
+  const minEl = document.getElementById(minElId);
+  const secEl = document.getElementById(secElId);
+  const btn = document.getElementById(btnId);
+  if (!minEl || !secEl || !btn) return;
+  
+  btn.textContent = 'En cours...';
+  btn.disabled = true;
+  let remaining = seconds;
+  
+  const update = () => {
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    minEl.textContent = String(m).padStart(2, '0');
+    secEl.textContent = String(s).padStart(2, '0');
+  };
+  update();
+  
+  unstuckMiniTimer = setInterval(() => {
+    remaining--;
+    update();
+    if (remaining <= 0) {
+      clearInterval(unstuckMiniTimer);
+      unstuckMiniTimer = null;
+      btn.textContent = endMessage;
+      if (state.settings.vibration && navigator.vibrate) navigator.vibrate([100, 50, 100]);
+      if (onEnd) onEnd();
+    }
+  }, 1000);
+}
+
+// Exposer renderUnstuckMain globalement pour les onclick inline
+window.renderUnstuckMain = renderUnstuckMain;
 
 /* ---------- Onboarding ---------- */
 const ONBOARDING_SCREENS = 7;
@@ -1693,7 +2113,7 @@ function renderOnboardingScreen() {
     screensContainer.appendChild(screen);
   } else if (currentScreen === 6) {
     const screen = document.createElement('div'); screen.className = 'onboarding-screen active';
-    screen.innerHTML = `<div class="onboarding-message">Il y a une chose que tu repousses depuis un moment ?</div><div class="onboarding-submessage" style="margin-bottom:20px;">(facultatif — on peut toujours dire "plus tard")</div><input type="text" class="onboarding-input" id="taskInput" placeholder="Ex. Réviser mon cours de maths" value="${escapeHtml(onboardingAnswers.task || '')}" maxlength="80" /><div class="onboarding-actions"><button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button><button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button><button class="btn btn-primary" onclick="finishOnboarding()">Créer ma première étape</button></div>`;
+    screen.innerHTML = `<div class="onboarding-message">Il y a une chose que tu repousses depuis un moment ?</div><div class="onboarding-submessage" style="margin-bottom:20px;">(facultatif — on peut toujours dire "plus tard")</div><input type="text" class="onboarding-input" id="taskInput" placeholder="Ex. Réviser mon cours de maths" value="${escapeHtml(onboardingAnswers.task || '')}" maxlength="80" /><div class="onboarding-actions"><button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button><button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button><button class="btn btn-primary" onclick="finishOnboarding()">Créer ma première étape</button></div><button class="about-link" onclick="renderAboutTab('legal'); document.getElementById('aboutOverlay').classList.add('active');">Mentions légales</button>`;
     screensContainer.appendChild(screen);
   }
   state.onboarding.currentScreen = currentScreen;
@@ -1757,13 +2177,14 @@ function finishOnboarding() {
     setTimeout(() => { loadTask(task.id); toast('Première étape prête ! Appuie sur START'); }, 500);
   } else {
     document.getElementById('onboardingOverlay').classList.remove('active');
-    toast('Bienvenue dans Start !');
+    toast('Bienvenue dans Clic !');
   }
 }
 
 async function init() {
   await loadState();
   renderTemplates(); renderSteps(); renderTasks();
+  renderUnstuckMain();
   applySettingsToUI();
   renderDevice();
   await resumeSessionAfterReload();
