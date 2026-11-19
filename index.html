@@ -204,12 +204,24 @@
   .input-row input::placeholder { color: var(--ink-3); }
 
   .templates-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
-  .template-chip { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 14px 16px; cursor: pointer; text-align: left; transition: all .2s var(--ease); font-family: inherit; display: flex; flex-direction: column; gap: 4px; }
+  .template-chip { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 14px 16px; cursor: pointer; text-align: left; transition: all .2s var(--ease); font-family: inherit; display: flex; flex-direction: column; gap: 4px; position: relative; }
   .template-chip:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
   .template-chip .t-icon { width: 32px; height: 32px; border-radius: 10px; background: var(--bg-soft); display: grid; place-items: center; color: var(--ink-2); margin-bottom: 4px; }
   .template-chip .t-icon svg { width: 18px; height: 18px; }
   .template-chip .t-name { font-size: 14px; font-weight: 600; color: var(--ink); }
   .template-chip .t-sub { font-size: 12px; color: var(--ink-3); }
+  .template-chip .quick-start {
+    position: absolute; top: 10px; right: 10px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    border: none; cursor: pointer;
+    display: grid; place-items: center;
+    opacity: 0; transform: scale(0.8);
+    transition: all .2s var(--ease);
+  }
+  .template-chip:hover .quick-start { opacity: 1; transform: scale(1); }
+  .template-chip .quick-start:hover { background: var(--accent-2); transform: scale(1.1); }
+  .template-chip .quick-start svg { width: 14px; height: 14px; }
 
   .duration-dial-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 8px 0; }
   .duration-dial { position: relative; width: 220px; height: 220px; touch-action: none; }
@@ -220,8 +232,10 @@
   .dial-handle:active { cursor: grabbing; }
   .dial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
   .dial-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 4px; }
-  .dial-value { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 32px; color: var(--ink); letter-spacing: 1px; line-height: 1; }
-  .dial-value .dial-unit { font-size: 13px; color: var(--ink-3); margin-left: 2px; font-weight: 500; }
+  .dial-value { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 28px; color: var(--ink); letter-spacing: 1px; line-height: 1; cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: background .2s var(--ease); pointer-events: auto; }
+  .dial-value:hover { background: var(--accent-soft); }
+  .dial-value .dial-unit { font-size: 12px; color: var(--ink-3); margin-left: 2px; font-weight: 500; }
+  .dial-hint { font-size: 11px; color: var(--ink-3); font-style: italic; }
   .dial-controls { display: flex; align-items: center; gap: 16px; }
   .dial-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 22px; font-weight: 500; cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); font-family: inherit; line-height: 1; }
   .dial-btn:hover { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
@@ -287,11 +301,13 @@
 
   .device-hint { margin-top: 20px; font-size: 13px; color: var(--ink-3); text-align: center; max-width: 280px; line-height: 1.5; }
 
-  .session-controls { display: flex; gap: 8px; margin-bottom: 16px; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
+  .session-controls { display: flex; gap: 8px; margin-bottom: 16px; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); flex-wrap: wrap; justify-content: center; }
   .session-controls.visible { opacity: 1; pointer-events: auto; }
   .session-ctrl-btn { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
   .session-ctrl-btn:hover { background: var(--bg-soft); color: var(--ink); }
   .session-ctrl-btn.quit:hover { background: #FBEAEA; color: #B84A4A; border-color: #F5D5D5; }
+  .session-ctrl-btn.block-btn { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
+  .session-ctrl-btn.block-btn:hover { background: var(--accent); color: #fff; }
 
   .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
   .setting-row:last-child { border-bottom: none; }
@@ -333,14 +349,29 @@
   .timer-display { display: flex; align-items: baseline; justify-content: center; gap: 2px; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; color: #F5E9DC; letter-spacing: 1px; margin-top: 4px; }
   .timer-display .colon { opacity: 0.5; }
 
-  .end-screen { position: fixed; inset: 0; background: rgba(26,24,22,0.85); backdrop-filter: blur(8px); z-index: 500; display: none; align-items: center; justify-content: center; padding: 24px; }
-  .end-screen.active { display: flex; animation: fadeIn .3s var(--ease); }
+  .end-screen, .block-overlay, .resume-overlay, .duration-input-overlay { position: fixed; inset: 0; background: rgba(26,24,22,0.85); backdrop-filter: blur(8px); z-index: 500; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .end-screen.active, .block-overlay.active, .resume-overlay.active, .duration-input-overlay.active { display: flex; animation: fadeIn .3s var(--ease); }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .end-card { background: var(--surface); border-radius: var(--radius-lg); padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); }
-  .end-card h2 { font-family: 'Caveat', cursive; font-size: 36px; color: var(--ink); margin-bottom: 12px; }
-  .end-card p { color: var(--ink-2); margin-bottom: 28px; line-height: 1.5; }
-  .end-actions { display: flex; flex-direction: column; gap: 10px; }
-  .end-actions .btn { width: 100%; padding: 16px; font-size: 15px; }
+  .end-card, .block-card, .resume-card, .duration-input-card { background: var(--surface); border-radius: var(--radius-lg); padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); }
+  .end-card h2, .resume-card h3 { font-family: 'Caveat', cursive; font-size: 36px; color: var(--ink); margin-bottom: 12px; }
+  .end-card p, .resume-card p { color: var(--ink-2); margin-bottom: 28px; line-height: 1.5; }
+  .end-actions, .resume-actions { display: flex; flex-direction: column; gap: 10px; }
+  .end-actions .btn, .resume-actions .btn { width: 100%; padding: 16px; font-size: 15px; }
+
+  /* Mode Je bloque */
+  .block-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 12px; }
+  .block-text { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); line-height: 1.3; margin-bottom: 24px; }
+  .block-card .btn { width: 100%; padding: 16px; font-size: 15px; }
+
+  /* Saisie durée */
+  .duration-input-card h3 { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); margin-bottom: 8px; }
+  .duration-input-hint { font-size: 13px; color: var(--ink-3); margin-bottom: 16px; }
+  .duration-input-field { width: 100%; padding: 14px 18px; border: 2px solid var(--line); border-radius: var(--radius-md); background: var(--surface); font-family: inherit; font-size: 18px; color: var(--ink); outline: none; text-align: center; margin-bottom: 16px; transition: border-color .2s var(--ease); }
+  .duration-input-field:focus { border-color: var(--accent); }
+  .duration-input-field.error { border-color: #B84A4A; }
+  .duration-input-error { font-size: 12px; color: #B84A4A; margin-bottom: 12px; min-height: 16px; }
+  .duration-input-actions { display: flex; gap: 10px; }
+  .duration-input-actions .btn { flex: 1; }
 
   .theme-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
   .theme-card { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 14px; cursor: pointer; transition: all .2s var(--ease); font-family: inherit; text-align: left; display: flex; flex-direction: column; gap: 8px; }
@@ -408,10 +439,11 @@
     .onboarding-message { font-size: 26px; }
     .onboarding-device { width: 200px; height: 200px; }
     .onboarding-btn { width: 85px; height: 85px; font-size: 20px; }
-    .end-card { padding: 32px 24px; }
-    .end-card h2 { font-size: 30px; }
+    .end-card, .block-card, .resume-card, .duration-input-card { padding: 32px 24px; }
+    .end-card h2, .resume-card h3 { font-size: 30px; }
     .duration-dial { width: 200px; height: 200px; }
-    .dial-value { font-size: 28px; }
+    .dial-value { font-size: 24px; }
+    .block-text { font-size: 24px; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible, .dial-handle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -428,7 +460,6 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark">
-        <!-- LOGO : C arrondi + triangle terracotta -->
         <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="44" height="44" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="1"/>
           <path d="M28 15A10 10 0 1 0 28 29" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/>
@@ -483,7 +514,7 @@
         <div class="card" style="margin-top:16px;">
           <div class="section-label">Choisir la durée</div>
           <div class="duration-dial-wrap">
-            <div class="duration-dial" id="durationDial" role="slider" aria-label="Durée de la session" aria-valuemin="5" aria-valuemax="120" aria-valuenow="5" tabindex="0">
+            <div class="duration-dial" id="durationDial" role="slider" aria-label="Durée de la session" aria-valuemin="1" aria-valuemax="1440" aria-valuenow="5" tabindex="0">
               <svg viewBox="0 0 220 220">
                 <circle class="dial-track" cx="110" cy="110" r="90"/>
                 <circle class="dial-fill" id="dialFill" cx="110" cy="110" r="90" transform="rotate(-90 110 110)"/>
@@ -491,7 +522,8 @@
               </svg>
               <div class="dial-center">
                 <div class="dial-label">Durée</div>
-                <div class="dial-value"><span id="dialValue">05</span><span class="dial-unit">min</span></div>
+                <div class="dial-value" id="dialValueWrap" title="Cliquer pour saisir"><span id="dialValue">05</span><span class="dial-unit">min</span></div>
+                <div class="dial-hint">Cliquez pour saisir</div>
               </div>
             </div>
             <div class="dial-controls">
@@ -522,6 +554,7 @@
         <div class="device-stage">
           <div class="session-controls" id="sessionControls">
             <button class="session-ctrl-btn" id="pauseBtn">Pause</button>
+            <button class="session-ctrl-btn block-btn" id="blockBtn">Je bloque</button>
             <button class="session-ctrl-btn quit" id="quitBtn">Quitter</button>
           </div>
           <div class="device" role="group" aria-label="Boîtier Start simulé">
@@ -641,6 +674,41 @@
   </div>
 </div>
 
+<!-- NOUVEAU : Modal "Je bloque" -->
+<div class="block-overlay" id="blockOverlay">
+  <div class="block-card">
+    <div class="block-label">Micro-action</div>
+    <div class="block-text" id="blockText">—</div>
+    <button class="btn btn-primary" id="blockBack">Revenir à mon étape</button>
+  </div>
+</div>
+
+<!-- NOUVEAU : Modal de reprise -->
+<div class="resume-overlay" id="resumeOverlay">
+  <div class="resume-card">
+    <h3>Reprendre là où vous en étiez ?</h3>
+    <p id="resumeInfo">—</p>
+    <div class="resume-actions">
+      <button class="btn btn-ghost" id="resumeNo">Nouvelle session</button>
+      <button class="btn btn-primary" id="resumeYes">Reprendre</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOUVEAU : Modal de saisie de durée -->
+<div class="duration-input-overlay" id="durationInputOverlay">
+  <div class="duration-input-card">
+    <h3>Durée de la session</h3>
+    <p class="duration-input-hint">Exemples : 30, 150, 2h30, 4h, 2:30</p>
+    <input type="text" class="duration-input-field" id="durationInputField" placeholder="2h30" inputmode="text" autocomplete="off" />
+    <div class="duration-input-error" id="durationInputError"></div>
+    <div class="duration-input-actions">
+      <button class="btn btn-ghost" id="durationInputCancel">Annuler</button>
+      <button class="btn btn-primary" id="durationInputConfirm">Valider</button>
+    </div>
+  </div>
+</div>
+
 <div class="onboarding-overlay" id="onboardingOverlay">
   <div class="onboarding-container">
     <div class="onboarding-progress" id="onboardingProgress"></div>
@@ -683,7 +751,7 @@ const STORAGE_KEY = 'clic_app_fallback';
 const DEFAULT_STATE = {
   tasks: [],
   settings: { sound: 'bell', vibration: true, wakeLock: false, demo: true, theme: 'light', defaultDuration: 5, tone: 'warm' },
-  session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null },
+  session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, totalDuration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null, lastActiveDay: null },
   onboarding: { completed: false, currentScreen: 0, answers: {} }
 };
 
@@ -813,6 +881,7 @@ const ICONS = {
   arrowRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
   trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>`,
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
+  play: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`,
   x: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
   check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
   mountain: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>`,
@@ -824,11 +893,34 @@ const ICONS = {
 };
 
 const TEMPLATES = [
-  { name: "Réviser un cours", icon: ICONS.book, sub: "Mémoriser l'essentiel", steps: ["Relire les titres et sous-titres", "Surligner les idées clés", "Résumer chaque partie en une phrase", "Réciter sans regarder le cours", "Noter ce qui reste flou"] },
-  { name: "Faire un exercice difficile", icon: ICONS.target, sub: "Avancer pas à pas", steps: ["Lire l'énoncé entièrement", "Identifier ce qui est demandé", "Lister les données utiles", "Esquisser une première piste", "Rédiger une solution propre"] },
-  { name: "Rédiger un devoir", icon: ICONS.pen, sub: "Structurer sa pensée", steps: ["Choisir l'angle du sujet", "Écrire le plan en 3 parties", "Rédiger l'introduction", "Développer chaque partie", "Conclure et relire"] },
-  { name: "Ranger mon bureau", icon: ICONS.archive, sub: "Un espace clair", steps: ["Tout retirer du bureau", "Jeter ce qui est inutile", "Essuyer la surface", "Remettre l'essentiel seulement", "Profiter du résultat"] }
+  { name: "Réviser un cours", icon: ICONS.book, sub: "Mémoriser l'essentiel", steps: ["Relire les titres et sous-titres", "Surligner les idées clés", "Résumer chaque partie en une phrase", "Réciter sans regarder le cours", "Noter ce qui reste flou"], type: 'reviser' },
+  { name: "Faire un exercice difficile", icon: ICONS.target, sub: "Avancer pas à pas", steps: ["Lire l'énoncé entièrement", "Identifier ce qui est demandé", "Lister les données utiles", "Esquisser une première piste", "Rédiger une solution propre"], type: 'exercice' },
+  { name: "Rédiger un devoir", icon: ICONS.pen, sub: "Structurer sa pensée", steps: ["Choisir l'angle du sujet", "Écrire le plan en 3 parties", "Rédiger l'introduction", "Développer chaque partie", "Conclure et relire"], type: 'rediger' },
+  { name: "Ranger mon bureau", icon: ICONS.archive, sub: "Un espace clair", steps: ["Tout retirer du bureau", "Jeter ce qui est inutile", "Essuyer la surface", "Remettre l'essentiel seulement", "Profiter du résultat"], type: 'ranger' }
 ];
+
+/* ---------- Micro-actions "Je bloque" ---------- */
+const MICRO_ACTIONS = {
+  reviser: ["Ouvre ton cours à la bonne page", "Lis le titre du chapitre à voix haute", "Lis la première phrase du résumé", "Regarde un seul exemple", "Note un mot-clé sur une feuille"],
+  exercice: ["Lis l'énoncé en entier, sans crayon", "Surligne une seule donnée importante", "Écris ce qu'on te demande en une phrase", "Fais un schéma rapide au brouillon", "Relis la première ligne de l'énoncé"],
+  rediger: ["Ouvre un document vide", "Écris le titre de ton devoir", "Liste 3 idées en vrac", "Écris une seule phrase d'introduction", "Relis ta dernière phrase"],
+  ranger: ["Regarde ton bureau pendant 30 secondes", "Prends un seul objet inutile", "Essuie un coin du bureau", "Range un seul tiroir", "Jette un papier qui traîne"],
+  default: ["Respire 3 fois calmement", "Ouvre le document ou le livre", "Lis la première ligne", "Écris un seul mot", "Pose-toi la question : par quoi commencer ?"]
+};
+
+function getMicroActions(taskName) {
+  const n = (taskName || '').toLowerCase();
+  if (n.includes('révis') || n.includes('cours') || n.includes('leçon')) return MICRO_ACTIONS.reviser;
+  if (n.includes('exerc') || n.includes('math') || n.includes('problème')) return MICRO_ACTIONS.exercice;
+  if (n.includes('rédig') || n.includes('devoir') || n.includes('texte') || n.includes('dissertation')) return MICRO_ACTIONS.rediger;
+  if (n.includes('rang') || n.includes('bureau') || n.includes('ménage') || n.includes('trie')) return MICRO_ACTIONS.ranger;
+  return MICRO_ACTIONS.default;
+}
+
+function getRandomMicroAction(taskName) {
+  const actions = getMicroActions(taskName);
+  return actions[Math.floor(Math.random() * actions.length)];
+}
 
 const tasksContainer = document.getElementById('tasksContainer');
 function renderTasks() {
@@ -874,11 +966,47 @@ function renderTemplates() {
   templatesGrid.innerHTML = '';
   TEMPLATES.forEach(t => {
     const btn = document.createElement('button'); btn.className = 'template-chip';
-    btn.innerHTML = `<div class="t-icon">${t.icon}</div><div class="t-name">${t.name}</div><div class="t-sub">${t.sub}</div>`;
-    btn.addEventListener('click', () => applyTemplate(t)); templatesGrid.appendChild(btn);
+    btn.innerHTML = `
+      <div class="t-icon">${t.icon}</div>
+      <div class="t-name">${t.name}</div>
+      <div class="t-sub">${t.sub}</div>
+      <button class="quick-start" data-template="${t.name}" title="Démarrer immédiatement" aria-label="Démarrer ${t.name}">${ICONS.play}</button>
+    `;
+    btn.addEventListener('click', (e) => {
+      if (e.target.closest('.quick-start')) return;
+      applyTemplate(t);
+    });
+    btn.querySelector('.quick-start').addEventListener('click', (e) => {
+      e.stopPropagation();
+      quickStart(t);
+    });
+    templatesGrid.appendChild(btn);
   });
 }
 function applyTemplate(t) { taskNameInput.value = t.name; prepareSteps = t.steps.slice(); renderSteps(); toast('Modèle appliqué'); }
+
+/* NOUVEAU : Démarrage rapide */
+function quickStart(t) {
+  const duration = prepareFree ? 0 : (prepareDuration || state.settings.defaultDuration || 5);
+  const task = {
+    id: 't_' + Date.now(),
+    name: t.name,
+    steps: t.steps.slice(),
+    duration: duration,
+    done: false,
+    createdAt: Date.now()
+  };
+  state.tasks.unshift(task);
+  saveTasks();
+  renderTasks();
+  loadTask(task.id);
+  setTimeout(() => {
+    switchView('device');
+    setTimeout(() => handleStartClick(), 300);
+  }, 100);
+  toast('Session démarrée');
+}
+
 function renderSteps() {
   stepsEditor.innerHTML = '';
   prepareSteps.forEach((step, i) => {
@@ -901,13 +1029,14 @@ saveTaskBtn.addEventListener('click', () => {
 clearPrepareBtn.addEventListener('click', resetPrepare);
 function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; prepareFree = false; prepareDuration = state.settings.defaultDuration || 5; renderSteps(); updateDial(prepareDuration); document.getElementById('dialFree').classList.remove('active'); }
 
-/* ---------- Cadran de durée jusqu'à 120 min, paliers de 5 ---------- */
-const DIAL_MIN = 5, DIAL_MAX = 120, DIAL_STEP = 5;
+/* ---------- NOUVEAU : Cadran de durée illimité (1 min → 24h) ---------- */
+const DIAL_MIN = 1, DIAL_MAX = 1440;
 const DIAL_RADIUS = 90, DIAL_CENTER = 110;
 const DIAL_CIRC = 2 * Math.PI * DIAL_RADIUS;
 const dialFill = document.getElementById('dialFill');
 const dialHandle = document.getElementById('dialHandle');
 const dialValueEl = document.getElementById('dialValue');
+const dialValueWrap = document.getElementById('dialValueWrap');
 const dialMinus = document.getElementById('dialMinus');
 const dialPlus = document.getElementById('dialPlus');
 const dialFreeBtn = document.getElementById('dialFree');
@@ -920,13 +1049,17 @@ function valueToAngle(v) {
   return -90 + frac * 360;
 }
 
-function snapToStep(v) {
-  return Math.round(v / DIAL_STEP) * DIAL_STEP;
+function formatDialDisplay(v) {
+  if (v >= 60) {
+    const h = Math.floor(v / 60);
+    const m = v % 60;
+    return { main: m > 0 ? `${h}h${String(m).padStart(2,'0')}` : `${h}h`, unit: '' };
+  }
+  return { main: String(v).padStart(2, '0'), unit: 'min' };
 }
 
 function updateDial(v, skipSave) {
-  v = Math.max(DIAL_MIN, Math.min(DIAL_MAX, v));
-  v = snapToStep(v);
+  v = Math.max(DIAL_MIN, Math.min(DIAL_MAX, Math.round(v)));
   prepareDuration = v;
   const angle = valueToAngle(v);
   const rad = (angle * Math.PI) / 180;
@@ -937,7 +1070,9 @@ function updateDial(v, skipSave) {
   const frac = (v - DIAL_MIN) / (DIAL_MAX - DIAL_MIN);
   const offset = DIAL_CIRC * (1 - frac);
   dialFill.style.strokeDashoffset = offset;
-  dialValueEl.textContent = String(v).padStart(2, '0');
+  const display = formatDialDisplay(v);
+  dialValueEl.textContent = display.main;
+  dialValueEl.nextElementSibling.textContent = display.unit;
   durationDial.setAttribute('aria-valuenow', v);
   dialMinus.disabled = v <= DIAL_MIN;
   dialPlus.disabled = v >= DIAL_MAX;
@@ -957,8 +1092,7 @@ function setDialFromPointer(clientX, clientY) {
   angle = angle + 90;
   if (angle < 0) angle += 360;
   const frac = angle / 360;
-  const raw = DIAL_MIN + frac * (DIAL_MAX - DIAL_MIN);
-  const v = snapToStep(raw);
+  const v = DIAL_MIN + frac * (DIAL_MAX - DIAL_MIN);
   updateDial(v);
 }
 
@@ -976,7 +1110,7 @@ dialHandle.addEventListener('pointerup', (e) => { dialDragging = false; });
 dialHandle.addEventListener('pointercancel', () => { dialDragging = false; });
 
 durationDial.addEventListener('pointerdown', (e) => {
-  if (e.target === dialHandle || e.target.closest('.dial-btn') || e.target.closest('.dial-free')) return;
+  if (e.target === dialHandle || e.target.closest('.dial-btn') || e.target.closest('.dial-free') || e.target.closest('.dial-value')) return;
   setDialFromPointer(e.clientX, e.clientY);
   dialDragging = true;
   const moveHandler = (ev) => setDialFromPointer(ev.clientX, ev.clientY);
@@ -985,8 +1119,8 @@ durationDial.addEventListener('pointerdown', (e) => {
   document.addEventListener('pointerup', upHandler);
 });
 
-dialMinus.addEventListener('click', () => { if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
-dialPlus.addEventListener('click', () => { if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
+dialMinus.addEventListener('click', () => { if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
+dialPlus.addEventListener('click', () => { if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } });
 
 dialFreeBtn.addEventListener('click', () => {
   prepareFree = !prepareFree;
@@ -995,11 +1129,88 @@ dialFreeBtn.addEventListener('click', () => {
 });
 
 durationDial.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
-  else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - DIAL_STEP); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); if (prepareDuration < DIAL_MAX) { updateDial(prepareDuration + 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); if (prepareDuration > DIAL_MIN) { updateDial(prepareDuration - 1); if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); } } }
   else if (e.key === 'Home') { e.preventDefault(); updateDial(DIAL_MIN); }
   else if (e.key === 'End') { e.preventDefault(); updateDial(DIAL_MAX); }
 });
+
+/* NOUVEAU : Saisie directe de la durée */
+const durationInputOverlay = document.getElementById('durationInputOverlay');
+const durationInputField = document.getElementById('durationInputField');
+const durationInputError = document.getElementById('durationInputError');
+
+dialValueWrap.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (prepareFree) return;
+  durationInputField.value = formatDialDisplay(prepareDuration).main;
+  durationInputError.textContent = '';
+  durationInputField.classList.remove('error');
+  durationInputOverlay.classList.add('active');
+  setTimeout(() => durationInputField.focus(), 100);
+});
+
+document.getElementById('durationInputCancel').addEventListener('click', () => {
+  durationInputOverlay.classList.remove('active');
+});
+
+document.getElementById('durationInputConfirm').addEventListener('click', () => {
+  const v = parseDurationInput(durationInputField.value);
+  if (v === null) {
+    durationInputError.textContent = 'Durée invalide. Exemples : 30, 2h30, 4h, 150';
+    durationInputField.classList.add('error');
+    return;
+  }
+  updateDial(v);
+  if (prepareFree) { prepareFree = false; dialFreeBtn.classList.remove('active'); }
+  durationInputOverlay.classList.remove('active');
+  toast('Durée : ' + formatDuration(v));
+});
+
+durationInputField.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('durationInputConfirm').click(); }
+  if (e.key === 'Escape') { document.getElementById('durationInputCancel').click(); }
+});
+
+durationInputOverlay.addEventListener('click', (e) => {
+  if (e.target === durationInputOverlay) durationInputOverlay.classList.remove('active');
+});
+
+function parseDurationInput(str) {
+  if (!str) return null;
+  str = str.trim().toLowerCase().replace(',', '.');
+  let total = 0;
+  let matched = false;
+  
+  const colonMatch = str.match(/^(\d{1,3}):(\d{1,2})$/);
+  if (colonMatch) {
+    const h = parseInt(colonMatch[1]);
+    const m = parseInt(colonMatch[2]);
+    if (m >= 0 && m < 60 && h >= 0) { total = h * 60 + m; matched = true; }
+  }
+  
+  if (!matched) {
+    const hMatch = str.match(/(\d+(?:\.\d+)?)\s*h/);
+    const mMatch = str.match(/(\d+(?:\.\d+)?)\s*m(in)?/);
+    const pureNum = str.match(/^(\d+(?:\.\d+)?)$/);
+    
+    if (hMatch) {
+      total += Math.round(parseFloat(hMatch[1]) * 60);
+      matched = true;
+    }
+    if (mMatch) {
+      total += Math.round(parseFloat(mMatch[1]));
+      matched = true;
+    }
+    if (pureNum && !hMatch && !mMatch) {
+      total = Math.round(parseFloat(pureNum[1]));
+      matched = true;
+    }
+  }
+  
+  if (!matched || total < 1) return null;
+  return Math.min(DIAL_MAX, Math.max(1, total));
+}
 
 /* ---------- Web Audio ---------- */
 function getAudioContext() {
@@ -1054,6 +1265,7 @@ const progressFill = document.getElementById('progressFill');
 const sessionControls = document.getElementById('sessionControls');
 const pauseBtn = document.getElementById('pauseBtn');
 const quitBtn = document.getElementById('quitBtn');
+const blockBtn = document.getElementById('blockBtn');
 const endScreen = document.getElementById('endScreen');
 const continueBtn = document.getElementById('continueBtn');
 const finishBtn = document.getElementById('finishBtn');
@@ -1069,15 +1281,17 @@ startBtn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'En
 function handleStartClick() {
   const task = getCurrentTask(); if (!task) return;
   if (state.session.isPaused) { resumeSession(); return; }
-  if (state.session.endTime === 0) { startSession(); return; }
+  if (state.session.endTime === 0 && state.session.duration === 0) { startSession(); return; }
   validateStep();
 }
 
+/* CORRECTION : startSession fixe la durée totale une seule fois */
 function startSession() {
   const task = getCurrentTask(); if (!task) return;
   const duration = task.duration > 0 ? task.duration * 60 : 0;
   state.session.endTime = duration > 0 ? Date.now() + duration * 1000 : 0;
   state.session.duration = duration;
+  state.session.totalDuration = duration; // Durée totale figée
   state.session.isPaused = false;
   state.session.startedAt = Date.now();
   saveSession();
@@ -1089,17 +1303,15 @@ function startSession() {
   setTimeout(() => startBtn.classList.remove('glow'), 500);
 }
 
+/* CORRECTION : validateStep n'altère PAS le timer */
 function validateStep() {
   const task = getCurrentTask(); if (!task) return;
-  stopTimer();
+  // On ne stoppe pas le timer en mode chronométré — il continue
   if (state.session.stepIndex < task.steps.length - 1) {
     state.session.stepIndex++;
-    if (task.duration > 0) {
-      state.session.endTime = Date.now() + task.duration * 60 * 1000;
-      state.session.duration = task.duration * 60;
-    }
-    saveSession(); renderDevice();
-    if (task.duration > 0) startTimer();
+    // NE PAS reset endTime ni duration
+    saveSession();
+    renderDevice();
     if (state.settings.vibration && navigator.vibrate) navigator.vibrate(30);
     startBtn.classList.add('glow');
     setTimeout(() => startBtn.classList.remove('glow'), 500);
@@ -1120,6 +1332,7 @@ continueBtn.addEventListener('click', () => {
   if (task) {
     state.session.endTime = Date.now() + 10 * 60 * 1000;
     state.session.duration = 10 * 60;
+    state.session.totalDuration = 10 * 60;
     state.session.isPaused = false;
     saveSession(); renderDevice(); startTimer();
     toast('Session prolongée de 10 minutes');
@@ -1129,7 +1342,7 @@ continueBtn.addEventListener('click', () => {
 finishBtn.addEventListener('click', () => { endScreen.classList.remove('active'); completeTask(); });
 
 function pauseSession() {
-  if (state.session.endTime === 0) return;
+  if (state.session.duration === 0) return; // Mode libre : pas de pause timer
   state.session.isPaused = true;
   state.session.pausedAt = Date.now();
   state.session.pausedRemaining = Math.max(0, state.session.endTime - Date.now());
@@ -1139,17 +1352,36 @@ function resumeSession() {
   if (!state.session.isPaused) return;
   state.session.isPaused = false;
   state.session.endTime = Date.now() + state.session.pausedRemaining;
-  state.session.duration = Math.ceil(state.session.pausedRemaining / 1000);
   saveSession(); renderDevice(); startTimer();
   if (state.settings.wakeLock) requestWakeLock();
   toast('Session reprise');
 }
 function quitSession() {
   stopTimer(); releaseWakeLock();
-  state.session.endTime = 0; state.session.duration = 0;
+  state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
   state.session.isPaused = false; state.session.pausedRemaining = 0;
   saveSession(); renderDevice(); toast('Session quittée');
 }
+
+/* NOUVEAU : Mode "Je bloque" */
+const blockOverlay = document.getElementById('blockOverlay');
+const blockText = document.getElementById('blockText');
+const blockBack = document.getElementById('blockBack');
+
+blockBtn.addEventListener('click', () => {
+  const task = getCurrentTask();
+  const action = getRandomMicroAction(task ? task.name : '');
+  blockText.textContent = action;
+  blockOverlay.classList.add('active');
+});
+
+blockBack.addEventListener('click', () => {
+  blockOverlay.classList.remove('active');
+});
+
+blockOverlay.addEventListener('click', (e) => {
+  if (e.target === blockOverlay) blockOverlay.classList.remove('active');
+});
 
 pauseBtn.addEventListener('click', pauseSession);
 quitBtn.addEventListener('click', quitSession);
@@ -1167,7 +1399,7 @@ function startTimer() {
 function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
 function updateTimerFromEndTime() {
   const remaining = Math.max(0, state.session.endTime - Date.now());
-  const total = state.session.duration > 0 ? state.session.duration * 1000 : 1;
+  const total = state.session.totalDuration > 0 ? state.session.totalDuration * 1000 : 1;
   const percent = remaining / total;
   progressFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - percent);
   const m = Math.floor(remaining / 60000);
@@ -1179,11 +1411,7 @@ function onTimerEnd() {
   const task = getCurrentTask();
   if (task && state.session.stepIndex < task.steps.length - 1) {
     state.session.stepIndex++;
-    if (task.duration > 0) {
-      state.session.endTime = Date.now() + task.duration * 60 * 1000;
-      state.session.duration = task.duration * 60;
-    }
-    saveSession(); renderDevice(); startTimer();
+    saveSession(); renderDevice();
     playAlert();
     if (state.settings.vibration && navigator.vibrate) navigator.vibrate([120, 80, 120]);
     toast('Étape suivante');
@@ -1194,7 +1422,7 @@ function loadTask(id) {
   const task = state.tasks.find(t => t.id === id); if (!task) return;
   stopTimer();
   state.session.taskId = id; state.session.stepIndex = 0;
-  state.session.endTime = 0; state.session.duration = 0;
+  state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
   state.session.isPaused = false; state.session.pausedRemaining = 0;
   state.session.startedAt = Date.now();
   saveSession(); renderTasks(); renderDevice();
@@ -1204,7 +1432,7 @@ function getCurrentTask() { return state.tasks.find(t => t.id === state.session.
 
 function renderDevice() {
   const task = getCurrentTask();
-  const sessionActive = task && state.session.endTime > 0;
+  const sessionActive = task && (state.session.duration > 0 || state.session.stepIndex > 0);
   sessionControls.classList.toggle('visible', sessionActive && !state.session.isPaused);
   pauseBtn.textContent = state.session.isPaused ? 'Reprendre' : 'Pause';
 
@@ -1240,6 +1468,7 @@ function renderDevice() {
     devProgress.appendChild(pip);
   });
 
+  // Mode chronométré OU mode libre
   if (task.duration > 0 && state.session.endTime > 0) {
     devTimer.style.display = 'flex';
     if (!timerInterval && !state.session.isPaused) startTimer();
@@ -1253,6 +1482,9 @@ function renderDevice() {
   if (state.session.isPaused) {
     startBtn.textContent = 'PAUSE';
     deviceHint.textContent = 'Session en pause. Appuyez sur START pour reprendre.';
+  } else if (state.session.duration === 0) {
+    startBtn.textContent = 'START';
+    deviceHint.textContent = 'Mode libre. Appuyez sur START pour avancer d\'une étape.';
   } else if (state.session.endTime === 0) {
     startBtn.textContent = 'START';
     deviceHint.textContent = 'Appuyez sur START pour commencer.';
@@ -1266,7 +1498,7 @@ function completeTask() {
   const task = getCurrentTask(); if (!task) return;
   task.done = true; stopTimer(); releaseWakeLock();
   state.session.taskId = null; state.session.stepIndex = 0;
-  state.session.endTime = 0; state.session.duration = 0;
+  state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
   state.session.isPaused = false; state.session.pausedRemaining = 0;
   saveTasks(); saveSession(); renderTasks(); renderDevice();
   toast('Tâche terminée'); progressFill.classList.add('complete');
@@ -1303,7 +1535,7 @@ document.getElementById('wakeLockToggle').addEventListener('click', async () => 
   state.settings.wakeLock = !state.settings.wakeLock;
   document.getElementById('wakeLockToggle').classList.toggle('on', state.settings.wakeLock);
   saveSettings();
-  if (state.settings.wakeLock && getCurrentTask() && state.session.endTime > 0) await requestWakeLock();
+  if (state.settings.wakeLock && getCurrentTask() && state.session.duration > 0) await requestWakeLock();
   else releaseWakeLock();
 });
 document.getElementById('demoToggle').addEventListener('click', () => {
@@ -1340,13 +1572,66 @@ function applySettingsToUI() {
   updateDial(prepareDuration, true);
 }
 
+/* NOUVEAU : Modal de reprise */
+const resumeOverlay = document.getElementById('resumeOverlay');
+const resumeInfo = document.getElementById('resumeInfo');
+
+function showResumeModal(task) {
+  const remaining = state.session.duration > 0 && state.session.endTime > Date.now()
+    ? Math.ceil((state.session.endTime - Date.now()) / 60000)
+    : null;
+  const timeInfo = remaining ? ` (environ ${remaining} min restantes)` : '';
+  resumeInfo.innerHTML = `<strong>${escapeHtml(task.name)}</strong><br>Étape ${state.session.stepIndex + 1} sur ${task.steps.length}${timeInfo}`;
+  resumeOverlay.classList.add('active');
+}
+
+document.getElementById('resumeNo').addEventListener('click', () => {
+  resumeOverlay.classList.remove('active');
+  state.session.taskId = null; state.session.stepIndex = 0;
+  state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
+  state.session.isPaused = false; state.session.pausedRemaining = 0;
+  saveSession();
+  renderDevice();
+});
+
+document.getElementById('resumeYes').addEventListener('click', () => {
+  resumeOverlay.classList.remove('active');
+  const task = getCurrentTask();
+  if (!task) return;
+  switchView('device');
+  if (state.session.isPaused) {
+    // Reste en pause, l'utilisateur doit appuyer sur START
+    renderDevice();
+  } else if (state.session.duration > 0 && state.session.endTime > Date.now()) {
+    renderDevice();
+    startTimer();
+    if (state.settings.wakeLock) requestWakeLock();
+  } else {
+    renderDevice();
+  }
+});
+
+resumeOverlay.addEventListener('click', (e) => {
+  if (e.target === resumeOverlay) resumeOverlay.classList.remove('active');
+});
+
 async function resumeSessionAfterReload() {
   if (!state.session.taskId) return;
   const task = getCurrentTask(); if (!task) return;
-  if (state.session.isPaused && state.session.pausedRemaining > 0) { renderDevice(); return; }
-  if (state.session.endTime > Date.now()) { renderDevice(); startTimer(); if (state.settings.wakeLock) await requestWakeLock(); return; }
-  if (state.session.endTime > 0 && state.session.endTime < Date.now()) { state.session.endTime = 0; saveSession(); renderDevice(); return; }
-  renderDevice();
+  
+  // Ajuster le temps restant si session active non-pause
+  if (!state.session.isPaused && state.session.duration > 0 && state.session.endTime > 0) {
+    if (state.session.endTime < Date.now()) {
+      // Temps écoulé pendant l'absence
+      state.session.endTime = 0;
+      state.session.duration = 0;
+      state.session.totalDuration = 0;
+      saveSession();
+    }
+  }
+  
+  // Proposer la reprise
+  showResumeModal(task);
 }
 
 /* ---------- Onboarding ---------- */
@@ -1491,8 +1776,8 @@ window.addEventListener('beforeunload', () => { saveSession(); });
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') saveSession();
   else {
-    if (state.session.endTime > Date.now() && !state.session.isPaused && state.session.taskId) {
-      if (!timerInterval) { const task = getCurrentTask(); if (task && task.duration > 0) startTimer(); }
+    if (state.session.duration > 0 && state.session.endTime > Date.now() && !state.session.isPaused && state.session.taskId) {
+      if (!timerInterval) { const task = getCurrentTask(); if (task) startTimer(); }
     }
   }
 });
