@@ -504,66 +504,11 @@
   .block-subtitle { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 8px; }
   .block-subtext { text-align: center; color: var(--ink-2); margin-bottom: 24px; line-height: 1.5; }
   
-  /* NOUVEAU : Affichage une action à la fois */
-  .current-action-display {
-    background: var(--accent-soft);
-    border: 2px solid var(--accent);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  .current-action-number {
-    font-size: 12px;
-    color: var(--accent-2);
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .current-action-text {
-    font-family: 'Caveat', cursive;
-    font-size: 26px;
-    color: var(--ink);
-    line-height: 1.3;
-    margin-bottom: 16px;
-  }
-  .current-action-input {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--surface);
-    font-family: inherit;
-    font-size: 15px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color .2s var(--ease);
-  }
-  .current-action-input:focus { border-color: var(--accent); }
-  
-  .action-progress {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-bottom: 20px;
-  }
-  .action-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--line);
-    transition: background .3s var(--ease);
-  }
-  .action-dot.done { background: var(--accent); }
-  .action-dot.current { background: var(--accent-2); }
-
   .micro-steps-list { display: grid; gap: 10px; margin-bottom: 20px; }
   .micro-step-item { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); }
   .micro-step-item .ms-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-2); font-size: 11px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
   .micro-step-item input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--ink); outline: none; }
   
-  /* NOUVEAU : Formulaire de clarification */
   .clarification-form {
     background: var(--surface-2);
     border: 1px solid var(--line);
@@ -578,7 +523,6 @@
     color: var(--ink);
     margin-bottom: 8px;
   }
-  .clarification-form input,
   .clarification-form select {
     width: 100%;
     padding: 12px 16px;
@@ -592,35 +536,7 @@
     margin-bottom: 12px;
     transition: border-color .2s var(--ease);
   }
-  .clarification-form input:focus,
   .clarification-form select:focus { border-color: var(--accent); }
-
-  .checklist { display: grid; gap: 10px; margin: 20px 0; }
-  .checklist-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); cursor: pointer; transition: all .2s var(--ease); }
-  .checklist-item:hover { border-color: var(--accent); }
-  .checklist-item.checked { background: var(--accent-soft); border-color: var(--accent); }
-  .checklist-item .check-box { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--line); display: grid; place-items: center; flex-shrink: 0; transition: all .2s var(--ease); }
-  .checklist-item.checked .check-box { background: var(--accent); border-color: var(--accent); }
-  .checklist-item.checked .check-box svg { display: block; }
-  .checklist-item .check-box svg { width: 14px; height: 14px; color: #fff; display: none; }
-  .checklist-item .check-text { font-size: 14px; color: var(--ink); }
-
-  .breathe-circle-wrap { display: flex; justify-content: center; margin: 24px 0; }
-  .breathe-circle {
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, var(--accent-halo), var(--accent));
-    box-shadow: 0 0 30px rgba(224,133,111,0.3);
-    animation: breatheCircle 6s ease-in-out infinite;
-  }
-  @keyframes breatheCircle {
-    0%, 100% { transform: scale(0.7); opacity: 0.7; }
-    50% { transform: scale(1.2); opacity: 1; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .breathe-circle { animation: none; transform: scale(1); }
-  }
-  .breathe-label { text-align: center; font-family: 'Caveat', cursive; font-size: 22px; color: var(--ink); margin-bottom: 16px; min-height: 28px; }
 
   .theme-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
   .theme-card { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 14px; cursor: pointer; transition: all .2s var(--ease); font-family: inherit; text-align: left; display: flex; flex-direction: column; gap: 8px; }
@@ -693,7 +609,6 @@
     .end-card h2, .resume-card h3, .about-card h2 { font-size: 28px; }
     .duration-display { font-size: 40px; }
     .block-intro .page-title { font-size: 40px; }
-    .current-action-text { font-size: 22px; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -1208,7 +1123,8 @@ const ICONS = {
   sun: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
   moon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
   coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
-  unlock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`
+  unlock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`,
+  batteryLow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/><rect x="4" y="9" width="6" height="6" fill="currentColor" opacity="0.3"/></svg>`
 };
 
 const TEMPLATES = [
@@ -1218,144 +1134,141 @@ const TEMPLATES = [
   { name: "Ranger mon bureau", icon: ICONS.archive, sub: "Un espace clair", steps: ["Tout retirer du bureau", "Jeter ce qui est inutile", "Essuyer la surface", "Remettre l'essentiel seulement", "Profiter du résultat"], type: 'ranger' }
 ];
 
-/* ============================================================
-   MOTEUR DE MICRO-ACTIONS CONCRÈTES
-   ============================================================ */
 const MICRO_ACTIONS = {
   reviser: {
     noIdea: [
-      "Prends ton cahier de maths",
-      "Ouvre le chapitre à réviser",
-      "Lis uniquement la première définition"
+      ["Prends ton cahier de maths", "Ouvre-le à la page du chapitre", "Lis uniquement le titre de la première section"],
+      ["Sors tes fiches de révision", "Pose-les dans l'ordre chronologique", "Lis la première fiche en entier"],
+      ["Ouvre ton cours à la première page", "Lis seulement les titres en diagonale", "Note 3 mots que tu ne comprends pas"]
     ],
     tooBig: [
-      "Relis seulement les titres du chapitre",
-      "Fais une fiche sur une seule notion",
-      "Refais un seul exercice type"
+      ["Relis seulement les titres du chapitre", "Fais une fiche sur une seule notion", "Refais un seul exercice type"],
+      ["Divise le chapitre en 3 parties", "Travaille uniquement la première partie", "Fais une pause avant la suite"],
+      ["Liste toutes les notions à revoir", "Choisis la plus importante", "Fais une fiche dessus seulement"]
     ],
     tired: [
-      "Relis une seule définition",
-      "Regarde un seul schéma",
-      "Note un seul mot-clé"
+      ["Relis une seule définition", "Regarde un seul schéma", "Note un seul mot-clé"],
+      ["Ouvre ton cours", "Lis une seule phrase", "Ferme-le si tu veux"],
+      ["Pose ton cahier devant toi", "Lis le titre du chapitre", "Décide si tu continues ou fais une pause"]
     ]
   },
   ranger: {
     noIdea: [
-      "Ramasse un vêtement au sol",
-      "Mets-le dans le panier à linge",
-      "Range trois autres vêtements"
+      ["Ramasse un vêtement au sol", "Mets-le dans le panier à linge", "Range trois autres vêtements"],
+      ["Pose une boîte vide au centre de la pièce", "Mets-y tout ce qui traîne", "Trie la boîte ensuite"],
+      ["Commence par le bureau", "Enlève tout ce qui n'a rien à y faire", "Essuie la surface"]
     ],
     tooBig: [
-      "Commence par un seul coin de la pièce",
-      "Trie seulement les vêtements",
-      "Range uniquement les livres"
+      ["Commence par un seul coin de la pièce", "Trie seulement les vêtements", "Range uniquement les livres"],
+      ["Divise la pièce en 4 zones", "Travaille uniquement la première zone", "Fais une pause avant la suite"],
+      ["Fais 3 tas : à garder, à jeter, à déplacer", "Remplis seulement le tas 'à jeter'", "Jette-le tout de suite"]
     ],
     tired: [
-      "Ramasse un seul objet",
-      "Mets-le à sa place",
-      "Fais une pause si besoin"
+      ["Ramasse un seul objet", "Mets-le à sa place", "Fais une pause si besoin"],
+      ["Ouvre la porte de ta chambre", "Regarde ce qui traîne", "Choisis UN seul objet à ranger"],
+      ["Prends un sac poubelle", "Jette 3 déchets visibles", "Décide si tu continues"]
     ]
   },
   ecrire: {
     noIdea: [
-      "Ouvre ton document",
-      "Écris le titre de ton devoir",
-      "Écris une première idée, même imparfaite"
+      ["Ouvre ton document", "Écris le titre de ton devoir", "Écris une première idée, même imparfaite"],
+      ["Prends une feuille blanche", "Note 5 idées en vrac", "Choisis la meilleure"],
+      ["Ouvre un document vide", "Écris la question du sujet", "Liste 3 mots-clés de réponse"]
     ],
     tooBig: [
-      "Écris le plan en 3 parties",
-      "Rédige seulement l'introduction",
-      "Fais la bibliographie"
+      ["Écris le plan en 3 parties", "Rédige seulement l'introduction", "Fais la bibliographie"],
+      ["Divise ton texte en sections", "Travaille uniquement la première section", "Fais une pause avant la suite"],
+      ["Liste tous les points à aborder", "Choisis le plus simple", "Rédige-le en entier"]
     ],
     tired: [
-      "Écris une seule phrase du rapport",
-      "Note une idée en vrac",
-      "Relis ton dernier paragraphe"
+      ["Écris une seule phrase du rapport", "Note une idée en vrac", "Relis ton dernier paragraphe"],
+      ["Ouvre ton document", "Écris le titre provisoire", "Ferme-le si tu veux"],
+      ["Prends une feuille", "Écris UNE seule idée", "Décide si tu continues ou fais une pause"]
     ]
   },
   contacter: {
     noIdea: [
-      "Ouvre le message",
-      "Identifie la question principale",
-      "Écris une phrase de réponse provisoire"
+      ["Ouvre le message", "Identifie la question principale", "Écris une phrase de réponse provisoire"],
+      ["Cherche le numéro ou l'adresse", "Note-le sur un papier", "Prépare ce que tu veux dire"],
+      ["Ouvre ta messagerie", "Crée un nouveau message", "Écris seulement l'objet"]
     ],
     tooBig: [
-      "Écris seulement l'objet du message",
-      "Rédige la première phrase",
-      "Liste les 3 points à aborder"
+      ["Écris seulement l'objet du message", "Rédige la première phrase", "Liste les 3 points à aborder"],
+      ["Divise ton message en parties", "Rédige seulement l'introduction", "Fais une pause avant la suite"],
+      ["Liste toutes les personnes à contacter", "Choisis la plus urgente", "Envoie-lui un message court"]
     ],
     tired: [
-      "Regarde le numéro de téléphone",
-      "Ouvre un nouveau message",
-      "Écris seulement l'objet"
+      ["Regarde le numéro de téléphone", "Ouvre un nouveau message", "Écris seulement l'objet"],
+      ["Ouvre ta messagerie", "Lis le dernier message reçu", "Décide si tu réponds maintenant"],
+      ["Prends ton téléphone", "Compose le numéro", "Décide si tu appelles ou fais une pause"]
     ]
   },
   exercice: {
     noIdea: [
-      "Lis l'énoncé en entier, sans crayon",
-      "Surligne les données importantes",
-      "Écris ce qu'on te demande"
+      ["Lis l'énoncé en entier, sans crayon", "Surligne les données importantes", "Écris ce qu'on te demande"],
+      ["Ouvre ton cahier d'exercices", "Lis le premier exercice", "Identifie le chapitre correspondant"],
+      ["Prends une feuille de brouillon", "Recopie l'énoncé", "Souligne les mots-clés"]
     ],
     tooBig: [
-      "Lis seulement l'énoncé",
-      "Identifie les données utiles",
-      "Fais un schéma rapide"
+      ["Lis seulement l'énoncé", "Identifie les données utiles", "Fais un schéma rapide"],
+      ["Divise l'exercice en questions", "Résous uniquement la première", "Fais une pause avant la suite"],
+      ["Liste toutes les questions", "Choisis la plus simple", "Résous-la en entier"]
     ],
     tired: [
-      "Relis l'énoncé une fois",
-      "Note une donnée importante",
-      "Écris la formule principale"
+      ["Relis l'énoncé une fois", "Note une donnée importante", "Écris la formule principale"],
+      ["Ouvre ton cahier", "Lis la première question", "Décide si tu commences ou fais une pause"],
+      ["Prends ton crayon", "Écris le numéro de l'exercice", "Recopie la première ligne de l'énoncé"]
     ]
   },
   lire: {
     noIdea: [
-      "Ouvre le livre à la première page",
-      "Lis le sommaire ou la table des matières",
-      "Lis la quatrième de couverture"
+      ["Ouvre le livre à la première page", "Lis le sommaire ou la table des matières", "Lis la quatrième de couverture"],
+      ["Prends le livre", "Ouvre-le au chapitre 1", "Lis le premier paragraphe"],
+      ["Pose le livre devant toi", "Lis le titre du chapitre", "Note ce que tu attends de cette lecture"]
     ],
     tooBig: [
-      "Lis seulement le premier chapitre",
-      "Lis les titres des sections",
-      "Note 3 idées principales"
+      ["Lis seulement le premier chapitre", "Lis les titres des sections", "Note 3 idées principales"],
+      ["Divise le livre en parties", "Lis uniquement la première partie", "Fais une pause avant la suite"],
+      ["Fixe-toi un objectif de 10 pages", "Lis ces 10 pages", "Fais un résumé en une phrase"]
     ],
     tired: [
-      "Lis un seul paragraphe",
-      "Regarde les images ou schémas",
-      "Lis le résumé de fin de chapitre"
+      ["Lis un seul paragraphe", "Regarde les images ou schémas", "Lis le résumé de fin de chapitre"],
+      ["Ouvre le livre", "Lis une seule phrase", "Décide si tu continues ou fais une pause"],
+      ["Prends le livre", "Lis le titre du chapitre", "Feuillette 2 pages au hasard"]
     ]
   },
   projet: {
     noIdea: [
-      "Ouvre ton outil de travail",
-      "Crée un nouveau fichier ou projet",
-      "Note l'objectif final"
+      ["Ouvre ton outil de travail", "Crée un nouveau fichier ou projet", "Note l'objectif final"],
+      ["Ouvre ton IDE ou ton logiciel", "Crée un nouveau projet", "Nomme-le clairement"],
+      ["Prends une feuille", "Écris le nom du projet", "Liste 3 grandes étapes"]
     ],
     tooBig: [
-      "Fais la liste des tâches à faire",
-      "Commence par la plus simple",
-      "Dessine un schéma ou une maquette"
+      ["Fais la liste des tâches à faire", "Commence par la plus simple", "Dessine un schéma ou une maquette"],
+      ["Divise le projet en phases", "Travaille uniquement la première phase", "Fais une pause avant la suite"],
+      ["Liste toutes les fonctionnalités", "Choisis la plus importante", "Implémente-la d'abord"]
     ],
     tired: [
-      "Ouvre ton projet et regarde-le",
-      "Note une seule idée",
-      "Fais un petit croquis"
+      ["Ouvre ton projet et regarde-le", "Note une seule idée", "Fais un petit croquis"],
+      ["Ouvre ton outil de travail", "Regarde ce que tu as déjà fait", "Décide si tu continues ou fais une pause"],
+      ["Prends une feuille", "Dessine un schéma rapide", "Décide si tu commences à coder"]
     ]
   },
   cuisine: {
     noIdea: [
-      "Choisis une recette simple",
-      "Vérifie ce que tu as dans le frigo",
-      "Fais la liste des courses"
+      ["Choisis une recette simple", "Vérifie ce que tu as dans le frigo", "Fais la liste des courses"],
+      ["Ouvre un livre de recettes", "Choisis une recette", "Lis-la en entier"],
+      ["Regarde ce qu'il y a dans le frigo", "Note 3 ingrédients disponibles", "Cherche une recette avec ces ingrédients"]
     ],
     tooBig: [
-      "Lis la recette en entier",
-      "Rassemble tous les ingrédients",
-      "Prépare seulement les légumes"
+      ["Lis la recette en entier", "Rassemble tous les ingrédients", "Prépare seulement les légumes"],
+      ["Divise la recette en étapes", "Fais uniquement la préparation", "Fais une pause avant la cuisson"],
+      ["Liste tous les plats à faire", "Choisis le plus simple", "Fais-le en entier"]
     ],
     tired: [
-      "Prépare un sandwich simple",
-      "Fais bouillir de l'eau pour des pâtes",
-      "Coupe un fruit"
+      ["Prépare un sandwich simple", "Fais bouillir de l'eau pour des pâtes", "Coupe un fruit"],
+      ["Ouvre le frigo", "Regarde ce qu'il y a", "Décide si tu cuisines ou commandes"],
+      ["Prends un bol", "Mets-y des céréales", "Ajoute du lait"]
     ]
   }
 };
@@ -1394,20 +1307,24 @@ function suggestActions(taskName, blocker) {
   }
   
   const bank = MICRO_ACTIONS[category];
-  if (!bank || !bank[blocker]) {
+  if (!bank || !bank[blocker] || bank[blocker].length === 0) {
     return { category, actions: [], needsClarification: true };
   }
   
-  let actions = bank[blocker].slice();
+  const variants = bank[blocker];
+  const variantIndex = Math.floor(Math.random() * variants.length);
+  let actions = variants[variantIndex].slice();
   
-  // Ajouter les actions apprises en premier
   const learnedKey = `${category}_${blocker}`;
   const learned = state.blockLearned[learnedKey] || [];
-  if (learned.length > 0) {
-    actions = [...learned, ...actions.filter(a => !learned.includes(a))];
+  if (learned.length >= 3) {
+    actions = learned.slice(0, 3);
+  } else if (learned.length > 0) {
+    const remaining = actions.filter(a => !learned.includes(a));
+    actions = [...learned, ...remaining].slice(0, 3);
   }
   
-  return { category, actions: actions.slice(0, 3), needsClarification: false };
+  return { category, actions, needsClarification: false };
 }
 
 function saveLearnedAction(taskName, blocker, action) {
@@ -1542,9 +1459,6 @@ saveTaskBtn.addEventListener('click', () => {
 clearPrepareBtn.addEventListener('click', resetPrepare);
 function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; prepareFree = false; prepareDuration = state.settings.defaultDuration || 5; renderSteps(); updateDurationRow(); document.getElementById('dialFree').classList.remove('active'); }
 
-/* ============================================================
-   BOTTOM SHEET DURÉE
-   ============================================================ */
 const durationRow = document.getElementById('durationRow');
 const durationRowValue = document.getElementById('durationRowValue');
 const durationSheetOverlay = document.getElementById('durationSheetOverlay');
@@ -1662,9 +1576,6 @@ document.getElementById('dialFree').addEventListener('click', () => {
   if (prepareFree) toast('Session libre activée');
 });
 
-/* ============================================================
-   WEB AUDIO
-   ============================================================ */
 function getAudioContext() {
   if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} }
   if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
@@ -1703,9 +1614,6 @@ function playAlert() {
   else if (sound === 'pulse') playPulse();
 }
 
-/* ============================================================
-   DEVICE / START
-   ============================================================ */
 const startBtn = document.getElementById('startBtn');
 const devLabel = document.getElementById('devLabel');
 const devTask = document.getElementById('devTask');
@@ -1949,9 +1857,6 @@ async function requestWakeLock() {
 }
 function releaseWakeLock() { if (wakeLock) { try { wakeLock.release(); } catch(e) {} wakeLock = null; } }
 
-/* ============================================================
-   RÉGLAGES
-   ============================================================ */
 function bindSegmented(containerId, settingKey, onChange) {
   const container = document.getElementById(containerId);
   container.addEventListener('click', (e) => {
@@ -2105,13 +2010,10 @@ async function resumeSessionAfterReload() {
   showResumeModal(task);
 }
 
-/* ============================================================
-   MODE "JE BLOQUE" — MOTEUR AMÉLIORÉ
-   ============================================================ */
 const BLOCK_CARDS = [
-  { key: 'noIdea', icon: ICONS.compass, title: "Je ne sais pas par où commencer", desc: "Première action immédiate" },
-  { key: 'tooBig', icon: ICONS.mountain, title: "C'est trop gros", desc: "Découpage + première micro-action" },
-  { key: 'tired', icon: ICONS.leaf, title: "Je suis à plat", desc: "Version ultra-courte + option pause" }
+  { key: 'noIdea', icon: ICONS.compass, title: "Je ne sais pas par où commencer", desc: "Trois premières actions concrètes" },
+  { key: 'tooBig', icon: ICONS.mountain, title: "C'est trop gros", desc: "Découpage en 3 micro-étapes" },
+  { key: 'tired', icon: ICONS.batteryLow, title: "Je suis à plat", desc: "Version minimaliste + option pause" }
 ];
 
 const blockGrid = document.getElementById('blockGrid');
@@ -2121,7 +2023,6 @@ const blockActions = document.getElementById('blockActions');
 let currentBlockCategory = null;
 let currentBlocker = null;
 let currentActions = [];
-let currentActionIndex = 0;
 let needsClarification = false;
 
 function renderBlockMain() {
@@ -2152,7 +2053,6 @@ function openBlockAction(blocker) {
   const result = suggestActions(taskName, blocker);
   currentBlockCategory = result.category;
   currentActions = result.actions;
-  currentActionIndex = 0;
   needsClarification = result.needsClarification;
   
   blockMain.style.display = 'none';
@@ -2197,24 +2097,25 @@ function renderClarificationForm() {
     }
     currentBlockCategory = category;
     const bank = MICRO_ACTIONS[category];
-    if (bank && bank[currentBlocker]) {
-      currentActions = bank[currentBlocker].slice(0, 3);
+    if (bank && bank[currentBlocker] && bank[currentBlocker].length > 0) {
+      const variants = bank[currentBlocker];
+      currentActions = variants[0].slice();
       needsClarification = false;
       renderBlockAction();
     } else {
-      toast('Catégorie non disponible');
+      toast('Catégorie non disponible pour ce blocage');
     }
   });
 }
 
 function renderBlockAction() {
-  if (currentActionIndex >= currentActions.length) {
-    renderBlockComplete();
+  if (currentActions.length === 0) {
+    renderBlockEmpty();
     return;
   }
   
-  const action = currentActions[currentActionIndex];
   const totalActions = currentActions.length;
+  const isTired = currentBlocker === 'tired';
   
   blockActions.innerHTML = `
     <div class="block-action active">
@@ -2222,52 +2123,52 @@ function renderBlockAction() {
       <div class="block-subtitle">${getBlockTitle(currentBlocker)}</div>
       <p class="block-subtext">${getBlockSubtitle(currentBlocker, totalActions)}</p>
       
-      <div class="current-action-display">
-        <div class="current-action-number">Action ${currentActionIndex + 1} sur ${totalActions}</div>
-        <div class="current-action-text">${escapeHtml(action)}</div>
-        <input type="text" class="current-action-input" id="currentActionInput" value="${escapeHtml(action)}" placeholder="Modifier si besoin" />
+      <div class="micro-steps-list" id="microStepsList">
+        ${currentActions.map((action, i) => `
+          <div class="micro-step-item" data-index="${i}">
+            <span class="ms-num">${i + 1}</span>
+            <input type="text" class="step-text" value="${escapeHtml(action)}" data-idx="${i}" />
+          </div>
+        `).join('')}
       </div>
       
-      <div class="action-progress">
-        ${Array.from({length: totalActions}, (_, i) => 
-          `<div class="action-dot ${i < currentActionIndex ? 'done' : ''} ${i === currentActionIndex ? 'current' : ''}"></div>`
-        ).join('')}
-      </div>
+      ${isTired ? `
+        <button class="btn btn-ghost" id="pauseOptionBtn" style="width:100%; margin-bottom:12px;">
+          🌙 Faire une pause (sans culpabilité)
+        </button>
+      ` : ''}
       
-      <button class="btn btn-primary" id="nextActionBtn" style="width:100%; margin-bottom:8px;">
-        ${currentActionIndex < totalActions - 1 ? 'Action suivante' : 'Terminer'}
-      </button>
-      <button class="btn btn-ghost" id="otherIdeaBtn" style="width:100%; margin-bottom:8px;">Autre idée</button>
-      <button class="btn btn-ghost" id="addToTaskBtn" style="width:100%;">Ajouter à ma tâche</button>
+      <button class="btn btn-ghost" id="otherIdeaBtn" style="width:100%; margin-bottom:12px;">Autre idée</button>
+      <button class="btn btn-primary" id="addToTaskBtn" style="width:100%; margin-bottom:8px;">Ajouter à ma tâche</button>
+      <button class="btn btn-ghost" onclick="renderBlockMain()" style="width:100%;">Reprendre ma tâche</button>
     </div>
   `;
   
-  document.getElementById('nextActionBtn').addEventListener('click', () => {
-    const input = document.getElementById('currentActionInput');
-    if (input) {
-      const modifiedAction = input.value.trim();
-      if (modifiedAction && modifiedAction !== action) {
-        currentActions[currentActionIndex] = modifiedAction;
-        const task = getCurrentTask();
-        if (task) saveLearnedAction(task.name, currentBlocker, modifiedAction);
-      }
-    }
-    currentActionIndex++;
-    renderBlockAction();
+  blockActions.querySelectorAll('.step-text').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const idx = parseInt(e.target.dataset.idx, 10);
+      currentActions[idx] = e.target.value;
+    });
   });
   
+  const pauseBtn = document.getElementById('pauseOptionBtn');
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      toast('Pause acceptée. Reviens quand tu veux.');
+      renderBlockMain();
+    });
+  }
+  
   document.getElementById('otherIdeaBtn').addEventListener('click', () => {
-    if (currentBlockCategory && MICRO_ACTIONS[currentBlockCategory] && MICRO_ACTIONS[currentBlockCategory][currentBlocker]) {
-      const bank = MICRO_ACTIONS[currentBlockCategory][currentBlocker];
-      const otherActions = bank.filter(a => !currentActions.includes(a));
-      if (otherActions.length > 0) {
-        const randomIndex = Math.floor(Math.random() * otherActions.length);
-        currentActions[currentActionIndex] = otherActions[randomIndex];
-        renderBlockAction();
-        toast('Nouvelle suggestion');
-      } else {
-        toast('Pas d\'autre idée pour l\'instant');
-      }
+    const task = getCurrentTask();
+    const taskName = task ? task.name : '';
+    const result = suggestActions(taskName, currentBlocker);
+    if (result.actions.length === 3) {
+      currentActions = result.actions;
+      renderBlockAction();
+      toast('Nouvelles suggestions');
+    } else {
+      toast('Pas d\'autre idée pour l\'instant');
     }
   });
   
@@ -2277,33 +2178,36 @@ function renderBlockAction() {
       toast('Aucune tâche en cours');
       return;
     }
-    const input = document.getElementById('currentActionInput');
-    const actionToAdd = input ? input.value.trim() : action;
-    if (!actionToAdd) {
-      toast('Action vide');
+    const inputs = blockActions.querySelectorAll('.step-text');
+    const newSteps = Array.from(inputs).map(i => i.value.trim()).filter(s => s);
+    if (newSteps.length === 0) {
+      toast('Au moins une étape');
       return;
     }
-    if (task.steps.includes(actionToAdd)) {
-      toast('Déjà dans la tâche');
+    const existingSteps = new Set(task.steps.map(s => s.toLowerCase()));
+    const toAdd = newSteps.filter(s => !existingSteps.has(s.toLowerCase()));
+    if (toAdd.length === 0) {
+      toast('Ces étapes sont déjà dans la tâche');
       return;
     }
     const insertAt = state.session.stepIndex + 1;
-    task.steps.splice(insertAt, 0, actionToAdd);
-    saveLearnedAction(task.name, currentBlocker, actionToAdd);
+    task.steps.splice(insertAt, 0, ...toAdd);
+    toAdd.forEach(s => {
+      if (task.name) saveLearnedAction(task.name, currentBlocker, s);
+    });
     saveTasks();
     renderTasks();
-    toast('Action ajoutée à la tâche');
+    toast(`${toAdd.length} étape${toAdd.length > 1 ? 's' : ''} ajoutée${toAdd.length > 1 ? 's' : ''}`);
   });
 }
 
-function renderBlockComplete() {
+function renderBlockEmpty() {
   blockActions.innerHTML = `
     <div class="block-action active">
       <button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button>
-      <div class="block-subtitle">Bien joué !</div>
-      <p class="block-subtext">Tu as avancé, même petit. C'est déjà ça.</p>
-      <button class="btn btn-primary" onclick="renderBlockMain()" style="width:100%; margin-bottom:8px;">Reprendre ma tâche</button>
-      <button class="btn btn-ghost" onclick="renderBlockMain()" style="width:100%;">Mettre de côté</button>
+      <div class="block-subtitle">Pas de suggestion disponible</div>
+      <p class="block-subtext">Je n'ai pas encore de micro-étapes pour cette combinaison.</p>
+      <button class="btn btn-primary" onclick="renderBlockMain()" style="width:100%;">Retour</button>
     </div>
   `;
 }
@@ -2319,18 +2223,15 @@ function getBlockTitle(blocker) {
 
 function getBlockSubtitle(blocker, count) {
   const subtitles = {
-    noIdea: `Voici la première action à faire. ${count > 1 ? `Puis ${count - 1} autre${count > 2 ? 's' : ''} si tu veux continuer.` : ''}`,
-    tooBig: `La tâche est découpée en ${count} parties. Commence par la première.`,
-    tired: `Version minimale. ${count} action${count > 1 ? 's' : ''} très simple${count > 1 ? 's' : ''}.`
+    noIdea: `Voici 3 actions concrètes pour démarrer. Modifiables.`,
+    tooBig: `La tâche est découpée en 3 micro-étapes. Commence par la première.`,
+    tired: `Version minimaliste en 3 étapes. Tu peux faire une pause à tout moment.`
   };
-  return subtitles[blocker] || `${count} action${count > 1 ? 's' : ''} à faire`;
+  return subtitles[blocker] || `${count} actions à faire`;
 }
 
 window.renderBlockMain = renderBlockMain;
 
-/* ============================================================
-   ONBOARDING
-   ============================================================ */
 const ONBOARDING_SCREENS = 7;
 let currentScreen = 0, onboardingAnswers = {};
 
