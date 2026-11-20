@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#FAF6F1" />
-<title>Clic — Commencez simplement</title>
+<title>START — Commencez simplement</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 <script>
 (function() {
   try {
-    const saved = localStorage.getItem('clic_app_fallback');
+    const saved = localStorage.getItem('start_app_fallback');
     if (saved) {
       const p = JSON.parse(saved);
       if (p.settings && p.settings.theme) applyTheme(p.settings.theme, true);
@@ -355,7 +355,6 @@
   .timer-display { display: flex; align-items: baseline; justify-content: center; gap: 2px; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; color: #F5E9DC; letter-spacing: 1px; margin-top: 4px; }
   .timer-display .colon { opacity: 0.5; }
 
-  /* Modales */
   .end-screen, .block-overlay, .resume-overlay, .about-overlay, .duration-sheet-overlay { position: fixed; inset: 0; background: rgba(26,24,22,0.6); backdrop-filter: blur(6px); z-index: 500; display: none; align-items: flex-end; justify-content: center; padding: 0; }
   .end-screen.active, .block-overlay.active, .resume-overlay.active, .about-overlay.active, .duration-sheet-overlay.active { display: flex; animation: fadeIn .3s var(--ease); }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -369,7 +368,6 @@
   .end-actions, .resume-actions { display: flex; flex-direction: column; gap: 10px; }
   .end-actions .btn, .resume-actions .btn { width: 100%; padding: 16px; font-size: 15px; }
 
-  /* Bottom sheet durée */
   .duration-sheet {
     background: var(--surface);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -472,9 +470,9 @@
     min-height: 18px;
   }
 
-  .block-label, .unstuck-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 12px; }
-  .block-text, .unstuck-text { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); line-height: 1.3; margin-bottom: 24px; }
-  .block-card .btn, .unstuck-card .btn { width: 100%; padding: 16px; font-size: 15px; margin-top: 8px; }
+  .block-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 12px; }
+  .block-text { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); line-height: 1.3; margin-bottom: 24px; }
+  .block-card .btn { width: 100%; padding: 16px; font-size: 15px; margin-top: 8px; }
 
   .about-tabs { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
   .about-tab { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
@@ -485,30 +483,118 @@
   .about-content p { margin-bottom: 12px; }
   .about-content a { color: var(--accent-2); text-decoration: underline; }
 
-  .unstuck-intro { text-align: center; margin-bottom: 28px; }
-  .unstuck-intro .page-title { font-size: 48px; margin-bottom: 8px; }
-  .unstuck-intro .page-subtitle { margin: 0 auto; }
-  .unstuck-question { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 20px; }
-  .unstuck-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
-  @media (min-width: 600px) { .unstuck-grid { grid-template-columns: repeat(2, 1fr); } }
-  .unstuck-card-item { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 20px; cursor: pointer; transition: all .2s var(--ease); text-align: left; display: flex; gap: 14px; align-items: flex-start; }
-  .unstuck-card-item:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
-  .unstuck-card-item .uc-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--bg-soft); display: grid; place-items: center; color: var(--ink-2); flex-shrink: 0; }
-  .unstuck-card-item .uc-icon svg { width: 22px; height: 22px; }
-  .unstuck-card-item:hover .uc-icon { background: var(--accent-soft); color: var(--accent-2); }
-  .unstuck-card-item .uc-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
-  .unstuck-card-item .uc-desc { font-size: 13px; color: var(--ink-3); line-height: 1.4; }
-  .unstuck-disclaimer { text-align: center; font-size: 12px; color: var(--ink-3); margin-top: 32px; line-height: 1.5; font-style: italic; }
+  .block-intro { text-align: center; margin-bottom: 28px; }
+  .block-intro .page-title { font-size: 48px; margin-bottom: 8px; }
+  .block-intro .page-subtitle { margin: 0 auto; }
+  .block-question { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 20px; }
+  .block-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 600px) { .block-grid { grid-template-columns: repeat(2, 1fr); } }
+  .block-card-item { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-md); padding: 20px; cursor: pointer; transition: all .2s var(--ease); text-align: left; display: flex; gap: 14px; align-items: flex-start; }
+  .block-card-item:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+  .block-card-item .bc-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--bg-soft); display: grid; place-items: center; color: var(--ink-2); flex-shrink: 0; }
+  .block-card-item .bc-icon svg { width: 22px; height: 22px; }
+  .block-card-item:hover .bc-icon { background: var(--accent-soft); color: var(--accent-2); }
+  .block-card-item .bc-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .block-card-item .bc-desc { font-size: 13px; color: var(--ink-3); line-height: 1.4; }
+  .block-disclaimer { text-align: center; font-size: 12px; color: var(--ink-3); margin-top: 32px; line-height: 1.5; font-style: italic; }
 
-  .unstuck-action { display: none; }
-  .unstuck-action.active { display: block; animation: fadeUp .4s var(--ease); }
-  .unstuck-back { margin-bottom: 20px; }
-  .unstuck-subtitle { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 8px; }
-  .unstuck-subtext { text-align: center; color: var(--ink-2); margin-bottom: 24px; line-height: 1.5; }
+  .block-action { display: none; }
+  .block-action.active { display: block; animation: fadeUp .4s var(--ease); }
+  .block-back { margin-bottom: 20px; }
+  .block-subtitle { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 8px; }
+  .block-subtext { text-align: center; color: var(--ink-2); margin-bottom: 24px; line-height: 1.5; }
+  
+  /* NOUVEAU : Affichage une action à la fois */
+  .current-action-display {
+    background: var(--accent-soft);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .current-action-number {
+    font-size: 12px;
+    color: var(--accent-2);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .current-action-text {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .current-action-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .2s var(--ease);
+  }
+  .current-action-input:focus { border-color: var(--accent); }
+  
+  .action-progress {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .action-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+    transition: background .3s var(--ease);
+  }
+  .action-dot.done { background: var(--accent); }
+  .action-dot.current { background: var(--accent-2); }
+
   .micro-steps-list { display: grid; gap: 10px; margin-bottom: 20px; }
   .micro-step-item { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); }
   .micro-step-item .ms-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-2); font-size: 11px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
   .micro-step-item input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--ink); outline: none; }
+  
+  /* NOUVEAU : Formulaire de clarification */
+  .clarification-form {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .clarification-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .clarification-form input,
+  .clarification-form select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    margin-bottom: 12px;
+    transition: border-color .2s var(--ease);
+  }
+  .clarification-form input:focus,
+  .clarification-form select:focus { border-color: var(--accent); }
+
   .checklist { display: grid; gap: 10px; margin: 20px 0; }
   .checklist-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); cursor: pointer; transition: all .2s var(--ease); }
   .checklist-item:hover { border-color: var(--accent); }
@@ -606,7 +692,8 @@
     .end-card, .block-card, .resume-card, .about-card, .duration-sheet { padding: 28px 20px calc(20px + env(safe-area-inset-bottom)); }
     .end-card h2, .resume-card h3, .about-card h2 { font-size: 28px; }
     .duration-display { font-size: 40px; }
-    .unstuck-intro .page-title { font-size: 40px; }
+    .block-intro .page-title { font-size: 40px; }
+    .current-action-text { font-size: 22px; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -630,14 +717,14 @@
         </svg>
       </div>
       <div>
-        <div class="brand-name">Clic</div>
+        <div class="brand-name">START</div>
         <div class="brand-tag">Commencez simplement</div>
       </div>
     </div>
     <div class="topbar-right">
       <div class="status-pill">
         <span class="status-dot"></span>
-        <span class="status-brand">Clic</span>
+        <span class="status-brand">START</span>
       </div>
     </div>
   </header>
@@ -656,7 +743,7 @@
     <div class="view-content">
       <div class="page-head">
         <h1 class="page-title">Préparer</h1>
-        <p class="page-subtitle">Décrivez ce que vous voulez accomplir. Clic découpera la tâche en petites actions claires.</p>
+        <p class="page-subtitle">Décrivez ce que vous voulez accomplir. START découpera la tâche en petites actions claires.</p>
       </div>
       <div class="prepare-layout">
         <div>
@@ -704,7 +791,7 @@
     <div class="view-content">
       <div class="page-head">
         <h1 class="page-title">Appareil</h1>
-        <p class="page-subtitle">Votre boîtier Clic simulé. Personnalisez les sensations et le comportement.</p>
+        <p class="page-subtitle">Votre boîtier START simulé. Personnalisez les sensations et le comportement.</p>
       </div>
       <div class="device-layout">
         <div class="card" style="padding: 32px 20px;">
@@ -714,7 +801,7 @@
               <button class="session-ctrl-btn block-btn" id="blockBtn">Je bloque</button>
               <button class="session-ctrl-btn quit" id="quitBtn">Quitter</button>
             </div>
-            <div class="device" role="group" aria-label="Boîtier Clic simulé">
+            <div class="device" role="group" aria-label="Boîtier START simulé">
               <svg class="progress-ring" viewBox="0 0 200 200" aria-hidden="true">
                 <circle class="track" cx="100" cy="100" r="90"/>
                 <circle class="fill" id="progressFill" cx="100" cy="100" r="90"/>
@@ -809,7 +896,7 @@
             <div class="setting-row">
               <div class="setting-info">
                 <div class="setting-title">Revoir l'accueil</div>
-                <div class="setting-desc">Redécouvrir comment utiliser Clic</div>
+                <div class="setting-desc">Redécouvrir comment utiliser START</div>
               </div>
               <button class="btn btn-ghost" id="redoOnboardingBtn" style="padding:10px 16px; font-size:13px;">Recommencer</button>
             </div>
@@ -829,24 +916,23 @@
     </div>
   </section>
 
-  <section class="view" id="view-unstuck">
+  <section class="view" id="view-block">
     <div class="view-content">
-      <div class="unstuck-intro">
-        <h1 class="page-title">Unstuck</h1>
-        <p class="page-subtitle">Tu n'y arrives pas ? Ça arrive. On fait plus petit.</p>
+      <div class="block-intro">
+        <h1 class="page-title">Je bloque</h1>
+        <p class="page-subtitle">Tu n'y arrives pas ? Ça arrive. On va t'aider concrètement.</p>
       </div>
-      <div id="unstuckMain">
-        <div class="unstuck-question">Qu'est-ce qui se passe ?</div>
-        <div class="unstuck-grid" id="unstuckGrid"></div>
-        <p class="unstuck-disclaimer">Clic aide à démarrer, ce n'est pas un outil médical. En période difficile, parle à un proche ou à un professionnel.</p>
+      <div id="blockMain">
+        <div class="block-question">Qu'est-ce qui se passe ?</div>
+        <div class="block-grid" id="blockGrid"></div>
+        <p class="block-disclaimer">START aide à démarrer, ce n'est pas un outil médical. En période difficile, parle à un proche ou à un professionnel.</p>
       </div>
-      <div id="unstuckActions"></div>
+      <div id="blockActions"></div>
     </div>
   </section>
 
 </div>
 
-<!-- Bottom sheet durée -->
 <div class="duration-sheet-overlay" id="durationSheetOverlay">
   <div class="duration-sheet" id="durationSheet">
     <div class="duration-sheet-handle"></div>
@@ -897,7 +983,7 @@
   <div class="block-card">
     <div class="block-label">Micro-action</div>
     <div class="block-text" id="blockText">—</div>
-    <button class="btn btn-primary" id="blockUnstuckBtn">Ouvrir Unstuck</button>
+    <button class="btn btn-primary" id="blockHelpBtn">Ouvrir "Je bloque"</button>
     <button class="btn btn-ghost" id="blockBack" style="margin-top:8px;">Revenir à mon étape</button>
   </div>
 </div>
@@ -945,16 +1031,12 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
     <span class="nav-label">Appareil</span>
   </button>
-  <button class="nav-btn" data-view="unstuck">
+  <button class="nav-btn" data-view="block">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="9"/>
-      <circle cx="12" cy="12" r="3"/>
-      <line x1="12" y1="3" x2="12" y2="6"/>
-      <line x1="12" y1="18" x2="12" y2="21"/>
-      <line x1="3" y1="12" x2="6" y2="12"/>
-      <line x1="18" y1="12" x2="21" y2="12"/>
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
     </svg>
-    <span class="nav-label">Unstuck</span>
+    <span class="nav-label">Je bloque</span>
   </button>
 </nav>
 
@@ -972,21 +1054,20 @@ if ('serviceWorker' in navigator) {
   }).catch((err) => console.log('SW failed:', err));
 }
 
-const DB_NAME = 'clic_app';
-const STORAGE_KEY = 'clic_app_fallback';
+const DB_NAME = 'start_app';
+const STORAGE_KEY = 'start_app_fallback';
 
 const DEFAULT_STATE = {
   tasks: [],
   settings: { sound: 'bell', vibration: true, wakeLock: false, demo: true, theme: 'light', defaultDuration: 5, tone: 'warm' },
   session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, totalDuration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null },
   onboarding: { completed: false, currentScreen: 0, answers: {} },
-  unstuckUsage: { tooBig: 0, noIdea: 0, distracted: 0, tired: 0, twoMin: 0 },
-  unstuckLearned: {}
+  blockUsage: { noIdea: 0, tooBig: 0, tired: 0 },
+  blockLearned: {}
 };
 
 let state = structuredClone(DEFAULT_STATE);
 let db = null, wakeLock = null, timerInterval = null, audioCtx = null;
-let unstuckBreatheTimer = null, unstuckMiniTimer = null;
 
 function openDB() {
   return new Promise((resolve, reject) => {
@@ -1061,8 +1142,8 @@ async function loadState() {
           settings: { ...DEFAULT_STATE.settings, ...(p.settings||{}) },
           session: { ...DEFAULT_STATE.session, ...(p.session||{}) },
           onboarding: { ...DEFAULT_STATE.onboarding, ...(p.onboarding||{}) },
-          unstuckUsage: { ...DEFAULT_STATE.unstuckUsage, ...(p.unstuckUsage||{}) },
-          unstuckLearned: { ...(p.unstuckLearned||{}) } };
+          blockUsage: { ...DEFAULT_STATE.blockUsage, ...(p.blockUsage||{}) },
+          blockLearned: { ...(p.blockLearned||{}) } };
         if (state.settings.defaultDuration > 360) state.settings.defaultDuration = 5;
       }
     } catch(e2) {}
@@ -1086,11 +1167,11 @@ async function saveOnboarding() {
   if (db) await dbPut('onboarding', 'main', state.onboarding);
   try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.onboarding = state.onboarding; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
 }
-async function saveUnstuckUsage() {
-  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.unstuckUsage = state.unstuckUsage; r.unstuckLearned = state.unstuckLearned; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
+async function saveBlockUsage() {
+  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.blockUsage = state.blockUsage; r.blockLearned = state.blockLearned; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
 }
 
-const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device'), unstuck: document.getElementById('view-unstuck') };
+const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device'), block: document.getElementById('view-block') };
 document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
 function switchView(name) {
   Object.entries(views).forEach(([k, el]) => el.classList.toggle('active', k === name));
@@ -1127,12 +1208,7 @@ const ICONS = {
   sun: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
   moon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
   coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
-  scissor: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`,
-  flag: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
-  wind: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
-  leaf: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
-  timer2: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></svg>`,
-  lifebuoy: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></svg>`
+  unlock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`
 };
 
 const TEMPLATES = [
@@ -1143,71 +1219,144 @@ const TEMPLATES = [
 ];
 
 /* ============================================================
-   MOTEUR DE SUGGESTIONS LOCAL
+   MOTEUR DE MICRO-ACTIONS CONCRÈTES
    ============================================================ */
-const STEP_BANK = {
-  rangement: {
-    tooBig: ["Vide une seule zone (tiroir, étagère, coin)", "Retire tout ce qui est sur le côté gauche", "Enlève la pile de papiers du centre", "Trie seulement les objets visibles", "Fais un sac pour les choses à jeter", "Range une seule catégorie d'objets", "Essuie seulement le dessus du bureau", "Mets de côté ce qui ne sert plus"],
-    noIdea: ["Pose une boîte ou un sac à côté", "Prends un seul objet et décide : garder, jeter, déplacer", "Éloigne la chaise pour voir le sol", "Regarde la pièce pendant 30 secondes", "Commence par le coin le plus visible", "Ramasse tout ce qui est par terre", "Ouvre une fenêtre pour aérer", "Mets une musique pour te motiver"],
-    distracted: ["Mets un minuteur de 5 minutes", "Lance une playlist sans paroles", "Pose le téléphone dans une autre pièce", "Ferme la porte pour être seul·e", "Enlève tout ce qui brille ou clignote", "Concentre-toi sur une seule zone", "Fais une pause toutes les 10 minutes", "Récompense-toi après 3 objets rangés"],
-    tired: ["Remets un seul objet à sa place", "Jette un papier qui traîne", "Essuie une petite surface", "Déplace une chaise pour voir clair", "Ouvre la fenêtre 30 secondes"],
-    twoMin: ["Range 5 objets à leur place", "Jette tout ce qui est clairement un déchet", "Essuie le bureau en entier", "Fais la vaisselle qui traîne", "Passe l'aspirateur sur une zone"]
-  },
+const MICRO_ACTIONS = {
   reviser: {
-    tooBig: ["Relis seulement le chapitre 1", "Fais une fiche sur les formules clés", "Refais un exercice type", "Relis les titres et sous-titres", "Surligne les idées principales", "Résume une partie en une phrase", "Fais un schéma de la leçon", "Relis tes annotations de cours"],
-    noIdea: ["Sors le cours et ouvre-le à la première page", "Lis les titres en diagonale", "Note 3 mots que tu ne comprends pas", "Regarde le plan du chapitre", "Relis l'introduction du cours", "Identifie les 3 idées principales", "Note ce que tu sais déjà", "Liste ce que tu dois revoir"],
-    distracted: ["Ferme tous les onglets sauf le cours", "Pose le téléphone à l'envers", "Mets un minuteur de 25 minutes", "Installe-toi dans un endroit calme", "Éteins les notifications", "Prends une feuille pour noter les distractions", "Fais une pause de 5 min toutes les 25 min", "Récompense-toi après une session"],
-    tired: ["Relis une seule définition", "Regarde un schéma du cours", "Lis un exemple simple", "Note un mot-clé important", "Relis le résumé de fin de chapitre"],
-    twoMin: ["Écris 3 formules de mémoire", "Relis le résumé du chapitre", "Fais un schéma rapide", "Note 5 mots-clés importants", "Relis tes fiches de révision"]
+    noIdea: [
+      "Prends ton cahier de maths",
+      "Ouvre le chapitre à réviser",
+      "Lis uniquement la première définition"
+    ],
+    tooBig: [
+      "Relis seulement les titres du chapitre",
+      "Fais une fiche sur une seule notion",
+      "Refais un seul exercice type"
+    ],
+    tired: [
+      "Relis une seule définition",
+      "Regarde un seul schéma",
+      "Note un seul mot-clé"
+    ]
+  },
+  ranger: {
+    noIdea: [
+      "Ramasse un vêtement au sol",
+      "Mets-le dans le panier à linge",
+      "Range trois autres vêtements"
+    ],
+    tooBig: [
+      "Commence par un seul coin de la pièce",
+      "Trie seulement les vêtements",
+      "Range uniquement les livres"
+    ],
+    tired: [
+      "Ramasse un seul objet",
+      "Mets-le à sa place",
+      "Fais une pause si besoin"
+    ]
   },
   ecrire: {
-    tooBig: ["Écris le plan en 3 parties", "Rédige seulement l'introduction", "Fais la bibliographie", "Écris un paragraphe à la fois", "Liste les idées principales", "Rédige la conclusion d'abord", "Fais un brouillon très moche", "Relis ce que tu as déjà écrit"],
-    noIdea: ["Ouvre un document vide", "Écris le titre provisoire", "Liste 5 idées en vrac", "Note l'angle de ton sujet", "Écris la question centrale", "Fais un plan très simple", "Rédige une phrase d'accroche", "Note 3 arguments possibles"],
-    distracted: ["Ferme tous les onglets inutiles", "Pose le téléphone à l'envers", "Mets un minuteur de 25 minutes", "Installe-toi au calme", "Éteins les notifications", "Ouvre seulement ton traitement de texte", "Fais une pause après un paragraphe", "Récompense-toi après 500 mots"],
-    tired: ["Écris une seule phrase du rapport", "Note une idée en vrac", "Relis ton dernier paragraphe", "Corrige une phrase déjà écrite", "Ajoute un mot à ton plan"],
-    twoMin: ["Rédige le premier paragraphe de l'intro", "Écris 3 idées principales", "Fais le plan détaillé", "Rédige une phrase de conclusion", "Corrige un paragraphe existant"]
-  },
-  exercice: {
-    tooBig: ["Lis seulement l'énoncé", "Identifie les données utiles", "Fais un schéma rapide", "Résous la première question", "Écris la formule à utiliser", "Relis un exercice similaire", "Fais un calcul intermédiaire", "Vérifie une étape du corrigé"],
-    noIdea: ["Lis l'énoncé en entier, sans crayon", "Surligne les données importantes", "Écris ce qu'on te demande", "Note les formules possibles", "Fais un dessin ou schéma", "Relis le cours correspondant", "Identifie le type d'exercice", "Cherche un exemple similaire"],
-    distracted: ["Pose le téléphone à l'envers", "Mets un minuteur de 15 minutes", "Ferme les onglets inutiles", "Installe-toi au calme", "Prends une feuille de brouillon", "Fais une pause après chaque question", "Éteins les notifications", "Récompense-toi après un exercice"],
-    tired: ["Relis l'énoncé une fois", "Note une donnée importante", "Écris la formule principale", "Fais un petit calcul simple", "Regarde un exemple du cours"],
-    twoMin: ["Résous la première question", "Fais le schéma de l'exercice", "Écris les données utiles", "Applique la formule principale", "Vérifie un calcul intermédiaire"]
-  },
-  lire: {
-    tooBig: ["Lis seulement le premier chapitre", "Lis les titres des sections", "Note 3 idées principales", "Lis le résumé de fin", "Surligne les passages clés", "Fais une fiche de lecture", "Relis un passage important", "Note tes questions sur le texte"],
-    noIdea: ["Ouvre le livre à la première page", "Lis le sommaire ou la table des matières", "Lis la quatrième de couverture", "Note ce que tu attends de cette lecture", "Lis le premier paragraphe", "Identifie le genre du texte", "Note l'auteur et le contexte", "Fixe-toi un objectif de pages"],
-    distracted: ["Pose le téléphone dans une autre pièce", "Installe-toi dans un endroit calme", "Mets un minuteur de 20 minutes", "Éteins les notifications", "Prends un marque-page", "Lis à voix haute si besoin", "Fais une pause toutes les 15 pages", "Note tes distractions sur un papier"],
-    tired: ["Lis un seul paragraphe", "Regarde les images ou schémas", "Lis le résumé de fin de chapitre", "Note un mot intéressant", "Relis une phrase que tu aimes"],
-    twoMin: ["Lis 2 pages du chapitre", "Note 3 idées principales", "Surligne les passages clés", "Fais un résumé en une phrase", "Note tes questions sur le texte"]
+    noIdea: [
+      "Ouvre ton document",
+      "Écris le titre de ton devoir",
+      "Écris une première idée, même imparfaite"
+    ],
+    tooBig: [
+      "Écris le plan en 3 parties",
+      "Rédige seulement l'introduction",
+      "Fais la bibliographie"
+    ],
+    tired: [
+      "Écris une seule phrase du rapport",
+      "Note une idée en vrac",
+      "Relis ton dernier paragraphe"
+    ]
   },
   contacter: {
-    tooBig: ["Écris seulement l'objet du message", "Rédige la première phrase", "Liste les 3 points à aborder", "Prépare tes questions", "Rassemble les documents nécessaires", "Vérifie les coordonnées", "Fais un brouillon du message", "Relis avant d'envoyer"],
-    noIdea: ["Ouvre ta messagerie ou ton téléphone", "Cherche le numéro ou l'adresse", "Note ton numéro d'adhérent ou de dossier", "Écris l'objet du message", "Liste tes questions", "Choisis un moment calme", "Prépare tes documents", "Rédige une phrase d'introduction"],
-    distracted: ["Ferme les réseaux sociaux", "Mets le téléphone en mode Ne pas déranger après", "Note tes questions avant d'appeler", "Installe-toi au calme", "Prépare un papier et un stylo", "Vérifie que tu as tous les documents", "Choisis un moment sans interruption", "Fais l'appel maintenant, pas plus tard"],
-    tired: ["Regarde le numéro de téléphone", "Ouvre un nouveau message", "Écris seulement l'objet", "Note une question à poser", "Prépare ton numéro de dossier"],
-    twoMin: ["Compose le numéro et attends", "Rédige l'objet et la première phrase", "Envoie le message préparé", "Note tes 3 questions principales", "Rassemble tous les documents nécessaires"]
+    noIdea: [
+      "Ouvre le message",
+      "Identifie la question principale",
+      "Écris une phrase de réponse provisoire"
+    ],
+    tooBig: [
+      "Écris seulement l'objet du message",
+      "Rédige la première phrase",
+      "Liste les 3 points à aborder"
+    ],
+    tired: [
+      "Regarde le numéro de téléphone",
+      "Ouvre un nouveau message",
+      "Écris seulement l'objet"
+    ]
+  },
+  exercice: {
+    noIdea: [
+      "Lis l'énoncé en entier, sans crayon",
+      "Surligne les données importantes",
+      "Écris ce qu'on te demande"
+    ],
+    tooBig: [
+      "Lis seulement l'énoncé",
+      "Identifie les données utiles",
+      "Fais un schéma rapide"
+    ],
+    tired: [
+      "Relis l'énoncé une fois",
+      "Note une donnée importante",
+      "Écris la formule principale"
+    ]
+  },
+  lire: {
+    noIdea: [
+      "Ouvre le livre à la première page",
+      "Lis le sommaire ou la table des matières",
+      "Lis la quatrième de couverture"
+    ],
+    tooBig: [
+      "Lis seulement le premier chapitre",
+      "Lis les titres des sections",
+      "Note 3 idées principales"
+    ],
+    tired: [
+      "Lis un seul paragraphe",
+      "Regarde les images ou schémas",
+      "Lis le résumé de fin de chapitre"
+    ]
   },
   projet: {
-    tooBig: ["Fais la liste des tâches à faire", "Commence par la plus simple", "Dessine un schéma ou une maquette", "Écris les étapes dans l'ordre", "Fais une recherche rapide", "Ouvre les outils nécessaires", "Travaille 15 minutes seulement", "Note tes idées en vrac"],
-    noIdea: ["Ouvre ton outil de travail", "Crée un nouveau fichier ou projet", "Note l'objectif final", "Liste les premières étapes", "Fais une recherche sur le sujet", "Regarde des exemples similaires", "Dessine un croquis rapide", "Note tes questions"],
-    distracted: ["Ferme tous les onglets inutiles", "Mets un minuteur de 25 minutes", "Pose le téléphone à l'envers", "Installe-toi au calme", "Éteins les notifications", "Travaille par blocs de 15 min", "Fais une pause après chaque étape", "Récompense-toi après une session"],
-    tired: ["Ouvre ton projet et regarde-le", "Note une seule idée", "Fais un petit croquis", "Relis ce que tu as déjà fait", "Organise tes fichiers"],
-    twoMin: ["Travaille 2 minutes sur ton projet", "Fais la première étape de ta liste", "Ouvre les outils nécessaires", "Note 3 idées principales", "Fais un schéma rapide"]
+    noIdea: [
+      "Ouvre ton outil de travail",
+      "Crée un nouveau fichier ou projet",
+      "Note l'objectif final"
+    ],
+    tooBig: [
+      "Fais la liste des tâches à faire",
+      "Commence par la plus simple",
+      "Dessine un schéma ou une maquette"
+    ],
+    tired: [
+      "Ouvre ton projet et regarde-le",
+      "Note une seule idée",
+      "Fais un petit croquis"
+    ]
   },
   cuisine: {
-    tooBig: ["Lis la recette en entier", "Rassemble tous les ingrédients", "Prépare seulement les légumes", "Fais la sauce d'abord", "Préchauffe le four", "Lave et coupe les ingrédients", "Suis la recette étape par étape", "Goûte et ajuste l'assaisonnement"],
-    noIdea: ["Choisis une recette simple", "Vérifie ce que tu as dans le frigo", "Fais la liste des courses", "Lis la recette une fois", "Rassemble les ustensiles", "Prépare ton plan de travail", "Commence par la préparation", "Suis les étapes dans l'ordre"],
-    distracted: ["Pose le téléphone loin de la cuisine", "Mets un minuteur pour chaque étape", "Lis la recette avant de commencer", "Prépare tous les ingrédients d'abord", "Nettoie au fur et à mesure", "Concentre-toi sur une tâche à la fois", "Fais une pause entre les étapes", "Récompense-toi avec un goûter"],
-    tired: ["Prépare un sandwich simple", "Fais bouillir de l'eau pour des pâtes", "Coupe un fruit", "Prépare un yaourt avec des toppings", "Fais une tartine"],
-    twoMin: ["Lave et coupe les légumes", "Prépare les ingrédients", "Mets l'eau à bouillir", "Préchauffe le four", "Fais la sauce rapide"]
-  },
-  autre: {
-    tooBig: ["Divise la tâche en 3 petites étapes", "Commence par la plus simple", "Fais seulement 5 minutes", "Note ce qui te bloque", "Demande de l'aide si besoin", "Fais une pause et reprends", "Concentre-toi sur une seule chose", "Célèbre chaque petite victoire"],
-    noIdea: ["Note l'objectif final", "Liste les premières actions", "Fais une recherche rapide", "Demande conseil à quelqu'un", "Commence par le plus facile", "Regarde des exemples", "Fixe-toi un temps limite", "Fais un brouillon"],
-    distracted: ["Éloigne les distractions", "Mets un minuteur", "Installe-toi au calme", "Fais une seule chose à la fois", "Prends des pauses régulières", "Récompense-toi", "Note tes distractions", "Reviens à ta tâche"],
-    tired: ["Fais une version très simple", "Repose-toi 5 minutes", "Fais seulement 1 minute", "Note une petite action", "Respire calmement"],
-    twoMin: ["Travaille 2 minutes", "Fais la première étape", "Commence maintenant", "Note tes idées", "Fais un premier jet"]
+    noIdea: [
+      "Choisis une recette simple",
+      "Vérifie ce que tu as dans le frigo",
+      "Fais la liste des courses"
+    ],
+    tooBig: [
+      "Lis la recette en entier",
+      "Rassemble tous les ingrédients",
+      "Prépare seulement les légumes"
+    ],
+    tired: [
+      "Prépare un sandwich simple",
+      "Fais bouillir de l'eau pour des pâtes",
+      "Coupe un fruit"
+    ]
   }
 };
 
@@ -1219,51 +1368,57 @@ function normalizeText(text) {
 }
 
 function classifyTask(name) {
-  if (!name) return 'autre';
+  if (!name) return null;
   const n = normalizeText(name);
   const keywords = {
-    rangement: ['ranger', 'nettoyer', 'vaisselle', 'bureau', 'chambre', 'trier', 'vider', 'linge', 'menage', 'aspirer', 'laver', 'essuyer'],
-    reviser: ['reviser', 'apprendre', 'cours', 'fiche', 'memoriser', 'examen', 'lecon', 'chapitre', 'etudier'],
-    ecrire: ['ecrire', 'rediger', 'devoir', 'rapport', 'memoire', 'lettre', 'cv', 'dissertation', 'texte', 'article'],
+    reviser: ['reviser', 'apprendre', 'cours', 'fiche', 'memoriser', 'examen', 'lecon', 'chapitre', 'etudier', 'maths', 'chimie', 'physique', 'histoire'],
+    ranger: ['ranger', 'nettoyer', 'vaisselle', 'bureau', 'chambre', 'trier', 'vider', 'linge', 'menage', 'aspirer', 'laver', 'essuyer'],
+    ecrire: ['ecrire', 'rediger', 'devoir', 'rapport', 'memoire', 'lettre', 'cv', 'dissertation', 'texte', 'article', 'mail', 'email', 'courrier'],
     exercice: ['exercice', 'td', 'probleme', 'calcul', 'maths', 'mathematiques', 'equation'],
+    contacter: ['appeler', 'telephoner', 'dossier', 'formulaire', 'rendez-vous', 'inscription', 'mutuelle', 'prof'],
     lire: ['lire', 'chapitre', 'article', 'livre', 'lecture', 'roman'],
-    contacter: ['mail', 'appeler', 'telephoner', 'dossier', 'formulaire', 'rendez-vous', 'inscription', 'mutuelle', 'prof', 'email', 'courrier'],
     projet: ['coder', 'programmer', 'projet', 'site', 'appli', 'dessiner', 'composer', 'developper', 'application'],
-    cuisine: ['cuisiner', 'repas', 'courses', 'gateau', 'recette', 'patisserie', 'plat', 'vaisselle']
+    cuisine: ['cuisiner', 'repas', 'courses', 'gateau', 'recette', 'patisserie', 'plat']
   };
   for (const [cat, words] of Object.entries(keywords)) {
     if (words.some(w => n.includes(w))) return cat;
   }
-  return 'autre';
+  return null;
 }
 
-function suggestSteps(taskName, blocker, context = {}) {
+function suggestActions(taskName, blocker) {
   const category = classifyTask(taskName);
-  const bank = STEP_BANK[category] || STEP_BANK.autre;
-  let steps = bank[blocker] || bank.autre;
   
+  if (!category) {
+    return { category: null, actions: [], needsClarification: true };
+  }
+  
+  const bank = MICRO_ACTIONS[category];
+  if (!bank || !bank[blocker]) {
+    return { category, actions: [], needsClarification: true };
+  }
+  
+  let actions = bank[blocker].slice();
+  
+  // Ajouter les actions apprises en premier
   const learnedKey = `${category}_${blocker}`;
-  const learned = state.unstuckLearned[learnedKey] || [];
+  const learned = state.blockLearned[learnedKey] || [];
   if (learned.length > 0) {
-    steps = [...learned, ...steps.filter(s => !learned.includes(s))];
+    actions = [...learned, ...actions.filter(a => !learned.includes(a))];
   }
   
-  const duration = context.duration || 5;
-  if (duration < 5) {
-    steps = steps.map(s => s.length > 50 ? s.substring(0, 50) + '...' : s);
-  }
-  
-  return { category, steps: steps.slice(0, 4) };
+  return { category, actions: actions.slice(0, 3), needsClarification: false };
 }
 
-function saveLearnedStep(taskName, blocker, step) {
+function saveLearnedAction(taskName, blocker, action) {
   const category = classifyTask(taskName);
+  if (!category) return;
   const key = `${category}_${blocker}`;
-  if (!state.unstuckLearned[key]) state.unstuckLearned[key] = [];
-  if (!state.unstuckLearned[key].includes(step)) {
-    state.unstuckLearned[key].unshift(step);
-    if (state.unstuckLearned[key].length > 5) state.unstuckLearned[key] = state.unstuckLearned[key].slice(0, 5);
-    saveUnstuckUsage();
+  if (!state.blockLearned[key]) state.blockLearned[key] = [];
+  if (!state.blockLearned[key].includes(action)) {
+    state.blockLearned[key].unshift(action);
+    if (state.blockLearned[key].length > 5) state.blockLearned[key] = state.blockLearned[key].slice(0, 5);
+    saveBlockUsage();
   }
 }
 
@@ -1659,9 +1814,9 @@ function quitSession() {
 }
 
 blockBtn.addEventListener('click', () => {
-  switchView('unstuck');
-  renderUnstuckMain();
-  toast('On va faire plus petit');
+  switchView('block');
+  renderBlockMain();
+  toast('On va t\'aider concrètement');
 });
 
 pauseBtn.addEventListener('click', pauseSession);
@@ -1855,13 +2010,13 @@ const ABOUT_TEXTS = {
 <h4>Hébergeur</h4>
 <p>GitHub, Inc.<br>88 Colin P. Kelly Jr. Street<br>San Francisco, CA 94107, États-Unis<br>Téléphone : +1 877 448 4820</p>`,
   privacy: `<h4>Tes données</h4>
-<p>Clic ne crée pas de compte et n'envoie aucune donnée à un serveur. Tes tâches, tes réglages et tes réponses restent sur ton appareil (stockage local du navigateur).</p>
+<p>START ne crée pas de compte et n'envoie aucune donnée à un serveur. Tes tâches, tes réglages et tes réponses restent sur ton appareil (stockage local du navigateur).</p>
 <h4>Pas de pub, pas de traceur</h4>
 <p>Pas de publicité, pas de traceur. Pour tout effacer, vide les données du site dans les réglages de ton navigateur.</p>
 <h4>Hébergeur</h4>
 <p>L'hébergeur du site (GitHub) peut conserver des données techniques de connexion selon sa propre politique.</p>
 <h4>Avertissement</h4>
-<p>Clic aide à démarrer une tâche : ce n'est pas un outil médical.</p>
+<p>START aide à démarrer une tâche : ce n'est pas un outil médical.</p>
 <h4>Contact</h4>
 <p><a href="#">[À REMPLIR]</a></p>`
 };
@@ -1951,291 +2106,227 @@ async function resumeSessionAfterReload() {
 }
 
 /* ============================================================
-   UNSTUCK
+   MODE "JE BLOQUE" — MOTEUR AMÉLIORÉ
    ============================================================ */
-const UNSTUCK_CARDS = [
-  { key: 'tooBig', icon: ICONS.scissor, title: "C'est trop gros", desc: "On découpe en micro-étapes" },
-  { key: 'noIdea', icon: ICONS.flag, title: "Je ne sais pas par où commencer", desc: "On trouve la première action" },
-  { key: 'distracted', icon: ICONS.wind, title: "Je me laisse distraire", desc: "On se recentre" },
-  { key: 'tired', icon: ICONS.leaf, title: "Je suis à plat", desc: "Un tout petit pas" },
-  { key: 'twoMin', icon: ICONS.timer2, title: "Juste 2 minutes", desc: "Tu peux t'arrêter après" }
+const BLOCK_CARDS = [
+  { key: 'noIdea', icon: ICONS.compass, title: "Je ne sais pas par où commencer", desc: "Première action immédiate" },
+  { key: 'tooBig', icon: ICONS.mountain, title: "C'est trop gros", desc: "Découpage + première micro-action" },
+  { key: 'tired', icon: ICONS.leaf, title: "Je suis à plat", desc: "Version ultra-courte + option pause" }
 ];
 
-const unstuckGrid = document.getElementById('unstuckGrid');
-const unstuckMain = document.getElementById('unstuckMain');
-const unstuckActions = document.getElementById('unstuckActions');
+const blockGrid = document.getElementById('blockGrid');
+const blockMain = document.getElementById('blockMain');
+const blockActions = document.getElementById('blockActions');
 
-let currentUnstuckCategory = 'autre';
-let currentUnstuckBlocker = null;
-let currentUnstuckSteps = [];
-let currentUnstuckStepIndex = 0;
+let currentBlockCategory = null;
+let currentBlocker = null;
+let currentActions = [];
+let currentActionIndex = 0;
+let needsClarification = false;
 
-function renderUnstuckMain() {
-  unstuckMain.style.display = 'block';
-  unstuckActions.innerHTML = '';
-  unstuckGrid.innerHTML = '';
-  UNSTUCK_CARDS.forEach(c => {
+function renderBlockMain() {
+  blockMain.style.display = 'block';
+  blockActions.innerHTML = '';
+  blockGrid.innerHTML = '';
+  BLOCK_CARDS.forEach(c => {
     const card = document.createElement('button');
-    card.className = 'unstuck-card-item';
-    card.innerHTML = `<div class="uc-icon">${c.icon}</div><div><div class="uc-title">${c.title}</div><div class="uc-desc">${c.desc}</div></div>`;
-    card.addEventListener('click', () => openUnstuckAction(c.key));
-    unstuckGrid.appendChild(card);
+    card.className = 'block-card-item';
+    card.innerHTML = `<div class="bc-icon">${c.icon}</div><div><div class="bc-title">${c.title}</div><div class="bc-desc">${c.desc}</div></div>`;
+    card.addEventListener('click', () => openBlockAction(c.key));
+    blockGrid.appendChild(card);
   });
 }
 
-function trackUnstuckUsage(key) {
-  if (state.unstuckUsage[key] !== undefined) {
-    state.unstuckUsage[key]++;
-    saveUnstuckUsage();
+function trackBlockUsage(key) {
+  if (state.blockUsage[key] !== undefined) {
+    state.blockUsage[key]++;
+    saveBlockUsage();
   }
 }
 
-function openUnstuckAction(blocker) {
-  trackUnstuckUsage(blocker);
-  currentUnstuckBlocker = blocker;
+function openBlockAction(blocker) {
+  trackBlockUsage(blocker);
+  currentBlocker = blocker;
   const task = getCurrentTask();
   const taskName = task ? task.name : '';
-  const context = { duration: prepareDuration || 5 };
-  const result = suggestSteps(taskName, blocker, context);
-  currentUnstuckCategory = result.category;
-  currentUnstuckSteps = result.steps.slice();
-  currentUnstuckStepIndex = 0;
+  const result = suggestActions(taskName, blocker);
+  currentBlockCategory = result.category;
+  currentActions = result.actions;
+  currentActionIndex = 0;
+  needsClarification = result.needsClarification;
   
-  unstuckMain.style.display = 'none';
-  unstuckActions.innerHTML = '';
+  blockMain.style.display = 'none';
+  blockActions.innerHTML = '';
   
-  if (blocker === 'tooBig') renderUnstuckTooBig();
-  else if (blocker === 'noIdea') renderUnstuckNoIdea();
-  else if (blocker === 'distracted') renderUnstuckDistracted();
-  else if (blocker === 'tired') renderUnstuckTired();
-  else if (blocker === 'twoMin') renderUnstuckTwoMin();
+  if (needsClarification) {
+    renderClarificationForm();
+  } else {
+    renderBlockAction();
+  }
 }
 
-function unstuckBackButton() {
-  return `<button class="btn btn-ghost unstuck-back" onclick="renderUnstuckMain()">← Retour</button>`;
-}
-
-function unstuckEndCard(message) {
-  return `
-    <div style="text-align:center; margin-top:24px;">
-      <p style="font-family:'Caveat',cursive; font-size:22px; color:var(--accent-2); margin-bottom:16px;">${message}</p>
-      <button class="btn btn-primary" onclick="renderUnstuckMain()" style="width:100%; margin-bottom:8px;">Reprendre ma tâche</button>
-      <button class="btn btn-ghost" onclick="renderUnstuckMain()" style="width:100%;">Mettre de côté</button>
-    </div>
-  `;
-}
-
-function renderUnstuckTooBig() {
-  const task = getCurrentTask();
-  const taskName = task ? task.name : 'ma tâche';
-  const currentStep = task ? (task.steps[state.session.stepIndex] || task.steps[0]) : 'commencer';
-  
-  unstuckActions.innerHTML = `
-    <div class="unstuck-action active">
-      ${unstuckBackButton()}
-      <div class="unstuck-subtitle">On découpe "${escapeHtml(currentStep)}"</div>
-      <p class="unstuck-subtext">3 micro-étapes de 30 secondes à 2 minutes. Modifiables.</p>
-      <div class="micro-steps-list" id="microStepsList">
-        ${currentUnstuckSteps.map((s, i) => `<div class="micro-step-item"><span class="ms-num">${i+1}</span><input type="text" value="${escapeHtml(s)}" data-idx="${i}" /></div>`).join('')}
+function renderClarificationForm() {
+  blockActions.innerHTML = `
+    <div class="block-action active">
+      <button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button>
+      <div class="block-subtitle">Je n'ai pas reconnu ta tâche</div>
+      <p class="block-subtext">Pour t'aider concrètement, dis-moi en deux mots de quoi il s'agit.</p>
+      <div class="clarification-form">
+        <label for="clarifyCategory">C'est plutôt...</label>
+        <select id="clarifyCategory">
+          <option value="">-- Choisis une catégorie --</option>
+          <option value="reviser">Réviser / Apprendre</option>
+          <option value="ranger">Ranger / Ménage</option>
+          <option value="ecrire">Écrire / Rédiger</option>
+          <option value="exercice">Exercice / Calcul</option>
+          <option value="contacter">Contacter / Administratif</option>
+          <option value="lire">Lire</option>
+          <option value="projet">Projet / Coder</option>
+          <option value="cuisine">Cuisine / Courses</option>
+        </select>
+        <button class="btn btn-primary" id="confirmClarify" style="width:100%;">Valider</button>
       </div>
-      <button class="btn btn-ghost" id="otherIdeaBtn" style="width:100%; margin-bottom:12px;">Autre idée</button>
-      <button class="btn btn-primary" id="addMicroSteps" style="width:100%; margin-bottom:8px;">Ajouter à ma tâche</button>
-      ${unstuckEndCard("Bien joué. Trois petits pas, c'est déjà avancé.")}
     </div>
   `;
+  
+  document.getElementById('confirmClarify').addEventListener('click', () => {
+    const category = document.getElementById('clarifyCategory').value;
+    if (!category) {
+      toast('Choisis une catégorie');
+      return;
+    }
+    currentBlockCategory = category;
+    const bank = MICRO_ACTIONS[category];
+    if (bank && bank[currentBlocker]) {
+      currentActions = bank[currentBlocker].slice(0, 3);
+      needsClarification = false;
+      renderBlockAction();
+    } else {
+      toast('Catégorie non disponible');
+    }
+  });
+}
+
+function renderBlockAction() {
+  if (currentActionIndex >= currentActions.length) {
+    renderBlockComplete();
+    return;
+  }
+  
+  const action = currentActions[currentActionIndex];
+  const totalActions = currentActions.length;
+  
+  blockActions.innerHTML = `
+    <div class="block-action active">
+      <button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button>
+      <div class="block-subtitle">${getBlockTitle(currentBlocker)}</div>
+      <p class="block-subtext">${getBlockSubtitle(currentBlocker, totalActions)}</p>
+      
+      <div class="current-action-display">
+        <div class="current-action-number">Action ${currentActionIndex + 1} sur ${totalActions}</div>
+        <div class="current-action-text">${escapeHtml(action)}</div>
+        <input type="text" class="current-action-input" id="currentActionInput" value="${escapeHtml(action)}" placeholder="Modifier si besoin" />
+      </div>
+      
+      <div class="action-progress">
+        ${Array.from({length: totalActions}, (_, i) => 
+          `<div class="action-dot ${i < currentActionIndex ? 'done' : ''} ${i === currentActionIndex ? 'current' : ''}"></div>`
+        ).join('')}
+      </div>
+      
+      <button class="btn btn-primary" id="nextActionBtn" style="width:100%; margin-bottom:8px;">
+        ${currentActionIndex < totalActions - 1 ? 'Action suivante' : 'Terminer'}
+      </button>
+      <button class="btn btn-ghost" id="otherIdeaBtn" style="width:100%; margin-bottom:8px;">Autre idée</button>
+      <button class="btn btn-ghost" id="addToTaskBtn" style="width:100%;">Ajouter à ma tâche</button>
+    </div>
+  `;
+  
+  document.getElementById('nextActionBtn').addEventListener('click', () => {
+    const input = document.getElementById('currentActionInput');
+    if (input) {
+      const modifiedAction = input.value.trim();
+      if (modifiedAction && modifiedAction !== action) {
+        currentActions[currentActionIndex] = modifiedAction;
+        const task = getCurrentTask();
+        if (task) saveLearnedAction(task.name, currentBlocker, modifiedAction);
+      }
+    }
+    currentActionIndex++;
+    renderBlockAction();
+  });
   
   document.getElementById('otherIdeaBtn').addEventListener('click', () => {
-    currentUnstuckStepIndex = (currentUnstuckStepIndex + 1) % (STEP_BANK[currentUnstuckCategory]?.tooBig?.length || 1);
-    const newSteps = STEP_BANK[currentUnstuckCategory]?.tooBig || STEP_BANK.autre.tooBig;
-    currentUnstuckSteps = newSteps.slice(currentUnstuckStepIndex, currentUnstuckStepIndex + 3);
-    if (currentUnstuckSteps.length < 3) {
-      currentUnstuckSteps = [...currentUnstuckSteps, ...newSteps.slice(0, 3 - currentUnstuckSteps.length)];
+    if (currentBlockCategory && MICRO_ACTIONS[currentBlockCategory] && MICRO_ACTIONS[currentBlockCategory][currentBlocker]) {
+      const bank = MICRO_ACTIONS[currentBlockCategory][currentBlocker];
+      const otherActions = bank.filter(a => !currentActions.includes(a));
+      if (otherActions.length > 0) {
+        const randomIndex = Math.floor(Math.random() * otherActions.length);
+        currentActions[currentActionIndex] = otherActions[randomIndex];
+        renderBlockAction();
+        toast('Nouvelle suggestion');
+      } else {
+        toast('Pas d\'autre idée pour l\'instant');
+      }
     }
-    renderUnstuckTooBig();
   });
   
-  document.getElementById('addMicroSteps').addEventListener('click', () => {
-    if (!task) { toast('Aucune tâche en cours'); return; }
-    const inputs = unstuckActions.querySelectorAll('#microStepsList input');
-    const newSteps = Array.from(inputs).map(i => i.value.trim()).filter(s => s);
-    if (newSteps.length === 0) { toast('Au moins une étape'); return; }
+  document.getElementById('addToTaskBtn').addEventListener('click', () => {
+    const task = getCurrentTask();
+    if (!task) {
+      toast('Aucune tâche en cours');
+      return;
+    }
+    const input = document.getElementById('currentActionInput');
+    const actionToAdd = input ? input.value.trim() : action;
+    if (!actionToAdd) {
+      toast('Action vide');
+      return;
+    }
+    if (task.steps.includes(actionToAdd)) {
+      toast('Déjà dans la tâche');
+      return;
+    }
     const insertAt = state.session.stepIndex + 1;
-    task.steps.splice(insertAt, 0, ...newSteps);
-    newSteps.forEach(s => saveLearnedStep(taskName, 'tooBig', s));
+    task.steps.splice(insertAt, 0, actionToAdd);
+    saveLearnedAction(task.name, currentBlocker, actionToAdd);
     saveTasks();
     renderTasks();
-    toast(`${newSteps.length} micro-étapes ajoutées`);
+    toast('Action ajoutée à la tâche');
   });
 }
 
-function renderUnstuckNoIdea() {
-  unstuckActions.innerHTML = `
-    <div class="unstuck-action active">
-      ${unstuckBackButton()}
-      <div class="unstuck-subtitle">Quelle est la toute première chose ?</div>
-      <p class="unstuck-subtext">Même minuscule. On commence par là.</p>
-      <div class="micro-steps-list" id="noIdeaList">
-        ${currentUnstuckSteps.map((s, i) => `<div class="micro-step-item"><span class="ms-num">${i+1}</span><input type="text" value="${escapeHtml(s)}" data-idx="${i}" /></div>`).join('')}
-      </div>
-      <button class="btn btn-ghost" id="otherIdeaNoIdea" style="width:100%; margin-bottom:12px;">Autre idée</button>
-      <button class="btn btn-primary" id="setFirstStep" style="width:100%; margin-bottom:8px;">En faire l'étape 1 (1 min)</button>
-      ${unstuckEndCard("Premier pas fait. Le reste suivra.")}
+function renderBlockComplete() {
+  blockActions.innerHTML = `
+    <div class="block-action active">
+      <button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button>
+      <div class="block-subtitle">Bien joué !</div>
+      <p class="block-subtext">Tu as avancé, même petit. C'est déjà ça.</p>
+      <button class="btn btn-primary" onclick="renderBlockMain()" style="width:100%; margin-bottom:8px;">Reprendre ma tâche</button>
+      <button class="btn btn-ghost" onclick="renderBlockMain()" style="width:100%;">Mettre de côté</button>
     </div>
   `;
-  
-  document.getElementById('otherIdeaNoIdea').addEventListener('click', () => {
-    currentUnstuckStepIndex = (currentUnstuckStepIndex + 1) % (STEP_BANK[currentUnstuckCategory]?.noIdea?.length || 1);
-    const newSteps = STEP_BANK[currentUnstuckCategory]?.noIdea || STEP_BANK.autre.noIdea;
-    currentUnstuckSteps = newSteps.slice(currentUnstuckStepIndex, currentUnstuckStepIndex + 4);
-    if (currentUnstuckSteps.length < 4) {
-      currentUnstuckSteps = [...currentUnstuckSteps, ...newSteps.slice(0, 4 - currentUnstuckSteps.length)];
-    }
-    renderUnstuckNoIdea();
-  });
-  
-  document.getElementById('setFirstStep').addEventListener('click', () => {
-    const inputs = unstuckActions.querySelectorAll('#noIdeaList input');
-    const first = inputs[0].value.trim();
-    if (!first) { toast('Une étape au moins'); return; }
-    const task = getCurrentTask();
-    if (task) {
-      task.steps[0] = first;
-      state.session.stepIndex = 0;
-      task.duration = 1;
-      saveLearnedStep(task.name, 'noIdea', first);
-      saveTasks(); saveSession();
-      renderTasks();
-      toast('Nouvelle étape 1 : 1 minute');
-    } else {
-      const newTask = { id: 't_' + Date.now(), name: 'Premier pas', steps: [first], duration: 1, done: false, createdAt: Date.now() };
-      state.tasks.unshift(newTask);
-      saveLearnedStep('Premier pas', 'noIdea', first);
-      saveTasks();
-      loadTask(newTask.id);
-      toast('Nouvelle tâche créée');
-    }
-  });
 }
 
-function renderUnstuckDistracted() {
-  const checklist = [
-    "Poser le téléphone à l'envers",
-    "Fermer l'onglet qui distraie",
-    "Boire un verre d'eau",
-    "Respirer 3 fois calmement"
-  ];
-  
-  unstuckActions.innerHTML = `
-    <div class="unstuck-action active">
-      ${unstuckBackButton()}
-      <div class="unstuck-subtitle">On se recentre — 1 minute</div>
-      <p class="unstuck-subtext">Coche ce que tu peux faire maintenant.</p>
-      <div class="checklist" id="distraChecklist">
-        ${checklist.map((item, i) => `<div class="checklist-item" data-idx="${i}"><div class="check-box">${ICONS.check}</div><div class="check-text">${item}</div></div>`).join('')}
-      </div>
-      <div class="timer-display" id="distraTimer" style="color:var(--ink); font-size:28px; margin:16px 0;"><span id="distraMin">01</span><span class="colon" style="color:var(--ink-3);">:</span><span id="distraSec">00</span></div>
-      <button class="btn btn-primary" id="startDistraTimer" style="width:100%; margin-bottom:8px;">Lancer 1 minute</button>
-      ${unstuckEndCard("Recentré·e. On y retourne doucement.")}
-    </div>
-  `;
-  
-  unstuckActions.querySelectorAll('.checklist-item').forEach(item => {
-    item.addEventListener('click', () => {
-      item.classList.toggle('checked');
-    });
-  });
-  
-  document.getElementById('startDistraTimer').addEventListener('click', () => {
-    startUnstuckMiniTimer(60, 'distraMin', 'distraSec', 'startDistraTimer', 'Temps écoulé');
-  });
-}
-
-function renderUnstuckTired() {
-  const action = currentUnstuckSteps[0] || 'Fais une toute petite action';
-  
-  unstuckActions.innerHTML = `
-    <div class="unstuck-action active">
-      ${unstuckBackButton()}
-      <div class="unstuck-subtitle">Aujourd'hui, un tout petit pas suffit.</div>
-      <p class="unstuck-subtext">Une seule action, puis on respire.</p>
-      <div class="micro-steps-list">
-        <div class="micro-step-item"><span class="ms-num">1</span><input type="text" value="${escapeHtml(action)}" readonly /></div>
-      </div>
-      <div class="breathe-label" id="breatheLabel">Inspire...</div>
-      <div class="breathe-circle-wrap"><div class="breathe-circle"></div></div>
-      <div class="timer-display" id="breatheTimer" style="color:var(--ink); font-size:22px; margin-bottom:16px;"><span id="breatheMin">00</span><span class="colon" style="color:var(--ink-3);">:</span><span id="breatheSec">30</span></div>
-      <button class="btn btn-primary" id="startBreathe" style="width:100%; margin-bottom:8px;">Commencer la respiration (30 s)</button>
-      ${unstuckEndCard("Bravo. Même petit, c'est un pas.")}
-    </div>
-  `;
-  
-  document.getElementById('startBreathe').addEventListener('click', () => {
-    const label = document.getElementById('breatheLabel');
-    let phase = 0;
-    const phases = ['Inspire...', 'Bloque...', 'Expire...'];
-    unstuckBreatheTimer = setInterval(() => {
-      phase = (phase + 1) % 3;
-      if (label) label.textContent = phases[phase];
-    }, 2000);
-    startUnstuckMiniTimer(30, 'breatheMin', 'breatheSec', 'startBreathe', 'Respiration terminée', () => {
-      if (unstuckBreatheTimer) { clearInterval(unstuckBreatheTimer); unstuckBreatheTimer = null; }
-      if (label) label.textContent = 'Terminé';
-    });
-  });
-}
-
-function renderUnstuckTwoMin() {
-  const action = currentUnstuckSteps[0] || 'Travaille 2 minutes sur ta tâche';
-  
-  unstuckActions.innerHTML = `
-    <div class="unstuck-action active">
-      ${unstuckBackButton()}
-      <div class="unstuck-subtitle">Juste 2 minutes</div>
-      <p class="unstuck-subtext">${escapeHtml(action)}<br><br>Après 2 minutes, tu peux t'arrêter. Sans culpabilité.</p>
-      <div class="timer-display" id="twoMinTimer" style="color:var(--ink); font-size:36px; margin:20px 0;"><span id="twoMinMin">02</span><span class="colon" style="color:var(--ink-3);">:</span><span id="twoMinSec">00</span></div>
-      <button class="btn btn-primary" id="startTwoMin" style="width:100%; margin-bottom:8px;">Lancer 2 minutes</button>
-      ${unstuckEndCard("2 minutes, c'est déjà quelque chose.")}
-    </div>
-  `;
-  
-  document.getElementById('startTwoMin').addEventListener('click', () => {
-    startUnstuckMiniTimer(120, 'twoMinMin', 'twoMinSec', 'startTwoMin', '2 minutes écoulées');
-  });
-}
-
-function startUnstuckMiniTimer(seconds, minElId, secElId, btnId, endMessage, onEnd) {
-  if (unstuckMiniTimer) { clearInterval(unstuckMiniTimer); unstuckMiniTimer = null; }
-  const minEl = document.getElementById(minElId);
-  const secEl = document.getElementById(secElId);
-  const btn = document.getElementById(btnId);
-  if (!minEl || !secEl || !btn) return;
-  
-  btn.textContent = 'En cours...';
-  btn.disabled = true;
-  let remaining = seconds;
-  
-  const update = () => {
-    const m = Math.floor(remaining / 60);
-    const s = remaining % 60;
-    minEl.textContent = String(m).padStart(2, '0');
-    secEl.textContent = String(s).padStart(2, '0');
+function getBlockTitle(blocker) {
+  const titles = {
+    noIdea: "Première action immédiate",
+    tooBig: "On découpe et on commence",
+    tired: "Version ultra-courte"
   };
-  update();
-  
-  unstuckMiniTimer = setInterval(() => {
-    remaining--;
-    update();
-    if (remaining <= 0) {
-      clearInterval(unstuckMiniTimer);
-      unstuckMiniTimer = null;
-      btn.textContent = endMessage;
-      if (state.settings.vibration && navigator.vibrate) navigator.vibrate([100, 50, 100]);
-      if (onEnd) onEnd();
-    }
-  }, 1000);
+  return titles[blocker] || "Action concrète";
 }
 
-window.renderUnstuckMain = renderUnstuckMain;
+function getBlockSubtitle(blocker, count) {
+  const subtitles = {
+    noIdea: `Voici la première action à faire. ${count > 1 ? `Puis ${count - 1} autre${count > 2 ? 's' : ''} si tu veux continuer.` : ''}`,
+    tooBig: `La tâche est découpée en ${count} parties. Commence par la première.`,
+    tired: `Version minimale. ${count} action${count > 1 ? 's' : ''} très simple${count > 1 ? 's' : ''}.`
+  };
+  return subtitles[blocker] || `${count} action${count > 1 ? 's' : ''} à faire`;
+}
+
+window.renderBlockMain = renderBlockMain;
 
 /* ============================================================
    ONBOARDING
@@ -2362,14 +2453,14 @@ function finishOnboarding() {
     setTimeout(() => { loadTask(task.id); toast('Première étape prête ! Appuie sur START'); }, 500);
   } else {
     document.getElementById('onboardingOverlay').classList.remove('active');
-    toast('Bienvenue dans Clic !');
+    toast('Bienvenue dans START !');
   }
 }
 
 async function init() {
   await loadState();
   renderTemplates(); renderSteps(); renderTasks();
-  renderUnstuckMain();
+  renderBlockMain();
   applySettingsToUI();
   renderDevice();
   await resumeSessionAfterReload();
