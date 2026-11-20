@@ -198,7 +198,6 @@
   .input-row input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 16px; color: var(--ink); padding: 0; }
   .input-row input::placeholder { color: var(--ink-3); }
 
-  /* Ligne de durée cliquable */
   .duration-row {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 18px;
@@ -234,7 +233,6 @@
   .template-chip .quick-start:hover { background: var(--accent-2); transform: scale(1.1); }
   .template-chip .quick-start svg { width: 14px; height: 14px; }
 
-  /* Barre d'action sticky */
   .prepare-actions {
     position: sticky;
     bottom: calc(var(--nav-height) + 12px + env(safe-area-inset-bottom));
@@ -327,7 +325,6 @@
   .seg-opt { padding: 8px 14px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); min-height: 36px; }
   .seg-opt.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
 
-  /* Nav à 4 entrées */
   .bottom-nav {
     position: fixed; bottom: calc(12px + env(safe-area-inset-bottom)); left: 50%;
     transform: translateX(-50%);
@@ -372,7 +369,7 @@
   .end-actions, .resume-actions { display: flex; flex-direction: column; gap: 10px; }
   .end-actions .btn, .resume-actions .btn { width: 100%; padding: 16px; font-size: 15px; }
 
-  /* NOUVEAU : Bottom sheet durée */
+  /* Bottom sheet durée */
   .duration-sheet {
     background: var(--surface);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -467,7 +464,6 @@
     box-shadow: 0 4px 14px rgba(224,133,111,0.35);
   }
   .duration-validate:hover { background: var(--accent-2); }
-  .duration-validate:disabled { opacity: 0.5; cursor: not-allowed; }
   .duration-error {
     text-align: center;
     font-size: 13px;
@@ -476,12 +472,10 @@
     min-height: 18px;
   }
 
-  /* Mode Je bloque / Unstuck */
   .block-label, .unstuck-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 12px; }
   .block-text, .unstuck-text { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); line-height: 1.3; margin-bottom: 24px; }
   .block-card .btn, .unstuck-card .btn { width: 100%; padding: 16px; font-size: 15px; margin-top: 8px; }
 
-  /* À propos */
   .about-tabs { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
   .about-tab { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); }
   .about-tab.active { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
@@ -491,7 +485,6 @@
   .about-content p { margin-bottom: 12px; }
   .about-content a { color: var(--accent-2); text-decoration: underline; }
 
-  /* Unstuck page */
   .unstuck-intro { text-align: center; margin-bottom: 28px; }
   .unstuck-intro .page-title { font-size: 48px; margin-bottom: 8px; }
   .unstuck-intro .page-subtitle { margin: 0 auto; }
@@ -692,7 +685,7 @@
               <span class="dur-arrow">›</span>
             </div>
             <div style="margin-top:10px;">
-              <button class="dial-free" id="dialFree" style="font-size:13px; color:var(--ink-3); background:none; border:none; cursor:pointer; font-family:inherit;">Session libre (sans minuteur)</button>
+              <button class="dial-free" id="dialFree" style="font-size:13px; color:var(--ink-3); background:none; border:none; cursor:pointer; font-family:inherit; text-decoration:underline; text-decoration-color:var(--line-2); text-underline-offset:3px;">Session libre (sans minuteur)</button>
             </div>
           </div>
         </div>
@@ -889,7 +882,6 @@
   </div>
 </div>
 
-<!-- Autres modales -->
 <div class="end-screen" id="endScreen">
   <div class="end-card">
     <h2>Session terminée</h2>
@@ -954,8 +946,7 @@
     <span class="nav-label">Appareil</span>
   </button>
   <button class="nav-btn" data-view="unstuck">
-    <!-- NOUVEAU : icône bouée de sauvetage -->
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="9"/>
       <circle cx="12" cy="12" r="3"/>
       <line x1="12" y1="3" x2="12" y2="6"/>
@@ -1153,376 +1144,63 @@ const TEMPLATES = [
 
 /* ============================================================
    MOTEUR DE SUGGESTIONS LOCAL
-   suggestSteps(taskName, blocker, context)
    ============================================================ */
 const STEP_BANK = {
   rangement: {
-    tooBig: [
-      "Vide une seule zone (tiroir, étagère, coin)",
-      "Retire tout ce qui est sur le côté gauche",
-      "Enlève la pile de papiers du centre",
-      "Trie seulement les objets visibles",
-      "Fais un sac pour les choses à jeter",
-      "Range une seule catégorie d'objets",
-      "Essuie seulement le dessus du bureau",
-      "Mets de côté ce qui ne sert plus"
-    ],
-    noIdea: [
-      "Pose une boîte ou un sac à côté",
-      "Prends un seul objet et décide : garder, jeter, déplacer",
-      "Éloigne la chaise pour voir le sol",
-      "Regarde la pièce pendant 30 secondes",
-      "Commence par le coin le plus visible",
-      "Ramasse tout ce qui est par terre",
-      "Ouvre une fenêtre pour aérer",
-      "Mets une musique pour te motiver"
-    ],
-    distracted: [
-      "Mets un minuteur de 5 minutes",
-      "Lance une playlist sans paroles",
-      "Pose le téléphone dans une autre pièce",
-      "Ferme la porte pour être seul·e",
-      "Enlève tout ce qui brille ou clignote",
-      "Concentre-toi sur une seule zone",
-      "Fais une pause toutes les 10 minutes",
-      "Récompense-toi après 3 objets rangés"
-    ],
-    tired: [
-      "Remets un seul objet à sa place",
-      "Jette un papier qui traîne",
-      "Essuie une petite surface",
-      "Déplace une chaise pour voir clair",
-      "Ouvre la fenêtre 30 secondes"
-    ],
-    twoMin: [
-      "Range 5 objets à leur place",
-      "Jette tout ce qui est clairement un déchet",
-      "Essuie le bureau en entier",
-      "Fais la vaisselle qui traîne",
-      "Passe l'aspirateur sur une zone"
-    ]
+    tooBig: ["Vide une seule zone (tiroir, étagère, coin)", "Retire tout ce qui est sur le côté gauche", "Enlève la pile de papiers du centre", "Trie seulement les objets visibles", "Fais un sac pour les choses à jeter", "Range une seule catégorie d'objets", "Essuie seulement le dessus du bureau", "Mets de côté ce qui ne sert plus"],
+    noIdea: ["Pose une boîte ou un sac à côté", "Prends un seul objet et décide : garder, jeter, déplacer", "Éloigne la chaise pour voir le sol", "Regarde la pièce pendant 30 secondes", "Commence par le coin le plus visible", "Ramasse tout ce qui est par terre", "Ouvre une fenêtre pour aérer", "Mets une musique pour te motiver"],
+    distracted: ["Mets un minuteur de 5 minutes", "Lance une playlist sans paroles", "Pose le téléphone dans une autre pièce", "Ferme la porte pour être seul·e", "Enlève tout ce qui brille ou clignote", "Concentre-toi sur une seule zone", "Fais une pause toutes les 10 minutes", "Récompense-toi après 3 objets rangés"],
+    tired: ["Remets un seul objet à sa place", "Jette un papier qui traîne", "Essuie une petite surface", "Déplace une chaise pour voir clair", "Ouvre la fenêtre 30 secondes"],
+    twoMin: ["Range 5 objets à leur place", "Jette tout ce qui est clairement un déchet", "Essuie le bureau en entier", "Fais la vaisselle qui traîne", "Passe l'aspirateur sur une zone"]
   },
   reviser: {
-    tooBig: [
-      "Relis seulement le chapitre 1",
-      "Fais une fiche sur les formules clés",
-      "Refais un exercice type",
-      "Relis les titres et sous-titres",
-      "Surligne les idées principales",
-      "Résume une partie en une phrase",
-      "Fais un schéma de la leçon",
-      "Relis tes annotations de cours"
-    ],
-    noIdea: [
-      "Sors le cours et ouvre-le à la première page",
-      "Lis les titres en diagonale",
-      "Note 3 mots que tu ne comprends pas",
-      "Regarde le plan du chapitre",
-      "Relis l'introduction du cours",
-      "Identifie les 3 idées principales",
-      "Note ce que tu sais déjà",
-      "Liste ce que tu dois revoir"
-    ],
-    distracted: [
-      "Ferme tous les onglets sauf le cours",
-      "Pose le téléphone à l'envers",
-      "Mets un minuteur de 25 minutes",
-      "Installe-toi dans un endroit calme",
-      "Éteins les notifications",
-      "Prends une feuille pour noter les distractions",
-      "Fais une pause de 5 min toutes les 25 min",
-      "Récompense-toi après une session"
-    ],
-    tired: [
-      "Relis une seule définition",
-      "Regarde un schéma du cours",
-      "Lis un exemple simple",
-      "Note un mot-clé important",
-      "Relis le résumé de fin de chapitre"
-    ],
-    twoMin: [
-      "Écris 3 formules de mémoire",
-      "Relis le résumé du chapitre",
-      "Fais un schéma rapide",
-      "Note 5 mots-clés importants",
-      "Relis tes fiches de révision"
-    ]
+    tooBig: ["Relis seulement le chapitre 1", "Fais une fiche sur les formules clés", "Refais un exercice type", "Relis les titres et sous-titres", "Surligne les idées principales", "Résume une partie en une phrase", "Fais un schéma de la leçon", "Relis tes annotations de cours"],
+    noIdea: ["Sors le cours et ouvre-le à la première page", "Lis les titres en diagonale", "Note 3 mots que tu ne comprends pas", "Regarde le plan du chapitre", "Relis l'introduction du cours", "Identifie les 3 idées principales", "Note ce que tu sais déjà", "Liste ce que tu dois revoir"],
+    distracted: ["Ferme tous les onglets sauf le cours", "Pose le téléphone à l'envers", "Mets un minuteur de 25 minutes", "Installe-toi dans un endroit calme", "Éteins les notifications", "Prends une feuille pour noter les distractions", "Fais une pause de 5 min toutes les 25 min", "Récompense-toi après une session"],
+    tired: ["Relis une seule définition", "Regarde un schéma du cours", "Lis un exemple simple", "Note un mot-clé important", "Relis le résumé de fin de chapitre"],
+    twoMin: ["Écris 3 formules de mémoire", "Relis le résumé du chapitre", "Fais un schéma rapide", "Note 5 mots-clés importants", "Relis tes fiches de révision"]
   },
   ecrire: {
-    tooBig: [
-      "Écris le plan en 3 parties",
-      "Rédige seulement l'introduction",
-      "Fais la bibliographie",
-      "Écris un paragraphe à la fois",
-      "Liste les idées principales",
-      "Rédige la conclusion d'abord",
-      "Fais un brouillon très moche",
-      "Relis ce que tu as déjà écrit"
-    ],
-    noIdea: [
-      "Ouvre un document vide",
-      "Écris le titre provisoire",
-      "Liste 5 idées en vrac",
-      "Note l'angle de ton sujet",
-      "Écris la question centrale",
-      "Fais un plan très simple",
-      "Rédige une phrase d'accroche",
-      "Note 3 arguments possibles"
-    ],
-    distracted: [
-      "Ferme tous les onglets inutiles",
-      "Pose le téléphone à l'envers",
-      "Mets un minuteur de 25 minutes",
-      "Installe-toi au calme",
-      "Éteins les notifications",
-      "Ouvre seulement ton traitement de texte",
-      "Fais une pause après un paragraphe",
-      "Récompense-toi après 500 mots"
-    ],
-    tired: [
-      "Écris une seule phrase du rapport",
-      "Note une idée en vrac",
-      "Relis ton dernier paragraphe",
-      "Corrige une phrase déjà écrite",
-      "Ajoute un mot à ton plan"
-    ],
-    twoMin: [
-      "Rédige le premier paragraphe de l'intro",
-      "Écris 3 idées principales",
-      "Fais le plan détaillé",
-      "Rédige une phrase de conclusion",
-      "Corrige un paragraphe existant"
-    ]
+    tooBig: ["Écris le plan en 3 parties", "Rédige seulement l'introduction", "Fais la bibliographie", "Écris un paragraphe à la fois", "Liste les idées principales", "Rédige la conclusion d'abord", "Fais un brouillon très moche", "Relis ce que tu as déjà écrit"],
+    noIdea: ["Ouvre un document vide", "Écris le titre provisoire", "Liste 5 idées en vrac", "Note l'angle de ton sujet", "Écris la question centrale", "Fais un plan très simple", "Rédige une phrase d'accroche", "Note 3 arguments possibles"],
+    distracted: ["Ferme tous les onglets inutiles", "Pose le téléphone à l'envers", "Mets un minuteur de 25 minutes", "Installe-toi au calme", "Éteins les notifications", "Ouvre seulement ton traitement de texte", "Fais une pause après un paragraphe", "Récompense-toi après 500 mots"],
+    tired: ["Écris une seule phrase du rapport", "Note une idée en vrac", "Relis ton dernier paragraphe", "Corrige une phrase déjà écrite", "Ajoute un mot à ton plan"],
+    twoMin: ["Rédige le premier paragraphe de l'intro", "Écris 3 idées principales", "Fais le plan détaillé", "Rédige une phrase de conclusion", "Corrige un paragraphe existant"]
   },
   exercice: {
-    tooBig: [
-      "Lis seulement l'énoncé",
-      "Identifie les données utiles",
-      "Fais un schéma rapide",
-      "Résous la première question",
-      "Écris la formule à utiliser",
-      "Relis un exercice similaire",
-      "Fais un calcul intermédiaire",
-      "Vérifie une étape du corrigé"
-    ],
-    noIdea: [
-      "Lis l'énoncé en entier, sans crayon",
-      "Surligne les données importantes",
-      "Écris ce qu'on te demande",
-      "Note les formules possibles",
-      "Fais un dessin ou schéma",
-      "Relis le cours correspondant",
-      "Identifie le type d'exercice",
-      "Cherche un exemple similaire"
-    ],
-    distracted: [
-      "Pose le téléphone à l'envers",
-      "Mets un minuteur de 15 minutes",
-      "Ferme les onglets inutiles",
-      "Installe-toi au calme",
-      "Prends une feuille de brouillon",
-      "Fais une pause après chaque question",
-      "Éteins les notifications",
-      "Récompense-toi après un exercice"
-    ],
-    tired: [
-      "Relis l'énoncé une fois",
-      "Note une donnée importante",
-      "Écris la formule principale",
-      "Fais un petit calcul simple",
-      "Regarde un exemple du cours"
-    ],
-    twoMin: [
-      "Résous la première question",
-      "Fais le schéma de l'exercice",
-      "Écris les données utiles",
-      "Applique la formule principale",
-      "Vérifie un calcul intermédiaire"
-    ]
+    tooBig: ["Lis seulement l'énoncé", "Identifie les données utiles", "Fais un schéma rapide", "Résous la première question", "Écris la formule à utiliser", "Relis un exercice similaire", "Fais un calcul intermédiaire", "Vérifie une étape du corrigé"],
+    noIdea: ["Lis l'énoncé en entier, sans crayon", "Surligne les données importantes", "Écris ce qu'on te demande", "Note les formules possibles", "Fais un dessin ou schéma", "Relis le cours correspondant", "Identifie le type d'exercice", "Cherche un exemple similaire"],
+    distracted: ["Pose le téléphone à l'envers", "Mets un minuteur de 15 minutes", "Ferme les onglets inutiles", "Installe-toi au calme", "Prends une feuille de brouillon", "Fais une pause après chaque question", "Éteins les notifications", "Récompense-toi après un exercice"],
+    tired: ["Relis l'énoncé une fois", "Note une donnée importante", "Écris la formule principale", "Fais un petit calcul simple", "Regarde un exemple du cours"],
+    twoMin: ["Résous la première question", "Fais le schéma de l'exercice", "Écris les données utiles", "Applique la formule principale", "Vérifie un calcul intermédiaire"]
   },
   lire: {
-    tooBig: [
-      "Lis seulement le premier chapitre",
-      "Lis les titres des sections",
-      "Note 3 idées principales",
-      "Lis le résumé de fin",
-      "Surligne les passages clés",
-      "Fais une fiche de lecture",
-      "Relis un passage important",
-      "Note tes questions sur le texte"
-    ],
-    noIdea: [
-      "Ouvre le livre à la première page",
-      "Lis le sommaire ou la table des matières",
-      "Lis la quatrième de couverture",
-      "Note ce que tu attends de cette lecture",
-      "Lis le premier paragraphe",
-      "Identifie le genre du texte",
-      "Note l'auteur et le contexte",
-      "Fixe-toi un objectif de pages"
-    ],
-    distracted: [
-      "Pose le téléphone dans une autre pièce",
-      "Installe-toi dans un endroit calme",
-      "Mets un minuteur de 20 minutes",
-      "Éteins les notifications",
-      "Prends un marque-page",
-      "Lis à voix haute si besoin",
-      "Fais une pause toutes les 15 pages",
-      "Note tes distractions sur un papier"
-    ],
-    tired: [
-      "Lis un seul paragraphe",
-      "Regarde les images ou schémas",
-      "Lis le résumé de fin de chapitre",
-      "Note un mot intéressant",
-      "Relis une phrase que tu aimes"
-    ],
-    twoMin: [
-      "Lis 2 pages du chapitre",
-      "Note 3 idées principales",
-      "Surligne les passages clés",
-      "Fais un résumé en une phrase",
-      "Note tes questions sur le texte"
-    ]
+    tooBig: ["Lis seulement le premier chapitre", "Lis les titres des sections", "Note 3 idées principales", "Lis le résumé de fin", "Surligne les passages clés", "Fais une fiche de lecture", "Relis un passage important", "Note tes questions sur le texte"],
+    noIdea: ["Ouvre le livre à la première page", "Lis le sommaire ou la table des matières", "Lis la quatrième de couverture", "Note ce que tu attends de cette lecture", "Lis le premier paragraphe", "Identifie le genre du texte", "Note l'auteur et le contexte", "Fixe-toi un objectif de pages"],
+    distracted: ["Pose le téléphone dans une autre pièce", "Installe-toi dans un endroit calme", "Mets un minuteur de 20 minutes", "Éteins les notifications", "Prends un marque-page", "Lis à voix haute si besoin", "Fais une pause toutes les 15 pages", "Note tes distractions sur un papier"],
+    tired: ["Lis un seul paragraphe", "Regarde les images ou schémas", "Lis le résumé de fin de chapitre", "Note un mot intéressant", "Relis une phrase que tu aimes"],
+    twoMin: ["Lis 2 pages du chapitre", "Note 3 idées principales", "Surligne les passages clés", "Fais un résumé en une phrase", "Note tes questions sur le texte"]
   },
   contacter: {
-    tooBig: [
-      "Écris seulement l'objet du message",
-      "Rédige la première phrase",
-      "Liste les 3 points à aborder",
-      "Prépare tes questions",
-      "Rassemble les documents nécessaires",
-      "Vérifie les coordonnées",
-      "Fais un brouillon du message",
-      "Relis avant d'envoyer"
-    ],
-    noIdea: [
-      "Ouvre ta messagerie ou ton téléphone",
-      "Cherche le numéro ou l'adresse",
-      "Note ton numéro d'adhérent ou de dossier",
-      "Écris l'objet du message",
-      "Liste tes questions",
-      "Choisis un moment calme",
-      "Prépare tes documents",
-      "Rédige une phrase d'introduction"
-    ],
-    distracted: [
-      "Ferme les réseaux sociaux",
-      "Mets le téléphone en mode Ne pas déranger après",
-      "Note tes questions avant d'appeler",
-      "Installe-toi au calme",
-      "Prépare un papier et un stylo",
-      "Vérifie que tu as tous les documents",
-      "Choisis un moment sans interruption",
-      "Fais l'appel maintenant, pas plus tard"
-    ],
-    tired: [
-      "Regarde le numéro de téléphone",
-      "Ouvre un nouveau message",
-      "Écris seulement l'objet",
-      "Note une question à poser",
-      "Prépare ton numéro de dossier"
-    ],
-    twoMin: [
-      "Compose le numéro et attends",
-      "Rédige l'objet et la première phrase",
-      "Envoie le message préparé",
-      "Note tes 3 questions principales",
-      "Rassemble tous les documents nécessaires"
-    ]
+    tooBig: ["Écris seulement l'objet du message", "Rédige la première phrase", "Liste les 3 points à aborder", "Prépare tes questions", "Rassemble les documents nécessaires", "Vérifie les coordonnées", "Fais un brouillon du message", "Relis avant d'envoyer"],
+    noIdea: ["Ouvre ta messagerie ou ton téléphone", "Cherche le numéro ou l'adresse", "Note ton numéro d'adhérent ou de dossier", "Écris l'objet du message", "Liste tes questions", "Choisis un moment calme", "Prépare tes documents", "Rédige une phrase d'introduction"],
+    distracted: ["Ferme les réseaux sociaux", "Mets le téléphone en mode Ne pas déranger après", "Note tes questions avant d'appeler", "Installe-toi au calme", "Prépare un papier et un stylo", "Vérifie que tu as tous les documents", "Choisis un moment sans interruption", "Fais l'appel maintenant, pas plus tard"],
+    tired: ["Regarde le numéro de téléphone", "Ouvre un nouveau message", "Écris seulement l'objet", "Note une question à poser", "Prépare ton numéro de dossier"],
+    twoMin: ["Compose le numéro et attends", "Rédige l'objet et la première phrase", "Envoie le message préparé", "Note tes 3 questions principales", "Rassemble tous les documents nécessaires"]
   },
   projet: {
-    tooBig: [
-      "Fais la liste des tâches à faire",
-      "Commence par la plus simple",
-      "Dessine un schéma ou une maquette",
-      "Écris les étapes dans l'ordre",
-      "Fais une recherche rapide",
-      "Ouvre les outils nécessaires",
-      "Travaille 15 minutes seulement",
-      "Note tes idées en vrac"
-    ],
-    noIdea: [
-      "Ouvre ton outil de travail",
-      "Crée un nouveau fichier ou projet",
-      "Note l'objectif final",
-      "Liste les premières étapes",
-      "Fais une recherche sur le sujet",
-      "Regarde des exemples similaires",
-      "Dessine un croquis rapide",
-      "Note tes questions"
-    ],
-    distracted: [
-      "Ferme tous les onglets inutiles",
-      "Mets un minuteur de 25 minutes",
-      "Pose le téléphone à l'envers",
-      "Installe-toi au calme",
-      "Éteins les notifications",
-      "Travaille par blocs de 15 min",
-      "Fais une pause après chaque étape",
-      "Récompense-toi après une session"
-    ],
-    tired: [
-      "Ouvre ton projet et regarde-le",
-      "Note une seule idée",
-      "Fais un petit croquis",
-      "Relis ce que tu as déjà fait",
-      "Organise tes fichiers"
-    ],
-    twoMin: [
-      "Travaille 2 minutes sur ton projet",
-      "Fais la première étape de ta liste",
-      "Ouvre les outils nécessaires",
-      "Note 3 idées principales",
-      "Fais un schéma rapide"
-    ]
+    tooBig: ["Fais la liste des tâches à faire", "Commence par la plus simple", "Dessine un schéma ou une maquette", "Écris les étapes dans l'ordre", "Fais une recherche rapide", "Ouvre les outils nécessaires", "Travaille 15 minutes seulement", "Note tes idées en vrac"],
+    noIdea: ["Ouvre ton outil de travail", "Crée un nouveau fichier ou projet", "Note l'objectif final", "Liste les premières étapes", "Fais une recherche sur le sujet", "Regarde des exemples similaires", "Dessine un croquis rapide", "Note tes questions"],
+    distracted: ["Ferme tous les onglets inutiles", "Mets un minuteur de 25 minutes", "Pose le téléphone à l'envers", "Installe-toi au calme", "Éteins les notifications", "Travaille par blocs de 15 min", "Fais une pause après chaque étape", "Récompense-toi après une session"],
+    tired: ["Ouvre ton projet et regarde-le", "Note une seule idée", "Fais un petit croquis", "Relis ce que tu as déjà fait", "Organise tes fichiers"],
+    twoMin: ["Travaille 2 minutes sur ton projet", "Fais la première étape de ta liste", "Ouvre les outils nécessaires", "Note 3 idées principales", "Fais un schéma rapide"]
   },
   cuisine: {
-    tooBig: [
-      "Lis la recette en entier",
-      "Rassemble tous les ingrédients",
-      "Prépare seulement les légumes",
-      "Fais la sauce d'abord",
-      "Préchauffe le four",
-      "Lave et coupe les ingrédients",
-      "Suis la recette étape par étape",
-      "Goûte et ajuste l'assaisonnement"
-    ],
-    noIdea: [
-      "Choisis une recette simple",
-      "Vérifie ce que tu as dans le frigo",
-      "Fais la liste des courses",
-      "Lis la recette une fois",
-      "Rassemble les ustensiles",
-      "Prépare ton plan de travail",
-      "Commence par la préparation",
-      "Suis les étapes dans l'ordre"
-    ],
-    distracted: [
-      "Pose le téléphone loin de la cuisine",
-      "Mets un minuteur pour chaque étape",
-      "Lis la recette avant de commencer",
-      "Prépare tous les ingrédients d'abord",
-      "Nettoie au fur et à mesure",
-      "Concentre-toi sur une tâche à la fois",
-      "Fais une pause entre les étapes",
-      "Récompense-toi avec un goûter"
-    ],
-    tired: [
-      "Prépare un sandwich simple",
-      "Fais bouillir de l'eau pour des pâtes",
-      "Coupe un fruit",
-      "Prépare un yaourt avec des toppings",
-      "Fais une tartine"
-    ],
-    twoMin: [
-      "Lave et coupe les légumes",
-      "Prépare les ingrédients",
-      "Mets l'eau à bouillir",
-      "Préchauffe le four",
-      "Fais la sauce rapide"
-    ]
+    tooBig: ["Lis la recette en entier", "Rassemble tous les ingrédients", "Prépare seulement les légumes", "Fais la sauce d'abord", "Préchauffe le four", "Lave et coupe les ingrédients", "Suis la recette étape par étape", "Goûte et ajuste l'assaisonnement"],
+    noIdea: ["Choisis une recette simple", "Vérifie ce que tu as dans le frigo", "Fais la liste des courses", "Lis la recette une fois", "Rassemble les ustensiles", "Prépare ton plan de travail", "Commence par la préparation", "Suis les étapes dans l'ordre"],
+    distracted: ["Pose le téléphone loin de la cuisine", "Mets un minuteur pour chaque étape", "Lis la recette avant de commencer", "Prépare tous les ingrédients d'abord", "Nettoie au fur et à mesure", "Concentre-toi sur une tâche à la fois", "Fais une pause entre les étapes", "Récompense-toi avec un goûter"],
+    tired: ["Prépare un sandwich simple", "Fais bouillir de l'eau pour des pâtes", "Coupe un fruit", "Prépare un yaourt avec des toppings", "Fais une tartine"],
+    twoMin: ["Lave et coupe les légumes", "Prépare les ingrédients", "Mets l'eau à bouillir", "Préchauffe le four", "Fais la sauce rapide"]
   },
   autre: {
     tooBig: ["Divise la tâche en 3 petites étapes", "Commence par la plus simple", "Fais seulement 5 minutes", "Note ce qui te bloque", "Demande de l'aide si besoin", "Fais une pause et reprends", "Concentre-toi sur une seule chose", "Célèbre chaque petite victoire"],
@@ -1551,7 +1229,7 @@ function classifyTask(name) {
     lire: ['lire', 'chapitre', 'article', 'livre', 'lecture', 'roman'],
     contacter: ['mail', 'appeler', 'telephoner', 'dossier', 'formulaire', 'rendez-vous', 'inscription', 'mutuelle', 'prof', 'email', 'courrier'],
     projet: ['coder', 'programmer', 'projet', 'site', 'appli', 'dessiner', 'composer', 'developper', 'application'],
-    cuisine: ['cuisiner', 'repas', 'courses', 'gateau', 'recette', 'patisserie', 'plat']
+    cuisine: ['cuisiner', 'repas', 'courses', 'gateau', 'recette', 'patisserie', 'plat', 'vaisselle']
   };
   for (const [cat, words] of Object.entries(keywords)) {
     if (words.some(w => n.includes(w))) return cat;
@@ -1564,14 +1242,12 @@ function suggestSteps(taskName, blocker, context = {}) {
   const bank = STEP_BANK[category] || STEP_BANK.autre;
   let steps = bank[blocker] || bank.autre;
   
-  // Ajouter les étapes apprises en premier
   const learnedKey = `${category}_${blocker}`;
   const learned = state.unstuckLearned[learnedKey] || [];
   if (learned.length > 0) {
     steps = [...learned, ...steps.filter(s => !learned.includes(s))];
   }
   
-  // Adapter la durée
   const duration = context.duration || 5;
   if (duration < 5) {
     steps = steps.map(s => s.length > 50 ? s.substring(0, 50) + '...' : s);
@@ -1712,18 +1388,16 @@ clearPrepareBtn.addEventListener('click', resetPrepare);
 function resetPrepare() { taskNameInput.value = ''; prepareSteps = []; prepareFree = false; prepareDuration = state.settings.defaultDuration || 5; renderSteps(); updateDurationRow(); document.getElementById('dialFree').classList.remove('active'); }
 
 /* ============================================================
-   NOUVEAU : Bottom sheet durée style horloge Android
+   BOTTOM SHEET DURÉE
    ============================================================ */
 const durationRow = document.getElementById('durationRow');
 const durationRowValue = document.getElementById('durationRowValue');
 const durationSheetOverlay = document.getElementById('durationSheetOverlay');
-const durationDisplay = document.getElementById('durationDisplay');
 const durH = document.getElementById('durH');
 const durM = document.getElementById('durM');
 const durationError = document.getElementById('durationError');
-const durationValidate = document.getElementById('durationValidate');
 
-let sheetMinutes = 5; // valeur en cours d'édition (entier de minutes)
+let sheetMinutes = 5;
 
 function updateDurationRow() {
   if (prepareFree) {
@@ -1784,7 +1458,6 @@ document.querySelectorAll('.keypad-btn').forEach(btn => {
       if (sheetMinutes < 1) sheetMinutes = 1;
     } else {
       const digit = parseInt(key, 10);
-      // Entrée par la droite : on décale et on ajoute
       const newTotal = sheetMinutes * 10 + digit;
       if (key === '00') {
         const newTotal00 = sheetMinutes * 100;
@@ -1810,7 +1483,7 @@ document.querySelectorAll('.keypad-btn').forEach(btn => {
   });
 });
 
-durationValidate.addEventListener('click', () => {
+document.getElementById('durationValidate').addEventListener('click', () => {
   if (sheetMinutes < 1) {
     durationError.textContent = 'Minimum 1 minute';
     return;
@@ -1835,7 +1508,7 @@ document.getElementById('dialFree').addEventListener('click', () => {
 });
 
 /* ============================================================
-   Web Audio
+   WEB AUDIO
    ============================================================ */
 function getAudioContext() {
   if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} }
@@ -1876,7 +1549,7 @@ function playAlert() {
 }
 
 /* ============================================================
-   Device / START
+   DEVICE / START
    ============================================================ */
 const startBtn = document.getElementById('startBtn');
 const devLabel = document.getElementById('devLabel');
@@ -2122,7 +1795,7 @@ async function requestWakeLock() {
 function releaseWakeLock() { if (wakeLock) { try { wakeLock.release(); } catch(e) {} wakeLock = null; } }
 
 /* ============================================================
-   Réglages
+   RÉGLAGES
    ============================================================ */
 function bindSegmented(containerId, settingKey, onChange) {
   const container = document.getElementById(containerId);
@@ -2278,7 +1951,7 @@ async function resumeSessionAfterReload() {
 }
 
 /* ============================================================
-   UNSTUCK — Moteur de suggestions local
+   UNSTUCK
    ============================================================ */
 const UNSTUCK_CARDS = [
   { key: 'tooBig', icon: ICONS.scissor, title: "C'est trop gros", desc: "On découpe en micro-étapes" },
@@ -2565,7 +2238,7 @@ function startUnstuckMiniTimer(seconds, minElId, secElId, btnId, endMessage, onE
 window.renderUnstuckMain = renderUnstuckMain;
 
 /* ============================================================
-   Onboarding
+   ONBOARDING
    ============================================================ */
 const ONBOARDING_SCREENS = 7;
 let currentScreen = 0, onboardingAnswers = {};
