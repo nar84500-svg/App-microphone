@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <script>
 (function() {
   try {
@@ -30,7 +29,8 @@
         '--accent-halo': '#F2A892',
         '--sage': '#A8B89A', '--sage-2': '#5C7050', '--sage-soft': '#E8EFE1',
         '--nav-bg': 'rgba(255,255,255,0.85)', '--nav-border': '#EDE7DF',
-        '--nav-text': '#5A564F', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#2B2A28'
+        '--nav-text': '#5A564F', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#2B2A28',
+        '--gold': '#D4A574', '--gold-soft': '#F5E6D3'
       },
       night: {
         '--bg': '#1a1816', '--bg-soft': '#252220', '--surface': '#2a2724',
@@ -40,7 +40,8 @@
         '--accent-halo': '#F2A892',
         '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3326',
         '--nav-bg': 'rgba(24,24,27,0.92)', '--nav-border': '#27272A',
-        '--nav-text': '#A1A1AA', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#E0856F'
+        '--nav-text': '#A1A1AA', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#E0856F',
+        '--gold': '#D4A574', '--gold-soft': '#3d3024'
       },
       galaxy: {
         '--bg': '#1a1a2e', '--bg-soft': '#252540', '--surface': '#2a2a45',
@@ -50,7 +51,8 @@
         '--accent-halo': '#F2A892',
         '--sage': '#A8B89A', '--sage-2': '#C5D4B8', '--sage-soft': '#2a3335',
         '--nav-bg': 'rgba(22,25,44,0.92)', '--nav-border': '#2E3454',
-        '--nav-text': '#CBD5E1', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#E0856F'
+        '--nav-text': '#CBD5E1', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#E0856F',
+        '--gold': '#D4A574', '--gold-soft': '#3d2a35'
       },
       warm: {
         '--bg': '#F5EDE0', '--bg-soft': '#EDE0CC', '--surface': '#FFF8EE',
@@ -60,7 +62,8 @@
         '--accent-halo': '#E89878',
         '--sage': '#9a8a6a', '--sage-2': '#6b5e48', '--sage-soft': '#E8DCC0',
         '--nav-bg': 'rgba(255,248,238,0.9)', '--nav-border': '#E8D8C0',
-        '--nav-text': '#6b5a48', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#3a2e22'
+        '--nav-text': '#6b5a48', '--nav-text-active': '#FFFFFF', '--nav-bg-active': '#3a2e22',
+        '--gold': '#B8864E', '--gold-soft': '#F0DCC0'
       }
     };
     const t = themes[theme] || themes.light;
@@ -73,7 +76,6 @@
   };
 })();
 </script>
-
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -85,6 +87,7 @@
     --sage: #A8B89A; --sage-2: #5C7050; --sage-soft: #E8EFE1;
     --nav-bg: rgba(255,255,255,0.85); --nav-border: #EDE7DF;
     --nav-text: #5A564F; --nav-text-active: #FFFFFF; --nav-bg-active: #2B2A28;
+    --gold: #D4A574; --gold-soft: #F5E6D3;
     --shadow-sm: 0 1px 2px rgba(60,45,30,0.04), 0 2px 8px rgba(60,45,30,0.04);
     --shadow-md: 0 2px 6px rgba(60,45,30,0.05), 0 10px 28px rgba(60,45,30,0.08);
     --shadow-lg: 0 8px 24px rgba(60,45,30,0.08), 0 24px 60px rgba(60,45,30,0.12);
@@ -92,7 +95,6 @@
     --ease: cubic-bezier(.2,.7,.2,1);
     --nav-height: 64px;
   }
-
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg); color: var(--ink);
@@ -104,33 +106,28 @@
   }
   body::before {
     content: ""; position: fixed; inset: 0;
-    background:
-      radial-gradient(1200px 600px at 85% -10%, rgba(224,133,111,0.08), transparent 60%),
-      radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
+    background: radial-gradient(1200px 600px at 85% -10%, rgba(224,133,111,0.08), transparent 60%),
+                radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
     pointer-events: none; z-index: 0;
   }
   body.theme-galaxy::before {
-    background:
-      radial-gradient(1200px 600px at 85% -10%, rgba(224,133,111,0.12), transparent 60%),
-      radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
+    background: radial-gradient(1200px 600px at 85% -10%, rgba(224,133,111,0.12), transparent 60%),
+                radial-gradient(900px 500px at -10% 20%, rgba(168,184,154,0.08), transparent 60%);
   }
   body.theme-galaxy::after {
     content: ""; position: fixed; inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3), transparent),
-      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2), transparent),
-      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.25), transparent),
-      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.15), transparent),
-      radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.2), transparent);
-    background-size: 100% 100%;
-    pointer-events: none; z-index: 0;
+    background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3), transparent),
+                      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2), transparent),
+                      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.25), transparent),
+                      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.15), transparent),
+                      radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.2), transparent);
+    background-size: 100% 100%; pointer-events: none; z-index: 0;
     animation: twinkle 8s ease-in-out infinite;
   }
   @keyframes twinkle { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { body.theme-galaxy::after { animation: none; } }
 
   .app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 32px 24px 40px; }
-
   .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; flex-wrap: wrap; gap: 12px; }
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-mark { width: 44px; height: 44px; display: grid; place-items: center; flex-shrink: 0; }
@@ -155,6 +152,9 @@
   .card + .card { margin-top: 16px; }
   .card:hover { box-shadow: var(--shadow-md); }
   .section-label { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 14px; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .section-header h2 { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); }
+  .section-header .section-sub { font-size: 13px; color: var(--ink-3); }
 
   .tasks-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   .task-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; cursor: pointer; transition: all .25s var(--ease); position: relative; overflow: hidden; }
@@ -164,7 +164,6 @@
   .task-card.selected { border-color: var(--accent); background: linear-gradient(180deg, var(--surface) 0%, var(--accent-soft) 100%); box-shadow: var(--shadow-md); }
   .task-card.selected::before { background: var(--accent); }
   .task-card.done { opacity: 0.55; }
-  .task-card.done .task-title::after { content: ""; display: inline-block; width: 16px; height: 16px; margin-left: 6px; vertical-align: middle; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A8B89A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>"); background-size: contain; background-repeat: no-repeat; }
   .task-title { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
   .task-meta { display: flex; gap: 14px; align-items: center; font-size: 13px; color: var(--ink-3); flex-wrap: wrap; }
   .task-meta span { display: inline-flex; align-items: center; gap: 6px; }
@@ -192,22 +191,12 @@
 
   .prepare-layout { display: grid; gap: 20px; grid-template-columns: 1fr; }
   @media (min-width: 860px) { .prepare-layout { grid-template-columns: 1.1fr 1fr; } }
-
   .input-row { display: flex; align-items: stretch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 12px 18px; transition: all .2s var(--ease); }
   .input-row:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224,133,111,0.12); }
   .input-row input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 16px; color: var(--ink); padding: 0; }
   .input-row input::placeholder { color: var(--ink-3); }
 
-  .duration-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 18px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all .2s var(--ease);
-    min-height: 52px;
-  }
+  .duration-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); cursor: pointer; transition: all .2s var(--ease); min-height: 52px; }
   .duration-row:hover { border-color: var(--accent); background: var(--accent-soft); }
   .duration-row .dur-label { font-size: 13px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
   .duration-row .dur-value { font-family: 'Caveat', cursive; font-size: 24px; font-weight: 700; color: var(--ink); }
@@ -220,35 +209,14 @@
   .template-chip .t-icon svg { width: 18px; height: 18px; }
   .template-chip .t-name { font-size: 14px; font-weight: 600; color: var(--ink); }
   .template-chip .t-sub { font-size: 12px; color: var(--ink-3); }
-  .template-chip .quick-start {
-    position: absolute; top: 10px; right: 10px;
-    width: 32px; height: 32px; border-radius: 50%;
-    background: var(--accent); color: #fff;
-    border: none; cursor: pointer;
-    display: grid; place-items: center;
-    opacity: 0; transform: scale(0.8);
-    transition: all .2s var(--ease);
-  }
+  .template-chip .quick-start { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; border: none; cursor: pointer; display: grid; place-items: center; opacity: 0; transform: scale(0.8); transition: all .2s var(--ease); }
   .template-chip:hover .quick-start { opacity: 1; transform: scale(1); }
-  .template-chip .quick-start:hover { background: var(--accent-2); transform: scale(1.1); }
   .template-chip .quick-start svg { width: 14px; height: 14px; }
 
-  .prepare-actions {
-    position: sticky;
-    bottom: calc(var(--nav-height) + 12px + env(safe-area-inset-bottom));
-    background: var(--bg);
-    padding: 12px 0;
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    z-index: 10;
-    border-top: 1px solid var(--line);
-  }
+  .prepare-actions { position: sticky; bottom: calc(var(--nav-height) + 12px + env(safe-area-inset-bottom)); background: var(--bg); padding: 12px 0; margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; z-index: 10; border-top: 1px solid var(--line); }
 
   .steps-editor { margin-top: 8px; }
   .step-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); margin-bottom: 8px; transition: all .2s var(--ease); }
-  .step-item:hover { border-color: var(--line-2); }
   .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-2); font-size: 12px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
   .step-text { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--ink); outline: none; }
   .step-remove { width: 26px; height: 26px; border-radius: 8px; border: none; background: transparent; color: var(--ink-3); cursor: pointer; display: grid; place-items: center; transition: all .2s var(--ease); }
@@ -259,27 +227,14 @@
 
   .device-layout { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: start; }
   @media (min-width: 860px) { .device-layout { grid-template-columns: 1fr 1fr; } }
-
   .device-stage { display: flex; flex-direction: column; align-items: center; padding: 20px 10px; }
-  .device {
-    width: 280px;
-    background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%);
-    border-radius: 50%;
-    aspect-ratio: 1;
-    padding: 28px;
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.08), inset 0 -4px 12px rgba(0,0,0,0.4), 0 20px 50px rgba(40,30,20,0.3), 0 4px 12px rgba(40,30,20,0.2);
-    position: relative;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 18px;
-  }
+  .device { width: 280px; background: linear-gradient(160deg, #3a3632 0%, #1f1d1b 100%); border-radius: 50%; aspect-ratio: 1; padding: 28px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.08), inset 0 -4px 12px rgba(0,0,0,0.4), 0 20px 50px rgba(40,30,20,0.3), 0 4px 12px rgba(40,30,20,0.2); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
   .device::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.04); pointer-events: none; }
-
   .progress-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; pointer-events: none; z-index: 1; }
   .progress-ring circle { fill: none; stroke-width: 5; }
   .progress-ring .track { stroke: rgba(255,255,255,0.08); }
   .progress-ring .fill { stroke: var(--accent); stroke-linecap: round; stroke-dasharray: 565; stroke-dashoffset: 565; transition: stroke-dashoffset 0.3s linear; transform: rotate(-90deg); transform-origin: center; filter: drop-shadow(0 0 6px rgba(224,133,111,0.5)); }
   .progress-ring .fill.complete { stroke: var(--sage); filter: drop-shadow(0 0 6px rgba(168,184,154,0.5)); }
-
   .device-screen { width: 100%; background: #0a0908; border-radius: 24px; padding: 18px 16px; color: #F5E9DC; text-align: center; box-shadow: inset 0 2px 6px rgba(0,0,0,0.6); min-height: 110px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; z-index: 2; }
   .device-screen::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent); pointer-events: none; }
   .device-label { font-size: 10px; letter-spacing: 2px; color: #8A857E; text-transform: uppercase; margin-bottom: 4px; }
@@ -290,9 +245,9 @@
   .device-progress .pip.done { background: var(--accent); }
   .device-progress .pip.current { background: #F5E9DC; box-shadow: 0 0 8px rgba(245,233,220,0.6); }
 
-  .start-button { width: 110px; height: 110px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, var(--accent-halo) 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: transform .1s var(--ease), box-shadow .2s var(--ease); letter-spacing: 1px; user-select: none; -webkit-tap-highlight-color: transparent; }
-  .start-button:hover { transform: scale(1.03); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -4px 10px rgba(0,0,0,0.25), 0 12px 28px rgba(224,133,111,0.55), 0 0 0 10px rgba(224,133,111,0.18); }
-  .start-button:active { transform: scale(0.94); box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 4px 12px rgba(224,133,111,0.4), 0 0 0 4px rgba(224,133,111,0.15); }
+  .start-button { width: 110px; height: 110px; border-radius: 50%; border: none; background: radial-gradient(circle at 30% 30%, var(--accent-halo) 0%, var(--accent) 45%, var(--accent-2) 100%); color: #fff; font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; cursor: pointer; position: relative; z-index: 2; box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); transition: transform .1s var(--ease), box-shadow .2s var(--ease); letter-spacing: 1px; user-select: none; }
+  .start-button:hover { transform: scale(1.03); }
+  .start-button:active { transform: scale(0.94); }
   .start-button.pulse { animation: btnPulse 1.6s ease-in-out infinite; }
   @keyframes btnPulse { 0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 6px rgba(224,133,111,0.12); } 50% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -4px 10px rgba(0,0,0,0.25), 0 8px 20px rgba(224,133,111,0.5), 0 0 0 18px rgba(224,133,111,0); } }
   .start-button.breathing { animation: breathe 2.5s ease-in-out infinite; }
@@ -301,7 +256,6 @@
   @keyframes glow { 0% { filter: brightness(1); } 50% { filter: brightness(1.4); } 100% { filter: brightness(1); } }
 
   .device-hint { margin-top: 20px; font-size: 13px; color: var(--ink-3); text-align: center; max-width: 280px; line-height: 1.5; }
-
   .session-controls { display: flex; gap: 8px; margin-bottom: 16px; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); flex-wrap: wrap; justify-content: center; }
   .session-controls.visible { opacity: 1; pointer-events: auto; }
   .session-ctrl-btn { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); min-height: 44px; }
@@ -315,16 +269,15 @@
   .setting-info { flex: 1; }
   .setting-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
   .setting-desc { font-size: 13px; color: var(--ink-3); }
-
-  .toggle { position: relative; width: 48px; height: 28px; background: var(--line-2); border-radius: 999px; cursor: pointer; transition: background .25s var(--ease); flex-shrink: 0; border: none; min-height: 28px; }
+  .toggle { position: relative; width: 48px; height: 28px; background: var(--line-2); border-radius: 999px; cursor: pointer; transition: background .25s var(--ease); flex-shrink: 0; border: none; }
   .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: transform .25s var(--ease); }
   .toggle.on { background: var(--accent); }
   .toggle.on::after { transform: translateX(20px); }
-
   .segmented { display: inline-flex; background: var(--bg-soft); border-radius: 999px; padding: 4px; gap: 2px; }
   .seg-opt { padding: 8px 14px; border-radius: 999px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); min-height: 36px; }
   .seg-opt.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
 
+  /* NOUVEAU : Navigation 6 onglets avec scroll horizontal */
   .bottom-nav {
     position: fixed; bottom: calc(12px + env(safe-area-inset-bottom)); left: 50%;
     transform: translateX(-50%);
@@ -339,12 +292,15 @@
     z-index: 100;
     transition: background .4s var(--ease), border-color .4s var(--ease);
     max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    scrollbar-width: none;
   }
-  .nav-btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; border-radius: 999px; border: none; background: transparent; color: var(--nav-text); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .25s var(--ease); min-width: 44px; min-height: 44px; }
+  .bottom-nav::-webkit-scrollbar { display: none; }
+  .nav-btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; border-radius: 999px; border: none; background: transparent; color: var(--nav-text); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .25s var(--ease); min-width: 44px; min-height: 44px; white-space: nowrap; flex-shrink: 0; }
   .nav-btn:hover { color: var(--ink); }
   .nav-btn.active { background: var(--nav-bg-active); color: var(--nav-text-active); }
   .nav-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-  @media (max-width: 480px) {
+  @media (max-width: 720px) {
     .nav-btn span.nav-label { display: none; }
     .nav-btn { padding: 10px 12px; }
   }
@@ -359,7 +315,6 @@
   .end-screen.active, .block-overlay.active, .resume-overlay.active, .about-overlay.active, .duration-sheet-overlay.active { display: flex; animation: fadeIn .3s var(--ease); }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
   .end-card, .block-card, .resume-card, .about-card { background: var(--surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: 32px 24px calc(24px + env(safe-area-inset-bottom)); max-width: 500px; width: 100%; box-shadow: var(--shadow-lg); max-height: 85vh; overflow-y: auto; animation: slideUp .3s var(--ease); }
   .end-screen { align-items: center; }
   .end-screen .end-card { border-radius: var(--radius-lg); }
@@ -368,107 +323,25 @@
   .end-actions, .resume-actions { display: flex; flex-direction: column; gap: 10px; }
   .end-actions .btn, .resume-actions .btn { width: 100%; padding: 16px; font-size: 15px; }
 
-  .duration-sheet {
-    background: var(--surface);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
-    max-width: 500px;
-    width: 100%;
-    box-shadow: var(--shadow-lg);
-    animation: slideUp .3s var(--ease);
-  }
-  .duration-sheet-handle {
-    width: 40px; height: 4px;
-    background: var(--line-2);
-    border-radius: 2px;
-    margin: 0 auto 16px;
-  }
-  .duration-sheet-title {
-    font-family: 'Caveat', cursive;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--ink);
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .duration-display {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 48px;
-    color: var(--ink);
-    text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    min-height: 60px;
-  }
+  .duration-sheet { background: var(--surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: 20px 20px calc(20px + env(safe-area-inset-bottom)); max-width: 500px; width: 100%; box-shadow: var(--shadow-lg); animation: slideUp .3s var(--ease); }
+  .duration-sheet-handle { width: 40px; height: 4px; background: var(--line-2); border-radius: 2px; margin: 0 auto 16px; }
+  .duration-sheet-title { font-family: 'Caveat', cursive; font-size: 24px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 16px; }
+  .duration-display { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 48px; color: var(--ink); text-align: center; margin-bottom: 20px; letter-spacing: 1px; min-height: 60px; }
   .duration-display .dur-h { color: var(--ink); }
   .duration-display .dur-label { font-size: 20px; color: var(--ink-3); font-weight: 400; margin: 0 4px; }
   .duration-display .dur-min { color: var(--ink); }
-  .duration-quick {
-    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  .duration-quick-btn {
-    padding: 10px 16px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink-2);
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .2s var(--ease);
-    min-height: 44px;
-  }
+  .duration-quick { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+  .duration-quick-btn { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s var(--ease); min-height: 44px; }
   .duration-quick-btn:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-2); }
   .duration-quick-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .duration-keypad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .keypad-btn {
-    padding: 16px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--line);
-    background: var(--surface-2);
-    color: var(--ink);
-    font-family: inherit;
-    font-size: 22px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .15s var(--ease);
-    min-height: 56px;
-    display: grid; place-items: center;
-  }
+  .duration-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .keypad-btn { padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); font-family: inherit; font-size: 22px; font-weight: 500; cursor: pointer; transition: all .15s var(--ease); min-height: 56px; display: grid; place-items: center; }
   .keypad-btn:hover { background: var(--accent-soft); color: var(--accent-2); border-color: var(--accent-soft); }
   .keypad-btn:active { transform: scale(0.96); }
   .keypad-btn.erase { color: var(--accent-2); }
-  .duration-validate {
-    width: 100%;
-    padding: 16px;
-    border-radius: 999px;
-    border: none;
-    background: var(--accent);
-    color: #fff;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all .2s var(--ease);
-    min-height: 52px;
-    box-shadow: 0 4px 14px rgba(224,133,111,0.35);
-  }
+  .duration-validate { width: 100%; padding: 16px; border-radius: 999px; border: none; background: var(--accent); color: #fff; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: all .2s var(--ease); min-height: 52px; box-shadow: 0 4px 14px rgba(224,133,111,0.35); }
   .duration-validate:hover { background: var(--accent-2); }
-  .duration-error {
-    text-align: center;
-    font-size: 13px;
-    color: #B84A4A;
-    margin-top: 8px;
-    min-height: 18px;
-  }
+  .duration-error { text-align: center; font-size: 13px; color: #B84A4A; margin-top: 8px; min-height: 18px; }
 
   .block-label { font-size: 11px; letter-spacing: 1.5px; color: var(--ink-3); text-transform: uppercase; margin-bottom: 12px; }
   .block-text { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); line-height: 1.3; margin-bottom: 24px; }
@@ -497,45 +370,18 @@
   .block-card-item .bc-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
   .block-card-item .bc-desc { font-size: 13px; color: var(--ink-3); line-height: 1.4; }
   .block-disclaimer { text-align: center; font-size: 12px; color: var(--ink-3); margin-top: 32px; line-height: 1.5; font-style: italic; }
-
   .block-action { display: none; }
   .block-action.active { display: block; animation: fadeUp .4s var(--ease); }
   .block-back { margin-bottom: 20px; }
   .block-subtitle { font-family: 'Caveat', cursive; font-size: 28px; color: var(--ink); text-align: center; margin-bottom: 8px; }
   .block-subtext { text-align: center; color: var(--ink-2); margin-bottom: 24px; line-height: 1.5; }
-  
   .micro-steps-list { display: grid; gap: 10px; margin-bottom: 20px; }
   .micro-step-item { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); }
   .micro-step-item .ms-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-2); font-size: 11px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
   .micro-step-item input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--ink); outline: none; }
-  
-  .clarification-form {
-    background: var(--surface-2);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .clarification-form label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 8px;
-  }
-  .clarification-form select {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--surface);
-    font-family: inherit;
-    font-size: 15px;
-    color: var(--ink);
-    outline: none;
-    margin-bottom: 12px;
-    transition: border-color .2s var(--ease);
-  }
+  .clarification-form { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px; }
+  .clarification-form label { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .clarification-form select { width: 100%; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); font-family: inherit; font-size: 15px; color: var(--ink); outline: none; margin-bottom: 12px; }
   .clarification-form select:focus { border-color: var(--accent); }
 
   .theme-grid { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
@@ -590,6 +436,93 @@
   .onboarding-input::placeholder { color: var(--ink-3); }
   .onboarding-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
+  /* NOUVEAU : Styles Quêtes */
+  .quests-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .quests-points { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 12px 18px; box-shadow: var(--shadow-sm); }
+  .quests-points-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--gold-soft); display: grid; place-items: center; color: var(--gold); }
+  .quests-points-icon svg { width: 22px; height: 22px; }
+  .quests-points-info { display: flex; flex-direction: column; }
+  .quests-points-value { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 20px; color: var(--ink); line-height: 1; }
+  .quests-points-label { font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .quests-level { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
+  .quests-level-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); }
+  .quests-level-header strong { color: var(--ink); font-weight: 600; }
+  .quests-level-bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .quests-level-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold)); border-radius: 3px; transition: width .4s var(--ease); }
+
+  .quests-section { margin-bottom: 28px; }
+  .quests-section-title { font-family: 'Caveat', cursive; font-size: 26px; color: var(--ink); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .quests-section-title svg { width: 22px; height: 22px; color: var(--accent-2); }
+  .quests-section-sub { font-size: 13px; color: var(--ink-3); margin-bottom: 14px; }
+  .quests-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 600px) { .quests-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .quest-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 18px; transition: all .25s var(--ease); position: relative; overflow: hidden; }
+  .quest-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--line-2); transition: background .3s var(--ease); }
+  .quest-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .quest-card.completed { opacity: 0.7; }
+  .quest-card.completed::before { background: var(--sage); }
+  .quest-card.just-completed { animation: questComplete .6s var(--ease); }
+  @keyframes questComplete { 0% { transform: scale(1); } 50% { transform: scale(1.03); box-shadow: 0 0 0 4px var(--gold-soft); } 100% { transform: scale(1); } }
+
+  .quest-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+  .quest-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--bg-soft); display: grid; place-items: center; color: var(--ink-2); flex-shrink: 0; transition: all .3s var(--ease); }
+  .quest-icon svg { width: 20px; height: 20px; }
+  .quest-card.completed .quest-icon { background: var(--sage-soft); color: var(--sage-2); }
+  .quest-info { flex: 1; min-width: 0; }
+  .quest-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .quest-desc { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
+  .quest-reward { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--gold); background: var(--gold-soft); padding: 3px 8px; border-radius: 999px; margin-top: 6px; }
+  .quest-reward svg { width: 12px; height: 12px; }
+
+  .quest-progress { margin-top: 10px; }
+  .quest-progress-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .quest-progress-text { font-size: 12px; color: var(--ink-3); font-weight: 500; }
+  .quest-progress-text strong { color: var(--ink); font-weight: 700; }
+  .quest-progress-bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .quest-progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .4s var(--ease); }
+  .quest-card.completed .quest-progress-fill { background: var(--sage); }
+
+  .quest-badge { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--sage); display: none; align-items: center; justify-content: center; }
+  .quest-card.completed .quest-badge { display: flex; }
+  .quest-badge svg { width: 14px; height: 14px; color: #fff; }
+
+  .quests-empty { text-align: center; padding: 40px 20px; background: var(--surface); border: 1px dashed var(--line-2); border-radius: var(--radius-md); color: var(--ink-3); font-size: 14px; }
+
+  /* NOUVEAU : Styles Parcours */
+  .journey-stats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-bottom: 24px; }
+  .journey-stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 18px; text-align: center; }
+  .journey-stat-value { font-family: 'Caveat', cursive; font-size: 36px; font-weight: 700; color: var(--ink); line-height: 1; }
+  .journey-stat-label { font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+  .journey-chart { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; margin-bottom: 24px; }
+  .journey-chart-title { font-family: 'Caveat', cursive; font-size: 22px; color: var(--ink); margin-bottom: 16px; }
+  .journey-chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 120px; padding-top: 10px; }
+  .journey-chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+  .journey-chart-bar { width: 100%; max-width: 40px; background: var(--accent-soft); border-radius: 6px 6px 0 0; transition: height .4s var(--ease); min-height: 4px; position: relative; }
+  .journey-chart-bar.has-value { background: var(--accent); }
+  .journey-chart-bar-label { font-size: 11px; color: var(--ink-3); font-weight: 500; }
+  .journey-chart-bar-value { font-size: 11px; color: var(--ink-2); font-weight: 600; }
+
+  .journey-history-title { font-family: 'Caveat', cursive; font-size: 22px; color: var(--ink); margin-bottom: 12px; }
+  .journey-history-list { display: grid; gap: 10px; }
+  .journey-history-item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 14px 16px; display: flex; align-items: center; gap: 12px; transition: all .2s var(--ease); }
+  .journey-history-item:hover { border-color: var(--line-2); box-shadow: var(--shadow-sm); }
+  .journey-history-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--bg-soft); display: grid; place-items: center; color: var(--ink-2); flex-shrink: 0; }
+  .journey-history-icon svg { width: 18px; height: 18px; }
+  .journey-history-icon.done { background: var(--sage-soft); color: var(--sage-2); }
+  .journey-history-icon.abandoned { background: var(--accent-soft); color: var(--accent-2); }
+  .journey-history-info { flex: 1; min-width: 0; }
+  .journey-history-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .journey-history-meta { font-size: 12px; color: var(--ink-3); }
+  .journey-history-actions { display: flex; gap: 6px; }
+
+  .journey-empty { text-align: center; padding: 60px 20px; background: var(--surface); border: 1px dashed var(--line-2); border-radius: var(--radius-md); }
+  .journey-empty-icon { width: 56px; height: 56px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent-soft); display: grid; place-items: center; color: var(--accent-2); }
+  .journey-empty-icon svg { width: 28px; height: 28px; }
+  .journey-empty h3 { font-family: 'Caveat', cursive; font-size: 24px; color: var(--ink); margin-bottom: 6px; }
+  .journey-empty p { color: var(--ink-3); font-size: 14px; }
+
   @media (max-width: 600px) {
     .app { padding: 20px 16px 40px; }
     .page-title { font-size: 40px; }
@@ -609,6 +542,8 @@
     .end-card h2, .resume-card h3, .about-card h2 { font-size: 28px; }
     .duration-display { font-size: 40px; }
     .block-intro .page-title { font-size: 40px; }
+    .quests-header { flex-direction: column; align-items: stretch; }
+    .quests-points { justify-content: center; }
   }
 
   button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -846,6 +781,98 @@
     </div>
   </section>
 
+  <!-- NOUVEAU : Onglet Quêtes -->
+  <section class="view" id="view-quests">
+    <div class="view-content">
+      <div class="page-head">
+        <h1 class="page-title">Quêtes</h1>
+        <p class="page-subtitle">Des objectifs doux pour avancer pas à pas. Sans pression.</p>
+      </div>
+
+      <div class="quests-header">
+        <div class="quests-points">
+          <div class="quests-points-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="quests-points-info">
+            <span class="quests-points-value" id="questsPointsValue">0</span>
+            <span class="quests-points-label">points</span>
+          </div>
+        </div>
+        <div class="quests-level">
+          <div class="quests-level-header">
+            <span>Niveau <strong id="questsLevelValue">1</strong></span>
+            <span id="questsLevelProgress">0 / 100</span>
+          </div>
+          <div class="quests-level-bar">
+            <div class="quests-level-fill" id="questsLevelFill" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quests-section">
+        <div class="section-header">
+          <div>
+            <h2 class="quests-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Mes quêtes du jour
+            </h2>
+            <p class="section-sub" id="questsDailyReset">Se réinitialisent à minuit</p>
+          </div>
+        </div>
+        <div class="quests-grid" id="questsDailyGrid"></div>
+      </div>
+
+      <div class="quests-section">
+        <div class="section-header">
+          <div>
+            <h2 class="quests-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Défis de la semaine
+            </h2>
+            <p class="section-sub" id="questsWeeklyReset">Se réinitialisent lundi</p>
+          </div>
+        </div>
+        <div class="quests-grid" id="questsWeeklyGrid"></div>
+      </div>
+
+      <div class="quests-section">
+        <div class="section-header">
+          <div>
+            <h2 class="quests-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              Mes grandes étapes
+            </h2>
+            <p class="section-sub">Succès permanents</p>
+          </div>
+        </div>
+        <div class="quests-grid" id="questsSpecialGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOUVEAU : Onglet Parcours -->
+  <section class="view" id="view-journey">
+    <div class="view-content">
+      <div class="page-head">
+        <h1 class="page-title">Parcours</h1>
+        <p class="page-subtitle">Ton historique, tes sessions, ta progression.</p>
+      </div>
+
+      <div class="journey-stats" id="journeyStats"></div>
+
+      <div class="journey-chart">
+        <div class="journey-chart-title">7 derniers jours</div>
+        <div class="journey-chart-bars" id="journeyChartBars"></div>
+      </div>
+
+      <div>
+        <div class="journey-history-title">Sessions récentes</div>
+        <div class="journey-history-list" id="journeyHistoryList"></div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <div class="duration-sheet-overlay" id="durationSheetOverlay">
@@ -947,11 +974,16 @@
     <span class="nav-label">Appareil</span>
   </button>
   <button class="nav-btn" data-view="block">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     <span class="nav-label">Je bloque</span>
+  </button>
+  <button class="nav-btn" data-view="quests">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <span class="nav-label">Quêtes</span>
+  </button>
+  <button class="nav-btn" data-view="journey">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 12l4-4 4 4 5-5"/></svg>
+    <span class="nav-label">Parcours</span>
   </button>
 </nav>
 
@@ -975,10 +1007,19 @@ const STORAGE_KEY = 'start_app_fallback';
 const DEFAULT_STATE = {
   tasks: [],
   settings: { sound: 'bell', vibration: true, wakeLock: false, demo: true, theme: 'light', defaultDuration: 5, tone: 'warm' },
-  session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, totalDuration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null },
+  session: { taskId: null, stepIndex: 0, endTime: 0, duration: 0, totalDuration: 0, isPaused: false, pausedAt: 0, pausedRemaining: 0, startedAt: null, lastSaved: null, sessionStartedAt: null },
   onboarding: { completed: false, currentScreen: 0, answers: {} },
   blockUsage: { noIdea: 0, tooBig: 0, tired: 0 },
-  blockLearned: {}
+  blockLearned: {},
+  quests: {
+    points: 0,
+    level: 1,
+    daily: { date: null, progress: {}, completed: [] },
+    weekly: { weekStart: null, progress: {}, completed: [] },
+    special: { completed: [] },
+    history: []
+  },
+  journey: { sessions: [], daysUsed: [] }
 };
 
 let state = structuredClone(DEFAULT_STATE);
@@ -986,13 +1027,15 @@ let db = null, wakeLock = null, timerInterval = null, audioCtx = null;
 
 function openDB() {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, 1);
+    const req = indexedDB.open(DB_NAME, 2);
     req.onupgradeneeded = (e) => {
       const d = e.target.result;
       if (!d.objectStoreNames.contains('tasks')) d.createObjectStore('tasks', { keyPath: 'id' });
       if (!d.objectStoreNames.contains('settings')) d.createObjectStore('settings', { keyPath: 'key' });
       if (!d.objectStoreNames.contains('session')) d.createObjectStore('session', { keyPath: 'key' });
       if (!d.objectStoreNames.contains('onboarding')) d.createObjectStore('onboarding', { keyPath: 'key' });
+      if (!d.objectStoreNames.contains('quests')) d.createObjectStore('quests', { keyPath: 'key' });
+      if (!d.objectStoreNames.contains('journey')) d.createObjectStore('journey', { keyPath: 'key' });
     };
     req.onsuccess = (e) => resolve(e.target.result);
     req.onerror = (e) => reject(e);
@@ -1033,6 +1076,18 @@ async function dbGetAllTasks() {
   });
 }
 
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function weekStartKey() {
+  const d = new Date();
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  const monday = new Date(d.setDate(diff));
+  return `${monday.getFullYear()}-${String(monday.getMonth()+1).padStart(2,'0')}-${String(monday.getDate()).padStart(2,'0')}`;
+}
+
 async function loadState() {
   try {
     db = await openDB();
@@ -1040,10 +1095,18 @@ async function loadState() {
     const settings = await dbGet('settings', 'main');
     const session = await dbGet('session', 'main');
     const onboarding = await dbGet('onboarding', 'main');
+    const quests = await dbGet('quests', 'main');
+    const journey = await dbGet('journey', 'main');
     if (settings) state.settings = { ...DEFAULT_STATE.settings, ...settings };
     if (session) state.session = { ...DEFAULT_STATE.session, ...session };
     if (onboarding) state.onboarding = { ...DEFAULT_STATE.onboarding, ...onboarding };
+    if (quests) state.quests = { ...DEFAULT_STATE.quests, ...quests };
+    if (journey) state.journey = { ...DEFAULT_STATE.journey, ...journey };
     if (state.settings.defaultDuration > 360) state.settings.defaultDuration = 5;
+    
+    // Reset quotidien/hebdomadaire si nécessaire
+    checkQuestsReset();
+    
     if (navigator.storage?.persist) {
       const persisted = await navigator.storage.persisted();
       if (!persisted) { try { await navigator.storage.persist(); } catch(e) {} }
@@ -1058,10 +1121,24 @@ async function loadState() {
           session: { ...DEFAULT_STATE.session, ...(p.session||{}) },
           onboarding: { ...DEFAULT_STATE.onboarding, ...(p.onboarding||{}) },
           blockUsage: { ...DEFAULT_STATE.blockUsage, ...(p.blockUsage||{}) },
-          blockLearned: { ...(p.blockLearned||{}) } };
+          blockLearned: { ...(p.blockLearned||{}) },
+          quests: { ...DEFAULT_STATE.quests, ...(p.quests||{}) },
+          journey: { ...DEFAULT_STATE.journey, ...(p.journey||{}) } };
         if (state.settings.defaultDuration > 360) state.settings.defaultDuration = 5;
+        checkQuestsReset();
       }
     } catch(e2) {}
+  }
+}
+
+function checkQuestsReset() {
+  const today = todayKey();
+  const weekStart = weekStartKey();
+  if (state.quests.daily.date !== today) {
+    state.quests.daily = { date: today, progress: {}, completed: [] };
+  }
+  if (state.quests.weekly.weekStart !== weekStart) {
+    state.quests.weekly = { weekStart: weekStart, progress: {}, completed: [] };
   }
 }
 
@@ -1085,13 +1162,23 @@ async function saveOnboarding() {
 async function saveBlockUsage() {
   try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.blockUsage = state.blockUsage; r.blockLearned = state.blockLearned; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
 }
+async function saveQuests() {
+  if (db) await dbPut('quests', 'main', state.quests);
+  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.quests = state.quests; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
+}
+async function saveJourney() {
+  if (db) await dbPut('journey', 'main', state.journey);
+  try { const r = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); r.journey = state.journey; localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch(e) {}
+}
 
-const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device'), block: document.getElementById('view-block') };
+const views = { tasks: document.getElementById('view-tasks'), prepare: document.getElementById('view-prepare'), device: document.getElementById('view-device'), block: document.getElementById('view-block'), quests: document.getElementById('view-quests'), journey: document.getElementById('view-journey') };
 document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
 function switchView(name) {
   Object.entries(views).forEach(([k, el]) => el.classList.toggle('active', k === name));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === name));
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name === 'quests') renderQuests();
+  if (name === 'journey') renderJourney();
 }
 
 const toastEl = document.getElementById('toast');
@@ -1124,7 +1211,20 @@ const ICONS = {
   moon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
   coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
   unlock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`,
-  batteryLow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/><rect x="4" y="9" width="6" height="6" fill="currentColor" opacity="0.3"/></svg>`
+  batteryLow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/><rect x="4" y="9" width="6" height="6" fill="currentColor" opacity="0.3"/></svg>`,
+  trophy: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`,
+  calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+  flame: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`,
+  star: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  flag: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
+  timer: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></svg>`,
+  playCircle: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
+  checkCircle: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+  repeat: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>`,
+  calendarCheck: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>`,
+  hourglass: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>`,
+  layers: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+  award: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>`
 };
 
 const TEMPLATES = [
@@ -1136,150 +1236,50 @@ const TEMPLATES = [
 
 const MICRO_ACTIONS = {
   reviser: {
-    noIdea: [
-      ["Prends ton cahier de maths", "Ouvre-le à la page du chapitre", "Lis uniquement le titre de la première section"],
-      ["Sors tes fiches de révision", "Pose-les dans l'ordre chronologique", "Lis la première fiche en entier"],
-      ["Ouvre ton cours à la première page", "Lis seulement les titres en diagonale", "Note 3 mots que tu ne comprends pas"]
-    ],
-    tooBig: [
-      ["Relis seulement les titres du chapitre", "Fais une fiche sur une seule notion", "Refais un seul exercice type"],
-      ["Divise le chapitre en 3 parties", "Travaille uniquement la première partie", "Fais une pause avant la suite"],
-      ["Liste toutes les notions à revoir", "Choisis la plus importante", "Fais une fiche dessus seulement"]
-    ],
-    tired: [
-      ["Relis une seule définition", "Regarde un seul schéma", "Note un seul mot-clé"],
-      ["Ouvre ton cours", "Lis une seule phrase", "Ferme-le si tu veux"],
-      ["Pose ton cahier devant toi", "Lis le titre du chapitre", "Décide si tu continues ou fais une pause"]
-    ]
+    noIdea: [["Prends ton cahier de maths", "Ouvre-le à la page du chapitre", "Lis uniquement le titre de la première section"], ["Sors tes fiches de révision", "Pose-les dans l'ordre chronologique", "Lis la première fiche en entier"], ["Ouvre ton cours à la première page", "Lis seulement les titres en diagonale", "Note 3 mots que tu ne comprends pas"]],
+    tooBig: [["Relis seulement les titres du chapitre", "Fais une fiche sur une seule notion", "Refais un seul exercice type"], ["Divise le chapitre en 3 parties", "Travaille uniquement la première partie", "Fais une pause avant la suite"], ["Liste toutes les notions à revoir", "Choisis la plus importante", "Fais une fiche dessus seulement"]],
+    tired: [["Relis une seule définition", "Regarde un seul schéma", "Note un seul mot-clé"], ["Ouvre ton cours", "Lis une seule phrase", "Ferme-le si tu veux"], ["Pose ton cahier devant toi", "Lis le titre du chapitre", "Décide si tu continues ou fais une pause"]]
   },
   ranger: {
-    noIdea: [
-      ["Ramasse un vêtement au sol", "Mets-le dans le panier à linge", "Range trois autres vêtements"],
-      ["Pose une boîte vide au centre de la pièce", "Mets-y tout ce qui traîne", "Trie la boîte ensuite"],
-      ["Commence par le bureau", "Enlève tout ce qui n'a rien à y faire", "Essuie la surface"]
-    ],
-    tooBig: [
-      ["Commence par un seul coin de la pièce", "Trie seulement les vêtements", "Range uniquement les livres"],
-      ["Divise la pièce en 4 zones", "Travaille uniquement la première zone", "Fais une pause avant la suite"],
-      ["Fais 3 tas : à garder, à jeter, à déplacer", "Remplis seulement le tas 'à jeter'", "Jette-le tout de suite"]
-    ],
-    tired: [
-      ["Ramasse un seul objet", "Mets-le à sa place", "Fais une pause si besoin"],
-      ["Ouvre la porte de ta chambre", "Regarde ce qui traîne", "Choisis UN seul objet à ranger"],
-      ["Prends un sac poubelle", "Jette 3 déchets visibles", "Décide si tu continues"]
-    ]
+    noIdea: [["Ramasse un vêtement au sol", "Mets-le dans le panier à linge", "Range trois autres vêtements"], ["Pose une boîte vide au centre de la pièce", "Mets-y tout ce qui traîne", "Trie la boîte ensuite"], ["Commence par le bureau", "Enlève tout ce qui n'a rien à y faire", "Essuie la surface"]],
+    tooBig: [["Commence par un seul coin de la pièce", "Trie seulement les vêtements", "Range uniquement les livres"], ["Divise la pièce en 4 zones", "Travaille uniquement la première zone", "Fais une pause avant la suite"], ["Fais 3 tas : à garder, à jeter, à déplacer", "Remplis seulement le tas 'à jeter'", "Jette-le tout de suite"]],
+    tired: [["Ramasse un seul objet", "Mets-le à sa place", "Fais une pause si besoin"], ["Ouvre la porte de ta chambre", "Regarde ce qui traîne", "Choisis UN seul objet à ranger"], ["Prends un sac poubelle", "Jette 3 déchets visibles", "Décide si tu continues"]]
   },
   ecrire: {
-    noIdea: [
-      ["Ouvre ton document", "Écris le titre de ton devoir", "Écris une première idée, même imparfaite"],
-      ["Prends une feuille blanche", "Note 5 idées en vrac", "Choisis la meilleure"],
-      ["Ouvre un document vide", "Écris la question du sujet", "Liste 3 mots-clés de réponse"]
-    ],
-    tooBig: [
-      ["Écris le plan en 3 parties", "Rédige seulement l'introduction", "Fais la bibliographie"],
-      ["Divise ton texte en sections", "Travaille uniquement la première section", "Fais une pause avant la suite"],
-      ["Liste tous les points à aborder", "Choisis le plus simple", "Rédige-le en entier"]
-    ],
-    tired: [
-      ["Écris une seule phrase du rapport", "Note une idée en vrac", "Relis ton dernier paragraphe"],
-      ["Ouvre ton document", "Écris le titre provisoire", "Ferme-le si tu veux"],
-      ["Prends une feuille", "Écris UNE seule idée", "Décide si tu continues ou fais une pause"]
-    ]
+    noIdea: [["Ouvre ton document", "Écris le titre de ton devoir", "Écris une première idée, même imparfaite"], ["Prends une feuille blanche", "Note 5 idées en vrac", "Choisis la meilleure"], ["Ouvre un document vide", "Écris la question du sujet", "Liste 3 mots-clés de réponse"]],
+    tooBig: [["Écris le plan en 3 parties", "Rédige seulement l'introduction", "Fais la bibliographie"], ["Divise ton texte en sections", "Travaille uniquement la première section", "Fais une pause avant la suite"], ["Liste tous les points à aborder", "Choisis le plus simple", "Rédige-le en entier"]],
+    tired: [["Écris une seule phrase du rapport", "Note une idée en vrac", "Relis ton dernier paragraphe"], ["Ouvre ton document", "Écris le titre provisoire", "Ferme-le si tu veux"], ["Prends une feuille", "Écris UNE seule idée", "Décide si tu continues ou fais une pause"]]
   },
   contacter: {
-    noIdea: [
-      ["Ouvre le message", "Identifie la question principale", "Écris une phrase de réponse provisoire"],
-      ["Cherche le numéro ou l'adresse", "Note-le sur un papier", "Prépare ce que tu veux dire"],
-      ["Ouvre ta messagerie", "Crée un nouveau message", "Écris seulement l'objet"]
-    ],
-    tooBig: [
-      ["Écris seulement l'objet du message", "Rédige la première phrase", "Liste les 3 points à aborder"],
-      ["Divise ton message en parties", "Rédige seulement l'introduction", "Fais une pause avant la suite"],
-      ["Liste toutes les personnes à contacter", "Choisis la plus urgente", "Envoie-lui un message court"]
-    ],
-    tired: [
-      ["Regarde le numéro de téléphone", "Ouvre un nouveau message", "Écris seulement l'objet"],
-      ["Ouvre ta messagerie", "Lis le dernier message reçu", "Décide si tu réponds maintenant"],
-      ["Prends ton téléphone", "Compose le numéro", "Décide si tu appelles ou fais une pause"]
-    ]
+    noIdea: [["Ouvre le message", "Identifie la question principale", "Écris une phrase de réponse provisoire"], ["Cherche le numéro ou l'adresse", "Note-le sur un papier", "Prépare ce que tu veux dire"], ["Ouvre ta messagerie", "Crée un nouveau message", "Écris seulement l'objet"]],
+    tooBig: [["Écris seulement l'objet du message", "Rédige la première phrase", "Liste les 3 points à aborder"], ["Divise ton message en parties", "Rédige seulement l'introduction", "Fais une pause avant la suite"], ["Liste toutes les personnes à contacter", "Choisis la plus urgente", "Envoie-lui un message court"]],
+    tired: [["Regarde le numéro de téléphone", "Ouvre un nouveau message", "Écris seulement l'objet"], ["Ouvre ta messagerie", "Lis le dernier message reçu", "Décide si tu réponds maintenant"], ["Prends ton téléphone", "Compose le numéro", "Décide si tu appelles ou fais une pause"]]
   },
   exercice: {
-    noIdea: [
-      ["Lis l'énoncé en entier, sans crayon", "Surligne les données importantes", "Écris ce qu'on te demande"],
-      ["Ouvre ton cahier d'exercices", "Lis le premier exercice", "Identifie le chapitre correspondant"],
-      ["Prends une feuille de brouillon", "Recopie l'énoncé", "Souligne les mots-clés"]
-    ],
-    tooBig: [
-      ["Lis seulement l'énoncé", "Identifie les données utiles", "Fais un schéma rapide"],
-      ["Divise l'exercice en questions", "Résous uniquement la première", "Fais une pause avant la suite"],
-      ["Liste toutes les questions", "Choisis la plus simple", "Résous-la en entier"]
-    ],
-    tired: [
-      ["Relis l'énoncé une fois", "Note une donnée importante", "Écris la formule principale"],
-      ["Ouvre ton cahier", "Lis la première question", "Décide si tu commences ou fais une pause"],
-      ["Prends ton crayon", "Écris le numéro de l'exercice", "Recopie la première ligne de l'énoncé"]
-    ]
+    noIdea: [["Lis l'énoncé en entier, sans crayon", "Surligne les données importantes", "Écris ce qu'on te demande"], ["Ouvre ton cahier d'exercices", "Lis le premier exercice", "Identifie le chapitre correspondant"], ["Prends une feuille de brouillon", "Recopie l'énoncé", "Souligne les mots-clés"]],
+    tooBig: [["Lis seulement l'énoncé", "Identifie les données utiles", "Fais un schéma rapide"], ["Divise l'exercice en questions", "Résous uniquement la première", "Fais une pause avant la suite"], ["Liste toutes les questions", "Choisis la plus simple", "Résous-la en entier"]],
+    tired: [["Relis l'énoncé une fois", "Note une donnée importante", "Écris la formule principale"], ["Ouvre ton cahier", "Lis la première question", "Décide si tu commences ou fais une pause"], ["Prends ton crayon", "Écris le numéro de l'exercice", "Recopie la première ligne de l'énoncé"]]
   },
   lire: {
-    noIdea: [
-      ["Ouvre le livre à la première page", "Lis le sommaire ou la table des matières", "Lis la quatrième de couverture"],
-      ["Prends le livre", "Ouvre-le au chapitre 1", "Lis le premier paragraphe"],
-      ["Pose le livre devant toi", "Lis le titre du chapitre", "Note ce que tu attends de cette lecture"]
-    ],
-    tooBig: [
-      ["Lis seulement le premier chapitre", "Lis les titres des sections", "Note 3 idées principales"],
-      ["Divise le livre en parties", "Lis uniquement la première partie", "Fais une pause avant la suite"],
-      ["Fixe-toi un objectif de 10 pages", "Lis ces 10 pages", "Fais un résumé en une phrase"]
-    ],
-    tired: [
-      ["Lis un seul paragraphe", "Regarde les images ou schémas", "Lis le résumé de fin de chapitre"],
-      ["Ouvre le livre", "Lis une seule phrase", "Décide si tu continues ou fais une pause"],
-      ["Prends le livre", "Lis le titre du chapitre", "Feuillette 2 pages au hasard"]
-    ]
+    noIdea: [["Ouvre le livre à la première page", "Lis le sommaire ou la table des matières", "Lis la quatrième de couverture"], ["Prends le livre", "Ouvre-le au chapitre 1", "Lis le premier paragraphe"], ["Pose le livre devant toi", "Lis le titre du chapitre", "Note ce que tu attends de cette lecture"]],
+    tooBig: [["Lis seulement le premier chapitre", "Lis les titres des sections", "Note 3 idées principales"], ["Divise le livre en parties", "Lis uniquement la première partie", "Fais une pause avant la suite"], ["Fixe-toi un objectif de 10 pages", "Lis ces 10 pages", "Fais un résumé en une phrase"]],
+    tired: [["Lis un seul paragraphe", "Regarde les images ou schémas", "Lis le résumé de fin de chapitre"], ["Ouvre le livre", "Lis une seule phrase", "Décide si tu continues ou fais une pause"], ["Prends le livre", "Lis le titre du chapitre", "Feuillette 2 pages au hasard"]]
   },
   projet: {
-    noIdea: [
-      ["Ouvre ton outil de travail", "Crée un nouveau fichier ou projet", "Note l'objectif final"],
-      ["Ouvre ton IDE ou ton logiciel", "Crée un nouveau projet", "Nomme-le clairement"],
-      ["Prends une feuille", "Écris le nom du projet", "Liste 3 grandes étapes"]
-    ],
-    tooBig: [
-      ["Fais la liste des tâches à faire", "Commence par la plus simple", "Dessine un schéma ou une maquette"],
-      ["Divise le projet en phases", "Travaille uniquement la première phase", "Fais une pause avant la suite"],
-      ["Liste toutes les fonctionnalités", "Choisis la plus importante", "Implémente-la d'abord"]
-    ],
-    tired: [
-      ["Ouvre ton projet et regarde-le", "Note une seule idée", "Fais un petit croquis"],
-      ["Ouvre ton outil de travail", "Regarde ce que tu as déjà fait", "Décide si tu continues ou fais une pause"],
-      ["Prends une feuille", "Dessine un schéma rapide", "Décide si tu commences à coder"]
-    ]
+    noIdea: [["Ouvre ton outil de travail", "Crée un nouveau fichier ou projet", "Note l'objectif final"], ["Ouvre ton IDE ou ton logiciel", "Crée un nouveau projet", "Nomme-le clairement"], ["Prends une feuille", "Écris le nom du projet", "Liste 3 grandes étapes"]],
+    tooBig: [["Fais la liste des tâches à faire", "Commence par la plus simple", "Dessine un schéma ou une maquette"], ["Divise le projet en phases", "Travaille uniquement la première phase", "Fais une pause avant la suite"], ["Liste toutes les fonctionnalités", "Choisis la plus importante", "Implémente-la d'abord"]],
+    tired: [["Ouvre ton projet et regarde-le", "Note une seule idée", "Fais un petit croquis"], ["Ouvre ton outil de travail", "Regarde ce que tu as déjà fait", "Décide si tu continues ou fais une pause"], ["Prends une feuille", "Dessine un schéma rapide", "Décide si tu commences à coder"]]
   },
   cuisine: {
-    noIdea: [
-      ["Choisis une recette simple", "Vérifie ce que tu as dans le frigo", "Fais la liste des courses"],
-      ["Ouvre un livre de recettes", "Choisis une recette", "Lis-la en entier"],
-      ["Regarde ce qu'il y a dans le frigo", "Note 3 ingrédients disponibles", "Cherche une recette avec ces ingrédients"]
-    ],
-    tooBig: [
-      ["Lis la recette en entier", "Rassemble tous les ingrédients", "Prépare seulement les légumes"],
-      ["Divise la recette en étapes", "Fais uniquement la préparation", "Fais une pause avant la cuisson"],
-      ["Liste tous les plats à faire", "Choisis le plus simple", "Fais-le en entier"]
-    ],
-    tired: [
-      ["Prépare un sandwich simple", "Fais bouillir de l'eau pour des pâtes", "Coupe un fruit"],
-      ["Ouvre le frigo", "Regarde ce qu'il y a", "Décide si tu cuisines ou commandes"],
-      ["Prends un bol", "Mets-y des céréales", "Ajoute du lait"]
-    ]
+    noIdea: [["Choisis une recette simple", "Vérifie ce que tu as dans le frigo", "Fais la liste des courses"], ["Ouvre un livre de recettes", "Choisis une recette", "Lis-la en entier"], ["Regarde ce qu'il y a dans le frigo", "Note 3 ingrédients disponibles", "Cherche une recette avec ces ingrédients"]],
+    tooBig: [["Lis la recette en entier", "Rassemble tous les ingrédients", "Prépare seulement les légumes"], ["Divise la recette en étapes", "Fais uniquement la préparation", "Fais une pause avant la cuisson"], ["Liste tous les plats à faire", "Choisis le plus simple", "Fais-le en entier"]],
+    tired: [["Prépare un sandwich simple", "Fais bouillir de l'eau pour des pâtes", "Coupe un fruit"], ["Ouvre le frigo", "Regarde ce qu'il y a", "Décide si tu cuisines ou commandes"], ["Prends un bol", "Mets-y des céréales", "Ajoute du lait"]]
   }
 };
 
 function normalizeText(text) {
-  return text.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9\s]/g, ' ')
-    .trim();
+  return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, ' ').trim();
 }
-
 function classifyTask(name) {
   if (!name) return null;
   const n = normalizeText(name);
@@ -1298,35 +1298,23 @@ function classifyTask(name) {
   }
   return null;
 }
-
 function suggestActions(taskName, blocker) {
   const category = classifyTask(taskName);
-  
-  if (!category) {
-    return { category: null, actions: [], needsClarification: true };
-  }
-  
+  if (!category) return { category: null, actions: [], needsClarification: true };
   const bank = MICRO_ACTIONS[category];
-  if (!bank || !bank[blocker] || bank[blocker].length === 0) {
-    return { category, actions: [], needsClarification: true };
-  }
-  
+  if (!bank || !bank[blocker] || bank[blocker].length === 0) return { category, actions: [], needsClarification: true };
   const variants = bank[blocker];
   const variantIndex = Math.floor(Math.random() * variants.length);
   let actions = variants[variantIndex].slice();
-  
   const learnedKey = `${category}_${blocker}`;
   const learned = state.blockLearned[learnedKey] || [];
-  if (learned.length >= 3) {
-    actions = learned.slice(0, 3);
-  } else if (learned.length > 0) {
+  if (learned.length >= 3) actions = learned.slice(0, 3);
+  else if (learned.length > 0) {
     const remaining = actions.filter(a => !learned.includes(a));
     actions = [...learned, ...remaining].slice(0, 3);
   }
-  
   return { category, actions, needsClarification: false };
 }
-
 function saveLearnedAction(taskName, blocker, action) {
   const category = classifyTask(taskName);
   if (!category) return;
@@ -1337,6 +1325,263 @@ function saveLearnedAction(taskName, blocker, action) {
     if (state.blockLearned[key].length > 5) state.blockLearned[key] = state.blockLearned[key].slice(0, 5);
     saveBlockUsage();
   }
+}
+
+/* ============================================================
+   SYSTÈME DE QUÊTES
+   ============================================================ */
+const QUEST_DEFINITIONS = {
+  daily: [
+    { id: 'first_step', title: 'Premier pas', desc: 'Terminer une tâche aujourd\'hui', icon: 'playCircle', target: 1, unit: 'task', reward: 20, track: 'tasksCompleted' },
+    { id: 'mission_accomplished', title: 'Mission accomplie', desc: 'Terminer deux tâches aujourd\'hui', icon: 'checkCircle', target: 2, unit: 'task', reward: 30, track: 'tasksCompleted' },
+    { id: 'focus_time', title: 'Temps de concentration', desc: 'Cumuler 60 minutes de sessions terminées', icon: 'timer', target: 60, unit: 'min', reward: 40, track: 'minutesCompleted' },
+    { id: 'take_action', title: 'Passer à l\'action', desc: 'Démarrer une session START aujourd\'hui', icon: 'flame', target: 1, unit: 'session', reward: 15, track: 'sessionsStarted' }
+  ],
+  weekly: [
+    { id: 'ten_tasks', title: 'Dix tâches', desc: 'Terminer 10 tâches cette semaine', icon: 'layers', target: 10, unit: 'task', reward: 50, track: 'tasksCompleted' },
+    { id: 'three_days', title: 'Trois jours actifs', desc: 'Utiliser START pendant 3 jours différents', icon: 'calendarCheck', target: 3, unit: 'day', reward: 40, track: 'daysUsed' },
+    { id: 'five_hours', title: 'Cinq heures', desc: 'Cumuler 5 heures de sessions terminées', icon: 'hourglass', target: 300, unit: 'min', reward: 60, track: 'minutesCompleted' },
+    { id: 'multi_task_session', title: 'Session riche', desc: 'Terminer une session avec au moins 3 tâches', icon: 'award', target: 1, unit: 'session', reward: 50, track: 'multiTaskSessions' }
+  ],
+  special: [
+    { id: 'first_ever', title: 'Mes débuts', desc: 'Terminer sa première tâche', icon: 'seedling', target: 1, unit: 'task', reward: 100, track: 'lifetimeTasks' },
+    { id: 'ten_total', title: 'En mouvement', desc: 'Terminer 10 tâches au total', icon: 'flame', target: 10, unit: 'task', reward: 100, track: 'lifetimeTasks' },
+    { id: 'seven_days', title: 'Régulier', desc: 'Utiliser START pendant 7 jours différents', icon: 'calendar', target: 7, unit: 'day', reward: 100, track: 'lifetimeDays' },
+    { id: 'fifty_total', title: 'Persévérant', desc: 'Terminer 50 tâches', icon: 'trophy', target: 50, unit: 'task', reward: 100, track: 'lifetimeTasks' },
+    { id: 'hundred_total', title: 'Cap des 100', desc: 'Terminer 100 tâches', icon: 'star', target: 100, unit: 'task', reward: 100, track: 'lifetimeTasks' },
+    { id: 'ten_multi', title: 'Organisé', desc: 'Terminer 10 sessions avec plusieurs tâches', icon: 'layers', target: 10, unit: 'session', reward: 100, track: 'lifetimeMultiSessions' }
+  ]
+};
+
+function getQuestProgress(quest, period) {
+  const key = quest.track;
+  if (period === 'daily') return state.quests.daily.progress[key] || 0;
+  if (period === 'weekly') return state.quests.weekly.progress[key] || 0;
+  if (period === 'special') {
+    if (key === 'lifetimeTasks') return state.journey.sessions.filter(s => s.status === 'completed').length;
+    if (key === 'lifetimeDays') return state.journey.daysUsed.length;
+    if (key === 'lifetimeMultiSessions') return state.journey.sessions.filter(s => s.status === 'completed' && s.taskCount > 1).length;
+  }
+  return 0;
+}
+
+function isQuestCompleted(quest, period) {
+  const completedList = period === 'daily' ? state.quests.daily.completed : period === 'weekly' ? state.quests.weekly.completed : state.quests.special.completed;
+  return completedList.includes(quest.id);
+}
+
+function addQuestPoints(amount, questId, period) {
+  state.quests.points += amount;
+  state.quests.history.push({
+    questId, period, amount, timestamp: Date.now(),
+    date: todayKey()
+  });
+  // Calcul du niveau : 100 points par niveau
+  const newLevel = Math.floor(state.quests.points / 100) + 1;
+  if (newLevel > state.quests.level) {
+    state.quests.level = newLevel;
+    setTimeout(() => toast(`Niveau ${newLevel} atteint !`), 500);
+  }
+  saveQuests();
+}
+
+function completeQuest(quest, period) {
+  const completedList = period === 'daily' ? state.quests.daily.completed : period === 'weekly' ? state.quests.weekly.completed : state.quests.special.completed;
+  if (completedList.includes(quest.id)) return;
+  completedList.push(quest.id);
+  addQuestPoints(quest.reward, quest.id, period);
+  saveQuests();
+}
+
+function updateQuestProgress(event) {
+  // event = { type: 'taskCompleted' | 'sessionStarted' | 'dayUsed', duration: number, taskCount: number }
+  const today = todayKey();
+  
+  // Enregistrer le jour utilisé
+  if (!state.journey.daysUsed.includes(today)) {
+    state.journey.daysUsed.push(today);
+  }
+  
+  // Mettre à jour la progression quotidienne
+  ['tasksCompleted', 'minutesCompleted', 'sessionsStarted', 'daysUsed', 'multiTaskSessions'].forEach(key => {
+    if (!state.quests.daily.progress[key]) state.quests.daily.progress[key] = 0;
+  });
+  ['tasksCompleted', 'minutesCompleted', 'sessionsStarted', 'daysUsed', 'multiTaskSessions'].forEach(key => {
+    if (!state.quests.weekly.progress[key]) state.quests.weekly.progress[key] = 0;
+  });
+  
+  if (event.type === 'taskCompleted') {
+    state.quests.daily.progress.tasksCompleted = (state.quests.daily.progress.tasksCompleted || 0) + 1;
+    state.quests.weekly.progress.tasksCompleted = (state.quests.weekly.progress.tasksCompleted || 0) + 1;
+    state.quests.daily.progress.minutesCompleted = (state.quests.daily.progress.minutesCompleted || 0) + (event.duration || 0);
+    state.quests.weekly.progress.minutesCompleted = (state.quests.weekly.progress.minutesCompleted || 0) + (event.duration || 0);
+    if (event.taskCount > 1) {
+      state.quests.daily.progress.multiTaskSessions = (state.quests.daily.progress.multiTaskSessions || 0) + 1;
+      state.quests.weekly.progress.multiTaskSessions = (state.quests.weekly.progress.multiTaskSessions || 0) + 1;
+    }
+  } else if (event.type === 'sessionStarted') {
+    state.quests.daily.progress.sessionsStarted = (state.quests.daily.progress.sessionsStarted || 0) + 1;
+    state.quests.weekly.progress.sessionsStarted = (state.quests.weekly.progress.sessionsStarted || 0) + 1;
+  }
+  
+  // Vérifier les quêtes complétées
+  QUEST_DEFINITIONS.daily.forEach(q => {
+    if (!isQuestCompleted(q, 'daily')) {
+      const progress = getQuestProgress(q, 'daily');
+      if (progress >= q.target) completeQuest(q, 'daily');
+    }
+  });
+  QUEST_DEFINITIONS.weekly.forEach(q => {
+    if (!isQuestCompleted(q, 'weekly')) {
+      const progress = getQuestProgress(q, 'weekly');
+      if (progress >= q.target) completeQuest(q, 'weekly');
+    }
+  });
+  QUEST_DEFINITIONS.special.forEach(q => {
+    if (!isQuestCompleted(q, 'special')) {
+      const progress = getQuestProgress(q, 'special');
+      if (progress >= q.target) completeQuest(q, 'special');
+    }
+  });
+  
+  saveQuests();
+  saveJourney();
+}
+
+function renderQuests() {
+  // Points et niveau
+  document.getElementById('questsPointsValue').textContent = state.quests.points;
+  document.getElementById('questsLevelValue').textContent = state.quests.level;
+  const pointsInLevel = state.quests.points % 100;
+  document.getElementById('questsLevelProgress').textContent = `${pointsInLevel} / 100`;
+  document.getElementById('questsLevelFill').style.width = `${pointsInLevel}%`;
+  
+  // Reset info
+  const now = new Date();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 0, 0, 0);
+  const hoursUntilReset = Math.ceil((tomorrow - now) / 3600000);
+  document.getElementById('questsDailyReset').textContent = `Se réinitialisent dans ${hoursUntilReset}h`;
+  
+  const nextMonday = new Date(now);
+  const daysUntilMonday = (1 + 7 - now.getDay()) % 7 || 7;
+  nextMonday.setDate(now.getDate() + daysUntilMonday);
+  nextMonday.setHours(0, 0, 0, 0);
+  const daysUntilWeekly = Math.ceil((nextMonday - now) / 86400000);
+  document.getElementById('questsWeeklyReset').textContent = `Se réinitialisent dans ${daysUntilWeekly}j`;
+  
+  // Quêtes quotidiennes
+  renderQuestSection('questsDailyGrid', QUEST_DEFINITIONS.daily, 'daily');
+  renderQuestSection('questsWeeklyGrid', QUEST_DEFINITIONS.weekly, 'weekly');
+  renderQuestSection('questsSpecialGrid', QUEST_DEFINITIONS.special, 'special');
+}
+
+function renderQuestSection(containerId, quests, period) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  quests.forEach(q => {
+    const progress = getQuestProgress(q, period);
+    const completed = isQuestCompleted(q, period);
+    const progressPercent = Math.min(100, (progress / q.target) * 100);
+    const unitLabel = q.unit === 'task' ? (progress === 1 ? 'tâche' : 'tâches') : q.unit === 'min' ? 'min' : q.unit === 'day' ? 'jours' : 'sessions';
+    const progressText = q.unit === 'min' ? `${progress}/${q.target} min` : `${progress}/${q.target} ${unitLabel}`;
+    
+    const card = document.createElement('div');
+    card.className = 'quest-card' + (completed ? ' completed' : '');
+    card.innerHTML = `
+      <div class="quest-badge">${ICONS.check}</div>
+      <div class="quest-header">
+        <div class="quest-icon">${ICONS[q.icon] || ICONS.star}</div>
+        <div class="quest-info">
+          <div class="quest-title">${q.title}</div>
+          <div class="quest-desc">${q.desc}</div>
+          <div class="quest-reward">${ICONS.star} +${q.reward} pts</div>
+        </div>
+      </div>
+      <div class="quest-progress">
+        <div class="quest-progress-header">
+          <span class="quest-progress-text"><strong>${progressText}</strong></span>
+        </div>
+        <div class="quest-progress-bar">
+          <div class="quest-progress-fill" style="width: ${progressPercent}%"></div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+/* ============================================================
+   PARCOURS
+   ============================================================ */
+function renderJourney() {
+  const completedSessions = state.journey.sessions.filter(s => s.status === 'completed');
+  const totalTasks = completedSessions.length;
+  const totalMinutes = completedSessions.reduce((sum, s) => sum + (s.duration || 0), 0);
+  const totalDays = state.journey.daysUsed.length;
+  const thisWeekSessions = completedSessions.filter(s => {
+    const d = new Date(s.completedAt);
+    const now = new Date();
+    const weekAgo = new Date(now);
+    weekAgo.setDate(now.getDate() - 7);
+    return d >= weekAgo;
+  }).length;
+  
+  // Stats
+  document.getElementById('journeyStats').innerHTML = `
+    <div class="journey-stat"><div class="journey-stat-value">${totalTasks}</div><div class="journey-stat-label">Tâches terminées</div></div>
+    <div class="journey-stat"><div class="journey-stat-value">${formatDuration(totalMinutes)}</div><div class="journey-stat-label">Temps total</div></div>
+    <div class="journey-stat"><div class="journey-stat-value">${totalDays}</div><div class="journey-stat-label">Jours actifs</div></div>
+    <div class="journey-stat"><div class="journey-stat-value">${thisWeekSessions}</div><div class="journey-stat-label">Cette semaine</div></div>
+  `;
+  
+  // Graphique 7 jours
+  const days = [];
+  const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const count = completedSessions.filter(s => {
+      const sd = new Date(s.completedAt);
+      const sKey = `${sd.getFullYear()}-${String(sd.getMonth()+1).padStart(2,'0')}-${String(sd.getDate()).padStart(2,'0')}`;
+      return sKey === key;
+    }).length;
+    days.push({ label: dayNames[d.getDay()], count, key });
+  }
+  const maxCount = Math.max(1, ...days.map(d => d.count));
+  document.getElementById('journeyChartBars').innerHTML = days.map(d => `
+    <div class="journey-chart-bar-wrap">
+      <div class="journey-chart-bar-value">${d.count}</div>
+      <div class="journey-chart-bar ${d.count > 0 ? 'has-value' : ''}" style="height: ${(d.count / maxCount) * 100}%"></div>
+      <div class="journey-chart-bar-label">${d.label}</div>
+    </div>
+  `).join('');
+  
+  // Historique
+  const historyList = document.getElementById('journeyHistoryList');
+  if (state.journey.sessions.length === 0) {
+    historyList.innerHTML = `<div class="journey-empty"><div class="journey-empty-icon">${ICONS.clock}</div><h3>Aucune session pour l'instant</h3><p>Termine ta première tâche pour commencer ton parcours.</p></div>`;
+    return;
+  }
+  const recentSessions = [...state.journey.sessions].sort((a, b) => b.completedAt - a.completedAt).slice(0, 20);
+  historyList.innerHTML = recentSessions.map(s => {
+    const d = new Date(s.completedAt);
+    const dateStr = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' });
+    const timeStr = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    const iconClass = s.status === 'completed' ? 'done' : 'abandoned';
+    const icon = s.status === 'completed' ? ICONS.checkCircle : ICONS.clock;
+    return `
+      <div class="journey-history-item">
+        <div class="journey-history-icon ${iconClass}">${icon}</div>
+        <div class="journey-history-info">
+          <div class="journey-history-name">${escapeHtml(s.taskName || 'Session')}</div>
+          <div class="journey-history-meta">${dateStr} à ${timeStr} · ${formatDuration(s.duration || 0)} · ${s.taskCount || 1} tâche${(s.taskCount||1) > 1 ? 's' : ''}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 const tasksContainer = document.getElementById('tasksContainer');
@@ -1364,11 +1609,10 @@ function formatDuration(min) {
   if (min >= 60) {
     const h = Math.floor(min / 60);
     const m = min % 60;
-    return m > 0 ? `${h} h ${m}` : `${h} h`;
+    return m > 0 ? `${h}h${String(m).padStart(2,'0')}` : `${h}h`;
   }
   return min + ' min';
 }
-
 function formatTimerDisplay(totalSeconds) {
   if (totalSeconds < 3600) {
     const m = Math.floor(totalSeconds / 60);
@@ -1380,7 +1624,6 @@ function formatTimerDisplay(totalSeconds) {
   const s = totalSeconds % 60;
   return { min: String(m).padStart(2, '0'), sec: String(s).padStart(2, '0'), colon: true, hour: String(h) };
 }
-
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
 function deleteTask(id) {
   state.tasks = state.tasks.filter(t => t.id !== id);
@@ -1397,46 +1640,22 @@ function renderTemplates() {
   templatesGrid.innerHTML = '';
   TEMPLATES.forEach(t => {
     const btn = document.createElement('button'); btn.className = 'template-chip';
-    btn.innerHTML = `
-      <div class="t-icon">${t.icon}</div>
-      <div class="t-name">${t.name}</div>
-      <div class="t-sub">${t.sub}</div>
-      <button class="quick-start" data-template="${t.name}" title="Démarrer immédiatement" aria-label="Démarrer ${t.name}">${ICONS.play}</button>
-    `;
-    btn.addEventListener('click', (e) => {
-      if (e.target.closest('.quick-start')) return;
-      applyTemplate(t);
-    });
-    btn.querySelector('.quick-start').addEventListener('click', (e) => {
-      e.stopPropagation();
-      quickStart(t);
-    });
+    btn.innerHTML = `<div class="t-icon">${t.icon}</div><div class="t-name">${t.name}</div><div class="t-sub">${t.sub}</div><button class="quick-start" data-template="${t.name}" title="Démarrer immédiatement" aria-label="Démarrer ${t.name}">${ICONS.play}</button>`;
+    btn.addEventListener('click', (e) => { if (e.target.closest('.quick-start')) return; applyTemplate(t); });
+    btn.querySelector('.quick-start').addEventListener('click', (e) => { e.stopPropagation(); quickStart(t); });
     templatesGrid.appendChild(btn);
   });
 }
 function applyTemplate(t) { taskNameInput.value = t.name; prepareSteps = t.steps.slice(); renderSteps(); toast('Modèle appliqué'); }
-
 function quickStart(t) {
   const duration = prepareFree ? 0 : (prepareDuration || state.settings.defaultDuration || 5);
-  const task = {
-    id: 't_' + Date.now(),
-    name: t.name,
-    steps: t.steps.slice(),
-    duration: duration,
-    done: false,
-    createdAt: Date.now()
-  };
+  const task = { id: 't_' + Date.now(), name: t.name, steps: t.steps.slice(), duration, done: false, createdAt: Date.now() };
   state.tasks.unshift(task);
-  saveTasks();
-  renderTasks();
+  saveTasks(); renderTasks();
   loadTask(task.id);
-  setTimeout(() => {
-    switchView('device');
-    setTimeout(() => handleStartClick(), 300);
-  }, 100);
+  setTimeout(() => { switchView('device'); setTimeout(() => handleStartClick(), 300); }, 100);
   toast('Session démarrée');
 }
-
 function renderSteps() {
   stepsEditor.innerHTML = '';
   prepareSteps.forEach((step, i) => {
@@ -1465,24 +1684,17 @@ const durationSheetOverlay = document.getElementById('durationSheetOverlay');
 const durH = document.getElementById('durH');
 const durM = document.getElementById('durM');
 const durationError = document.getElementById('durationError');
-
 let sheetMinutes = 5;
 
 function updateDurationRow() {
-  if (prepareFree) {
-    durationRowValue.textContent = 'Libre';
-  } else {
-    durationRowValue.textContent = formatDuration(prepareDuration);
-  }
+  durationRowValue.textContent = prepareFree ? 'Libre' : formatDuration(prepareDuration);
 }
-
 function updateDurationDisplay() {
   const h = Math.floor(sheetMinutes / 60);
   const m = sheetMinutes % 60;
   durH.textContent = String(h).padStart(2, '0');
   durM.textContent = String(m).padStart(2, '0');
 }
-
 function openDurationSheet() {
   if (prepareFree) return;
   sheetMinutes = prepareDuration;
@@ -1491,76 +1703,48 @@ function openDurationSheet() {
   updateQuickButtons();
   durationSheetOverlay.classList.add('active');
 }
-
-function closeDurationSheet() {
-  durationSheetOverlay.classList.remove('active');
-}
-
+function closeDurationSheet() { durationSheetOverlay.classList.remove('active'); }
 durationRow.addEventListener('click', openDurationSheet);
-durationSheetOverlay.addEventListener('click', (e) => {
-  if (e.target === durationSheetOverlay) closeDurationSheet();
-});
-
+durationSheetOverlay.addEventListener('click', (e) => { if (e.target === durationSheetOverlay) closeDurationSheet(); });
 function updateQuickButtons() {
   document.querySelectorAll('.duration-quick-btn').forEach(btn => {
     btn.classList.toggle('active', parseInt(btn.dataset.min, 10) === sheetMinutes);
   });
 }
-
 document.querySelectorAll('.duration-quick-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const min = parseInt(btn.dataset.min, 10);
-    sheetMinutes = min;
+    sheetMinutes = parseInt(btn.dataset.min, 10);
     updateDurationDisplay();
     updateQuickButtons();
     durationError.textContent = '';
   });
 });
-
 document.querySelectorAll('.keypad-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const key = btn.dataset.key;
     durationError.textContent = '';
-    
     if (key === 'erase') {
       sheetMinutes = Math.floor(sheetMinutes / 10);
       if (sheetMinutes < 1) sheetMinutes = 1;
     } else {
-      const digit = parseInt(key, 10);
-      const newTotal = sheetMinutes * 10 + digit;
       if (key === '00') {
-        const newTotal00 = sheetMinutes * 100;
-        if (newTotal00 <= 360) {
-          sheetMinutes = newTotal00;
-        } else {
-          durationError.textContent = 'Maximum 6 heures';
-          return;
-        }
+        const newTotal = sheetMinutes * 100;
+        if (newTotal <= 360) sheetMinutes = newTotal;
+        else { durationError.textContent = 'Maximum 6 heures'; return; }
       } else {
-        if (newTotal <= 360) {
-          sheetMinutes = newTotal;
-        } else {
-          durationError.textContent = 'Maximum 6 heures';
-          return;
-        }
+        const newTotal = sheetMinutes * 10 + parseInt(key, 10);
+        if (newTotal <= 360) sheetMinutes = newTotal;
+        else { durationError.textContent = 'Maximum 6 heures'; return; }
       }
     }
-    
     if (sheetMinutes < 1) sheetMinutes = 1;
     updateDurationDisplay();
     updateQuickButtons();
   });
 });
-
 document.getElementById('durationValidate').addEventListener('click', () => {
-  if (sheetMinutes < 1) {
-    durationError.textContent = 'Minimum 1 minute';
-    return;
-  }
-  if (sheetMinutes > 360) {
-    durationError.textContent = 'Maximum 6 heures';
-    return;
-  }
+  if (sheetMinutes < 1) { durationError.textContent = 'Minimum 1 minute'; return; }
+  if (sheetMinutes > 360) { durationError.textContent = 'Maximum 6 heures'; return; }
   prepareDuration = sheetMinutes;
   state.settings.defaultDuration = prepareDuration;
   saveSettings();
@@ -1568,7 +1752,6 @@ document.getElementById('durationValidate').addEventListener('click', () => {
   closeDurationSheet();
   toast('Durée : ' + formatDuration(prepareDuration));
 });
-
 document.getElementById('dialFree').addEventListener('click', () => {
   prepareFree = !prepareFree;
   document.getElementById('dialFree').classList.toggle('active', prepareFree);
@@ -1643,7 +1826,12 @@ startBtn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'En
 function handleStartClick() {
   const task = getCurrentTask(); if (!task) return;
   if (state.session.isPaused) { resumeSession(); return; }
-  if (state.session.endTime === 0 && state.session.duration === 0) { startSession(); return; }
+  if (state.session.endTime === 0 && state.session.duration === 0) {
+    startSession();
+    // Tracker le démarrage de session pour les quêtes
+    updateQuestProgress({ type: 'sessionStarted' });
+    return;
+  }
   validateStep();
 }
 
@@ -1655,6 +1843,7 @@ function startSession() {
   state.session.totalDuration = duration;
   state.session.isPaused = false;
   state.session.startedAt = Date.now();
+  state.session.sessionStartedAt = Date.now();
   saveSession();
   renderDevice();
   if (duration > 0) startTimer();
@@ -1716,8 +1905,26 @@ function resumeSession() {
 }
 function quitSession() {
   stopTimer(); releaseWakeLock();
+  // Enregistrer comme abandonnée
+  const task = getCurrentTask();
+  if (task && state.session.sessionStartedAt) {
+    const elapsed = Math.floor((Date.now() - state.session.sessionStartedAt) / 60000);
+    state.journey.sessions.push({
+      id: 's_' + Date.now(),
+      taskName: task.name,
+      taskId: task.id,
+      duration: elapsed,
+      plannedDuration: task.duration,
+      status: 'abandoned',
+      completedAt: Date.now(),
+      taskCount: 1,
+      stepIndex: state.session.stepIndex
+    });
+    saveJourney();
+  }
   state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
   state.session.isPaused = false; state.session.pausedRemaining = 0;
+  state.session.sessionStartedAt = null;
   saveSession(); renderDevice(); toast('Session quittée');
 }
 
@@ -1772,6 +1979,7 @@ function loadTask(id) {
   state.session.taskId = id; state.session.stepIndex = 0;
   state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
   state.session.isPaused = false; state.session.pausedRemaining = 0;
+  state.session.sessionStartedAt = null;
   state.session.startedAt = Date.now();
   saveSession(); renderTasks(); renderDevice();
   toast('Tâche chargée. Appuyez sur START.');
@@ -1843,12 +2051,41 @@ function renderDevice() {
 
 function completeTask() {
   const task = getCurrentTask(); if (!task) return;
-  task.done = true; stopTimer(); releaseWakeLock();
+  task.done = true;
+  
+  // Calculer la durée réelle de la session
+  const sessionDuration = state.session.sessionStartedAt ? Math.floor((Date.now() - state.session.sessionStartedAt) / 60000) : (task.duration || 0);
+  
+  // Enregistrer dans l'historique
+  state.journey.sessions.push({
+    id: 's_' + Date.now(),
+    taskName: task.name,
+    taskId: task.id,
+    duration: sessionDuration,
+    plannedDuration: task.duration,
+    status: 'completed',
+    completedAt: Date.now(),
+    taskCount: 1,
+    stepIndex: state.session.stepIndex
+  });
+  
+  // Mettre à jour les quêtes
+  updateQuestProgress({ type: 'taskCompleted', duration: sessionDuration, taskCount: 1 });
+  
+  stopTimer(); releaseWakeLock();
   state.session.taskId = null; state.session.stepIndex = 0;
   state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
   state.session.isPaused = false; state.session.pausedRemaining = 0;
-  saveTasks(); saveSession(); renderTasks(); renderDevice();
-  toast('Tâche terminée'); progressFill.classList.add('complete');
+  state.session.sessionStartedAt = null;
+  saveTasks(); saveSession(); saveJourney();
+  renderTasks(); renderDevice();
+  toast('Tâche terminée');
+  progressFill.classList.add('complete');
+  
+  // Si on est sur l'onglet Quêtes, rafraîchir
+  if (document.getElementById('view-quests').classList.contains('active')) {
+    renderQuests();
+  }
 }
 
 async function requestWakeLock() {
@@ -1869,7 +2106,6 @@ function bindSegmented(containerId, settingKey, onChange) {
   });
 }
 bindSegmented('soundSeg', 'sound', () => {});
-
 document.getElementById('testSoundBtn').addEventListener('click', () => { playAlert(); toast('Son testé'); });
 document.getElementById('vibrationToggle').addEventListener('click', () => {
   state.settings.vibration = !state.settings.vibration;
@@ -1898,7 +2134,6 @@ document.getElementById('themeGrid').addEventListener('click', (e) => {
   applyTheme(theme);
   saveSettings();
 });
-
 document.getElementById('redoOnboardingBtn').addEventListener('click', () => {
   state.onboarding.completed = false;
   state.onboarding.currentScreen = 0;
@@ -1910,26 +2145,10 @@ document.getElementById('redoOnboardingBtn').addEventListener('click', () => {
 const aboutOverlay = document.getElementById('aboutOverlay');
 const aboutContent = document.getElementById('aboutContent');
 const ABOUT_TEXTS = {
-  legal: `<h4>Éditeur</h4>
-<p>Site édité à titre non professionnel par une personne physique, qui a choisi de préserver son anonymat conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN). Les éléments d'identification de l'éditeur sont détenus par l'hébergeur.</p>
-<h4>Hébergeur</h4>
-<p>GitHub, Inc.<br>88 Colin P. Kelly Jr. Street<br>San Francisco, CA 94107, États-Unis<br>Téléphone : +1 877 448 4820</p>`,
-  privacy: `<h4>Tes données</h4>
-<p>START ne crée pas de compte et n'envoie aucune donnée à un serveur. Tes tâches, tes réglages et tes réponses restent sur ton appareil (stockage local du navigateur).</p>
-<h4>Pas de pub, pas de traceur</h4>
-<p>Pas de publicité, pas de traceur. Pour tout effacer, vide les données du site dans les réglages de ton navigateur.</p>
-<h4>Hébergeur</h4>
-<p>L'hébergeur du site (GitHub) peut conserver des données techniques de connexion selon sa propre politique.</p>
-<h4>Avertissement</h4>
-<p>START aide à démarrer une tâche : ce n'est pas un outil médical.</p>
-<h4>Contact</h4>
-<p><a href="#">[À REMPLIR]</a></p>`
+  legal: `<h4>Éditeur</h4><p>Site édité à titre non professionnel par une personne physique, qui a choisi de préserver son anonymat conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN). Les éléments d'identification de l'éditeur sont détenus par l'hébergeur.</p><h4>Hébergeur</h4><p>GitHub, Inc.<br>88 Colin P. Kelly Jr. Street<br>San Francisco, CA 94107, États-Unis<br>Téléphone : +1 877 448 4820</p>`,
+  privacy: `<h4>Tes données</h4><p>START ne crée pas de compte et n'envoie aucune donnée à un serveur. Tes tâches, tes réglages et tes réponses restent sur ton appareil (stockage local du navigateur).</p><h4>Pas de pub, pas de traceur</h4><p>Pas de publicité, pas de traceur. Pour tout effacer, vide les données du site dans les réglages de ton navigateur.</p><h4>Hébergeur</h4><p>L'hébergeur du site (GitHub) peut conserver des données techniques de connexion selon sa propre politique.</p><h4>Avertissement</h4><p>START aide à démarrer une tâche : ce n'est pas un outil médical.</p><h4>Contact</h4><p><a href="#">[À REMPLIR]</a></p>`
 };
-
-document.getElementById('aboutBtn').addEventListener('click', () => {
-  renderAboutTab('legal');
-  aboutOverlay.classList.add('active');
-});
+document.getElementById('aboutBtn').addEventListener('click', () => { renderAboutTab('legal'); aboutOverlay.classList.add('active'); });
 document.getElementById('aboutClose').addEventListener('click', () => { aboutOverlay.classList.remove('active'); });
 aboutOverlay.addEventListener('click', (e) => { if (e.target === aboutOverlay) aboutOverlay.classList.remove('active'); });
 document.querySelectorAll('.about-tab').forEach(tab => {
@@ -1939,9 +2158,7 @@ document.querySelectorAll('.about-tab').forEach(tab => {
     renderAboutTab(tab.dataset.tab);
   });
 });
-function renderAboutTab(tab) {
-  aboutContent.innerHTML = ABOUT_TEXTS[tab] || '';
-}
+function renderAboutTab(tab) { aboutContent.innerHTML = ABOUT_TEXTS[tab] || ''; }
 
 function applySettingsToUI() {
   document.querySelectorAll('#soundSeg .seg-opt').forEach(o => o.classList.toggle('active', o.dataset.sound === state.settings.sound));
@@ -1957,53 +2174,35 @@ function applySettingsToUI() {
 
 const resumeOverlay = document.getElementById('resumeOverlay');
 const resumeInfo = document.getElementById('resumeInfo');
-
 function showResumeModal(task) {
-  const remaining = state.session.duration > 0 && state.session.endTime > Date.now()
-    ? Math.ceil((state.session.endTime - Date.now()) / 60000)
-    : null;
+  const remaining = state.session.duration > 0 && state.session.endTime > Date.now() ? Math.ceil((state.session.endTime - Date.now()) / 60000) : null;
   const timeInfo = remaining ? ` (environ ${remaining} min restantes)` : '';
   resumeInfo.innerHTML = `<strong>${escapeHtml(task.name)}</strong><br>Étape ${state.session.stepIndex + 1} sur ${task.steps.length}${timeInfo}`;
   resumeOverlay.classList.add('active');
 }
-
 document.getElementById('resumeNo').addEventListener('click', () => {
   resumeOverlay.classList.remove('active');
   state.session.taskId = null; state.session.stepIndex = 0;
   state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
   state.session.isPaused = false; state.session.pausedRemaining = 0;
-  saveSession();
-  renderDevice();
+  saveSession(); renderDevice();
 });
-
 document.getElementById('resumeYes').addEventListener('click', () => {
   resumeOverlay.classList.remove('active');
-  const task = getCurrentTask();
-  if (!task) return;
+  const task = getCurrentTask(); if (!task) return;
   switchView('device');
-  if (state.session.isPaused) {
-    renderDevice();
-  } else if (state.session.duration > 0 && state.session.endTime > Date.now()) {
-    renderDevice();
-    startTimer();
-    if (state.settings.wakeLock) requestWakeLock();
-  } else {
-    renderDevice();
-  }
+  if (state.session.isPaused) { renderDevice(); }
+  else if (state.session.duration > 0 && state.session.endTime > Date.now()) { renderDevice(); startTimer(); if (state.settings.wakeLock) requestWakeLock(); }
+  else { renderDevice(); }
 });
-
-resumeOverlay.addEventListener('click', (e) => {
-  if (e.target === resumeOverlay) resumeOverlay.classList.remove('active');
-});
+resumeOverlay.addEventListener('click', (e) => { if (e.target === resumeOverlay) resumeOverlay.classList.remove('active'); });
 
 async function resumeSessionAfterReload() {
   if (!state.session.taskId) return;
   const task = getCurrentTask(); if (!task) return;
   if (!state.session.isPaused && state.session.duration > 0 && state.session.endTime > 0) {
     if (state.session.endTime < Date.now()) {
-      state.session.endTime = 0;
-      state.session.duration = 0;
-      state.session.totalDuration = 0;
+      state.session.endTime = 0; state.session.duration = 0; state.session.totalDuration = 0;
       saveSession();
     }
   }
@@ -2019,11 +2218,7 @@ const BLOCK_CARDS = [
 const blockGrid = document.getElementById('blockGrid');
 const blockMain = document.getElementById('blockMain');
 const blockActions = document.getElementById('blockActions');
-
-let currentBlockCategory = null;
-let currentBlocker = null;
-let currentActions = [];
-let needsClarification = false;
+let currentBlockCategory = null, currentBlocker = null, currentActions = [], needsClarification = false;
 
 function renderBlockMain() {
   blockMain.style.display = 'block';
@@ -2039,10 +2234,7 @@ function renderBlockMain() {
 }
 
 function trackBlockUsage(key) {
-  if (state.blockUsage[key] !== undefined) {
-    state.blockUsage[key]++;
-    saveBlockUsage();
-  }
+  if (state.blockUsage[key] !== undefined) { state.blockUsage[key]++; saveBlockUsage(); }
 }
 
 function openBlockAction(blocker) {
@@ -2054,179 +2246,71 @@ function openBlockAction(blocker) {
   currentBlockCategory = result.category;
   currentActions = result.actions;
   needsClarification = result.needsClarification;
-  
   blockMain.style.display = 'none';
   blockActions.innerHTML = '';
-  
-  if (needsClarification) {
-    renderClarificationForm();
-  } else {
-    renderBlockAction();
-  }
+  if (needsClarification) renderClarificationForm();
+  else renderBlockAction();
 }
 
 function renderClarificationForm() {
-  blockActions.innerHTML = `
-    <div class="block-action active">
-      <button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button>
-      <div class="block-subtitle">Je n'ai pas reconnu ta tâche</div>
-      <p class="block-subtext">Pour t'aider concrètement, dis-moi en deux mots de quoi il s'agit.</p>
-      <div class="clarification-form">
-        <label for="clarifyCategory">C'est plutôt...</label>
-        <select id="clarifyCategory">
-          <option value="">-- Choisis une catégorie --</option>
-          <option value="reviser">Réviser / Apprendre</option>
-          <option value="ranger">Ranger / Ménage</option>
-          <option value="ecrire">Écrire / Rédiger</option>
-          <option value="exercice">Exercice / Calcul</option>
-          <option value="contacter">Contacter / Administratif</option>
-          <option value="lire">Lire</option>
-          <option value="projet">Projet / Coder</option>
-          <option value="cuisine">Cuisine / Courses</option>
-        </select>
-        <button class="btn btn-primary" id="confirmClarify" style="width:100%;">Valider</button>
-      </div>
-    </div>
-  `;
-  
+  blockActions.innerHTML = `<div class="block-action active"><button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button><div class="block-subtitle">Je n'ai pas reconnu ta tâche</div><p class="block-subtext">Pour t'aider concrètement, dis-moi en deux mots de quoi il s'agit.</p><div class="clarification-form"><label for="clarifyCategory">C'est plutôt...</label><select id="clarifyCategory"><option value="">-- Choisis une catégorie --</option><option value="reviser">Réviser / Apprendre</option><option value="ranger">Ranger / Ménage</option><option value="ecrire">Écrire / Rédiger</option><option value="exercice">Exercice / Calcul</option><option value="contacter">Contacter / Administratif</option><option value="lire">Lire</option><option value="projet">Projet / Coder</option><option value="cuisine">Cuisine / Courses</option></select><button class="btn btn-primary" id="confirmClarify" style="width:100%;">Valider</button></div></div>`;
   document.getElementById('confirmClarify').addEventListener('click', () => {
     const category = document.getElementById('clarifyCategory').value;
-    if (!category) {
-      toast('Choisis une catégorie');
-      return;
-    }
+    if (!category) { toast('Choisis une catégorie'); return; }
     currentBlockCategory = category;
     const bank = MICRO_ACTIONS[category];
     if (bank && bank[currentBlocker] && bank[currentBlocker].length > 0) {
-      const variants = bank[currentBlocker];
-      currentActions = variants[0].slice();
+      currentActions = bank[currentBlocker][0].slice();
       needsClarification = false;
       renderBlockAction();
-    } else {
-      toast('Catégorie non disponible pour ce blocage');
-    }
+    } else { toast('Catégorie non disponible pour ce blocage'); }
   });
 }
 
 function renderBlockAction() {
-  if (currentActions.length === 0) {
-    renderBlockEmpty();
-    return;
-  }
-  
+  if (currentActions.length === 0) { renderBlockEmpty(); return; }
   const totalActions = currentActions.length;
   const isTired = currentBlocker === 'tired';
-  
-  blockActions.innerHTML = `
-    <div class="block-action active">
-      <button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button>
-      <div class="block-subtitle">${getBlockTitle(currentBlocker)}</div>
-      <p class="block-subtext">${getBlockSubtitle(currentBlocker, totalActions)}</p>
-      
-      <div class="micro-steps-list" id="microStepsList">
-        ${currentActions.map((action, i) => `
-          <div class="micro-step-item" data-index="${i}">
-            <span class="ms-num">${i + 1}</span>
-            <input type="text" class="step-text" value="${escapeHtml(action)}" data-idx="${i}" />
-          </div>
-        `).join('')}
-      </div>
-      
-      ${isTired ? `
-        <button class="btn btn-ghost" id="pauseOptionBtn" style="width:100%; margin-bottom:12px;">
-          🌙 Faire une pause (sans culpabilité)
-        </button>
-      ` : ''}
-      
-      <button class="btn btn-ghost" id="otherIdeaBtn" style="width:100%; margin-bottom:12px;">Autre idée</button>
-      <button class="btn btn-primary" id="addToTaskBtn" style="width:100%; margin-bottom:8px;">Ajouter à ma tâche</button>
-      <button class="btn btn-ghost" onclick="renderBlockMain()" style="width:100%;">Reprendre ma tâche</button>
-    </div>
-  `;
-  
-  blockActions.querySelectorAll('.step-text').forEach(input => {
-    input.addEventListener('input', (e) => {
-      const idx = parseInt(e.target.dataset.idx, 10);
-      currentActions[idx] = e.target.value;
-    });
+  blockActions.innerHTML = `<div class="block-action active"><button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button><div class="block-subtitle">${getBlockTitle(currentBlocker)}</div><p class="block-subtext">${getBlockSubtitle(currentBlocker, totalActions)}</p><div class="micro-steps-list" id="microStepsList">${currentActions.map((s, i) => `<div class="micro-step-item"><span class="ms-num">${i+1}</span><input type="text" value="${escapeHtml(s)}" data-idx="${i}" /></div>`).join('')}</div>${isTired ? `<button class="btn btn-ghost" id="pauseOptionBtn" style="width:100%; margin-bottom:12px;">Faire une pause (sans culpabilité)</button>` : ''}<button class="btn btn-ghost" id="otherIdeaBtn" style="width:100%; margin-bottom:12px;">Autre idée</button><button class="btn btn-primary" id="addToTaskBtn" style="width:100%; margin-bottom:8px;">Ajouter à ma tâche</button><button class="btn btn-ghost" onclick="renderBlockMain()" style="width:100%;">Reprendre ma tâche</button></div>`;
+  blockActions.querySelectorAll('.micro-step-item input').forEach(input => {
+    input.addEventListener('input', (e) => { const idx = parseInt(e.target.dataset.idx, 10); currentActions[idx] = e.target.value; });
   });
-  
   const pauseBtn = document.getElementById('pauseOptionBtn');
-  if (pauseBtn) {
-    pauseBtn.addEventListener('click', () => {
-      toast('Pause acceptée. Reviens quand tu veux.');
-      renderBlockMain();
-    });
-  }
-  
+  if (pauseBtn) pauseBtn.addEventListener('click', () => { toast('Pause acceptée. Reviens quand tu veux.'); renderBlockMain(); });
   document.getElementById('otherIdeaBtn').addEventListener('click', () => {
     const task = getCurrentTask();
     const taskName = task ? task.name : '';
     const result = suggestActions(taskName, currentBlocker);
-    if (result.actions.length === 3) {
-      currentActions = result.actions;
-      renderBlockAction();
-      toast('Nouvelles suggestions');
-    } else {
-      toast('Pas d\'autre idée pour l\'instant');
-    }
+    if (result.actions.length === 3) { currentActions = result.actions; renderBlockAction(); toast('Nouvelles suggestions'); }
+    else toast('Pas d\'autre idée pour l\'instant');
   });
-  
   document.getElementById('addToTaskBtn').addEventListener('click', () => {
     const task = getCurrentTask();
-    if (!task) {
-      toast('Aucune tâche en cours');
-      return;
-    }
-    const inputs = blockActions.querySelectorAll('.step-text');
+    if (!task) { toast('Aucune tâche en cours'); return; }
+    const inputs = blockActions.querySelectorAll('.micro-step-item input');
     const newSteps = Array.from(inputs).map(i => i.value.trim()).filter(s => s);
-    if (newSteps.length === 0) {
-      toast('Au moins une étape');
-      return;
-    }
+    if (newSteps.length === 0) { toast('Au moins une étape'); return; }
     const existingSteps = new Set(task.steps.map(s => s.toLowerCase()));
     const toAdd = newSteps.filter(s => !existingSteps.has(s.toLowerCase()));
-    if (toAdd.length === 0) {
-      toast('Ces étapes sont déjà dans la tâche');
-      return;
-    }
+    if (toAdd.length === 0) { toast('Ces étapes sont déjà dans la tâche'); return; }
     const insertAt = state.session.stepIndex + 1;
     task.steps.splice(insertAt, 0, ...toAdd);
-    toAdd.forEach(s => {
-      if (task.name) saveLearnedAction(task.name, currentBlocker, s);
-    });
-    saveTasks();
-    renderTasks();
+    toAdd.forEach(s => { if (task.name) saveLearnedAction(task.name, currentBlocker, s); });
+    saveTasks(); renderTasks();
     toast(`${toAdd.length} étape${toAdd.length > 1 ? 's' : ''} ajoutée${toAdd.length > 1 ? 's' : ''}`);
   });
 }
 
 function renderBlockEmpty() {
-  blockActions.innerHTML = `
-    <div class="block-action active">
-      <button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button>
-      <div class="block-subtitle">Pas de suggestion disponible</div>
-      <p class="block-subtext">Je n'ai pas encore de micro-étapes pour cette combinaison.</p>
-      <button class="btn btn-primary" onclick="renderBlockMain()" style="width:100%;">Retour</button>
-    </div>
-  `;
+  blockActions.innerHTML = `<div class="block-action active"><button class="btn btn-ghost block-back" onclick="renderBlockMain()">← Retour</button><div class="block-subtitle">Pas de suggestion disponible</div><p class="block-subtext">Je n'ai pas encore de micro-étapes pour cette combinaison.</p><button class="btn btn-primary" onclick="renderBlockMain()" style="width:100%;">Retour</button></div>`;
 }
 
 function getBlockTitle(blocker) {
-  const titles = {
-    noIdea: "Première action immédiate",
-    tooBig: "On découpe et on commence",
-    tired: "Version ultra-courte"
-  };
+  const titles = { noIdea: "Première action immédiate", tooBig: "On découpe et on commence", tired: "Version ultra-courte" };
   return titles[blocker] || "Action concrète";
 }
-
 function getBlockSubtitle(blocker, count) {
-  const subtitles = {
-    noIdea: `Voici 3 actions concrètes pour démarrer. Modifiables.`,
-    tooBig: `La tâche est découpée en 3 micro-étapes. Commence par la première.`,
-    tired: `Version minimaliste en 3 étapes. Tu peux faire une pause à tout moment.`
-  };
+  const subtitles = { noIdea: `Voici 3 actions concrètes pour démarrer. Modifiables.`, tooBig: `La tâche est découpée en 3 micro-étapes. Commence par la première.`, tired: `Version minimaliste en 3 étapes. Tu peux faire une pause à tout moment.` };
   return subtitles[blocker] || `${count} actions à faire`;
 }
 
@@ -2234,7 +2318,6 @@ window.renderBlockMain = renderBlockMain;
 
 const ONBOARDING_SCREENS = 7;
 let currentScreen = 0, onboardingAnswers = {};
-
 function startOnboarding() {
   currentScreen = state.onboarding.currentScreen || 0;
   onboardingAnswers = { ...(state.onboarding.answers || {}) };
@@ -2243,7 +2326,6 @@ function startOnboarding() {
   document.getElementById('onboardingOverlay').classList.add('active');
   renderOnboardingScreen();
 }
-
 function renderOnboardingScreen() {
   const progressContainer = document.getElementById('onboardingProgress');
   const screensContainer = document.getElementById('onboardingScreens');
@@ -2255,7 +2337,6 @@ function renderOnboardingScreen() {
     progressContainer.appendChild(bar);
   }
   screensContainer.innerHTML = '';
-
   if (currentScreen === 0) {
     const screen = document.createElement('div'); screen.className = 'onboarding-screen active';
     screen.innerHTML = `<div class="onboarding-device"><button class="onboarding-btn breathing" id="onboardingBtn1">START</button></div><div class="onboarding-message">Salut. Moi, je suis là pour t'aider à commencer, doucement.</div><div class="onboarding-submessage">Un seul bouton. Pas de pression. On y va à ton rythme.</div><div class="onboarding-actions"><button class="btn btn-primary btn-lg" onclick="nextOnboardingScreen()">Découvrir</button></div>`;
@@ -2274,12 +2355,7 @@ function renderOnboardingScreen() {
     screen.innerHTML = `<div class="onboarding-device"><button class="onboarding-btn" id="onboardingBtn4">START</button></div><div class="onboarding-message">Pendant la session, deux petits boutons discrets apparaissent.</div><div class="onboarding-submessage">« Pause » pour mettre en pause, « Quitter » pour arrêter. Sans geste caché.</div><div class="onboarding-actions" style="margin-top:24px;"><button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button><button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button><button class="btn btn-primary" onclick="nextOnboardingScreen()">Suivant</button></div>`;
     screensContainer.appendChild(screen);
   } else if (currentScreen === 4) {
-    const blockers = [
-      { key: 'tooBig', icon: ICONS.mountain, label: "C'est trop gros" },
-      { key: 'noIdea', icon: ICONS.compass, label: "Je ne sais pas par où commencer" },
-      { key: 'distracted', icon: ICONS.sparkles, label: "Je me laisse distraire" },
-      { key: 'tired', icon: ICONS.coffee, label: "Je suis à plat" }
-    ];
+    const blockers = [{ key: 'tooBig', icon: ICONS.mountain, label: "C'est trop gros" }, { key: 'noIdea', icon: ICONS.compass, label: "Je ne sais pas par où commencer" }, { key: 'distracted', icon: ICONS.sparkles, label: "Je me laisse distraire" }, { key: 'tired', icon: ICONS.coffee, label: "Je suis à plat" }];
     const screen = document.createElement('div'); screen.className = 'onboarding-screen active';
     screen.innerHTML = `<div class="onboarding-message">Qu'est-ce qui t'arrête, quand tu dois t'y mettre ?</div><div class="onboarding-submessage multi-hint">(plusieurs choix possibles)</div><div class="onboarding-choices">${blockers.map(b => `<button class="onboarding-choice ${onboardingAnswers.blocker.includes(b.key) ? 'selected' : ''}" onclick="toggleOnboardingAnswer('blocker', '${b.key}')"><span class="check-mark">${ICONS.check}</span>${b.icon.replace('<svg', '<svg class="choice-icon"')}<span>${b.label}</span></button>`).join('')}</div><div id="onboardingReaction1"></div><div class="onboarding-actions"><button class="btn btn-ghost" onclick="prevOnboardingScreen()">Retour</button><button class="btn btn-ghost" onclick="skipOnboarding()">Passer</button><button class="btn btn-primary" onclick="nextOnboardingScreen()">Suivant</button></div>`;
     screensContainer.appendChild(screen);
@@ -2297,18 +2373,11 @@ function renderOnboardingScreen() {
   state.onboarding.answers = onboardingAnswers;
   saveOnboarding();
 }
-
 function setupTutorialButton(btnId, onComplete) {
   const btn = document.getElementById(btnId); if (!btn) return;
-  const handler = (e) => {
-    e.preventDefault(); btn.removeEventListener('click', handler);
-    btn.classList.add('glow'); setTimeout(() => btn.classList.remove('glow'), 500);
-    if (navigator.vibrate) navigator.vibrate(30);
-    onComplete();
-  };
+  const handler = (e) => { e.preventDefault(); btn.removeEventListener('click', handler); btn.classList.add('glow'); setTimeout(() => btn.classList.remove('glow'), 500); if (navigator.vibrate) navigator.vibrate(30); onComplete(); };
   btn.addEventListener('click', handler);
 }
-
 window.toggleOnboardingAnswer = function(key, value) {
   if (!Array.isArray(onboardingAnswers[key])) onboardingAnswers[key] = [];
   const idx = onboardingAnswers[key].indexOf(value);
@@ -2318,7 +2387,6 @@ window.toggleOnboardingAnswer = function(key, value) {
   if (key === 'blocker') showReaction(1);
 };
 window.selectOnboardingAnswer = function(key, value) { onboardingAnswers[key] = value; renderOnboardingScreen(); };
-
 function showReaction(screenNum) {
   const reactionEl = document.getElementById(`onboardingReaction${screenNum}`); if (!reactionEl) return;
   const selected = onboardingAnswers.blocker || [];
@@ -2334,11 +2402,9 @@ function showReaction(screenNum) {
   else reaction += "Je comprends. On va faire des étapes si petites et si douces que c'est difficile de s'arrêter.";
   reactionEl.innerHTML = `<div class="onboarding-reaction">${reaction}</div>`;
 }
-
 window.nextOnboardingScreen = function() { if (currentScreen < ONBOARDING_SCREENS - 1) { currentScreen++; renderOnboardingScreen(); } };
 window.prevOnboardingScreen = function() { if (currentScreen > 0) { currentScreen--; renderOnboardingScreen(); } };
 window.skipOnboarding = function() { finishOnboarding(); };
-
 function finishOnboarding() {
   const taskInput = document.getElementById('taskInput');
   const taskName = taskInput ? taskInput.value.trim() : '';
