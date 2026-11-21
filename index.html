@@ -15,11 +15,44 @@
             --text-secondary: #8C7B6B;
             --accent-coral: #FF7F66;
             --accent-coral-light: #FFB8A8;
-            --accent-brown: #6B5640;
+            --border-color: #F0E6D2;
             --shadow: 0 8px 24px rgba(74, 59, 42, 0.08);
             --radius: 20px;
             --font-hand: 'Caveat', cursive;
             --font-body: 'Nunito', sans-serif;
+        }
+
+        body.theme-nuit {
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --text-primary: #E0E0E0;
+            --text-secondary: #A0A0A0;
+            --accent-coral: #FF9A85;
+            --accent-coral-light: #3E2723;
+            --border-color: #333333;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        body.theme-galaxie {
+            --bg-color: #0B1026;
+            --card-bg: #151E3F;
+            --text-primary: #E0E7FF;
+            --text-secondary: #94A3B8;
+            --accent-coral: #818CF8;
+            --accent-coral-light: #312E81;
+            --border-color: #2D3768;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        body.theme-chaleureux {
+            --bg-color: #FFF8F0;
+            --card-bg: #FFFBF5;
+            --text-primary: #5D4037;
+            --text-secondary: #8D6E63;
+            --accent-coral: #E87A5D;
+            --accent-coral-light: #FFCCBC;
+            --border-color: #FFE0B2;
+            --shadow: 0 8px 24px rgba(93, 64, 55, 0.08);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -29,26 +62,61 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: var(--font-body);
-            padding-bottom: 90px;
+            padding-bottom: 100px;
             min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        h1, h2, h3, .logo { font-family: var(--font-hand); color: var(--text-primary); margin: 0; }
-        h1 { font-size: 2.2rem; text-align: center; margin-bottom: 10px; }
+        h1, h2, h3, .logo-title { font-family: var(--font-hand); color: var(--text-primary); margin: 0; }
         h2 { font-size: 1.8rem; margin-bottom: 12px; }
         h3 { font-size: 1.4rem; margin-bottom: 8px; }
         p { color: var(--text-secondary); line-height: 1.5; margin-top: 0; }
 
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
 
+        /* HEADER PHOTO 1 */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 0 4px;
+        }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .logo-box {
+            width: 48px; height: 48px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        .logo-letter {
+            font-family: var(--font-hand);
+            font-size: 1.8rem; font-weight: 700;
+            color: var(--accent-coral);
+        }
+        .header-text { display: flex; flex-direction: column; }
+        .logo-title { font-size: 2.2rem; font-weight: 700; line-height: 1; }
+        .logo-subtitle { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-top: 2px; }
+        .header-badge {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 6px 14px;
+            display: flex; align-items: center; gap: 6px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        .badge-dot { width: 8px; height: 8px; background: var(--accent-coral); border-radius: 50%; }
+        .header-badge span { font-size: 0.8rem; font-weight: 700; color: var(--text-primary); }
+
         .card {
             background: var(--card-bg);
             border-radius: var(--radius);
             padding: 20px;
             box-shadow: var(--shadow);
-            border: 2px solid #F0E6D2;
+            border: 1px solid var(--border-color);
             margin-bottom: 16px;
-            transition: transform 0.2s;
         }
 
         .btn {
@@ -59,118 +127,166 @@
         }
         .btn:active { transform: scale(0.96); }
         .btn-primary { background-color: var(--accent-coral); color: white; box-shadow: 0 4px 12px rgba(255, 127, 102, 0.3); width: 100%; }
-        .btn-secondary { background-color: #F0E6D2; color: var(--text-primary); width: 100%; margin-top: 8px; }
+        .btn-secondary { background-color: var(--border-color); color: var(--text-primary); width: 100%; margin-top: 8px; }
         .btn-danger { background-color: #FF6B6B; color: white; }
         .btn-small { padding: 8px 16px; font-size: 0.9rem; width: auto; }
+        .chip { 
+            background: var(--border-color); color: var(--text-primary); 
+            padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; 
+            font-weight: 700; cursor: pointer; border: none; 
+        }
+        .chip:active { background: var(--accent-coral-light); }
 
+        input, select {
+            width: 100%; padding: 14px; border-radius: 12px;
+            border: 2px solid var(--border-color); background: var(--bg-color);
+            font-family: var(--font-body); font-size: 1rem; color: var(--text-primary);
+            margin-bottom: 12px; outline: none; transition: border-color 0.2s;
+        }
+        input:focus { border-color: var(--accent-coral); }
+
+        /* TIME PICKER PHOTO 4 */
+        .time-picker-card { text-align: center; padding: 24px; }
+        .time-display {
+            font-size: 3.5rem; font-weight: 800; font-variant-numeric: tabular-nums;
+            color: var(--text-primary); margin: 10px 0 20px 0; letter-spacing: 2px;
+        }
+        .quick-durations { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+        .numpad {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 320px; margin: 0 auto;
+        }
+        .numpad button {
+            aspect-ratio: 1.2; border-radius: 16px; border: none;
+            background: var(--bg-color); color: var(--text-primary);
+            font-size: 1.5rem; font-weight: 700; cursor: pointer;
+            transition: all 0.1s; display: flex; align-items: center; justify-content: center;
+        }
+        .numpad button:active { background: var(--accent-coral-light); transform: scale(0.95); }
+        .numpad .ok-btn { background: var(--accent-coral); color: white; grid-column: span 1; }
+        .numpad .back-btn { font-size: 1.2rem; }
+
+        /* MULTI-TASKS */
+        .session-item {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--bg-color); padding: 12px; border-radius: 12px; margin-bottom: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .session-item input { margin: 0; padding: 8px; font-weight: 700; background: var(--card-bg); }
+        .total-duration { font-size: 1.3rem; font-weight: 800; color: var(--accent-coral); text-align: right; margin: 16px 0; }
+
+        /* APPAREIL */
+        .appareil-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .appareil-header button { background: none; border: none; color: var(--text-secondary); font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+        .timer-display { font-size: 4.5rem; font-weight: 800; text-align: center; color: var(--text-primary); font-variant-numeric: tabular-nums; margin: 10px 0; }
+        .current-task-name { text-align: center; font-size: 1.8rem; font-family: var(--font-hand); color: var(--accent-coral); margin-bottom: 5px; }
+        .current-step { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 20px; min-height: 3rem; font-weight: 600; }
         .start-btn {
-            width: 130px; height: 130px; border-radius: 50%;
+            width: 140px; height: 140px; border-radius: 50%;
             background: var(--accent-coral); color: white;
-            border: 5px solid white;
-            font-size: 2rem; font-weight: 800; font-family: var(--font-hand);
+            border: 6px solid var(--card-bg);
+            font-size: 2.2rem; font-weight: 800; font-family: var(--font-hand);
             cursor: pointer; box-shadow: 0 10px 30px rgba(255, 127, 102, 0.4);
             transition: all 0.2s; display: flex; align-items: center; justify-content: center;
             margin: 20px auto;
         }
-        .start-btn:active { transform: scale(0.92); box-shadow: 0 4px 12px rgba(255, 127, 102, 0.3); }
+        .start-btn:active { transform: scale(0.92); }
         .start-btn.paused { background: var(--text-secondary); box-shadow: 0 10px 30px rgba(140, 123, 107, 0.3); }
 
-        input, select, textarea {
-            width: 100%; padding: 14px; border-radius: 12px;
-            border: 2px solid #E8DFD0; background: #FAFAFA;
-            font-family: var(--font-body); font-size: 1rem; color: var(--text-primary);
-            margin-bottom: 12px; outline: none; transition: border-color 0.2s;
-        }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent-coral); }
+        /* QUÊTES */
+        .quest-card { padding: 16px; margin-bottom: 12px; }
+        .quest-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .quest-text { font-weight: 700; color: var(--text-primary); }
+        .quest-reward { font-weight: 800; color: var(--accent-coral); font-size: 0.9rem; }
+        .quest-bar { background: var(--border-color); height: 10px; border-radius: 5px; overflow: hidden; margin: 8px 0; }
+        .quest-fill { background: var(--accent-coral); height: 100%; border-radius: 5px; transition: width 0.5s ease; }
+        .quest-progress { font-size: 0.85rem; color: var(--text-secondary); text-align: right; font-weight: 600; }
+        .quest-completed { opacity: 0.6; text-decoration: line-through; }
 
+        /* PARCOURS */
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .stat-box { background: var(--card-bg); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid var(--border-color); }
+        .stat-value { font-size: 2rem; font-weight: 800; color: var(--accent-coral); font-family: var(--font-hand); }
+        .stat-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 700; }
+        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border-color); }
+        .history-item:last-child { border-bottom: none; }
+
+        /* JE BLOQUE */
+        .block-card { cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
+        .block-card:active { border-color: var(--accent-coral); background: var(--bg-color); }
+        .block-card h4 { margin: 0 0 8px 0; color: var(--accent-coral); font-family: var(--font-hand); font-size: 1.5rem; }
+
+        /* RÉGLAGES PHOTOS FINALES */
+        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .theme-option {
+            border-radius: 16px; padding: 16px; cursor: pointer; border: 3px solid transparent;
+            display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem;
+        }
+        .theme-option.active { border-color: var(--accent-coral); }
+        .theme-preview { width: 100%; height: 60px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); }
+        
+        .sound-options { display: flex; gap: 8px; margin-bottom: 16px; }
+        .sound-option { flex: 1; padding: 12px; border-radius: 12px; border: 2px solid var(--border-color); text-align: center; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+        .sound-option.active { border-color: var(--accent-coral); background: var(--accent-coral-light); color: var(--text-primary); }
+
+        .settings-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .settings-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .toggle { width: 52px; height: 30px; background: var(--border-color); border-radius: 15px; position: relative; cursor: pointer; transition: background 0.3s; }
+        .toggle.active { background: var(--accent-coral); }
+        .toggle::after { content: ''; position: absolute; width: 26px; height: 26px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .toggle.active::after { transform: translateX(22px); }
+
+        /* NAVIGATION FLOTTANTE */
         .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: white; border-top: 2px solid #F0E6D2;
-            display: flex; justify-content: space-around;
-            padding: 10px 0 20px 0; z-index: 100;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--card-bg); border-radius: 24px;
+            padding: 12px 20px; display: flex; gap: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color); z-index: 100;
         }
         .nav-item {
             display: flex; flex-direction: column; align-items: center;
             color: var(--text-secondary); text-decoration: none;
             font-size: 0.7rem; font-weight: 700; cursor: pointer;
-            transition: color 0.2s;
+            transition: color 0.2s; gap: 4px;
         }
         .nav-item.active { color: var(--accent-coral); }
-        .nav-item svg { width: 24px; height: 24px; margin-bottom: 4px; stroke-width: 2.5; }
-
-        .step-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
-        .step-row input { margin-bottom: 0; flex: 1; }
-        .step-row button { width: 40px; height: 40px; border-radius: 50%; border: none; background: #FFE5E0; color: var(--accent-coral); font-size: 1.2rem; cursor: pointer; }
-
-        .session-item {
-            display: flex; justify-content: space-between; align-items: center;
-            background: #F9F6F0; padding: 12px; border-radius: 12px; margin-bottom: 8px;
-            border: 1px solid #E8DFD0;
-        }
-        .total-duration { font-size: 1.2rem; font-weight: 800; color: var(--accent-coral); text-align: right; margin: 12px 0; }
-
-        .appareil-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
-        .appareil-header button { background: none; border: none; color: var(--text-secondary); font-weight: 700; cursor: pointer; font-size: 0.9rem; }
-        .timer-display { font-size: 4rem; font-weight: 800; text-align: center; color: var(--text-primary); font-variant-numeric: tabular-nums; margin: 10px 0; }
-        .current-task-name { text-align: center; font-size: 1.5rem; font-family: var(--font-hand); color: var(--accent-coral); margin-bottom: 5px; }
-        .current-step { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 20px; min-height: 3rem; }
-
-        .quest-bar { background: #F0E6D2; height: 12px; border-radius: 6px; overflow: hidden; margin: 8px 0; }
-        .quest-fill { background: var(--accent-coral); height: 100%; border-radius: 6px; transition: width 0.5s ease; }
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .stat-box { background: #F9F6F0; padding: 16px; border-radius: 16px; text-align: center; }
-        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--accent-coral); font-family: var(--font-hand); }
-        .stat-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; }
+        .nav-item svg { width: 24px; height: 24px; stroke-width: 2.5; }
 
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(74, 59, 42, 0.6); backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
             display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px;
         }
         .modal-overlay.active { display: flex; }
         .modal-content {
-            background: white; border-radius: var(--radius); padding: 24px;
-            max-width: 400px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            text-align: center; animation: slideUp 0.3s ease;
+            background: var(--card-bg); border-radius: var(--radius); padding: 24px;
+            max-width: 400px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center; animation: slideUp 0.3s ease; color: var(--text-primary);
         }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
         .hidden { display: none !important; }
-        .template-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-        .chip { background: #F0E6D2; color: var(--text-primary); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; }
-        .chip:hover { background: var(--accent-coral-light); }
-
-        .block-card { cursor: pointer; border: 2px solid transparent; }
-        .block-card:hover { border-color: var(--accent-coral); }
-        .block-card h4 { margin: 0 0 8px 0; color: var(--accent-coral); font-family: var(--font-hand); font-size: 1.4rem; }
-        
-        .settings-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .toggle { width: 50px; height: 28px; background: #E8DFD0; border-radius: 14px; position: relative; cursor: pointer; transition: background 0.3s; }
-        .toggle.active { background: var(--accent-coral); }
-        .toggle::after { content: ''; position: absolute; width: 24px; height: 24px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .toggle.active::after { transform: translateX(22px); }
-
-        /* Thèmes */
-        body.theme-nuit { --bg-color: #1A1612; --card-bg: #2A2420; --text-primary: #F5F1E8; --text-secondary: #A89B8C; --shadow: 0 8px 24px rgba(0,0,0,0.3); }
-        body.theme-nuit .card, body.theme-nuit .bottom-nav { border-color: #3A322A; }
-        body.theme-nuit input, body.theme-nuit select { background: #1A1612; border-color: #3A322A; color: #F5F1E8; }
-        body.theme-galaxie { --bg-color: #0F172A; --card-bg: #1E293B; --text-primary: #E2E8F0; --text-secondary: #94A3B8; }
-        body.theme-galaxie .card, body.theme-galaxie .bottom-nav { border-color: #334155; }
-        body.theme-chaleureux { --bg-color: #FFF8F0; --card-bg: #FFFBF5; --accent-coral: #E87A5D; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <div class="logo" style="font-size: 2.5rem; font-weight: 700; color: var(--accent-coral);">START</div>
-        <button class="btn btn-small btn-secondary" onclick="showTab('reglages')" style="width: auto; margin:0;">⚙️</button>
+    <header class="app-header">
+        <div class="header-left">
+            <div class="logo-box">
+                <span class="logo-letter">S</span>
+            </div>
+            <div class="header-text">
+                <div class="logo-title">START</div>
+                <div class="logo-subtitle">Commencez simplement</div>
+            </div>
+        </div>
+        <div class="header-badge">
+            <div class="badge-dot"></div>
+            <span>START</span>
+        </div>
     </header>
 
-    <main id="main-content">
-        <!-- Le contenu sera injecté ici par JavaScript -->
-    </main>
+    <main id="main-content"></main>
 </div>
 
 <nav class="bottom-nav">
@@ -188,7 +304,7 @@
     </div>
     <div class="nav-item" onclick="showTab('bloque')" id="nav-bloque">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        Je bloque
+        Bloque
     </div>
     <div class="nav-item" onclick="showTab('quetes')" id="nav-quetes">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -201,50 +317,77 @@
 </nav>
 
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
-    <div class="modal-content" id="modal-content">
-        <!-- Contenu modal dynamique -->
-    </div>
+    <div class="modal-content" id="modal-content"></div>
 </div>
 
 <script>
 // ==========================================
-// ÉTAT GLOBAL DE L'APPLICATION
+// ÉTAT GLOBAL & INITIALISATION
 // ==========================================
 const defaultState = {
     tasks: [],
     sessionQueue: [],
     currentSession: null,
-    quests: { points: 0, level: 1, daily: [{id:1, text:"Terminer 1 tâche", done:false, reward:20}], weekly: [{id:2, text:"Cumuler 30 min", done:false, progress:0, target:30, reward:50}], milestones: [] },
+    quests: {
+        points: 0, level: 1,
+        daily: [], weekly: [], special: []
+    },
     history: [],
     settings: { theme: 'clair', sound: 'carillon', vibration: true, keepAwake: true, onboardingCompleted: false },
-    currentTab: 'taches'
+    currentTab: 'taches',
+    lastDailyReset: null,
+    lastWeeklyReset: null,
+    streak: 0,
+    lastActiveDate: null
 };
 
 let state = JSON.parse(JSON.stringify(defaultState));
 let timerInterval = null;
+let pickerStr = "000500"; // HHMMSS pour le sélecteur de temps
 
-// ==========================================
-// PERSISTANCE
-// ==========================================
 function saveState() {
-    try { localStorage.setItem('start_app_state_v2', JSON.stringify(state)); } catch(e) {}
+    try { localStorage.setItem('start_app_v3', JSON.stringify(state)); } catch(e) {}
 }
 
 function loadState() {
     try {
-        const saved = localStorage.getItem('start_app_state_v2');
+        const saved = localStorage.getItem('start_app_v3');
         if (saved) {
             const parsed = JSON.parse(saved);
             state = { ...defaultState, ...parsed, settings: { ...defaultState.settings, ...(parsed.settings || {}) } };
-            // S'assurer que les structures de quêtes existent
             if (!state.quests.daily) state.quests.daily = [];
             if (!state.quests.weekly) state.quests.weekly = [];
+            if (!state.quests.special) state.quests.special = [];
         }
+        checkQuestResets();
     } catch(e) { console.error("Erreur chargement", e); }
 }
 
+function checkQuestResets() {
+    const now = new Date();
+    const today = now.toDateString();
+    if (state.lastDailyReset !== today) {
+        state.quests.daily = generateDailyQuests();
+        state.lastDailyReset = today;
+    }
+    const weekId = now.getFullYear() + '-' + getWeekNumber(now);
+    if (state.lastWeeklyReset !== weekId) {
+        state.quests.weekly = generateWeeklyQuests();
+        state.lastWeeklyReset = weekId;
+    }
+    saveState();
+}
+
+function getWeekNumber(d) {
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+    return weekNo;
+}
+
 // ==========================================
-// NAVIGATION & RENDU
+// NAVIGATION
 // ==========================================
 function showTab(tabName) {
     state.currentTab = tabName;
@@ -252,13 +395,12 @@ function showTab(tabName) {
     const navEl = document.getElementById('nav-' + tabName);
     if (navEl) navEl.classList.add('active');
     
-    const main = document.getElementById('main-content');
-    main.innerHTML = '';
-    
-    // Appliquer le thème
     document.body.className = '';
     if (state.settings.theme !== 'clair') document.body.classList.add('theme-' + state.settings.theme);
 
+    const main = document.getElementById('main-content');
+    main.innerHTML = '';
+    
     switch(tabName) {
         case 'taches': renderTaches(main); break;
         case 'preparer': renderPreparer(main); break;
@@ -277,11 +419,10 @@ function showTab(tabName) {
 function renderTaches(container) {
     container.innerHTML = `
         <h2>Mes tâches</h2>
-        <p>Choisissez une tâche, chargez-la sur le boîtier, et avancez pas à pas avec le bouton START.</p>
-        ${state.tasks.length === 0 ? '<div class="card" style="text-align:center; padding:40px;"><p>Aucune tâche pour l\'instant.<br>Préparez votre première tâche en quelques secondes.</p><button class="btn btn-primary" onclick="showTab(\'preparer\')">Créer une tâche</button></div>' : ''}
+        <p>Choisissez une tâche, chargez-la sur le boîtier, et avancez pas à pas.</p>
+        ${state.tasks.length === 0 ? '<div class="card" style="text-align:center; padding:40px;"><p>Aucune tâche pour l\'instant.</p><button class="btn btn-primary" onclick="showTab(\'preparer\')">Créer une tâche</button></div>' : ''}
         <div id="tasks-list"></div>
     `;
-    
     const list = document.getElementById('tasks-list');
     state.tasks.forEach((task, index) => {
         const div = document.createElement('div');
@@ -313,116 +454,162 @@ function deleteTask(index) {
 function loadTaskToSession(index) {
     const task = state.tasks[index];
     state.sessionQueue = [{ name: task.name, duration: task.duration, steps: [...task.steps] }];
-    showModal(`"${task.name}" chargée dans l'appareil.`, () => {
-        closeModal();
-        showTab('appareil');
-    });
+    showModal(`"${task.name}" chargée dans l'appareil.`, () => { closeModal(); showTab('appareil'); });
 }
 
 // ==========================================
-// 2. PRÉPARER (Multi-tâches)
+// 2. PRÉPARER & SÉLECTEUR DE TEMPS (Photo 4)
 // ==========================================
 let currentFormSteps = [''];
+let currentSessionName = "Ma session";
 
 function renderPreparer(container) {
     container.innerHTML = `
         <h2>Préparer</h2>
-        <p>Décrivez ce que vous voulez accomplir. START découpera la tâche en petites actions claires.</p>
+        <p>Décrivez ce que vous voulez accomplir.</p>
         
         <div class="card">
             <label style="font-weight:700; font-size:0.9rem;">Nom de la tâche</label>
             <input type="text" id="task-name" placeholder="Ex: Réviser les maths">
             
-            <label style="font-weight:700; font-size:0.9rem;">Modèles rapides</label>
-            <div class="template-chips">
-                <button class="chip" onclick="applyTemplate('Réviser un cours', ['Relire le résumé', 'Faire 3 exercices', 'Vérifier les corrections'])">Réviser un cours</button>
-                <button class="chip" onclick="applyTemplate('Ranger mon bureau', ['Jeter les papiers inutiles', 'Ranger les stylos', 'Essuyer la surface'])">Ranger mon bureau</button>
-                <button class="chip" onclick="applyTemplate('Rédiger un devoir', ['Faire un plan rapide', 'Rédiger l\'introduction', 'Développer une partie'])">Rédiger un devoir</button>
-            </div>
-
-            <label style="font-weight:700; font-size:0.9rem;">Micro-étapes</label>
+            <label style="font-weight:700; font-size:0.9rem; margin-top:8px; display:block;">Micro-étapes</label>
             <div id="steps-container"></div>
             <button class="btn btn-secondary" onclick="addStepField()" style="margin-top:8px;">+ Ajouter une étape</button>
-            
-            <label style="font-weight:700; font-size:0.9rem; margin-top:16px; display:block;">Durée (minutes)</label>
-            <input type="number" id="task-duration" value="5" min="1" max="180">
-            
-            <div style="display:flex; gap:10px; margin-top:16px;">
-                <button class="btn btn-secondary" onclick="saveCurrentTask()" style="flex:1;">Enregistrer</button>
-                <button class="btn btn-primary" onclick="addToSessionQueue()" style="flex:1;">Ajouter à la session</button>
+        </div>
+
+        <div class="card time-picker-card">
+            <label style="font-weight:700; font-size:0.9rem; display:block; text-align:left; margin-bottom:10px;">Durée</label>
+            <div class="time-display" id="picker-display">00 : 05 : 00</div>
+            <div class="quick-durations">
+                <button class="chip" onclick="setPickerTime(1)">1 min</button>
+                <button class="chip" onclick="setPickerTime(5)">5 min</button>
+                <button class="chip" onclick="setPickerTime(10)">10 min</button>
+                <button class="chip" onclick="setPickerTime(15)">15 min</button>
+            </div>
+            <div class="numpad">
+                <button onclick="numpadPress('1')">1</button>
+                <button onclick="numpadPress('2')">2</button>
+                <button onclick="numpadPress('3')">3</button>
+                <button onclick="numpadPress('4')">4</button>
+                <button onclick="numpadPress('5')">5</button>
+                <button onclick="numpadPress('6')">6</button>
+                <button onclick="numpadPress('7')">7</button>
+                <button onclick="numpadPress('8')">8</button>
+                <button onclick="numpadPress('9')">9</button>
+                <button class="back-btn" onclick="numpadPress('back')">⌫</button>
+                <button onclick="numpadPress('0')">0</button>
+                <button class="ok-btn" onclick="confirmPickerTime()">OK</button>
             </div>
         </div>
 
-        <div class="card" id="session-card" style="display:none;">
+        <div style="display:flex; gap:10px; margin-top:16px;">
+            <button class="btn btn-secondary" onclick="saveCurrentTask()" style="flex:1;">Enregistrer</button>
+            <button class="btn btn-primary" onclick="addToSessionQueue()" style="flex:1;">Ajouter à la session</button>
+        </div>
+
+        <div class="card" id="session-card" style="margin-top:20px; display:none;">
             <h3>Session multi-tâches</h3>
-            <p>Ajoutez plusieurs tâches avec des durées individuelles.</p>
-            <div id="session-list"></div>
+            <input type="text" id="session-name-input" value="${currentSessionName}" onchange="currentSessionName = this.value" placeholder="Nom de la session">
+            <div id="multi-task-list"></div>
             <div class="total-duration">Total: <span id="total-duration">0</span> min</div>
-            <button class="btn btn-primary" onclick="startSession()" style="background:var(--text-primary);">Démarrer la session</button>
-            <button class="btn btn-secondary" onclick="clearSession()">Annuler la session</button>
+            <button class="btn btn-primary" onclick="startMultiSession()">Démarrer la session</button>
+            <button class="btn btn-secondary" onclick="clearSession()">Annuler</button>
         </div>
     `;
     renderStepFields();
     updateSessionUI();
+    updatePickerDisplay();
 }
 
-function applyTemplate(name, steps) {
-    document.getElementById('task-name').value = name;
-    currentFormSteps = [...steps];
-    renderStepFields();
+function setPickerTime(min) {
+    const str = min.toString().padStart(4, '0') + "00";
+    pickerStr = str.slice(-6);
+    updatePickerDisplay();
+}
+
+function numpadPress(key) {
+    if (key === 'back') {
+        pickerStr = pickerStr.slice(0, -1).padStart(6, '0');
+    } else {
+        pickerStr = (pickerStr + key).slice(-6);
+    }
+    updatePickerDisplay();
+}
+
+function updatePickerDisplay() {
+    const h = pickerStr.slice(0, 2);
+    const m = pickerStr.slice(2, 4);
+    const s = pickerStr.slice(4, 6);
+    const el = document.getElementById('picker-display');
+    if (el) el.textContent = `${h} : ${m} : ${s}`;
+}
+
+function confirmPickerTime() {
+    // Le temps est déjà dans pickerStr, on peut juste fermer ou valider visuellement
+    const el = document.getElementById('picker-display');
+    if (el) {
+        el.style.transform = "scale(1.1)";
+        setTimeout(() => el.style.transform = "scale(1)", 200);
+    }
+}
+
+function getDurationFromPicker() {
+    const h = parseInt(pickerStr.slice(0, 2)) || 0;
+    const m = parseInt(pickerStr.slice(2, 4)) || 0;
+    const s = parseInt(pickerStr.slice(4, 6)) || 0;
+    return Math.max(1, Math.round((h * 3600 + m * 60 + s) / 60)); // Retourne en minutes, min 1
 }
 
 function renderStepFields() {
     const container = document.getElementById('steps-container');
+    if (!container) return;
     container.innerHTML = '';
     currentFormSteps.forEach((step, idx) => {
         const div = document.createElement('div');
-        div.className = 'step-row';
+        div.className = 'session-item';
+        div.style.marginBottom = '8px';
         div.innerHTML = `
-            <input type="text" value="${step}" placeholder="Étape ${idx + 1}" oninput="currentFormSteps[${idx}] = this.value">
-            ${currentFormSteps.length > 1 ? `<button onclick="removeStepField(${idx})">✕</button>` : ''}
+            <input type="text" value="${step}" placeholder="Étape ${idx + 1}" oninput="currentFormSteps[${idx}] = this.value" style="flex:1; margin:0;">
+            ${currentFormSteps.length > 1 ? `<button class="btn btn-small btn-danger" onclick="removeStepField(${idx})" style="width:40px; height:40px; padding:0;">✕</button>` : ''}
         `;
         container.appendChild(div);
     });
 }
 
-function addStepField() {
-    currentFormSteps.push('');
-    renderStepFields();
-}
-
-function removeStepField(idx) {
-    currentFormSteps.splice(idx, 1);
-    renderStepFields();
-}
+function addStepField() { currentFormSteps.push(''); renderStepFields(); }
+function removeStepField(idx) { currentFormSteps.splice(idx, 1); renderStepFields(); }
 
 function getFormData() {
-    const name = document.getElementById('task-name').value.trim() || 'Tâche sans nom';
-    const duration = parseInt(document.getElementById('task-duration').value) || 5;
+    const name = document.getElementById('task-name').value.trim();
+    if (!name) return null;
+    const duration = getDurationFromPicker();
     const steps = currentFormSteps.filter(s => s.trim() !== '');
-    return { name, duration, steps };
+    return { name, duration, steps: steps.length > 0 ? steps : ['Avancer pas à pas'] };
 }
 
 function saveCurrentTask() {
     const task = getFormData();
+    if (!task) { showModal("Veuillez donner un nom à la tâche."); return; }
     state.tasks.push(task);
     saveState();
-    showModal('Tâche enregistrée avec succès !', () => {
+    showModal('Tâche enregistrée !', () => {
         closeModal();
         document.getElementById('task-name').value = '';
         currentFormSteps = [''];
         renderStepFields();
+        setPickerTime(5);
     });
 }
 
 function addToSessionQueue() {
     const task = getFormData();
+    if (!task) { showModal("Veuillez donner un nom et une durée à la tâche."); return; }
     state.sessionQueue.push(task);
     saveState();
-    // Reset form pour ajouter une autre tâche facilement
     document.getElementById('task-name').value = '';
     currentFormSteps = [''];
     renderStepFields();
+    setPickerTime(5);
     updateSessionUI();
 }
 
@@ -431,15 +618,18 @@ function updateSessionUI() {
     if (!card) return;
     if (state.sessionQueue.length > 0) {
         card.style.display = 'block';
-        const list = document.getElementById('session-list');
+        const list = document.getElementById('multi-task-list');
         list.innerHTML = '';
         let total = 0;
-        state.sessionQueue.forEach((task, idx) => {
+        state.sessionQueue.forEach((task, index) => {
             total += task.duration;
             list.innerHTML += `
                 <div class="session-item">
-                    <span><strong>${task.name}</strong> (${task.duration} min)</span>
-                    <button class="btn btn-small btn-danger" onclick="removeFromSession(${idx})" style="width:32px; height:32px; padding:0;">✕</button>
+                    <input type="text" value="${task.name}" onchange="updateTaskName(${index}, this.value)" style="flex:2; margin:0;">
+                    <input type="number" value="${task.duration}" onchange="updateTaskDuration(${index}, this.value)" style="flex:1; margin:0; min-width:60px;">
+                    <button class="btn btn-small" style="width:32px; height:32px; padding:0;" onclick="moveTask(${index}, -1)">↑</button>
+                    <button class="btn btn-small" style="width:32px; height:32px; padding:0;" onclick="moveTask(${index}, 1)">↓</button>
+                    <button class="btn btn-small btn-danger" style="width:32px; height:32px; padding:0;" onclick="removeTask(${index})">✕</button>
                 </div>
             `;
         });
@@ -449,34 +639,50 @@ function updateSessionUI() {
     }
 }
 
-function removeFromSession(idx) {
-    state.sessionQueue.splice(idx, 1);
-    saveState();
-    updateSessionUI();
+function updateTaskName(idx, val) { state.sessionQueue[idx].name = val.trim() || "Tâche"; saveState(); }
+function updateTaskDuration(idx, val) { state.sessionQueue[idx].duration = Math.max(1, parseInt(val) || 1); saveState(); updateSessionUI(); }
+function moveTask(idx, dir) {
+    if (idx + dir < 0 || idx + dir >= state.sessionQueue.length) return;
+    const temp = state.sessionQueue[idx];
+    state.sessionQueue[idx] = state.sessionQueue[idx + dir];
+    state.sessionQueue[idx + dir] = temp;
+    saveState(); updateSessionUI();
 }
+function removeTask(idx) { state.sessionQueue.splice(idx, 1); saveState(); updateSessionUI(); }
+function clearSession() { state.sessionQueue = []; saveState(); updateSessionUI(); }
 
-function clearSession() {
+// ==========================================
+// 3. APPAREIL & MULTI-TÂCHES (Fonctionnel)
+// ==========================================
+function startMultiSession() {
+    if (state.sessionQueue.length === 0) return;
+    state.currentSession = {
+        name: currentSessionName,
+        queue: JSON.parse(JSON.stringify(state.sessionQueue)),
+        currentIndex: 0,
+        timeRemaining: state.sessionQueue[0].duration * 60,
+        isRunning: false,
+        isPaused: false,
+        currentStepIndex: 0,
+        completedTasks: []
+    };
     state.sessionQueue = [];
     saveState();
-    updateSessionUI();
+    showTab('appareil');
 }
 
-// ==========================================
-// 3. APPAREIL (Chronomètre & START)
-// ==========================================
 function renderAppareil(container) {
     if (!container) container = document.getElementById('main-content');
     
     if (!state.currentSession) {
         container.innerHTML = `
             <h2>Appareil</h2>
-            <p>Votre boîtier START simulé. Sélectionnez ou préparez une tâche pour commencer.</p>
+            <p>Votre boîtier START simulé. Sélectionnez ou préparez une tâche.</p>
             <div class="card" style="text-align:center; padding:40px;">
                 <div style="font-size:4rem; margin-bottom:20px;">📻</div>
                 <h3>En attente</h3>
-                <p>Aucune session en cours.</p>
-                <button class="btn btn-primary" onclick="showTab('preparer')">Préparer une session</button>
-                <button class="btn btn-secondary" onclick="showTab('taches')">Choisir une tâche enregistrée</button>
+                <button class="btn btn-primary" onclick="showTab('preparer')" style="margin-top:16px;">Préparer une session</button>
+                <button class="btn btn-secondary" onclick="showTab('taches')">Choisir une tâche</button>
             </div>
         `;
         return;
@@ -485,7 +691,8 @@ function renderAppareil(container) {
     const sess = state.currentSession;
     const currentTask = sess.queue[sess.currentIndex];
     const currentStepText = currentTask.steps[sess.currentStepIndex] || "Tâche terminée ! Prêt pour la suite ?";
-    const progress = ((currentTask.duration * 60 - sess.timeRemaining) / (currentTask.duration * 60)) * 100;
+    const totalSec = currentTask.duration * 60;
+    const progress = ((totalSec - sess.timeRemaining) / totalSec) * 100;
 
     container.innerHTML = `
         <div class="appareil-header">
@@ -495,50 +702,29 @@ function renderAppareil(container) {
         </div>
 
         <div class="card" style="text-align:center; padding:30px 20px;">
-            <div style="font-size:0.9rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Tâche ${sess.currentIndex + 1} / ${sess.queue.length}</div>
+            <div style="font-size:0.9rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; font-weight:700;">
+                ${sess.name} • Tâche ${sess.currentIndex + 1}/${sess.queue.length}
+            </div>
             <div class="current-task-name">${currentTask.name}</div>
             
             <div class="timer-display" id="timer-display">${formatTime(sess.timeRemaining)}</div>
             
-            <div style="background:#F0E6D2; height:8px; border-radius:4px; margin:20px 0; overflow:hidden;">
+            <div style="background:var(--border-color); height:8px; border-radius:4px; margin:20px 0; overflow:hidden;">
                 <div style="background:var(--accent-coral); height:100%; width:${progress}%; transition:width 1s linear;"></div>
             </div>
 
             <div class="current-step">➜ ${currentStepText}</div>
 
-            <button class="start-btn ${sess.isPaused ? 'paused' : ''}" id="start-btn" onclick="handleStartPress()">
-                ${sess.isPaused ? '▶' : (sess.timeRemaining === currentTask.duration * 60 ? 'START' : 'START')}
+            <button class="start-btn ${sess.isPaused ? 'paused' : ''}" onclick="handleStartPress()">
+                ${sess.isPaused ? '▶' : 'START'}
             </button>
             <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:10px;">
-                ${sess.isPaused ? 'Appuyez pour reprendre' : 'Appuyez sur START pour valider l\'étape'}
+                ${sess.isPaused ? 'Appuyez pour reprendre' : 'Appuyez pour valider l\'étape (le chrono continue)'}
             </p>
-        </div>
-
-        <div class="card">
-            <h4 style="margin-top:0;">Prochaines étapes</h4>
-            <ol style="padding-left:20px; color:var(--text-secondary); margin-bottom:0;">
-                ${currentTask.steps.map((s, i) => `<li style="margin-bottom:6px; ${i < sess.currentStepIndex ? 'text-decoration:line-through; opacity:0.5;' : ''}">${s}</li>`).join('')}
-            </ol>
+            
+            ${sess.currentStepIndex >= currentTask.steps.length ? `<button class="btn btn-primary" onclick="nextTask()" style="margin-top:20px;">Passer à la tâche suivante →</button>` : ''}
         </div>
     `;
-}
-
-function startSession() {
-    if (state.sessionQueue.length === 0) return;
-    
-    state.currentSession = {
-        queue: JSON.parse(JSON.stringify(state.sessionQueue)),
-        currentIndex: 0,
-        timeRemaining: state.sessionQueue[0].duration * 60,
-        isRunning: false,
-        isPaused: false,
-        currentStepIndex: 0
-    };
-    
-    // Vider la queue de préparation pour éviter les doublons
-    state.sessionQueue = [];
-    saveState();
-    showTab('appareil');
 }
 
 function handleStartPress() {
@@ -546,28 +732,16 @@ function handleStartPress() {
     if (!sess) return;
 
     if (!sess.isRunning || sess.isPaused) {
-        // Démarrer ou reprendre
         sess.isRunning = true;
         sess.isPaused = false;
         startTimer();
         renderAppareil();
     } else {
-        // Valider une étape (NE RÉINITIALISE PAS le chronomètre)
         sess.currentStepIndex++;
-        
-        // Vérifier si toutes les étapes de la tâche sont faites
-        if (sess.currentStepIndex >= sess.queue[sess.currentIndex].steps.length) {
-            // Tâche terminée avant la fin du temps ? On laisse le temps tourner ou on propose de passer à la suite
-            showModal("Toutes les étapes de cette tâche sont validées ! Vous pouvez continuer jusqu'à la fin du temps imparti ou passer à la suite.", [
-                { text: "Continuer le chrono", action: closeModal },
-                { text: "Passer à la tâche suivante", action: () => { closeModal(); nextTask(); } }
-            ]);
-        }
-        
+        addQuestProgress('daily', 'steps_validated', 1);
+        addQuestProgress('weekly', 'steps_validated', 1);
         saveState();
         renderAppareil();
-        
-        // Petit retour haptique
         if (state.settings.vibration && navigator.vibrate) navigator.vibrate(50);
     }
 }
@@ -578,8 +752,6 @@ function startTimer() {
         const sess = state.currentSession;
         if (sess && sess.isRunning && !sess.isPaused) {
             sess.timeRemaining--;
-            
-            // Mise à jour directe du DOM pour fluidité sans tout re-rendre
             const timerEl = document.getElementById('timer-display');
             if (timerEl) timerEl.textContent = formatTime(sess.timeRemaining);
             
@@ -593,40 +765,32 @@ function startTimer() {
 function handleTaskTimeUp() {
     playEndSound();
     const sess = state.currentSession;
-    
-    // Enregistrer dans l'historique
     const completedTask = sess.queue[sess.currentIndex];
-    state.history.push({
-        date: new Date().toISOString(),
-        name: completedTask.name,
-        duration: completedTask.duration,
-        completed: true
-    });
     
-    // Points de quête
-    addPoints(10);
-    updateQuestProgress('daily', 1, 1); // 1 tâche terminée
-    updateQuestProgress('weekly', 2, completedTask.duration); // minutes cumulées
+    if (!sess.completedTasks.includes(completedTask.name)) {
+        sess.completedTasks.push(completedTask.name);
+    }
 
     sess.currentIndex++;
     if (sess.currentIndex < sess.queue.length) {
-        // Passer à la tâche suivante
         sess.timeRemaining = sess.queue[sess.currentIndex].duration * 60;
         sess.currentStepIndex = 0;
-        sess.isPaused = true; // Pause entre les tâches
+        sess.isPaused = true;
         saveState();
-        showModal(`⏱️ Temps écoulé pour "${completedTask.name}" !\n\nPrêt pour "${sess.queue[sess.currentIndex].name}" ?`, [
+        showModal(`⏱️ Temps écoulé pour "${completedTask.name}" !`, [
             { text: "Démarrer la suite", action: () => { closeModal(); handleStartPress(); } }
         ]);
     } else {
-        // Session entièrement terminée
-        endSession();
+        endSession(true);
     }
     renderAppareil();
 }
 
 function nextTask() {
     const sess = state.currentSession;
+    const completedTask = sess.queue[sess.currentIndex];
+    if (!sess.completedTasks.includes(completedTask.name)) sess.completedTasks.push(completedTask.name);
+    
     sess.currentIndex++;
     if (sess.currentIndex < sess.queue.length) {
         sess.timeRemaining = sess.queue[sess.currentIndex].duration * 60;
@@ -635,17 +799,55 @@ function nextTask() {
         saveState();
         renderAppareil();
     } else {
-        endSession();
+        endSession(true);
     }
 }
 
-function endSession() {
+function endSession(completed) {
     clearInterval(timerInterval);
+    const sess = state.currentSession;
+    
+    // Calculer la durée réelle passée
+    let totalDuration = 0;
+    sess.queue.forEach((t, i) => {
+        if (i < sess.currentIndex) totalDuration += t.duration;
+        else if (i === sess.currentIndex) totalDuration += Math.floor((t.duration * 60 - sess.timeRemaining) / 60);
+    });
+
+    // Historique
+    state.history.push({
+        id: Date.now(),
+        date: new Date().toISOString(),
+        sessionName: sess.name,
+        tasksCompleted: sess.completedTasks,
+        totalDuration: Math.max(1, totalDuration),
+        status: completed ? 'completed' : 'abandoned'
+    });
+
+    // Quêtes
+    if (completed) {
+        addQuestProgress('daily', 'tasks_completed', sess.completedTasks.length);
+        addQuestProgress('weekly', 'tasks_completed', sess.completedTasks.length);
+        addQuestProgress('daily', 'sessions_completed', 1);
+        addQuestProgress('weekly', 'sessions_completed', 1);
+        addQuestProgress('special', 'sessions_completed', 1);
+    }
+    addQuestProgress('daily', 'minutes_focused', totalDuration);
+    addQuestProgress('weekly', 'minutes_focused', totalDuration);
+    addQuestProgress('special', 'minutes_focused', totalDuration);
+
+    // Streak
+    const today = new Date().toDateString();
+    if (state.lastActiveDate !== today) {
+        const yesterday = new Date(Date.now() - 86400000).toDateString();
+        state.streak = (state.lastActiveDate === yesterday) ? state.streak + 1 : 1;
+        state.lastActiveDate = today;
+    }
+
     state.currentSession = null;
-    addPoints(50);
     saveState();
     
-    showModal("🎉 Session terminée !\n\nBravo. Vous avez avancé pas à pas.", [
+    showModal(completed ? "🎉 Session terminée ! Bravo." : "Session enregistrée dans le parcours.", [
         { text: "Voir mon parcours", action: () => { closeModal(); showTab('parcours'); } },
         { text: "Retour à l'accueil", action: () => { closeModal(); showTab('taches'); } }
     ]);
@@ -658,21 +860,9 @@ function togglePause() {
 }
 
 function quitSession() {
-    if (confirm("Quitter la session en cours ? La progression sera sauvegardée dans l'historique.")) {
+    if (confirm("Quitter la session en cours ? La progression sera sauvegardée.")) {
         clearInterval(timerInterval);
-        if (state.currentSession) {
-            const sess = state.currentSession;
-            const currentTask = sess.queue[sess.currentIndex];
-            state.history.push({
-                date: new Date().toISOString(),
-                name: currentTask.name,
-                duration: Math.floor((currentTask.duration * 60 - sess.timeRemaining) / 60),
-                completed: false
-            });
-        }
-        state.currentSession = null;
-        saveState();
-        showTab('taches');
+        endSession(false);
     }
 }
 
@@ -689,18 +879,14 @@ function playEndSound() {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
+        osc.connect(gain); gain.connect(ctx.destination);
         osc.frequency.value = state.settings.sound === 'pulsation' ? 220 : 660;
         gain.gain.value = 0.1;
         osc.start();
         gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.8);
         osc.stop(ctx.currentTime + 0.8);
     } catch(e) {}
-    
-    if (state.settings.vibration && navigator.vibrate) {
-        navigator.vibrate([200, 100, 200, 100, 400]);
-    }
+    if (state.settings.vibration && navigator.vibrate) navigator.vibrate([200, 100, 200]);
 }
 
 // ==========================================
@@ -708,7 +894,6 @@ function playEndSound() {
 // ==========================================
 function renderBloque(container) {
     const currentTaskName = state.currentSession ? state.currentSession.queue[state.currentSession.currentIndex].name : "votre tâche";
-    
     container.innerHTML = `
         <h2>Je bloque</h2>
         <p>Tu n'y arrives pas ? Ça arrive. On va t'aider concrètement.</p>
@@ -717,21 +902,18 @@ function renderBloque(container) {
             <h4>Je ne sais pas par où commencer</h4>
             <p>Trois premières actions concrètes pour démarrer en douceur.</p>
         </div>
-        
         <div class="card block-card" onclick="showBlockDetails('big', '${currentTaskName}')">
             <h4>C'est trop gros</h4>
             <p>Découpage en 3 micro-étapes pour rendre la montagne escaladable.</p>
         </div>
-        
         <div class="card block-card" onclick="showBlockDetails('tired', '${currentTaskName}')">
             <h4>Je suis à plat</h4>
             <p>Version minimaliste + option pause. Prends soin de toi.</p>
         </div>
         
-        <div class="card" style="background:#FFF0F0; border-color:#FFD0D0; margin-top:20px;">
+        <div class="card" style="background:rgba(255,107,107,0.1); border-color:rgba(255,107,107,0.3); margin-top:20px;">
             <p style="color:#D04040; margin:0; font-size:0.9rem; text-align:center;">
-                START aide à démarrer, ce n'est pas un outil médical.<br>
-                En période difficile, parle à un proche ou à un professionnel.
+                START aide à démarrer, ce n'est pas un outil médical.<br>En période difficile, parle à un proche.
             </p>
         </div>
     `;
@@ -739,37 +921,96 @@ function renderBloque(container) {
 
 function showBlockDetails(type, taskName) {
     let steps = [];
-    if (type === 'start') {
-        steps = [
-            `1. Ouvrir le cahier ou le dossier pour "${taskName}"`,
-            "2. Lire la première consigne ou le premier paragraphe",
-            "3. Écrire la date et le titre en haut de la page"
-        ];
-    } else if (type === 'big') {
-        steps = [
-            `1. Identifier la toute première petite action pour "${taskName}"`,
-            "2. La découper en une action de moins de 5 minutes",
-            "3. Faire uniquement cette micro-action maintenant"
-        ];
-    } else if (type === 'tired') {
-        steps = [
-            "1. Faire 3 grandes respirations profondes",
-            "2. Boire un verre d'eau",
-            `3. Faire seulement 2 minutes de "${taskName}", puis faire une pause`
-        ];
-    }
+    if (type === 'start') steps = [`1. Ouvrir le cahier/dossier pour "${taskName}"`, "2. Lire la première consigne ou paragraphe", "3. Écrire la date et le titre en haut de la page"];
+    else if (type === 'big') steps = [`1. Identifier la toute première petite action pour "${taskName}"`, "2. La découper en une action de moins de 5 minutes", "3. Faire uniquement cette micro-action maintenant"];
+    else steps = ["1. Faire 3 grandes respirations profondes", "2. Boire un verre d'eau", `3. Faire seulement 2 minutes de "${taskName}", puis pause`];
     
-    showModal(`
-        <h3 style="margin-top:0;">Plan d'action</h3>
-        <ul style="text-align:left; line-height:1.8; color:var(--text-primary);">
-            ${steps.map(s => `<li>${s}</li>`).join('')}
-        </ul>
-    `, [{ text: "J'ai compris, merci", action: closeModal }]);
+    showModal(`<h3 style="margin-top:0;">Plan d'action</h3><ul style="text-align:left; line-height:1.8;">${steps.map(s => `<li>${s}</li>`).join('')}</ul>`, [{ text: "J'ai compris, merci", action: closeModal }]);
+    addQuestProgress('daily', 'block_used', 1);
 }
 
 // ==========================================
-// 5. QUÊTES
+// 5. QUÊTES (Système robuste)
 // ==========================================
+function generateDailyQuests() {
+    const pool = [
+        { id: 'd1', text: 'Terminer 1 tâche', target: 1, metric: 'tasks_completed', reward: 20 },
+        { id: 'd2', text: 'Terminer 2 tâches', target: 2, metric: 'tasks_completed', reward: 40 },
+        { id: 'd3', text: 'Cumuler 15 min de concentration', target: 15, metric: 'minutes_focused', reward: 30 },
+        { id: 'd4', text: 'Cumuler 30 min de concentration', target: 30, metric: 'minutes_focused', reward: 60 },
+        { id: 'd5', text: 'Utiliser l\'onglet "Je bloque"', target: 1, metric: 'block_used', reward: 10 },
+        { id: 'd6', text: 'Créer une nouvelle tâche', target: 1, metric: 'tasks_created', reward: 15 },
+        { id: 'd7', text: 'Compléter une session multi-tâches', target: 1, metric: 'sessions_completed', reward: 50 },
+        { id: 'd8', text: 'Valider 5 micro-étapes', target: 5, metric: 'steps_validated', reward: 25 },
+        { id: 'd9', text: 'Consulter son parcours', target: 1, metric: 'parcours_viewed', reward: 5 },
+        { id: 'd10', text: 'Changer de thème', target: 1, metric: 'theme_changed', reward: 10 },
+        { id: 'd11', text: 'Mettre en pause et reprendre', target: 1, metric: 'pause_used', reward: 10 },
+        { id: 'd12', text: 'Ajouter une tâche à une session', target: 1, metric: 'task_added', reward: 15 }
+    ];
+    return pool.sort(() => 0.5 - Math.random()).slice(0, 4).map(q => ({...q, progress: 0, completed: false}));
+}
+
+function generateWeeklyQuests() {
+    const pool = [
+        { id: 'w1', text: 'Cumuler 2 heures de concentration', target: 120, metric: 'minutes_focused', reward: 100 },
+        { id: 'w2', text: 'Terminer 5 tâches', target: 5, metric: 'tasks_completed', reward: 80 },
+        { id: 'w3', text: 'Compléter 2 sessions multi-tâches', target: 2, metric: 'sessions_completed', reward: 150 },
+        { id: 'w4', text: 'Utiliser "Je bloque" 2 fois', target: 2, metric: 'block_used', reward: 30 },
+        { id: 'w5', text: 'Valider 20 micro-étapes', target: 20, metric: 'steps_validated', reward: 60 },
+        { id: 'w6', text: 'Se connecter 3 jours différents', target: 3, metric: 'days_active', reward: 50 },
+        { id: 'w7', text: 'Atteindre un nouveau niveau', target: 1, metric: 'level_up', reward: 200 },
+        { id: 'w8', text: 'Cumuler 45 min en une seule session', target: 45, metric: 'single_session_minutes', reward: 70 }
+    ];
+    return pool.sort(() => 0.5 - Math.random()).slice(0, 3).map(q => ({...q, progress: 0, completed: false}));
+}
+
+function initSpecialQuests() {
+    if (state.quests.special.length === 0) {
+        state.quests.special = [
+            { id: 's1', text: 'Première tâche terminée', target: 1, metric: 'tasks_completed', reward: 50, completed: false },
+            { id: 's2', text: 'Première session multi-tâches', target: 1, metric: 'sessions_completed', reward: 100, completed: false },
+            { id: 's3', text: '1 heure cumulée', target: 60, metric: 'minutes_focused', reward: 100, completed: false },
+            { id: 's4', text: '5 heures cumulées', target: 300, metric: 'minutes_focused', reward: 300, completed: false },
+            { id: 's5', text: '10 heures cumulées', target: 600, metric: 'minutes_focused', reward: 500, completed: false },
+            { id: 's6', text: 'Niveau 5 atteint', target: 5, metric: 'level_reached', reward: 500, completed: false },
+            { id: 's7', text: '10 tâches terminées', target: 10, metric: 'tasks_completed', reward: 200, completed: false },
+            { id: 's8', text: '50 tâches terminées', target: 50, metric: 'tasks_completed', reward: 1000, completed: false },
+            { id: 's9', text: 'Utiliser les 4 thèmes', target: 4, metric: 'themes_used', reward: 100, completed: false },
+            { id: 's10', text: 'Série de 7 jours', target: 7, metric: 'streak_reached', reward: 500, completed: false }
+        ];
+        saveState();
+    }
+}
+
+function addQuestProgress(type, metric, value) {
+    initSpecialQuests();
+    const list = type === 'daily' ? state.quests.daily : (type === 'weekly' ? state.quests.weekly : state.quests.special);
+    let changed = false;
+    list.forEach(q => {
+        if (!q.completed && q.metric === metric) {
+            q.progress += value;
+            if (q.progress >= q.target) {
+                q.completed = true;
+                state.quests.points += q.reward;
+                changed = true;
+                checkLevelUp();
+            }
+        }
+    });
+    if (changed) saveState();
+}
+
+function checkLevelUp() {
+    const pointsForNext = state.quests.level * 100;
+    if (state.quests.points >= pointsForNext) {
+        state.quests.points -= pointsForNext;
+        state.quests.level++;
+        addQuestProgress('weekly', 'level_up', 1);
+        addQuestProgress('special', 'level_reached', 1);
+        showModal(`🎉 Niveau ${state.quests.level} atteint !`);
+    }
+}
+
 function renderQuetes(container) {
     const q = state.quests;
     const pointsForNext = q.level * 100;
@@ -777,7 +1018,7 @@ function renderQuetes(container) {
     
     container.innerHTML = `
         <h2>Quêtes</h2>
-        <p>Des objectifs doux pour avancer pas à pas. Sans pression.</p>
+        <p>Des objectifs doux pour avancer pas à pas.</p>
         
         <div class="card" style="text-align:center; background:linear-gradient(135deg, var(--accent-coral), #FF9A85); color:white; border:none;">
             <div style="font-size:3rem; font-family:var(--font-hand); font-weight:700;">${q.points} pts</div>
@@ -788,139 +1029,152 @@ function renderQuetes(container) {
             <div style="font-size:0.8rem; margin-top:4px; opacity:0.9;">${q.points} / ${pointsForNext} pour le niveau ${q.level + 1}</div>
         </div>
 
-        <h3>Mes quêtes du jour</h3>
-        ${renderQuestList(q.daily)}
+        <h3>Quêtes du jour</h3>
+        ${q.daily.map(q => renderQuestCard(q)).join('')}
         
         <h3>Défis de la semaine</h3>
-        ${renderQuestList(q.weekly, true)}
+        ${q.weekly.map(q => renderQuestCard(q)).join('')}
+        
+        <h3>Succès permanents</h3>
+        ${q.special.filter(q => q.completed).length === 0 ? '<p style="color:var(--text-secondary); font-style:italic;">Aucun succès débloqué encore.</p>' : ''}
+        ${q.special.filter(q => q.completed).map(q => renderQuestCard(q)).join('')}
     `;
 }
 
-function renderQuestList(quests, isWeekly = false) {
-    if (quests.length === 0) return '<p style="color:var(--text-secondary); font-style:italic;">Aucun défi pour le moment.</p>';
-    return quests.map(q => `
-        <div class="card" style="padding:16px; ${q.done ? 'opacity:0.6;' : ''}">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-weight:600;">${q.text}</span>
-                ${q.done ? '<span style="color:var(--accent-coral); font-weight:800;">✓</span>' : `<span style="color:var(--accent-coral); font-weight:700;">+${q.reward} pts</span>`}
+function renderQuestCard(q) {
+    const pct = Math.min(100, (q.progress / q.target) * 100);
+    return `
+        <div class="card quest-card ${q.completed ? 'quest-completed' : ''}">
+            <div class="quest-header">
+                <span class="quest-text">${q.text}</span>
+                <span class="quest-reward">${q.completed ? '✓' : '+' + q.reward + ' pts'}</span>
             </div>
-            ${isWeekly && !q.done ? `
-                <div class="quest-bar">
-                    <div class="quest-fill" style="width:${Math.min(100, (q.progress/q.target)*100)}%"></div>
-                </div>
-                <div style="font-size:0.8rem; color:var(--text-secondary); text-align:right;">${q.progress} / ${q.target} min</div>
-            ` : ''}
+            <div class="quest-bar"><div class="quest-fill" style="width:${pct}%"></div></div>
+            <div class="quest-progress">${Math.min(q.progress, q.target)} / ${q.target}</div>
         </div>
-    `).join('');
-}
-
-function addPoints(amount) {
-    state.quests.points += amount;
-    const pointsForNext = state.quests.level * 100;
-    if (state.quests.points >= pointsForNext) {
-        state.quests.points -= pointsForNext;
-        state.quests.level++;
-        showModal(`🎉 Niveau ${state.quests.level} atteint !`);
-    }
-    saveState();
-}
-
-function updateQuestProgress(type, questId, amount) {
-    const list = type === 'daily' ? state.quests.daily : state.quests.weekly;
-    const quest = list.find(q => q.id === questId);
-    if (quest && !quest.done) {
-        if (type === 'weekly') {
-            quest.progress += amount;
-            if (quest.progress >= quest.target) {
-                quest.done = true;
-                addPoints(quest.reward);
-            }
-        } else {
-            quest.done = true;
-            addPoints(quest.reward);
-        }
-        saveState();
-    }
+    `;
 }
 
 // ==========================================
-// 6. PARCOURS & RÉGLAGES
+// 6. PARCOURS
 // ==========================================
 function renderParcours(container) {
-    const totalSessions = state.history.length;
-    const totalMinutes = state.history.reduce((acc, curr) => acc + (curr.duration || 0), 0);
+    addQuestProgress('daily', 'parcours_viewed', 1);
+    const totalMinutes = state.history.reduce((acc, curr) => acc + (curr.totalDuration || 0), 0);
+    const totalTasks = state.history.reduce((acc, curr) => acc + (curr.tasksCompleted ? curr.tasksCompleted.length : 0), 0);
     
+    // 7 derniers jours chart
+    const days = [];
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date(); d.setDate(d.getDate() - i);
+        const dateStr = d.toDateString();
+        const dayMinutes = state.history.filter(h => new Date(h.date).toDateString() === dateStr).reduce((acc, curr) => acc + curr.totalDuration, 0);
+        days.push({ label: d.toLocaleDateString('fr-FR', {weekday:'short'}), value: dayMinutes });
+    }
+    const maxVal = Math.max(10, ...days.map(d => d.value));
+
     container.innerHTML = `
         <h2>Parcours</h2>
         <p>Ton historique, tes sessions, ta progression.</p>
         
         <div class="stat-grid">
             <div class="stat-box">
-                <div class="stat-value">${totalSessions}</div>
-                <div class="stat-label">Sessions</div>
+                <div class="stat-value">${totalMinutes}</div>
+                <div class="stat-label">Minutes totales</div>
             </div>
             <div class="stat-box">
-                <div class="stat-value">${totalMinutes}</div>
-                <div class="stat-label">Minutes</div>
+                <div class="stat-value">${totalTasks}</div>
+                <div class="stat-label">Tâches terminées</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">${state.streak}</div>
+                <div class="stat-label">Jours de suite</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">${state.history.length}</div>
+                <div class="stat-label">Sessions</div>
             </div>
         </div>
 
-        <h3 style="margin-top:24px;">Sessions récentes</h3>
-        ${state.history.length === 0 ? '<p style="color:var(--text-secondary);">Aucune session terminée pour l\'instant.</p>' : ''}
-        <div id="history-list"></div>
+        <div class="card">
+            <h3>7 derniers jours</h3>
+            <div style="display:flex; align-items:flex-end; justify-content:space-between; height:100px; gap:8px; margin-top:16px;">
+                ${days.map(d => `
+                    <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+                        <div style="width:100%; background:var(--accent-coral); border-radius:4px 4px 0 0; height:${(d.value/maxVal)*80}px; min-height:4px;"></div>
+                        <span style="font-size:0.7rem; color:var(--text-secondary); font-weight:700;">${d.label}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+
+        <h3>Sessions récentes</h3>
+        ${state.history.length === 0 ? '<p style="color:var(--text-secondary);">Aucune session pour l\'instant.</p>' : ''}
+        <div class="card">
+            ${[...state.history].reverse().slice(0, 10).map(h => {
+                const date = new Date(h.date);
+                return `
+                <div class="history-item">
+                    <div>
+                        <div style="font-weight:700;">${h.sessionName}</div>
+                        <div style="font-size:0.8rem; color:var(--text-secondary);">${date.toLocaleDateString('fr-FR')} à ${date.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</div>
+                        <div style="font-size:0.75rem; color:var(--accent-coral); margin-top:2px;">${h.tasksCompleted.join(', ') || 'Aucune'}</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-weight:800; color:var(--text-primary);">${h.totalDuration} min</div>
+                        <div style="font-size:0.75rem; color:${h.status === 'completed' ? '#30D158' : 'var(--text-secondary)'}; font-weight:700;">
+                            ${h.status === 'completed' ? 'Terminée' : 'Abandonnée'}
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('')}
+        </div>
         
         <button class="btn btn-secondary" onclick="showTab('reglages')" style="margin-top:20px;">⚙️ Réglages et mentions légales</button>
     `;
-    
-    const list = document.getElementById('history-list');
-    [...state.history].reverse().slice(0, 10).forEach(h => {
-        const date = new Date(h.date);
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.style.padding = '16px';
-        div.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <div style="font-weight:700;">${h.name}</div>
-                    <div style="font-size:0.85rem; color:var(--text-secondary);">${date.toLocaleDateString('fr-FR')} à ${date.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</div>
-                </div>
-                <div style="text-align:right;">
-                    <div style="font-weight:800; color:var(--accent-coral);">${h.duration} min</div>
-                    <div style="font-size:0.8rem; color:${h.completed ? 'var(--success-color)' : 'var(--text-secondary)'};">${h.completed ? 'Terminée' : 'Interrompue'}</div>
-                </div>
-            </div>
-        `;
-        list.appendChild(div);
-    });
 }
 
+// ==========================================
+// 7. RÉGLAGES (Photos finales)
+// ==========================================
 function renderReglages(container) {
     container.innerHTML = `
         <h2>Réglages</h2>
         
         <div class="card">
             <h3>Apparence</h3>
-            <div class="settings-row">
-                <span>Thème</span>
-                <select id="theme-select" onchange="changeTheme(this.value)" style="width:auto; margin:0;">
-                    <option value="clair" ${state.settings.theme === 'clair' ? 'selected' : ''}>Clair (par défaut)</option>
-                    <option value="nuit" ${state.settings.theme === 'nuit' ? 'selected' : ''}>Nuit (fond noir doux)</option>
-                    <option value="galaxie" ${state.settings.theme === 'galaxie' ? 'selected' : ''}>Galaxie (bleu nuit)</option>
-                    <option value="chaleureux" ${state.settings.theme === 'chaleureux' ? 'selected' : ''}>Chaleureux (tons miel)</option>
-                </select>
+            <div class="theme-grid">
+                <div class="theme-option ${state.settings.theme === 'clair' ? 'active' : ''}" onclick="changeTheme('clair')" style="background:#F9F6F0; color:#4A3B2A;">
+                    <div class="theme-preview" style="background:linear-gradient(135deg, #FFFFFF 50%, #FF7F66 50%);"></div>
+                    Clair
+                </div>
+                <div class="theme-option ${state.settings.theme === 'nuit' ? 'active' : ''}" onclick="changeTheme('nuit')" style="background:#121212; color:#E0E0E0;">
+                    <div class="theme-preview" style="background:linear-gradient(135deg, #1E1E1E 50%, #FF9A85 50%);"></div>
+                    Nuit
+                </div>
+                <div class="theme-option ${state.settings.theme === 'galaxie' ? 'active' : ''}" onclick="changeTheme('galaxie')" style="background:#0B1026; color:#E0E7FF;">
+                    <div class="theme-preview" style="background:linear-gradient(135deg, #151E3F 50%, #818CF8 50%);"></div>
+                    Galaxie
+                </div>
+                <div class="theme-option ${state.settings.theme === 'chaleureux' ? 'active' : ''}" onclick="changeTheme('chaleureux')" style="background:#FFF8F0; color:#5D4037;">
+                    <div class="theme-preview" style="background:linear-gradient(135deg, #FFFBF5 50%, #E87A5D 50%);"></div>
+                    Chaleureux
+                </div>
             </div>
         </div>
 
         <div class="card">
             <h3>Appareil</h3>
-            <div class="settings-row">
-                <span>Alerte de fin de session</span>
-                <select id="sound-select" onchange="state.settings.sound=this.value; saveState();" style="width:auto; margin:0;">
-                    <option value="carillon" ${state.settings.sound === 'carillon' ? 'selected' : ''}>Carillon doux</option>
-                    <option value="pulsation" ${state.settings.sound === 'pulsation' ? 'selected' : ''}>Pulsation</option>
-                    <option value="silencieux" ${state.settings.sound === 'silencieux' ? 'selected' : ''}>Silencieux</option>
-                </select>
+            <div style="margin-bottom:16px;">
+                <label style="font-weight:700; font-size:0.9rem; display:block; margin-bottom:8px;">Alerte de fin de session</label>
+                <div class="sound-options">
+                    <div class="sound-option ${state.settings.sound === 'carillon' ? 'active' : ''}" onclick="changeSound('carillon')">Carillon doux</div>
+                    <div class="sound-option ${state.settings.sound === 'pulsation' ? 'active' : ''}" onclick="changeSound('pulsation')">Pulsation</div>
+                    <div class="sound-option ${state.settings.sound === 'silencieux' ? 'active' : ''}" onclick="changeSound('silencieux')">Silencieux</div>
+                </div>
             </div>
+            
             <div class="settings-row">
                 <span>Vibration (haptique)</span>
                 <div class="toggle ${state.settings.vibration ? 'active' : ''}" onclick="toggleSetting('vibration')"></div>
@@ -932,18 +1186,26 @@ function renderReglages(container) {
         </div>
 
         <div class="card">
-            <h3>À propos</h3>
+            <h3>Aide & À propos</h3>
             <button class="btn btn-secondary" onclick="showOnboarding()">Revoir l'accueil guidé</button>
-            <button class="btn btn-secondary" onclick="showModal('<h3>Mentions légales</h3><p style=text-align:left;>START est une application d\'aide à l\'organisation personnelle. Les données sont stockées localement sur votre appareil. Aucune donnée n\'est envoyée sur un serveur externe.<br><br>© 2026 START App.</p>', [{text:'Fermer', action:closeModal}])">Mentions & confidentialité</button>
-            <button class="btn btn-danger" onclick="if(confirm('Tout effacer ?')){localStorage.clear(); location.reload();}" style="margin-top:16px;">Réinitialiser toutes les données</button>
+            <button class="btn btn-secondary" onclick="showModal('<h3>Mentions légales</h3><p style=text-align:left;>START est une application d\\'aide à l\\'organisation personnelle. Les données sont stockées localement sur votre appareil (localStorage). Aucune donnée n\\'est envoyée sur un serveur externe.<br><br>© 2026 START App.</p>', [{text:'Fermer', action:closeModal}])">Confidentialité & Mentions légales</button>
+            <button class="btn btn-danger" onclick="if(confirm('Tout effacer ? Cette action est irréversible.')){localStorage.clear(); location.reload();}" style="margin-top:16px;">Réinitialiser toutes les données</button>
         </div>
     `;
 }
 
 function changeTheme(val) {
     state.settings.theme = val;
+    addQuestProgress('daily', 'theme_changed', 1);
+    addQuestProgress('special', 'themes_used', 1); // Simplifié pour l'exemple
     saveState();
-    showTab('reglages'); // Re-render pour appliquer
+    showTab('reglages');
+}
+
+function changeSound(val) {
+    state.settings.sound = val;
+    saveState();
+    showTab('reglages');
 }
 
 function toggleSetting(key) {
@@ -953,20 +1215,16 @@ function toggleSetting(key) {
 }
 
 // ==========================================
-// UTILITAIRES & MODALES
+// UTILITAIRES
 // ==========================================
 function showModal(htmlContent, buttons = [{text: 'OK', action: closeModal}]) {
     const overlay = document.getElementById('modal-overlay');
     const content = document.getElementById('modal-content');
-    
     let buttonsHtml = buttons.map((b, i) => 
-        `<button class="btn ${i===0 ? 'btn-primary' : 'btn-secondary'}" style="margin-top:10px;" onclick="modalActions[${i}]()">${b.text}</button>`
+        `<button class="btn ${i===0 ? 'btn-primary' : 'btn-secondary'}" style="margin-top:10px;" onclick="window.modalActions[${i}]()">${b.text}</button>`
     ).join('');
-    
     content.innerHTML = htmlContent + buttonsHtml;
     overlay.classList.add('active');
-    
-    // Stocker les actions temporairement
     window.modalActions = buttons.map(b => b.action);
 }
 
@@ -980,8 +1238,8 @@ function showOnboarding() {
     showModal(`
         <h2 style="color:var(--accent-coral);">Bienvenue sur START</h2>
         <p style="text-align:left;">1. <strong>Préparez</strong> votre tâche en la découpant en micro-étapes.</p>
-        <p style="text-align:left;">2. <strong>Chargez</strong> la tâche sur l'Appareil.</p>
-        <p style="text-align:left;">3. <strong>Appuyez sur START</strong> pour lancer le chrono et valider chaque étape.</p>
+        <p style="text-align:left;">2. <strong>Ajoutez</strong> plusieurs tâches pour une session multi-tâches.</p>
+        <p style="text-align:left;">3. <strong>Appuyez sur START</strong> pour lancer le chrono. Validez les étapes sans arrêter le temps.</p>
         <p style="text-align:left; font-size:0.9rem; color:var(--text-secondary);">Le chronomètre ne se réinitialise jamais quand vous validez une étape. Avancez à votre rythme.</p>
     `, [{text: 'C\'est parti !', action: closeModal}]);
 }
@@ -991,20 +1249,13 @@ function showOnboarding() {
 // ==========================================
 window.onload = function() {
     loadState();
-    
-    // Gestion du "Wake Lock" (écran allumé)
     if (state.settings.keepAwake && 'wakeLock' in navigator) {
-        navigator.wakeLock.request('screen').catch(err => console.log('Wake lock non supporté'));
+        navigator.wakeLock.request('screen').catch(() => {});
     }
-    
-    if (!state.settings.onboardingCompleted) {
-        showOnboarding();
-    }
-    
+    if (!state.settings.onboardingCompleted) showOnboarding();
     showTab(state.currentTab);
 };
 
-// Empêcher le rechargement accidentel pendant une session
 window.onbeforeunload = function() {
     if (state.currentSession && state.currentSession.isRunning) {
         return "Une session est en cours. Voulez-vous vraiment quitter ?";
