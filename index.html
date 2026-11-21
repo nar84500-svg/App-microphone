@@ -41,7 +41,6 @@ html,body{height:100%;}
   --sage:#A8B89A;--sage-2:#5C7050;--sage-soft:#E8EFE1;
   --nav-bg:rgba(255,255,255,0.85);--nav-border:#EDE7DF;
   --nav-text:#5A564F;--nav-text-active:#FFFFFF;--nav-bg-active:#2B2A28;
-  --gold:#D4A574;--gold-soft:#F5E6D3;
   --shadow-sm:0 1px 2px rgba(60,45,30,0.04),0 2px 8px rgba(60,45,30,0.04);
   --shadow-md:0 2px 6px rgba(60,45,30,0.05),0 10px 28px rgba(60,45,30,0.08);
   --shadow-lg:0 8px 24px rgba(60,45,30,0.08),0 24px 60px rgba(60,45,30,0.12);
@@ -71,7 +70,8 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .page-subtitle{font-size:16px;color:var(--ink-3);max-width:520px;}
 .view{display:none;animation:fadeUp .45s var(--ease);}
 .view.active{display:block;}
-.view-content{padding-bottom:calc(var(--nav-height) + 24px + env(safe-area-inset-bottom));}
+/* CORRECTION 5 : Padding augmenté pour éviter le recouvrement par la nav mobile */
+.view-content{padding-bottom:calc(var(--nav-height) + 48px + env(safe-area-inset-bottom));}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);}
 .card+.card{margin-top:16px;}
@@ -140,14 +140,14 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .add-step-btn{width:100%;padding:10px;border:1px dashed var(--line-2);border-radius:var(--radius-sm);background:transparent;color:var(--ink-3);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s var(--ease);}
 .add-step-btn:hover{border-color:var(--accent);color:var(--accent-2);background:var(--accent-soft);}
 
-/* Session Multi-Tâches UI */
+/* CORRECTION 1 & 2 : Styles pour la file d'attente multi-tâches */
 .multi-session-builder{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;margin-top:16px;}
-.ms-task-item{display:flex;align-items:center;gap:8px;padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;}
+.ms-task-item{display:flex;align-items:center;gap:6px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;flex-wrap:wrap;}
 .ms-task-item select, .ms-task-item input[type="text"], .ms-task-item input[type="number"]{padding:8px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;}
 .ms-task-item select{flex:2;}
 .ms-task-item input[type="text"]{flex:2;}
 .ms-task-item input[type="number"]{width:60px;text-align:center;}
-.ms-task-item input:focus{border-color:var(--accent);}
+.ms-task-item input:focus, .ms-task-item select:focus{border-color:var(--accent);}
 .ms-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-weight:600;color:var(--ink);}
 .ms-total span{font-family:'Caveat',cursive;font-size:24px;color:var(--accent-2);}
 
@@ -397,32 +397,32 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .journey-empty h3{font-family:'Caveat',cursive;font-size:24px;color:var(--ink);margin-bottom:6px;}
 .journey-empty p{color:var(--ink-3);font-size:14px;}
 @media(max-width:600px){
-  .app{padding:20px 16px 40px;}
-  .page-title{font-size:40px;}
-  .brand-name{font-size:28px;}
-  .brand-mark{width:38px;height:38px;}
-  .status-pill{font-size:11px;padding:6px 10px;}
-  .status-brand{font-size:16px;}
-  .device{width:240px;padding:22px;}
-  .progress-ring{width:190px;height:190px;}
-  .start-button{width:96px;height:96px;font-size:24px;}
-  .device-task{font-size:18px;}
-  .card{padding:18px;}
-  .onboarding-message{font-size:26px;}
-  .onboarding-device{width:200px;height:200px;}
-  .onboarding-btn{width:85px;height:85px;font-size:20px;}
-  .end-card,.block-card,.resume-card,.about-card,.duration-sheet{padding:28px 20px calc(20px + env(safe-area-inset-bottom));}
-  .end-card h2,.resume-card h3,.about-card h2{font-size:28px;}
-  .duration-display{font-size:40px;}
-  .block-intro .page-title{font-size:40px;}
-  .quests-header{flex-direction:column;align-items:stretch;}
-  .quests-points{justify-content:center;}
+  .app { padding: 20px 16px 40px; }
+  .page-title { font-size: 40px; }
+  .brand-name { font-size: 28px; }
+  .brand-mark { width: 38px; height: 38px; }
+  .status-pill { font-size: 11px; padding: 6px 10px; }
+  .status-brand { font-size: 16px; }
+  .device { width: 240px; padding: 22px; }
+  .progress-ring { width: 190px; height: 190px; }
+  .start-button { width: 96px; height: 96px; font-size: 24px; }
+  .device-task { font-size: 18px; }
+  .card { padding: 18px; }
+  .onboarding-message { font-size: 26px; }
+  .onboarding-device { width: 200px; height: 200px; }
+  .onboarding-btn { width: 85px; height: 85px; font-size: 20px; }
+  .end-card, .block-card, .resume-card, .about-card, .duration-sheet { padding: 28px 20px calc(20px + env(safe-area-inset-bottom)); }
+  .end-card h2, .resume-card h3, .about-card h2 { font-size: 30px; }
+  .duration-display { font-size: 40px; }
+  .block-intro .page-title { font-size: 40px; }
+  .quests-header { flex-direction: column; align-items: stretch; }
+  .quests-points { justify-content: center; }
 }
-button:focus-visible,input:focus-visible,.task-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-::-webkit-scrollbar{width:8px;height:8px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px;}
-::-webkit-scrollbar-thumb:hover{background:var(--ink-3);}
+button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
 </style>
 </head>
 <body>
@@ -455,8 +455,8 @@ button:focus-visible,input:focus-visible,.task-card:focus-visible{outline:2px so
       </div>
       <div>
         <div class="card"><div class="section-label">Modèles rapides</div><div class="templates-grid" id="templatesGrid"></div></div>
-        <div class="card" style="margin-top:16px;"><div class="section-label">Durée</div><div class="duration-row" id="durationRow"><span class="dur-label">Durée de la session</span><span class="dur-value" id="durationRowValue">5 min</span><span class="dur-arrow">›</span></div><div style="margin-top:10px;"><button class="dial-free" id="dialFree" style="font-size:13px;color:var(--ink-3);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;">Session libre (sans minuteur)</button></div></div>
         
+        <!-- CORRECTION 2 : Séparation claire des modes -->
         <button class="btn btn-ghost" id="toggleMultiModeBtn" style="width:100%; margin-top:12px;">Mode Session multi-tâches</button>
         
         <div id="multiSessionBuilder" class="multi-session-builder" style="display:none;">
@@ -466,6 +466,12 @@ button:focus-visible,input:focus-visible,.task-card:focus-visible{outline:2px so
           <button class="btn btn-ghost" id="addMsTaskBtn" style="width:100%; margin-top:8px;">+ Ajouter une tâche</button>
           <div class="ms-total"><span>Durée totale</span><span id="msTotalTime">0 min</span></div>
           <button class="btn btn-primary" id="startMsSessionBtn" style="width:100%; margin-top:12px;">Démarrer la session</button>
+        </div>
+
+        <div id="singleTaskDuration" style="margin-top:16px;">
+          <div class="section-label">Durée de la session</div>
+          <div class="duration-row" id="durationRow"><span class="dur-label">Durée</span><span class="dur-value" id="durationRowValue">5 min</span><span class="dur-arrow">›</span></div>
+          <div style="margin-top:10px;"><button class="dial-free" id="dialFree" style="font-size:13px;color:var(--ink-3);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;">Session libre (sans minuteur)</button></div>
         </div>
 
       </div>
@@ -655,8 +661,8 @@ let isMultiMode = false;
 
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,2);r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('tasks'))d.createObjectStore('tasks',{keyPath:'id'});if(!d.objectStoreNames.contains('settings'))d.createObjectStore('settings',{keyPath:'id'});if(!d.objectStoreNames.contains('session'))d.createObjectStore('session',{keyPath:'id'});if(!d.objectStoreNames.contains('onboarding'))d.createObjectStore('onboarding',{keyPath:'id'});if(!d.objectStoreNames.contains('quests'))d.createObjectStore('quests',{keyPath:'id'});if(!d.objectStoreNames.contains('journey'))d.createObjectStore('journey',{keyPath:'id'});};r.onsuccess=e=>res(e.target.result);r.onerror=e=>rej(e);});}
 async function dbGet(s,k){if(!db)return null;return new Promise(r=>{try{const tx=db.transaction(s,'readonly'),req=tx.objectStore(s).get(k);req.onsuccess=()=>r(req.result?req.result.value:null);req.onerror=()=>r(null);}catch(e){r(null);}});}
-async function dbPut(s,k,v){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(s).put({id:k, value:v});tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
-async function dbClear(s){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(s).clear();tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
+async function dbPut(s,k,v){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(store).put({id:k, value:v});tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
+async function dbClear(s){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(store).clear();tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
 async function dbAllTasks(){if(!db)return[];return new Promise(r=>{try{const tx=db.transaction('tasks','readonly'),req=tx.objectStore('tasks').getAll();req.onsuccess=()=>r(req.result.map(x=>x.value));req.onerror=()=>r([]);}catch(e){r([]);}});}
 
 function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
@@ -813,13 +819,18 @@ function handleStartClick(){
   if (state.session.isMultiSession) {
     if (state.session.isPaused) { resumeSession(); return; }
     if (state.session.remainingMs <= 0) {
-      advanceMultiSession();
+      showMultiTaskEndModal();
     } else {
       validateStep();
     }
     return;
   }
-  const task=getCurrentTask();if(!task)return;
+  const task=getCurrentTask();
+  if(!task){
+    toast('Veuillez d\'abord préparer ou sélectionner une tâche');
+    setTimeout(() => switchView('prepare'), 1000);
+    return;
+  }
   if(!state.session.isActive){
     startSession();
     updateQuestProgress({type:'sessionStarted'});
@@ -1193,21 +1204,24 @@ window.prevOnboardingScreen=function(){if(currentScreen>0){currentScreen--;rende
 window.skipOnboarding=function(){finishOnboarding();};
 function finishOnboarding(){const ti=document.getElementById('taskInput'),tn=ti?ti.value.trim():'';state.onboarding.completed=true;state.onboarding.currentScreen=ONBOARDING_SCREENS;state.onboarding.answers=onboardingAnswers;saveOnboarding();if(tn){const t={id:'t_'+Date.now(),name:tn,steps:[`Commencer : ${tn}`],duration:5,done:false,createdAt:Date.now()};state.tasks.unshift(t);saveTasks();document.getElementById('onboardingOverlay').classList.remove('active');renderTasks();setTimeout(()=>{loadTask(t.id);toast('Première étape prête ! Appuie sur START');},500);}else{document.getElementById('onboardingOverlay').classList.remove('active');toast('Bienvenue dans START !');}}
 
-// Gestion Session Multi-Tâches UI
+// CORRECTION 1 & 2 : Gestion de la file d'attente multi-tâches
 document.getElementById('toggleMultiModeBtn').addEventListener('click', () => {
   isMultiMode = !isMultiMode;
   document.getElementById('multiSessionBuilder').style.display = isMultiMode ? 'block' : 'none';
+  document.getElementById('singleTaskDuration').style.display = isMultiMode ? 'none' : 'block';
   document.getElementById('toggleMultiModeBtn').textContent = isMultiMode ? 'Mode Tâche simple' : 'Mode Session multi-tâches';
 });
 
 window.addMsTask = function() {
-  state.multiSessionQueue.push({ taskId: null, name: "Nouvelle tâche", duration: 5 });
+  state.multiSessionQueue.push({ taskId: null, name: "", duration: 5 });
   renderMultiSessionQueue();
 };
+
 window.removeMsTask = function(index) {
   state.multiSessionQueue.splice(index, 1);
   renderMultiSessionQueue();
 };
+
 window.moveMsTask = function(index, direction) {
   const newIndex = index + direction;
   if (newIndex >= 0 && newIndex < state.multiSessionQueue.length) {
@@ -1225,7 +1239,7 @@ function renderMultiSessionQueue() {
   let total = 0;
   
   state.multiSessionQueue.forEach((item, i) => {
-    total += item.duration;
+    total += (parseInt(item.duration) || 0);
     const div = document.createElement('div');
     div.className = 'ms-task-item';
     
@@ -1235,12 +1249,12 @@ function renderMultiSessionQueue() {
     });
     
     div.innerHTML = `
-      <select class="ms-task-select" data-index="${i}">${options}</select>
-      <input type="text" class="ms-task-name" data-index="${i}" value="${escapeHtml(item.name)}" placeholder="Nom" style="${item.taskId ? 'display:none;' : ''}">
-      <input type="number" class="ms-task-duration" data-index="${i}" value="${item.duration}" min="1">
-      <button class="icon-btn" onclick="moveMsTask(${i}, -1)" ${i===0?'disabled':''}>↑</button>
-      <button class="icon-btn" onclick="moveMsTask(${i}, 1)" ${i===state.multiSessionQueue.length-1?'disabled':''}>↓</button>
-      <button class="icon-btn danger" onclick="removeMsTask(${i})">${ICONS.x}</button>
+      <select class="ms-task-select" data-index="${i}" style="flex:2; margin-right:4px;">${options}</select>
+      <input type="text" class="ms-task-name" data-index="${i}" value="${escapeHtml(item.name)}" placeholder="Nom" style="flex:2; display:${item.taskId ? 'none' : 'block'};">
+      <input type="number" class="ms-task-duration" data-index="${i}" value="${item.duration}" min="1" style="width:60px; text-align:center;">
+      <button class="icon-btn" onclick="moveMsTask(${i}, -1)" ${i===0?'disabled':''} style="width:28px;height:28px;">↑</button>
+      <button class="icon-btn" onclick="moveMsTask(${i}, 1)" ${i===state.multiSessionQueue.length-1?'disabled':''} style="width:28px;height:28px;">↓</button>
+      <button class="icon-btn danger" onclick="removeMsTask(${i})" style="width:28px;height:28px;">${ICONS.x}</button>
     `;
     list.appendChild(div);
   });
@@ -1262,6 +1276,8 @@ function renderMultiSessionQueue() {
         }
       } else {
         state.multiSessionQueue[idx].taskId = null;
+        state.multiSessionQueue[idx].name = "";
+        state.multiSessionQueue[idx].duration = 5;
         nameInput.style.display = 'block';
       }
       renderMultiSessionQueue();
@@ -1284,18 +1300,15 @@ function renderMultiSessionQueue() {
   });
 }
 
+// CORRECTION 3 : Démarrage de la session multi-tâches
 document.getElementById('startMsSessionBtn').addEventListener('click', () => {
-  if (state.multiSessionQueue.length === 0) {
-    toast('Ajoutez au moins une tâche');
+  const validQueue = state.multiSessionQueue.filter(item => item.name.trim() !== "");
+  if (validQueue.length === 0) {
+    toast('Ajoutez au moins une tâche avec un nom');
     return;
   }
-  for (let item of state.multiSessionQueue) {
-    if (!item.name.trim()) {
-      toast('Veuillez nommer toutes les tâches');
-      return;
-    }
-  }
   
+  state.multiSessionQueue = validQueue;
   state.session.isMultiSession = true;
   state.session.workedMs = 0;
   state.multiSessionIndex = 0;
