@@ -138,6 +138,14 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .step-remove svg{width:14px;height:14px;}
 .add-step-btn{width:100%;padding:10px;border:1px dashed var(--line-2);border-radius:var(--radius-sm);background:transparent;color:var(--ink-3);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s var(--ease);}
 .add-step-btn:hover{border-color:var(--accent);color:var(--accent-2);background:var(--accent-soft);}
+.session-builder{background:var(--accent-soft);border:1px solid var(--accent);border-radius:var(--radius-md);padding:20px;margin-top:16px;}
+.session-builder .section-label{color:var(--accent-2);}
+.session-task-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:var(--surface);padding:10px;border-radius:var(--radius-sm);border:1px solid var(--line);}
+.session-task-row input[type="text"]{flex:2;border:none;background:transparent;font-family:inherit;font-size:14px;color:var(--ink);outline:none;}
+.session-task-row input[type="number"]{flex:1;max-width:70px;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;text-align:center;}
+.session-task-row input[type="number"]:focus{border-color:var(--accent);}
+.session-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-weight:600;color:var(--ink);}
+.session-total span{font-family:'Caveat',cursive;font-size:24px;color:var(--accent-2);}
 .device-layout{display:grid;gap:28px;grid-template-columns:1fr;align-items:start;}
 @media(min-width:860px){.device-layout{grid-template-columns:1fr 1fr;}}
 .device-stage{display:flex;flex-direction:column;align-items:center;padding:20px 10px;}
@@ -197,14 +205,14 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .timer-display{display:flex;align-items:baseline;justify-content:center;gap:2px;font-family:'Inter',sans-serif;font-weight:300;font-size:22px;color:#F5E9DC;letter-spacing:1px;margin-top:4px;}
 .timer-display .colon{opacity:0.5;}
-.end-screen,.block-overlay,.resume-overlay,.about-overlay,.duration-sheet-overlay{position:fixed;inset:0;background:rgba(26,24,22,0.6);backdrop-filter:blur(6px);z-index:500;display:none;align-items:flex-end;justify-content:center;padding:0;}
-.end-screen.active,.block-overlay.active,.resume-overlay.active,.about-overlay.active,.duration-sheet-overlay.active{display:flex;animation:fadeIn .3s var(--ease);}
+.end-screen,.block-overlay,.resume-overlay,.about-overlay,.duration-sheet-overlay,.session-builder-overlay{position:fixed;inset:0;background:rgba(26,24,22,0.6);backdrop-filter:blur(6px);z-index:500;display:none;align-items:flex-end;justify-content:center;padding:0;}
+.end-screen.active,.block-overlay.active,.resume-overlay.active,.about-overlay.active,.duration-sheet-overlay.active,.session-builder-overlay.active{display:flex;animation:fadeIn .3s var(--ease);}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
-.end-card,.block-card,.resume-card,.about-card,.duration-sheet{background:var(--surface);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:32px 24px calc(24px + env(safe-area-inset-bottom));max-width:500px;width:100%;box-shadow:var(--shadow-lg);max-height:85vh;overflow-y:auto;animation:slideUp .3s var(--ease);}
+.end-card,.block-card,.resume-card,.about-card,.duration-sheet,.session-builder-card{background:var(--surface);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:32px 24px calc(24px + env(safe-area-inset-bottom));max-width:500px;width:100%;box-shadow:var(--shadow-lg);max-height:85vh;overflow-y:auto;animation:slideUp .3s var(--ease);}
 .end-screen{align-items:center;}
-.end-screen .end-card{border-radius:var(--radius-lg);}
-.end-card h2,.resume-card h3,.about-card h2{font-family:'Caveat',cursive;font-size:32px;color:var(--ink);margin-bottom:12px;text-align:center;}
+.end-screen .end-card,.session-builder-overlay .session-builder-card{border-radius:var(--radius-lg);}
+.end-card h2,.resume-card h3,.about-card h2,.session-builder-card h2{font-family:'Caveat',cursive;font-size:32px;color:var(--ink);margin-bottom:12px;text-align:center;}
 .end-card p,.resume-card p{color:var(--ink-2);margin-bottom:24px;line-height:1.5;text-align:center;}
 .end-actions,.resume-actions{display:flex;flex-direction:column;gap:10px;}
 .end-actions .btn,.resume-actions .btn{width:100%;padding:16px;font-size:15px;}
@@ -398,8 +406,8 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
   .onboarding-message{font-size:26px;}
   .onboarding-device{width:200px;height:200px;}
   .onboarding-btn{width:85px;height:85px;font-size:20px;}
-  .end-card,.block-card,.resume-card,.about-card,.duration-sheet{padding:28px 20px calc(20px + env(safe-area-inset-bottom));}
-  .end-card h2,.resume-card h3,.about-card h2{font-size:28px;}
+  .end-card,.block-card,.resume-card,.about-card,.duration-sheet,.session-builder-card{padding:28px 20px calc(20px + env(safe-area-inset-bottom));}
+  .end-card h2,.resume-card h3,.about-card h2,.session-builder-card h2{font-size:28px;}
   .duration-display{font-size:40px;}
   .block-intro .page-title{font-size:40px;}
   .quests-header{flex-direction:column;align-items:stretch;}
@@ -606,7 +614,7 @@ const DB_NAME='start_app',STORAGE_KEY='start_app';
 const DEFAULT_STATE={
   tasks:[],
   settings:{sound:'bell',vibration:true,wakeLock:false,demo:true,theme:'light',defaultDuration:5,tone:'warm'},
-  session:{taskId:null,stepIndex:0,isActive:false,isPaused:false,remainingTime:0,activeTimeAccumulated:0,lastActiveAt:null,startedAt:null,lastSaved:null},
+  session:{taskId:null,stepIndex:0,isActive:false,isPaused:false,remainingTime:0,activeTimeAccumulated:0,lastActiveAt:null,pausedAt:null,startedAt:null,lastSaved:null},
   onboarding:{completed:false,currentScreen:0,answers:{}},
   blockUsage:{noIdea:0,tooBig:0,tired:0},blockLearned:{},
   quests:{points:0,level:1,daily:{date:null,progress:{},completed:[]},weekly:{weekStart:null,progress:{},completed:[]},special:{completed:[]},history:[]},
@@ -616,15 +624,55 @@ let state=structuredClone(DEFAULT_STATE);
 let db=null,wakeLock=null,timerInterval=null,audioCtx=null;
 let sheetMinutes=5,prepareDuration=5,prepareFree=false,prepareSteps=[];
 
+// --- CORRECTION 1 : IndexedDB robuste et cohérente ---
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,2);r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('tasks'))d.createObjectStore('tasks',{keyPath:'id'});if(!d.objectStoreNames.contains('settings'))d.createObjectStore('settings',{keyPath:'id'});if(!d.objectStoreNames.contains('session'))d.createObjectStore('session',{keyPath:'id'});if(!d.objectStoreNames.contains('onboarding'))d.createObjectStore('onboarding',{keyPath:'id'});if(!d.objectStoreNames.contains('quests'))d.createObjectStore('quests',{keyPath:'id'});if(!d.objectStoreNames.contains('journey'))d.createObjectStore('journey',{keyPath:'id'});};r.onsuccess=e=>res(e.target.result);r.onerror=e=>rej(e);});}
 
-async function dbGet(s,k){if(!db)return null;return new Promise(r=>{try{const tx=db.transaction(s,'readonly'),req=tx.objectStore(s).get(k);req.onsuccess=()=>r(req.result?req.result.value:null);req.onerror=()=>r(null);}catch(e){r(null);}});}
+async function dbGet(s,k){
+  if(!db)return null;
+  return new Promise(r=>{
+    try{
+      const tx=db.transaction(s,'readonly'),req=tx.objectStore(s).get(k);
+      req.onsuccess=()=>r(req.result?req.result.value:null);
+      req.onerror=()=>r(null);
+    }catch(e){r(null);}
+  });
+}
 
-async function dbPut(s,k,v){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(s).put({id:k, value:v});tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
+async function dbPut(s,k,v){
+  if(!db)return;
+  return new Promise(r=>{
+    try{
+      const tx=db.transaction(s,'readwrite');
+      // CORRECTION : correspond au keyPath: 'id' défini dans onupgradeneeded
+      tx.objectStore(s).put({id:k, value:v});
+      tx.oncomplete=()=>r();
+      tx.onerror=()=>r();
+    }catch(e){r();}
+  });
+}
 
-async function dbClear(s){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(s).clear();tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
+async function dbClear(s){
+  if(!db)return;
+  return new Promise(r=>{
+    try{
+      const tx=db.transaction(s,'readwrite');
+      tx.objectStore(s).clear();
+      tx.oncomplete=()=>r();
+      tx.onerror=()=>r();
+    }catch(e){r();}
+  });
+}
 
-async function dbAllTasks(){if(!db)return[];return new Promise(r=>{try{const tx=db.transaction('tasks','readonly'),req=tx.objectStore('tasks').getAll();req.onsuccess=()=>r(req.result.map(x=>x.value));req.onerror=()=>r([]);}catch(e){r([]);}});}
+async function dbAllTasks(){
+  if(!db)return[];
+  return new Promise(r=>{
+    try{
+      const tx=db.transaction('tasks','readonly'),req=tx.objectStore('tasks').getAll();
+      req.onsuccess=()=>r(req.result.map(x=>x.value));
+      req.onerror=()=>r([]);
+    }catch(e){r([]);}
+  });
+}
 
 function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function weekStartKey(){const d=new Date(),day=d.getDay(),diff=d.getDate()-day+(day===0?-6:1),m=new Date(d.setDate(diff));return `${m.getFullYear()}-${String(m.getMonth()+1).padStart(2,'0')}-${String(m.getDate()).padStart(2,'0')}`;}
@@ -642,12 +690,14 @@ async function loadState(){
     if(state.settings.defaultDuration>360)state.settings.defaultDuration=5;
     checkQuestsReset();
     
+    // CORRECTION 3 : Reprise fiable du temps après fermeture
     if(state.session.isActive && !state.session.isPaused && state.session.lastActiveAt) {
       const elapsed = Date.now() - state.session.lastActiveAt;
       if(state.session.remainingTime > 0) {
         state.session.remainingTime = Math.max(0, state.session.remainingTime - elapsed);
         state.session.activeTimeAccumulated += elapsed;
         if(state.session.remainingTime <= 0) {
+          // Le temps est écoulé pendant l'absence
           state.session.isActive = false;
           state.session.remainingTime = 0;
         }
@@ -674,13 +724,15 @@ function checkQuestsReset(){const t=todayKey(),w=weekStartKey();if(state.quests.
 async function saveTasks(){if(db){await dbClear('tasks');for(const t of state.tasks)await dbPut('tasks',t.id,t);}try{const r=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');r.tasks=state.tasks;localStorage.setItem(STORAGE_KEY,JSON.stringify(r));}catch(e){}}
 async function saveSettings(){if(db)await dbPut('settings','main',state.settings);try{const r=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');r.settings=state.settings;localStorage.setItem(STORAGE_KEY,JSON.stringify(r));}catch(e){}}
 
+// CORRECTION 3 : Sauvegarde du temps actif avant fermeture
 async function saveSession(){
   if(state.session.isActive && !state.session.isPaused && state.session.lastActiveAt) {
     const elapsed = Date.now() - state.session.lastActiveAt;
     state.session.activeTimeAccumulated += elapsed;
   }
   state.session.lastSaved = Date.now();
-  state.session.lastActiveAt = Date.now();
+  state.session.lastActiveAt = Date.now(); // Met à jour pour la prochaine reprise
+  
   if(db)await dbPut('session','main',state.session);
   try{const r=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');r.session=state.session;localStorage.setItem(STORAGE_KEY,JSON.stringify(r));}catch(e){}
 }
@@ -798,29 +850,38 @@ const CIRCUMFERENCE=2*Math.PI*90;progressFill.style.strokeDasharray=CIRCUMFERENC
 startBtn.addEventListener('click',handleStartClick);
 startBtn.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();handleStartClick();}});
 
+// CORRECTION 2 : Logique de clic START robuste (Mode libre vs Chronométré)
 function handleStartClick(){
   const task=getCurrentTask();if(!task)return;
+  
+  // 1. Si la session n'est pas active, on la démarre
   if(!state.session.isActive){
     startSession();
     updateQuestProgress({type:'sessionStarted'});
     return;
   }
+  
+  // 2. Si la session est en pause, on reprend
   if(state.session.isPaused){
     resumeSession();
     return;
   }
+  
+  // 3. Si la session est active et non en pause, on avance l'étape
   validateStep();
 }
 
 function startSession(){
   const task=getCurrentTask();if(!task)return;
-  const d=task.duration>0?task.duration*60*1000:0;
+  const d=task.duration>0?task.duration*60:0;
+  
   state.session.isActive = true;
   state.session.isPaused = false;
-  state.session.remainingTime = d;
+  state.session.remainingTime = d > 0 ? d * 1000 : 0;
   state.session.activeTimeAccumulated = 0;
-  state.session.lastActiveAt = Date.now();
   state.session.startedAt = Date.now();
+  state.session.lastActiveAt = Date.now();
+  
   saveSession();renderDevice();
   if(d>0)startTimer();
   if(state.settings.wakeLock)requestWakeLock();
@@ -832,38 +893,64 @@ function validateStep(){
   const task=getCurrentTask();if(!task)return;
   if(state.session.stepIndex<task.steps.length-1){
     state.session.stepIndex++;
-    if(task.duration>0){
-      state.session.remainingTime = task.duration * 60 * 1000;
-      state.session.activeTimeAccumulated = 0;
-      state.session.lastActiveAt = Date.now();
-    }
     saveSession();renderDevice();
     if(state.settings.vibration&&navigator.vibrate)navigator.vibrate(30);
     startBtn.classList.add('glow');setTimeout(()=>startBtn.classList.remove('glow'),500);
-    if(task.duration>0) startTimer();
   } else {
     showEndScreen();
   }
 }
 
+function showEndScreen(){
+  const task=getCurrentTask();
+  endMessage.textContent=task?`Bravo. Vous avez avancé sur "${task.name}". Que souhaitez-vous faire maintenant ?`:'Bravo. Vous avez avancé. Que souhaitez-vous faire maintenant ?';
+  endScreen.classList.add('active');
+  playAlert();
+  if(state.settings.vibration&&navigator.vibrate)navigator.vibrate([120,80,120]);
+}
+
+continueBtn.addEventListener('click',()=>{
+  endScreen.classList.remove('active');
+  const task=getCurrentTask();
+  if(task){
+    // Prolonger de 10 min (600000 ms)
+    state.session.remainingTime += 600000;
+    state.session.lastActiveAt = Date.now();
+    saveSession();renderDevice();startTimer();
+    toast('Session prolongée de 10 minutes');
+  }
+});
+
+finishBtn.addEventListener('click',()=>{
+  endScreen.classList.remove('active');
+  completeTask();
+});
+
 function pauseSession(){
-  if(!state.session.isActive)return;
+  if(!state.session.isActive || state.session.duration===0)return;
   state.session.isPaused=true;
+  state.session.pausedAt=Date.now();
+  
+  // Ajouter le temps écoulé depuis le dernier tick au total actif
   state.session.activeTimeAccumulated += (Date.now() - state.session.lastActiveAt);
+  
   stopTimer();saveSession();renderDevice();toast('Session en pause');
 }
 
 function resumeSession(){
   if(!state.session.isPaused)return;
   state.session.isPaused=false;
-  state.session.lastActiveAt = Date.now();
-  saveSession();renderDevice();
-  if(state.session.remainingTime>0) startTimer();
+  state.session.lastActiveAt = Date.now(); // Repart de maintenant
+  
+  saveSession();renderDevice();startTimer();
+  if(state.settings.wakeLock)requestWakeLock();
   toast('Session reprise');
 }
 
 function quitSession(){
   stopTimer();releaseWakeLock();
+  
+  // Enregistrer comme abandonnée avec le temps réel travaillé
   const task = getCurrentTask();
   if(task && state.session.isActive) {
     const finalActiveTime = state.session.activeTimeAccumulated + (Date.now() - state.session.lastActiveAt);
@@ -871,7 +958,7 @@ function quitSession(){
       id:'s_'+Date.now(),
       taskName:task.name,
       taskId:task.id,
-      duration:Math.max(1, Math.floor(finalActiveTime / 60000)),
+      duration:Math.floor(finalActiveTime/1000), // en secondes pour l'historique
       plannedDuration:task.duration,
       status:'abandoned',
       completedAt:Date.now(),
@@ -880,68 +967,168 @@ function quitSession(){
     });
     saveJourney();
   }
+  
   state.session.isActive=false;
   state.session.isPaused=false;
   state.session.remainingTime=0;
   state.session.activeTimeAccumulated=0;
   state.session.lastActiveAt=null;
   state.session.startedAt=null;
+  
   saveSession();renderDevice();toast('Session quittée');
 }
+
+blockBtn.addEventListener('click',()=>{switchView('block');renderBlockMain();toast('On va t\'aider concrètement');});
+pauseBtn.addEventListener('click',pauseSession);
+quitBtn.addEventListener('click',quitSession);
 
 function startTimer(){
   stopTimer();
   updateTimerFromEndTime();
   timerInterval=setInterval(()=>{
     if(state.session.isPaused)return;
+    
     const now = Date.now();
     const elapsed = now - state.session.lastActiveAt;
     state.session.remainingTime = Math.max(0, state.session.remainingTime - elapsed);
     state.session.activeTimeAccumulated += elapsed;
     state.session.lastActiveAt = now;
+    
     updateTimerFromEndTime();
+    
     if(state.session.remainingTime<=0){
       stopTimer();
       onTimerEnd();
     }
-  }, 200);
+  }, 200); // Tick rapide pour fluidité
 }
 
 function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
 
 function updateTimerFromEndTime(){
-  const r = state.session.remainingTime;
-  const t = state.session.remainingTime + state.session.activeTimeAccumulated;
+  const r = state.session.remainingTime; // déjà en ms
+  const t = state.session.remainingTime + state.session.activeTimeAccumulated; // temps total prévu
   const p = t > 0 ? r / t : 0;
+  
   progressFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - p);
   const d = formatTimerDisplay(Math.floor(r / 1000));
-  if(d.hour!==null){timerMin.textContent=d.hour+':'+d.min;timerSec.textContent=d.sec;}
-  else{timerMin.textContent=d.min;timerSec.textContent=d.sec;}
+  
+  if(d.hour!==null){
+    timerMin.textContent=d.hour+':'+d.min;
+    timerSec.textContent=d.sec;
+  }else{
+    timerMin.textContent=d.min;
+    timerSec.textContent=d.sec;
+  }
 }
 
 function onTimerEnd(){
   const task=getCurrentTask();
   if(task && state.session.stepIndex < task.steps.length - 1){
     state.session.stepIndex++;
+    // Reset pour l'étape suivante si durée définie
     const d = task.duration > 0 ? task.duration * 60 * 1000 : 0;
     state.session.remainingTime = d;
     state.session.activeTimeAccumulated = 0;
     state.session.lastActiveAt = Date.now();
+    
     saveSession();renderDevice();
     playAlert();
     if(state.settings.vibration&&navigator.vibrate)navigator.vibrate([120,80,120]);
     toast('Étape suivante');
-    if(d>0) startTimer();
+    startTimer(); // Relancer pour la nouvelle étape
   } else {
     showEndScreen();
+  }
+}
+
+function loadTask(id){
+  const task=state.tasks.find(t=>t.id===id);if(!task)return;
+  stopTimer();
+  state.session.taskId=id;
+  state.session.stepIndex=0;
+  state.session.isActive=false; // Réinitialise l'état d'activité
+  state.session.isPaused=false;
+  state.session.remainingTime=0;
+  state.session.activeTimeAccumulated=0;
+  state.session.lastActiveAt=null;
+  state.session.startedAt=Date.now();
+  saveSession();renderTasks();renderDevice();
+  toast('Tâche chargée. Appuyez sur START.');
+}
+
+function getCurrentTask(){return state.tasks.find(t=>t.id===state.session.taskId)||null;}
+
+function renderDevice(){
+  const task=getCurrentTask();
+  const sa = state.session.isActive;
+  
+  sessionControls.classList.toggle('visible', sa && !state.session.isPaused);
+  pauseBtn.textContent = state.session.isPaused ? 'Reprendre' : 'Pause';
+  
+  if(!task && state.settings.demo){
+    devLabel.textContent='Démonstration';devTask.textContent='Bienvenue';
+    devStep.textContent='Chargez une tâche pour commencer';
+    devProgress.innerHTML='';devTimer.style.display='none';
+    stopTimer();startBtn.classList.add('pulse');startBtn.textContent='START';
+    progressFill.style.strokeDashoffset=CIRCUMFERENCE;progressFill.classList.remove('complete');
+    deviceHint.textContent='Appuyez sur START pour avancer d\'une étape.';return;
+  }
+  if(!task){
+    devLabel.textContent='Aucune tâche';devTask.textContent='—';
+    devStep.textContent='Préparez une tâche d\'abord';
+    devProgress.innerHTML='';devTimer.style.display='none';
+    stopTimer();startBtn.classList.remove('pulse');startBtn.textContent='START';
+    progressFill.style.strokeDashoffset=CIRCUMFERENCE;progressFill.classList.remove('complete');
+    deviceHint.textContent='Aucune tâche chargée.';return;
+  }
+
+  startBtn.classList.remove('pulse');
+  devLabel.textContent='Étape '+(state.session.stepIndex+1)+' / '+task.steps.length;
+  devTask.textContent=task.name;
+  devStep.textContent=task.steps[state.session.stepIndex]||'Terminé';
+
+  devProgress.innerHTML='';
+  task.steps.forEach((_,i)=>{
+    const p=document.createElement('span');p.className='pip';
+    if(i<state.session.stepIndex)p.classList.add('done');
+    else if(i===state.session.stepIndex)p.classList.add('current');
+    devProgress.appendChild(p);
+  });
+
+  if(task.duration>0 && state.session.isActive){
+    devTimer.style.display='flex';
+    if(!timerInterval && !state.session.isPaused) startTimer();
+  } else {
+    devTimer.style.display='none';
+    const p = task.steps.length > 0 ? (state.session.stepIndex + 1) / task.steps.length : 0;
+    progressFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - p);
+    stopTimer();
+  }
+
+  if(!state.session.isActive) {
+    startBtn.textContent='START';
+    deviceHint.textContent='Appuyez sur START pour commencer.';
+  } else if(state.session.isPaused) {
+    startBtn.textContent='REPRENDRE';
+    deviceHint.textContent='Session en pause. Appuyez pour reprendre.';
+  } else if(task.duration === 0) {
+    startBtn.textContent='SUIVANT';
+    deviceHint.textContent='Mode libre. Appuyez pour valider l\'étape.';
+  } else {
+    startBtn.textContent='SUIVANT';
+    deviceHint.textContent='Appuyez pour valider cette étape.';
   }
 }
 
 function completeTask(){
   const task=getCurrentTask();if(!task)return;
   task.done=true;
+  
+  // CORRECTION 3 : Calcul final du temps réel travaillé
   const finalActiveTime = state.session.activeTimeAccumulated + (Date.now() - state.session.lastActiveAt);
   const durationInMin = Math.max(1, Math.floor(finalActiveTime / 60000));
+  
   state.journey.sessions.push({
     id:'s_'+Date.now(),
     taskName:task.name,
@@ -953,14 +1140,22 @@ function completeTask(){
     taskCount:1,
     stepIndex:state.session.stepIndex
   });
+  
   updateQuestProgress({type:'taskCompleted',duration:durationInMin,taskCount:1});
+  
   stopTimer();releaseWakeLock();
   state.session.isActive=false;
-  state.session.taskId=null;state.session.stepIndex=0;
-  state.session.remainingTime=0;state.session.activeTimeAccumulated=0;
-  state.session.lastActiveAt=null;state.session.startedAt=null;
+  state.session.taskId=null;
+  state.session.stepIndex=0;
+  state.session.remainingTime=0;
+  state.session.activeTimeAccumulated=0;
+  state.session.lastActiveAt=null;
+  state.session.startedAt=null;
+  
   saveTasks();saveSession();saveJourney();
-  renderTasks();renderDevice();toast('Tâche terminée');progressFill.classList.add('complete');
+  renderTasks();renderDevice();
+  toast('Tâche terminée');
+  progressFill.classList.add('complete');
   if(document.getElementById('view-quests').classList.contains('active'))renderQuests();
 }
 
@@ -1014,6 +1209,8 @@ resumeOverlay.addEventListener('click',e=>{if(e.target===resumeOverlay)resumeOve
 async function resumeSessionAfterReload(){
   if(!state.session.taskId || !state.session.isActive) return;
   const task=getCurrentTask();if(!task)return;
+  
+  // Si le temps est déjà écoulé pendant l'absence
   if(state.session.remainingTime <= 0) {
     state.session.isActive = false;
     state.session.remainingTime = 0;
@@ -1037,6 +1234,7 @@ function getBlockTitle(b){const t={noIdea:"Première action immédiate",tooBig:"
 function getBlockSubtitle(b,c){const s={noIdea:`Voici 3 actions concrètes pour démarrer. Modifiables.`,tooBig:`La tâche est découpée en 3 micro-étapes. Commence par la première.`,tired:`Version minimaliste en 3 étapes. Tu peux faire une pause à tout moment.`};return s[b]||`${c} actions à faire`;}
 window.renderBlockMain=renderBlockMain;
 
+/* Quêtes */
 const QUEST_DEFS={
   daily:[{id:'first_step',title:'Premier pas',desc:'Terminer une tâche aujourd\'hui',icon:'playCircle',target:1,unit:'task',reward:20,track:'tasksCompleted'},{id:'mission_accomplished',title:'Mission accomplie',desc:'Terminer deux tâches aujourd\'hui',icon:'checkCircle',target:2,unit:'task',reward:30,track:'tasksCompleted'},{id:'focus_time',title:'Temps de concentration',desc:'Cumuler 60 minutes de sessions terminées',icon:'timer',target:60,unit:'min',reward:40,track:'minutesCompleted'},{id:'take_action',title:'Passer à l\'action',desc:'Démarrer une session START aujourd\'hui',icon:'flame',target:1,unit:'session',reward:15,track:'sessionsStarted'}],
   weekly:[{id:'ten_tasks',title:'Dix tâches',desc:'Terminer 10 tâches cette semaine',icon:'layers',target:10,unit:'task',reward:50,track:'tasksCompleted'},{id:'three_days',title:'Trois jours actifs',desc:'Utiliser START pendant 3 jours différents',icon:'calendarCheck',target:3,unit:'day',reward:40,track:'daysUsed'},{id:'five_hours',title:'Cinq heures',desc:'Cumuler 5 heures de sessions terminées',icon:'hourglass',target:300,unit:'min',reward:60,track:'minutesCompleted'},{id:'multi_task_session',title:'Session riche',desc:'Terminer une session avec au moins 3 tâches',icon:'award',target:1,unit:'session',reward:50,track:'multiTaskSessions'}],
@@ -1083,11 +1281,13 @@ async function init(){await loadState();renderTemplates();renderSteps();renderTa
 init();
 window.switchView=switchView;
 
+// CORRECTION 3 : Sauvegarde robuste à la fermeture
 window.addEventListener('beforeunload',()=>{saveSession();});
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='hidden') {
     saveSession();
   } else {
+    // Reprise après retour dans l'onglet
     if(state.session.isActive && !state.session.isPaused && state.session.remainingTime > 0) {
       if(!timerInterval) {
         const t=getCurrentTask();
