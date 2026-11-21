@@ -18,10 +18,10 @@
   window.applyTheme=function(theme,silent){
     const r=document.documentElement;
     const T={
-      light:{'--bg':'#FAF6F1','--bg-soft':'#F3ECE2','--surface':'#FFFFFF','--surface-2':'#FDFBF8','--ink':'#2B2A28','--ink-2':'#5A564F','--ink-3':'#8A857E','--line':'#EDE7DF','--line-2':'#E3DBCF','--accent':'#E0856F','--accent-2':'#C96E59','--accent-soft':'#FCEAE3','--accent-halo':'#F2A892','--sage':'#A8B89A','--sage-2':'#5C7050','--sage-soft':'#E8EFE1','--nav-bg':'rgba(255,255,255,0.85)','--nav-border':'#EDE7DF','--nav-text':'#5A564F','--nav-text-active':'#FFFFFF','--nav-bg-active':'#2B2A28','--gold':'#D4A574','--gold-soft':'#F5E6D3'},
-      night:{'--bg':'#1a1816','--bg-soft':'#252220','--surface':'#2a2724','--surface-2':'#2f2c29','--ink':'#F5E9DC','--ink-2':'#D4C8B8','--ink-3':'#8A857E','--line':'#3a3632','--line-2':'#4a4540','--accent':'#E0856F','--accent-2':'#C96E59','--accent-soft':'#3d2a24','--accent-halo':'#F2A892','--sage':'#A8B89A','--sage-2':'#C5D4B8','--sage-soft':'#2a3326','--nav-bg':'rgba(24,24,27,0.92)','--nav-border':'#27272A','--nav-text':'#A1A1AA','--nav-text-active':'#FFFFFF','--nav-bg-active':'#E0856F','--gold':'#D4A574','--gold-soft':'#3d3024'},
-      galaxy:{'--bg':'#1a1a2e','--bg-soft':'#252540','--surface':'#2a2a45','--surface-2':'#2f2f4a','--ink':'#F5E9DC','--ink-2':'#D4C8B8','--ink-3':'#9a95a8','--line':'#3a3a55','--line-2':'#4a4a65','--accent':'#E0856F','--accent-2':'#C96E59','--accent-soft':'#3d2a35','--accent-halo':'#F2A892','--sage':'#A8B89A','--sage-2':'#C5D4B8','--sage-soft':'#2a3335','--nav-bg':'rgba(22,25,44,0.92)','--nav-border':'#2E3454','--nav-text':'#CBD5E1','--nav-text-active':'#FFFFFF','--nav-bg-active':'#E0856F','--gold':'#D4A574','--gold-soft':'#3d2a35'},
-      warm:{'--bg':'#F5EDE0','--bg-soft':'#EDE0CC','--surface':'#FFF8EE','--surface-2':'#FFF5E8','--ink':'#3a2e22','--ink-2':'#6b5a48','--ink-3':'#9a8870','--line':'#E8D8C0','--line-2':'#DCC8A8','--accent':'#C96E59','--accent-2':'#A85845','--accent-soft':'#F5D8C8','--accent-halo':'#E89878','--sage':'#9a8a6a','--sage-2':'#6b5e48','--sage-soft':'#E8DCC0','--nav-bg':'rgba(255,248,238,0.9)','--nav-border':'#E8D8C0','--nav-text':'#6b5a48','--nav-text-active':'#FFFFFF','--nav-bg-active':'#3a2e22','--gold':'#B8864E','--gold-soft':'#F0DCC0'}
+      light:{'--bg':'#FAF6F1','--bg-soft':'#F3ECE2','--surface':'#FFFFFF','--surface-2':'#FDFBF8','--ink':'#2B2A28','--ink-2':'#5A564F','--ink-3':'#8A857E','--line':'#EDE7DF','--line-2':'#E3DBCF','--accent':'#E0856F','--accent-2':'#C96E59','--accent-soft':'#FCEAE3','--accent-halo':'#F2A892','--sage':'#A8B89A','--sage-2':'#5C7050','--sage-soft':'#E8EFE1','--nav-bg':'rgba(255,255,255,0.85)','--nav-border':'#EDE7DF','--nav-text':'#5A564F','--nav-text-active':'#FFFFFF','--nav-bg-active':'#2B2A28'},
+      night:{'--bg':'#1a1816','--bg-soft':'#252220','--surface':'#2a2724','--surface-2':'#2f2c29','--ink':'#F5E9DC','--ink-2':'#D4C8B8','--ink-3':'#8A857E','--line':'#3a3632','--line-2':'#4a4540','--accent':'#E0856F','--accent-2':'#C96E59','--accent-soft':'#3d2a24','--accent-halo':'#F2A892','--sage':'#A8B89A','--sage-2':'#C5D4B8','--sage-soft':'#2a3326','--nav-bg':'rgba(24,24,27,0.92)','--nav-border':'#27272A','--nav-text':'#A1A1AA','--nav-text-active':'#FFFFFF','--nav-bg-active':'#E0856F'},
+      galaxy:{'--bg':'#1a1a2e','--bg-soft':'#252540','--surface':'#2a2a45','--surface-2':'#2f2f4a','--ink':'#F5E9DC','--ink-2':'#D4C8B8','--ink-3':'#9a95a8','--line':'#3a3a55','--line-2':'#4a4a65','--accent':'#E0856F','--accent-2':'#C96E59','--accent-soft':'#3d2a35','--accent-halo':'#F2A892','--sage':'#A8B89A','--sage-2':'#C5D4B8','--sage-soft':'#2a3335','--nav-bg':'rgba(22,25,44,0.92)','--nav-border':'#2E3454','--nav-text':'#CBD5E1','--nav-text-active':'#FFFFFF','--nav-bg-active':'#E0856F'},
+      warm:{'--bg':'#F5EDE0','--bg-soft':'#EDE0CC','--surface':'#FFF8EE','--surface-2':'#FFF5E8','--ink':'#3a2e22','--ink-2':'#6b5a48','--ink-3':'#9a8870','--line':'#E8D8C0','--line-2':'#DCC8A8','--accent':'#C96E59','--accent-2':'#A85845','--accent-soft':'#F5D8C8','--accent-halo':'#E89878','--sage':'#9a8a6a','--sage-2':'#6b5e48','--sage-soft':'#E8DCC0','--nav-bg':'rgba(255,248,238,0.9)','--nav-border':'#E8D8C0','--nav-text':'#6b5a48','--nav-text-active':'#FFFFFF','--nav-bg-active':'#3a2e22'}
     };
     const t=T[theme]||T.light;
     Object.entries(t).forEach(([k,v])=>r.style.setProperty(k,v));
@@ -48,7 +48,7 @@ html,body{height:100%;}
   --ease:cubic-bezier(.2,.7,.2,1);
   --nav-height:64px;
 }
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:calc(var(--nav-height) + 12px + env(safe-area-inset-bottom));transition:background .4s var(--ease),color .4s var(--ease);}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:calc(var(--nav-height) + 48px + env(safe-area-inset-bottom));transition:background .4s var(--ease),color .4s var(--ease);}
 body::before{content:"";position:fixed;inset:0;background:radial-gradient(1200px 600px at 85% -10%,rgba(224,133,111,0.08),transparent 60%),radial-gradient(900px 500px at -10% 20%,rgba(168,184,154,0.08),transparent 60%);pointer-events:none;z-index:0;}
 body.theme-galaxy::before{background:radial-gradient(1200px 600px at 85% -10%,rgba(224,133,111,0.12),transparent 60%),radial-gradient(900px 500px at -10% 20%,rgba(168,184,154,0.08),transparent 60%);}
 body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,0.3),transparent),radial-gradient(1px 1px at 60% 70%,rgba(255,255,255,0.2),transparent),radial-gradient(1px 1px at 80% 20%,rgba(255,255,255,0.25),transparent),radial-gradient(1px 1px at 40% 80%,rgba(255,255,255,0.15),transparent),radial-gradient(1px 1px at 90% 60%,rgba(255,255,255,0.2),transparent);background-size:100% 100%;pointer-events:none;z-index:0;animation:twinkle 8s ease-in-out infinite;}
@@ -70,7 +70,6 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .page-subtitle{font-size:16px;color:var(--ink-3);max-width:520px;}
 .view{display:none;animation:fadeUp .45s var(--ease);}
 .view.active{display:block;}
-/* CORRECTION 5 : Padding augmenté pour éviter le recouvrement par la nav mobile */
 .view-content{padding-bottom:calc(var(--nav-height) + 48px + env(safe-area-inset-bottom));}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);}
@@ -140,7 +139,7 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .add-step-btn{width:100%;padding:10px;border:1px dashed var(--line-2);border-radius:var(--radius-sm);background:transparent;color:var(--ink-3);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s var(--ease);}
 .add-step-btn:hover{border-color:var(--accent);color:var(--accent-2);background:var(--accent-soft);}
 
-/* CORRECTION 1 & 2 : Styles pour la file d'attente multi-tâches */
+/* CORRECTION : Styles robustes pour la file d'attente multi-tâches */
 .multi-session-builder{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;margin-top:16px;}
 .ms-task-item{display:flex;align-items:center;gap:6px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;flex-wrap:wrap;}
 .ms-task-item select, .ms-task-item input[type="text"], .ms-task-item input[type="number"]{padding:8px;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;}
@@ -317,17 +316,17 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .onboarding-choice:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-2px);}
 .onboarding-choice.selected{border-color:var(--accent);background:var(--accent-soft);}
 .onboarding-choice .check-mark{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--accent);display:none;align-items:center;justify-content:center;}
-.onboarding-choice.selected .check-mark{display:flex;}
-.onboarding-choice .check-mark svg{width:12px;height:12px;color:#fff;}
-.onboarding-choice svg.choice-icon{width:24px;height:24px;color:var(--ink-2);flex-shrink:0;}
-.onboarding-choice.selected svg.choice-icon{color:var(--accent-2);}
+.onboarding-choice.selected .check-mark { display: flex; }
+.onboarding-choice .check-mark svg { width: 12px; height: 12px; color: #fff; }
+.onboarding-choice svg.choice-icon { width: 24px; height: 24px; color: var(--ink-2); flex-shrink: 0; }
+.onboarding-choice.selected svg.choice-icon { color: var(--accent-2); }
 .onboarding-input{width:100%;padding:16px 20px;border:2px solid var(--line);border-radius:var(--radius-md);background:var(--surface);font-family:inherit;font-size:16px;color:var(--ink);outline:none;transition:border-color .2s var(--ease);margin-bottom:16px;}
 .onboarding-input:focus{border-color:var(--accent);}
 .onboarding-input::placeholder{color:var(--ink-3);}
 .onboarding-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
 .quests-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
 .quests-points{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:12px 18px;box-shadow:var(--shadow-sm);}
-.quests-points-icon{width:40px;height:40px;border-radius:50%;background:var(--gold-soft);display:grid;place-items:center;color:var(--gold);}
+.quests-points-icon{width:40px;height:40px;border-radius:50%;background:var(--sage-soft);display:grid;place-items:center;color:var(--sage-2);}
 .quests-points-icon svg{width:22px;height:22px;}
 .quests-points-info{display:flex;flex-direction:column;}
 .quests-points-value{font-family:'Inter',sans-serif;font-weight:700;font-size:20px;color:var(--ink);line-height:1;}
@@ -336,7 +335,7 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .quests-level-header{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-3);}
 .quests-level-header strong{color:var(--ink);font-weight:600;}
 .quests-level-bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;}
-.quests-level-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;transition:width .4s var(--ease);}
+.quests-level-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--sage));border-radius:3px;transition:width .4s var(--ease);}
 .quests-section{margin-bottom:28px;}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 .section-header h2{font-family:'Caveat',cursive;font-size:28px;color:var(--ink);display:flex;align-items:center;gap:8px;}
@@ -356,7 +355,7 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .quest-info{flex:1;min-width:0;}
 .quest-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:2px;}
 .quest-desc{font-size:12px;color:var(--ink-3);line-height:1.4;}
-.quest-reward{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--gold);background:var(--gold-soft);padding:3px 8px;border-radius:999px;margin-top:6px;}
+.quest-reward{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--sage-2);background:var(--sage-soft);padding:3px 8px;border-radius:999px;margin-top:6px;}
 .quest-reward svg{width:12px;height:12px;}
 .quest-progress{margin-top:10px;}
 .quest-progress-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
@@ -391,7 +390,7 @@ body.theme-galaxy::after{content:"";position:fixed;inset:0;background-image:radi
 .journey-history-info{flex:1;min-width:0;}
 .journey-history-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .journey-history-meta{font-size:12px;color:var(--ink-3);}
-.journey-empty{text-align:center;padding:60px 20px;background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--radius-md);}
+.journey-empty{text-align:center;padding:60px 20px;background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--radius-lg);}
 .journey-empty-icon{width:56px;height:56px;margin:0 auto 16px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent-2);}
 .journey-empty-icon svg{width:28px;height:28px;}
 .journey-empty h3{font-family:'Caveat',cursive;font-size:24px;color:var(--ink);margin-bottom:6px;}
@@ -456,7 +455,6 @@ button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2
       <div>
         <div class="card"><div class="section-label">Modèles rapides</div><div class="templates-grid" id="templatesGrid"></div></div>
         
-        <!-- CORRECTION 2 : Séparation claire des modes -->
         <button class="btn btn-ghost" id="toggleMultiModeBtn" style="width:100%; margin-top:12px;">Mode Session multi-tâches</button>
         
         <div id="multiSessionBuilder" class="multi-session-builder" style="display:none;">
@@ -631,6 +629,7 @@ button:focus-visible, input:focus-visible, .task-card:focus-visible { outline: 2
 <div class="toast" id="toast"></div>
 
 <script>
+// Service Worker registration
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/App-microphone/sw.js').then(reg=>{
     reg.addEventListener('updatefound',()=>{
@@ -659,10 +658,10 @@ let db=null,wakeLock=null,timerInterval=null,audioCtx=null;
 let sheetMinutes=5,prepareDuration=5,prepareFree=false,prepareSteps=[];
 let isMultiMode = false;
 
-function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,2);r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('tasks'))d.createObjectStore('tasks',{keyPath:'id'});if(!d.objectStoreNames.contains('settings'))d.createObjectStore('settings',{keyPath:'id'});if(!d.objectStoreNames.contains('session'))d.createObjectStore('session',{keyPath:'id'});if(!d.objectStoreNames.contains('onboarding'))d.createObjectStore('onboarding',{keyPath:'id'});if(!d.objectStoreNames.contains('quests'))d.createObjectStore('quests',{keyPath:'id'});if(!d.objectStoreNames.contains('journey'))d.createObjectStore('journey',{keyPath:'id'});};r.onsuccess=e=>res(e.target.result);r.onerror=e=>rej(e);});}
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,2);r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('tasks'))d.createObjectStore('tasks',{keyPath:'id'});if(!d.objectStoreNames.contains('settings'))d.createObjectStore('settings',{keyPath:'key'});if(!d.objectStoreNames.contains('session'))d.createObjectStore('session',{keyPath:'key'});if(!d.objectStoreNames.contains('onboarding'))d.createObjectStore('onboarding',{keyPath:'key'});if(!d.objectStoreNames.contains('quests'))d.createObjectStore('quests',{keyPath:'key'});if(!d.objectStoreNames.contains('journey'))d.createObjectStore('journey',{keyPath:'key'});};r.onsuccess=e=>res(e.target.result);r.onerror=e=>rej(e);});}
 async function dbGet(s,k){if(!db)return null;return new Promise(r=>{try{const tx=db.transaction(s,'readonly'),req=tx.objectStore(s).get(k);req.onsuccess=()=>r(req.result?req.result.value:null);req.onerror=()=>r(null);}catch(e){r(null);}});}
-async function dbPut(s,k,v){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(store).put({id:k, value:v});tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
-async function dbClear(s){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(store).clear();tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
+async function dbPut(s,k,v){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(s).put({id:k, value:v});tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
+async function dbClear(s){if(!db)return;return new Promise(r=>{try{const tx=db.transaction(s,'readwrite');tx.objectStore(s).clear();tx.oncomplete=()=>r();tx.onerror=()=>r();}catch(e){r();}});}
 async function dbAllTasks(){if(!db)return[];return new Promise(r=>{try{const tx=db.transaction('tasks','readonly'),req=tx.objectStore('tasks').getAll();req.onsuccess=()=>r(req.result.map(x=>x.value));req.onerror=()=>r([]);}catch(e){r([]);}});}
 
 function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
@@ -815,32 +814,51 @@ const CIRCUMFERENCE=2*Math.PI*90;progressFill.style.strokeDasharray=CIRCUMFERENC
 startBtn.addEventListener('click',handleStartClick);
 startBtn.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();handleStartClick();}});
 
-function handleStartClick(){
-  if (state.session.isMultiSession) {
-    if (state.session.isPaused) { resumeSession(); return; }
-    if (state.session.remainingMs <= 0) {
-      showMultiTaskEndModal();
-    } else {
-      validateStep();
+// CORRECTION 4 : Le bouton START détecte une session préparée et la lance
+function handleStartClick() {
+    if (state.multiSessionQueue.length > 0 && !state.session.isMultiSession && !state.session.isActive) {
+        const firstItem = state.multiSessionQueue[0];
+        state.session.isMultiSession = true;
+        state.session.taskId = firstItem.taskId || 'temp_' + Date.now();
+        state.session.stepIndex = 0;
+        state.session.remainingMs = firstItem.duration * 60000;
+        state.session.lastTick = Date.now();
+        state.session.isPaused = false;
+        state.session.workedMs = 0;
+        saveSession();
+        renderDevice();
+        startSession();
+        if (state.settings.wakeLock) requestWakeLock();
+        toast('Session multi-tâches démarrée');
+        return;
     }
-    return;
-  }
-  const task=getCurrentTask();
-  if(!task){
-    toast('Veuillez d\'abord préparer ou sélectionner une tâche');
-    setTimeout(() => switchView('prepare'), 1000);
-    return;
-  }
-  if(!state.session.isActive){
-    startSession();
-    updateQuestProgress({type:'sessionStarted'});
-    return;
-  }
-  if(state.session.isPaused){
-    resumeSession();
-    return;
-  }
-  validateStep();
+
+    if (state.session.isMultiSession) {
+        if (state.session.isPaused) { resumeSession(); return; }
+        if (state.session.remainingMs <= 0) {
+            showMultiTaskEndModal();
+        } else {
+            validateStep();
+        }
+        return;
+    }
+
+    const task = getCurrentTask();
+    if (!task) {
+        toast('Veuillez d\'abord préparer ou sélectionner une tâche');
+        setTimeout(() => switchView('prepare'), 1000);
+        return;
+    }
+    if (!state.session.isActive) {
+        startSession();
+        updateQuestProgress({ type: 'sessionStarted' });
+        return;
+    }
+    if (state.session.isPaused) {
+        resumeSession();
+        return;
+    }
+    validateStep();
 }
 
 function startSession(){
@@ -1198,137 +1216,158 @@ state.onboarding.currentScreen=currentScreen;state.onboarding.answers=onboarding
 function setupTutorialButton(bid,cb){const b=document.getElementById(bid);if(!b)return;const h=e=>{e.preventDefault();b.removeEventListener('click',h);b.classList.add('glow');setTimeout(()=>b.classList.remove('glow'),500);if(navigator.vibrate)navigator.vibrate(30);cb();};b.addEventListener('click',h);}
 window.toggleOnboardingAnswer=function(k,v){if(!Array.isArray(onboardingAnswers[k]))onboardingAnswers[k]=[];const i=onboardingAnswers[k].indexOf(v);if(i>-1)onboardingAnswers[k].splice(i,1);else onboardingAnswers[k].push(v);renderOnboardingScreen();if(k==='blocker')showReaction(1);};
 window.selectOnboardingAnswer=function(k,v){onboardingAnswers[k]=v;renderOnboardingScreen();};
-function showReaction(sn){const r=document.getElementById(`onboardingReaction${sn}`);if(!r)return;const s=onboardingAnswers.blocker||[];if(s.length===0){r.innerHTML='';return;}const p=[];if(s.includes('tooBig'))p.push("c'est trop gros");if(s.includes('noIdea'))p.push("tu ne sais pas par où commencer");if(s.includes('distracted'))p.push("tu te laisses distraire");if(s.includes('tired'))p.push("tu es à plat");let rx="Merci de me le dire. ";if(s.length===1)rx+="On va y aller par toutes petites marches, à ton rythme.";else if(s.length===2)rx+=`Je comprends que ${p.join(' et ')}. On va découper ensemble, tout doucement.`;else rx+="Je comprends. On va faire des étapes si petites et si douces que c'est difficile de s'arrêter.";r.innerHTML=`<div class="onboarding-reaction">${rx}</div>`;}
+function showReaction(sn){const r=document.getElementById(`onboardingReaction${sn}`);if(!r)return;const s=onboardingAnswers.blocker||[];if(s.length===0){r.innerHTML='';return;}const p=[];if(s.includes('tooBig'))p.push("c'est trop gros");if(s.includes('noIdea'))p.push("tu ne sais pas par où commencer");if(s.includes('distracted'))p.push("tu te laisses distraire");if(s.includes('tired'))p.push("tu es à plat");let rx="Merci de me le dire. ";if(s.length===1)rx+="On va y aller par toutes petites marches, à ton rythme.";else if(s.length===2)rx+=`Je comprends que ${parts.join(' et ')}. On va découper ensemble, tout doucement.`;else rx+="Je comprends. On va faire des étapes si petites et si douces que c'est difficile de s'arrêter.";r.innerHTML=`<div class="onboarding-reaction">${rx}</div>`;}
 window.nextOnboardingScreen=function(){if(currentScreen<ONBOARDING_SCREENS-1){currentScreen++;renderOnboardingScreen();}};
 window.prevOnboardingScreen=function(){if(currentScreen>0){currentScreen--;renderOnboardingScreen();}};
 window.skipOnboarding=function(){finishOnboarding();};
 function finishOnboarding(){const ti=document.getElementById('taskInput'),tn=ti?ti.value.trim():'';state.onboarding.completed=true;state.onboarding.currentScreen=ONBOARDING_SCREENS;state.onboarding.answers=onboardingAnswers;saveOnboarding();if(tn){const t={id:'t_'+Date.now(),name:tn,steps:[`Commencer : ${tn}`],duration:5,done:false,createdAt:Date.now()};state.tasks.unshift(t);saveTasks();document.getElementById('onboardingOverlay').classList.remove('active');renderTasks();setTimeout(()=>{loadTask(t.id);toast('Première étape prête ! Appuie sur START');},500);}else{document.getElementById('onboardingOverlay').classList.remove('active');toast('Bienvenue dans START !');}}
 
-// CORRECTION 1 & 2 : Gestion de la file d'attente multi-tâches
-document.getElementById('toggleMultiModeBtn').addEventListener('click', () => {
-  isMultiMode = !isMultiMode;
-  document.getElementById('multiSessionBuilder').style.display = isMultiMode ? 'block' : 'none';
-  document.getElementById('singleTaskDuration').style.display = isMultiMode ? 'none' : 'block';
-  document.getElementById('toggleMultiModeBtn').textContent = isMultiMode ? 'Mode Tâche simple' : 'Mode Session multi-tâches';
-});
+// CORRECTION 1 & 2 & 3 : Délégation d'événements robuste pour la file d'attente multi-tâches
+function initMultiTaskListeners() {
+    const container = document.getElementById('multiSessionBuilder');
+    if (!container) return;
 
-window.addMsTask = function() {
-  state.multiSessionQueue.push({ taskId: null, name: "", duration: 5 });
-  renderMultiSessionQueue();
-};
+    // Délégation pour les clics sur les boutons
+    container.addEventListener('click', (e) => {
+        const target = e.target.closest('button');
+        if (!target) return;
 
-window.removeMsTask = function(index) {
-  state.multiSessionQueue.splice(index, 1);
-  renderMultiSessionQueue();
-};
-
-window.moveMsTask = function(index, direction) {
-  const newIndex = index + direction;
-  if (newIndex >= 0 && newIndex < state.multiSessionQueue.length) {
-    const temp = state.multiSessionQueue[index];
-    state.multiSessionQueue[index] = state.multiSessionQueue[newIndex];
-    state.multiSessionQueue[newIndex] = temp;
-    renderMultiSessionQueue();
-  }
-};
-
-function renderMultiSessionQueue() {
-  const list = document.getElementById('msTaskList');
-  const totalEl = document.getElementById('msTotalTime');
-  list.innerHTML = '';
-  let total = 0;
-  
-  state.multiSessionQueue.forEach((item, i) => {
-    total += (parseInt(item.duration) || 0);
-    const div = document.createElement('div');
-    div.className = 'ms-task-item';
-    
-    let options = `<option value="">Nouvelle tâche</option>`;
-    state.tasks.forEach(t => {
-      options += `<option value="${t.id}" ${item.taskId === t.id ? 'selected' : ''}>${escapeHtml(t.name)}</option>`;
-    });
-    
-    div.innerHTML = `
-      <select class="ms-task-select" data-index="${i}" style="flex:2; margin-right:4px;">${options}</select>
-      <input type="text" class="ms-task-name" data-index="${i}" value="${escapeHtml(item.name)}" placeholder="Nom" style="flex:2; display:${item.taskId ? 'none' : 'block'};">
-      <input type="number" class="ms-task-duration" data-index="${i}" value="${item.duration}" min="1" style="width:60px; text-align:center;">
-      <button class="icon-btn" onclick="moveMsTask(${i}, -1)" ${i===0?'disabled':''} style="width:28px;height:28px;">↑</button>
-      <button class="icon-btn" onclick="moveMsTask(${i}, 1)" ${i===state.multiSessionQueue.length-1?'disabled':''} style="width:28px;height:28px;">↓</button>
-      <button class="icon-btn danger" onclick="removeMsTask(${i})" style="width:28px;height:28px;">${ICONS.x}</button>
-    `;
-    list.appendChild(div);
-  });
-  
-  totalEl.textContent = formatDuration(total);
-  
-  list.querySelectorAll('.ms-task-select').forEach(sel => {
-    sel.addEventListener('change', (e) => {
-      const idx = parseInt(e.target.dataset.index);
-      const taskId = e.target.value;
-      const nameInput = e.target.parentElement.querySelector('.ms-task-name');
-      if (taskId) {
-        const t = state.tasks.find(x => x.id === taskId);
-        if (t) {
-          state.multiSessionQueue[idx].taskId = taskId;
-          state.multiSessionQueue[idx].name = t.name;
-          state.multiSessionQueue[idx].duration = t.duration;
-          nameInput.style.display = 'none';
+        if (target.id === 'addMsTaskBtn') {
+            state.multiSessionQueue.push({ taskId: null, name: "", duration: 5 });
+            renderMultiSessionQueue();
+            return;
         }
-      } else {
-        state.multiSessionQueue[idx].taskId = null;
-        state.multiSessionQueue[idx].name = "";
-        state.multiSessionQueue[idx].duration = 5;
-        nameInput.style.display = 'block';
-      }
-      renderMultiSessionQueue();
+
+        if (target.id === 'startMsSessionBtn') {
+            const validQueue = state.multiSessionQueue.filter(item => item.name.trim() !== "");
+            if (validQueue.length === 0) {
+                toast('Ajoutez au moins une tâche avec un nom');
+                return;
+            }
+            state.multiSessionQueue = validQueue;
+            state.session.isMultiSession = true;
+            state.session.workedMs = 0;
+            state.multiSessionIndex = 0;
+
+            const firstItem = state.multiSessionQueue[0];
+            state.session.taskId = firstItem.taskId || 'temp_' + Date.now();
+            state.session.stepIndex = 0;
+            state.session.remainingMs = firstItem.duration * 60000;
+            state.session.lastTick = Date.now();
+            state.session.isPaused = false;
+
+            saveSession();
+            switchView('device');
+            setTimeout(() => {
+                renderDevice();
+                startSession();
+                if (state.settings.wakeLock) requestWakeLock();
+                toast('Session multi-tâches démarrée');
+            }, 100);
+            return;
+        }
+
+        if (target.classList.contains('remove-task-btn')) {
+            const idx = parseInt(target.dataset.index);
+            state.multiSessionQueue.splice(idx, 1);
+            renderMultiSessionQueue();
+            return;
+        }
+
+        if (target.classList.contains('move-up-btn')) {
+            const idx = parseInt(target.dataset.index);
+            if (idx > 0) {
+                const temp = state.multiSessionQueue[idx];
+                state.multiSessionQueue[idx] = state.multiSessionQueue[idx - 1];
+                state.multiSessionQueue[idx - 1] = temp;
+                renderMultiSessionQueue();
+            }
+            return;
+        }
+
+        if (target.classList.contains('move-down-btn')) {
+            const idx = parseInt(target.dataset.index);
+            if (idx < state.multiSessionQueue.length - 1) {
+                const temp = state.multiSessionQueue[idx];
+                state.multiSessionQueue[idx] = state.multiSessionQueue[idx + 1];
+                state.multiSessionQueue[idx + 1] = temp;
+                renderMultiSessionQueue();
+            }
+            return;
+        }
     });
-  });
-  
-  list.querySelectorAll('.ms-task-name').forEach(inp => {
-    inp.addEventListener('input', (e) => {
-      const idx = parseInt(e.target.dataset.index);
-      state.multiSessionQueue[idx].name = e.target.value;
+
+    // Délégation pour les changements de valeur (input)
+    container.addEventListener('input', (e) => {
+        const target = e.target;
+        if (target.classList.contains('ms-task-name')) {
+            const idx = parseInt(target.dataset.index);
+            state.multiSessionQueue[idx].name = target.value;
+        }
+        if (target.classList.contains('ms-task-duration')) {
+            const idx = parseInt(target.dataset.index);
+            const val = Math.max(1, parseInt(target.value) || 1);
+            state.multiSessionQueue[idx].duration = val;
+            target.value = val; // Force la mise à jour visuelle
+            renderMultiSessionQueue(); // Recalcule le total immédiatement
+        }
     });
-  });
-  
-  list.querySelectorAll('.ms-task-duration').forEach(inp => {
-    inp.addEventListener('change', (e) => {
-      const idx = parseInt(e.target.dataset.index);
-      state.multiSessionQueue[idx].duration = Math.max(1, parseInt(e.target.value) || 1);
-      renderMultiSessionQueue();
+
+    // Délégation pour les changements de sélection (select)
+    container.addEventListener('change', (e) => {
+        const target = e.target;
+        if (target.classList.contains('ms-task-select')) {
+            const idx = parseInt(target.dataset.index);
+            const taskId = target.value;
+            const nameInput = target.parentElement.querySelector('.ms-task-name');
+            if (taskId) {
+                const t = state.tasks.find(x => x.id === taskId);
+                if (t) {
+                    state.multiSessionQueue[idx].taskId = taskId;
+                    state.multiSessionQueue[idx].name = t.name;
+                    state.multiSessionQueue[idx].duration = t.duration;
+                    nameInput.style.display = 'none';
+                }
+            } else {
+                state.multiSessionQueue[idx].taskId = null;
+                state.multiSessionQueue[idx].name = "";
+                state.multiSessionQueue[idx].duration = 5;
+                nameInput.style.display = 'block';
+            }
+            renderMultiSessionQueue();
+        }
     });
-  });
 }
 
-// CORRECTION 3 : Démarrage de la session multi-tâches
-document.getElementById('startMsSessionBtn').addEventListener('click', () => {
-  const validQueue = state.multiSessionQueue.filter(item => item.name.trim() !== "");
-  if (validQueue.length === 0) {
-    toast('Ajoutez au moins une tâche avec un nom');
-    return;
-  }
-  
-  state.multiSessionQueue = validQueue;
-  state.session.isMultiSession = true;
-  state.session.workedMs = 0;
-  state.multiSessionIndex = 0;
-  
-  const firstItem = state.multiSessionQueue[0];
-  state.session.taskId = firstItem.taskId || 'temp_' + Date.now();
-  state.session.stepIndex = 0;
-  state.session.remainingMs = firstItem.duration * 60000;
-  state.session.lastTick = Date.now();
-  state.session.isPaused = false;
-  
-  saveSession();
-  switchView('device');
-  setTimeout(() => {
-    renderDevice();
-    startTimer();
-    if (state.settings.wakeLock) requestWakeLock();
-    toast('Session multi-tâches démarrée');
-  }, 100);
-});
+function renderMultiSessionQueue() {
+    const list = document.getElementById('msTaskList');
+    const totalEl = document.getElementById('msTotalTime');
+    list.innerHTML = '';
+    let total = 0;
+    
+    state.multiSessionQueue.forEach((item, i) => {
+        total += (parseInt(item.duration) || 0);
+        const div = document.createElement('div');
+        div.className = 'ms-task-item';
+        
+        let options = `<option value="">Nouvelle tâche</option>`;
+        state.tasks.forEach(t => {
+            options += `<option value="${t.id}" ${item.taskId === t.id ? 'selected' : ''}>${escapeHtml(t.name)}</option>`;
+        });
+        
+        div.innerHTML = `
+            <select class="ms-task-select" data-index="${i}" style="flex:2; margin-right:4px;">${options}</select>
+            <input type="text" class="ms-task-name" data-index="${i}" value="${escapeHtml(item.name)}" placeholder="Nom" style="flex:2; display:${item.taskId ? 'none' : 'block'};">
+            <input type="number" class="ms-task-duration" data-index="${i}" value="${item.duration}" min="1" style="width:60px; text-align:center;">
+            <button class="icon-btn move-up-btn" data-index="${i}" ${i===0?'disabled':''} style="width:28px;height:28px;">↑</button>
+            <button class="icon-btn move-down-btn" data-index="${i}" ${i===state.multiSessionQueue.length-1?'disabled':''} style="width:28px;height:28px;">↓</button>
+            <button class="icon-btn danger remove-task-btn" data-index="${i}" style="width:28px;height:28px;">${ICONS.x}</button>
+        `;
+        list.appendChild(div);
+    });
+    
+    totalEl.textContent = formatDuration(total);
+}
 
 async function init(){
   await loadState();
@@ -1336,6 +1375,7 @@ async function init(){
   renderSteps();
   renderTasks();
   renderBlockMain();
+  initMultiTaskListeners(); // Initialisation des écouteurs multi-tâches
   applySettingsToUI();
   renderDevice();
   await resumeSessionAfterReload();
