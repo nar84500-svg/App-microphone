@@ -1,1266 +1,398 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>START</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #F9F6F0;
-            --card-bg: #FFFFFF;
-            --text-primary: #4A3B2A;
-            --text-secondary: #8C7B6B;
-            --accent-coral: #FF7F66;
-            --accent-coral-light: #FFB8A8;
-            --border-color: #F0E6D2;
-            --shadow: 0 8px 24px rgba(74, 59, 42, 0.08);
-            --radius: 20px;
-            --font-hand: 'Caveat', cursive;
-            --font-body: 'Nunito', sans-serif;
-        }
-
-        body.theme-nuit {
-            --bg-color: #121212;
-            --card-bg: #1E1E1E;
-            --text-primary: #E0E0E0;
-            --text-secondary: #A0A0A0;
-            --accent-coral: #FF9A85;
-            --accent-coral-light: #3E2723;
-            --border-color: #333333;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        body.theme-galaxie {
-            --bg-color: #0B1026;
-            --card-bg: #151E3F;
-            --text-primary: #E0E7FF;
-            --text-secondary: #94A3B8;
-            --accent-coral: #818CF8;
-            --accent-coral-light: #312E81;
-            --border-color: #2D3768;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        }
-
-        body.theme-chaleureux {
-            --bg-color: #FFF8F0;
-            --card-bg: #FFFBF5;
-            --text-primary: #5D4037;
-            --text-secondary: #8D6E63;
-            --accent-coral: #E87A5D;
-            --accent-coral-light: #FFCCBC;
-            --border-color: #FFE0B2;
-            --shadow: 0 8px 24px rgba(93, 64, 55, 0.08);
-        }
-
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body {
-            margin: 0; padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            padding-bottom: 100px;
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        h1, h2, h3, .logo-title { font-family: var(--font-hand); color: var(--text-primary); margin: 0; }
-        h2 { font-size: 1.8rem; margin-bottom: 12px; }
-        h3 { font-size: 1.4rem; margin-bottom: 8px; }
-        p { color: var(--text-secondary); line-height: 1.5; margin-top: 0; }
-
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-
-        /* HEADER PHOTO 1 */
-        .app-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            padding: 0 4px;
-        }
-        .header-left { display: flex; align-items: center; gap: 12px; }
-        .logo-box {
-            width: 48px; height: 48px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-        .logo-letter {
-            font-family: var(--font-hand);
-            font-size: 1.8rem; font-weight: 700;
-            color: var(--accent-coral);
-        }
-        .header-text { display: flex; flex-direction: column; }
-        .logo-title { font-size: 2.2rem; font-weight: 700; line-height: 1; }
-        .logo-subtitle { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-top: 2px; }
-        .header-badge {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 6px 14px;
-            display: flex; align-items: center; gap: 6px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-        .badge-dot { width: 8px; height: 8px; background: var(--accent-coral); border-radius: 50%; }
-        .header-badge span { font-size: 0.8rem; font-weight: 700; color: var(--text-primary); }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 16px;
-        }
-
-        .btn {
-            border: none; border-radius: 50px; padding: 14px 24px;
-            font-size: 1rem; font-weight: 700; cursor: pointer;
-            font-family: var(--font-body); transition: all 0.15s;
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn:active { transform: scale(0.96); }
-        .btn-primary { background-color: var(--accent-coral); color: white; box-shadow: 0 4px 12px rgba(255, 127, 102, 0.3); width: 100%; }
-        .btn-secondary { background-color: var(--border-color); color: var(--text-primary); width: 100%; margin-top: 8px; }
-        .btn-danger { background-color: #FF6B6B; color: white; }
-        .btn-small { padding: 8px 16px; font-size: 0.9rem; width: auto; }
-        .chip { 
-            background: var(--border-color); color: var(--text-primary); 
-            padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; 
-            font-weight: 700; cursor: pointer; border: none; 
-        }
-        .chip:active { background: var(--accent-coral-light); }
-
-        input, select {
-            width: 100%; padding: 14px; border-radius: 12px;
-            border: 2px solid var(--border-color); background: var(--bg-color);
-            font-family: var(--font-body); font-size: 1rem; color: var(--text-primary);
-            margin-bottom: 12px; outline: none; transition: border-color 0.2s;
-        }
-        input:focus { border-color: var(--accent-coral); }
-
-        /* TIME PICKER PHOTO 4 */
-        .time-picker-card { text-align: center; padding: 24px; }
-        .time-display {
-            font-size: 3.5rem; font-weight: 800; font-variant-numeric: tabular-nums;
-            color: var(--text-primary); margin: 10px 0 20px 0; letter-spacing: 2px;
-        }
-        .quick-durations { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-        .numpad {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 320px; margin: 0 auto;
-        }
-        .numpad button {
-            aspect-ratio: 1.2; border-radius: 16px; border: none;
-            background: var(--bg-color); color: var(--text-primary);
-            font-size: 1.5rem; font-weight: 700; cursor: pointer;
-            transition: all 0.1s; display: flex; align-items: center; justify-content: center;
-        }
-        .numpad button:active { background: var(--accent-coral-light); transform: scale(0.95); }
-        .numpad .ok-btn { background: var(--accent-coral); color: white; grid-column: span 1; }
-        .numpad .back-btn { font-size: 1.2rem; }
-
-        /* MULTI-TASKS */
-        .session-item {
-            display: flex; align-items: center; gap: 8px;
-            background: var(--bg-color); padding: 12px; border-radius: 12px; margin-bottom: 8px;
-            border: 1px solid var(--border-color);
-        }
-        .session-item input { margin: 0; padding: 8px; font-weight: 700; background: var(--card-bg); }
-        .total-duration { font-size: 1.3rem; font-weight: 800; color: var(--accent-coral); text-align: right; margin: 16px 0; }
-
-        /* APPAREIL */
-        .appareil-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
-        .appareil-header button { background: none; border: none; color: var(--text-secondary); font-weight: 700; cursor: pointer; font-size: 0.9rem; }
-        .timer-display { font-size: 4.5rem; font-weight: 800; text-align: center; color: var(--text-primary); font-variant-numeric: tabular-nums; margin: 10px 0; }
-        .current-task-name { text-align: center; font-size: 1.8rem; font-family: var(--font-hand); color: var(--accent-coral); margin-bottom: 5px; }
-        .current-step { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 20px; min-height: 3rem; font-weight: 600; }
-        .start-btn {
-            width: 140px; height: 140px; border-radius: 50%;
-            background: var(--accent-coral); color: white;
-            border: 6px solid var(--card-bg);
-            font-size: 2.2rem; font-weight: 800; font-family: var(--font-hand);
-            cursor: pointer; box-shadow: 0 10px 30px rgba(255, 127, 102, 0.4);
-            transition: all 0.2s; display: flex; align-items: center; justify-content: center;
-            margin: 20px auto;
-        }
-        .start-btn:active { transform: scale(0.92); }
-        .start-btn.paused { background: var(--text-secondary); box-shadow: 0 10px 30px rgba(140, 123, 107, 0.3); }
-
-        /* QUÊTES */
-        .quest-card { padding: 16px; margin-bottom: 12px; }
-        .quest-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .quest-text { font-weight: 700; color: var(--text-primary); }
-        .quest-reward { font-weight: 800; color: var(--accent-coral); font-size: 0.9rem; }
-        .quest-bar { background: var(--border-color); height: 10px; border-radius: 5px; overflow: hidden; margin: 8px 0; }
-        .quest-fill { background: var(--accent-coral); height: 100%; border-radius: 5px; transition: width 0.5s ease; }
-        .quest-progress { font-size: 0.85rem; color: var(--text-secondary); text-align: right; font-weight: 600; }
-        .quest-completed { opacity: 0.6; text-decoration: line-through; }
-
-        /* PARCOURS */
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-        .stat-box { background: var(--card-bg); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid var(--border-color); }
-        .stat-value { font-size: 2rem; font-weight: 800; color: var(--accent-coral); font-family: var(--font-hand); }
-        .stat-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 700; }
-        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border-color); }
-        .history-item:last-child { border-bottom: none; }
-
-        /* JE BLOQUE */
-        .block-card { cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
-        .block-card:active { border-color: var(--accent-coral); background: var(--bg-color); }
-        .block-card h4 { margin: 0 0 8px 0; color: var(--accent-coral); font-family: var(--font-hand); font-size: 1.5rem; }
-
-        /* RÉGLAGES PHOTOS FINALES */
-        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        .theme-option {
-            border-radius: 16px; padding: 16px; cursor: pointer; border: 3px solid transparent;
-            display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem;
-        }
-        .theme-option.active { border-color: var(--accent-coral); }
-        .theme-preview { width: 100%; height: 60px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); }
-        
-        .sound-options { display: flex; gap: 8px; margin-bottom: 16px; }
-        .sound-option { flex: 1; padding: 12px; border-radius: 12px; border: 2px solid var(--border-color); text-align: center; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
-        .sound-option.active { border-color: var(--accent-coral); background: var(--accent-coral-light); color: var(--text-primary); }
-
-        .settings-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
-        .settings-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .toggle { width: 52px; height: 30px; background: var(--border-color); border-radius: 15px; position: relative; cursor: pointer; transition: background 0.3s; }
-        .toggle.active { background: var(--accent-coral); }
-        .toggle::after { content: ''; position: absolute; width: 26px; height: 26px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .toggle.active::after { transform: translateX(22px); }
-
-        /* NAVIGATION FLOTTANTE */
-        .bottom-nav {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--card-bg); border-radius: 24px;
-            padding: 12px 20px; display: flex; gap: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color); z-index: 100;
-        }
-        .nav-item {
-            display: flex; flex-direction: column; align-items: center;
-            color: var(--text-secondary); text-decoration: none;
-            font-size: 0.7rem; font-weight: 700; cursor: pointer;
-            transition: color 0.2s; gap: 4px;
-        }
-        .nav-item.active { color: var(--accent-coral); }
-        .nav-item svg { width: 24px; height: 24px; stroke-width: 2.5; }
-
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-            display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px;
-        }
-        .modal-overlay.active { display: flex; }
-        .modal-content {
-            background: var(--card-bg); border-radius: var(--radius); padding: 24px;
-            max-width: 400px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            text-align: center; animation: slideUp 0.3s ease; color: var(--text-primary);
-        }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .hidden { display: none !important; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FFE9E4">
+<title>CLIC — Commencez simplement</title>
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-theme="clair">
+<div id="app">
 
-<div class="container">
-    <header class="app-header">
-        <div class="header-left">
-            <div class="logo-box">
-                <span class="logo-letter">S</span>
-            </div>
-            <div class="header-text">
-                <div class="logo-title">START</div>
-                <div class="logo-subtitle">Commencez simplement</div>
-            </div>
+  <!-- ================= ACCUEIL ================= -->
+  <section class="screen active" id="screen-home">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-logo" id="brand-logo"></div>
+        <div>
+          <h1 class="brand-name">Clic</h1>
+          <p class="brand-slogan">Commencez simplement</p>
         </div>
-        <div class="header-badge">
-            <div class="badge-dot"></div>
-            <span>START</span>
-        </div>
+      </div>
+      <button class="icon-btn avatar-btn" id="home-avatar" title="Profil"></button>
     </header>
 
-    <main id="main-content"></main>
+    <div class="screen-body">
+      <h2 class="greeting">Bonjour !</h2>
+      <p class="greeting-sub">Rendons votre journée productive !</p>
+
+      <div class="search-wrap">
+        <span class="search-ico" id="ico-search"></span>
+        <input id="search-input" type="text" placeholder="Rechercher une tâche, un parcours..." autocomplete="off">
+      </div>
+      <div id="search-results" class="search-results hidden"></div>
+
+      <div class="card focus-card">
+        <div class="focus-head">
+          <span class="focus-ico" id="ico-focus"></span>
+          <h3>Focus du jour</h3>
+          <button class="pill-btn" id="focus-plan-btn">Planifier</button>
+        </div>
+        <p class="focus-count" id="focus-count">0 sur 0 tâches terminées</p>
+        <div class="progress-row">
+          <div class="progress-bar"><div class="progress-fill" id="focus-fill"></div></div>
+          <span class="progress-pct" id="focus-pct">0 %</span>
+        </div>
+      </div>
+
+      <h3 class="section-title">Continuer là où vous avez laissé</h3>
+      <div id="resume-zone"></div>
+
+      <h3 class="section-title">Actions rapides</h3>
+      <div class="quick-grid">
+        <button class="quick-card" data-quick="add"><span id="ico-q1"></span><em>Ajouter une tâche</em></button>
+        <button class="quick-card" data-quick="plan"><span id="ico-q2"></span><em>Planifier ma journée</em></button>
+        <button class="quick-card" data-quick="models"><span id="ico-q3"></span><em>Modèles</em></button>
+        <button class="quick-card" data-quick="stats"><span id="ico-q4"></span><em>Statistiques</em></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MES TÂCHES ================= -->
+  <section class="screen" id="screen-tasks">
+    <header class="topbar center-title">
+      <button class="icon-btn" data-back="home" id="ico-back-t"></button>
+      <h2 class="page-title">Mes tâches</h2>
+      <button class="icon-btn avatar-btn" id="tasks-avatar"></button>
+    </header>
+    <div class="screen-body">
+      <div class="tasks-head">
+        <h3 class="accent-title">Mes tâches</h3>
+        <button class="plus-mini" id="tasks-add">+</button>
+      </div>
+      <div id="tasks-list" class="tasks-list"></div>
+    </div>
+  </section>
+
+  <!-- ================= PARCOURS ================= -->
+  <section class="screen" id="screen-journey">
+    <header class="topbar center-title">
+      <button class="icon-btn" data-back="home" id="ico-back-j"></button>
+      <h2 class="page-title">Parcours</h2>
+      <button class="icon-btn avatar-btn" id="journey-avatar"></button>
+    </header>
+    <div class="screen-body">
+      <div class="journey-head">
+        <div>
+          <h3 class="accent-title">Mes parcours</h3>
+          <p class="muted">Suivez vos progrès et vos réussites !</p>
+        </div>
+        <button class="plus-mini" id="journey-add">+</button>
+      </div>
+
+      <div class="stat-trio">
+        <div class="stat-card"><span id="ico-s1"></span><b id="j-tasks">0</b><em>Tâches terminées</em></div>
+        <div class="stat-card violet"><span id="ico-s2"></span><b id="j-time">0 min</b><em>Temps total</em></div>
+        <div class="stat-card green"><span id="ico-s3"></span><b id="j-streak">0 jour</b><em>Consécutifs</em></div>
+      </div>
+
+      <div class="card prog-card">
+        <div class="prog-head"><h4>Ma progression</h4><b id="j-prog">0 %</b></div>
+        <div class="progress-bar"><div class="progress-fill" id="j-prog-fill"></div></div>
+      </div>
+
+      <div class="sec-head"><span id="ico-flame"></span><h3>Quêtes</h3></div>
+      <div id="quests-daily" class="quest-group"></div>
+      <div class="quest-label">Hédomadaires</div>
+      <div id="quests-weekly" class="quest-group"></div>
+      <div class="quest-label">Défis permanents</div>
+      <div id="quests-life" class="quest-group"></div>
+
+      <div class="sec-head"><span id="ico-badge-star"></span><h3>Mes badges</h3>
+        <button class="pill-btn" id="badges-all">Tout voir</button></div>
+      <div id="badges-preview" class="badges-row"></div>
+
+      <div class="sec-head"><span id="ico-clock"></span><h3>Historique des sessions</h3></div>
+      <div class="card history-card" id="history-list"></div>
+    </div>
+  </section>
+
+  <!-- ================= PROFIL ================= -->
+  <section class="screen" id="screen-profile">
+    <header class="topbar">
+      <button class="icon-btn" data-back="home" id="ico-back-p"></button>
+      <span></span>
+    </header>
+    <div class="screen-body profile-body">
+      <div class="profile-hero">
+        <div class="hero-blob"></div>
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profile-avatar"></div>
+          <button class="edit-fab" id="profile-edit"></button>
+        </div>
+        <h2 id="profile-name">Mon profil</h2>
+        <p class="muted" id="profile-sub">Commencez simplement</p>
+      </div>
+
+      <div class="profile-grid">
+        <div class="card p-card">
+          <div class="p-head"><span class="p-ico purple" id="ico-p1"></span>
+            <div><b>Tâches terminées</b><em class="muted">Progression de productivité</em></div></div>
+          <div class="p-val"><span id="p-tasks">0</span><em>/100</em></div>
+          <div class="progress-bar thin"><div class="progress-fill orange" id="p-tasks-fill"></div></div>
+        </div>
+        <div class="card p-card">
+          <div class="p-head"><span class="p-ico brown" id="ico-p2"></span>
+            <div><b>Temps de focus</b><em class="muted">Temps de concentration</em></div></div>
+          <div class="p-val-row"><b id="p-time">0 min</b><span class="lotus" id="ico-lotus"></span></div>
+        </div>
+        <div class="card p-card">
+          <div class="p-head"><span class="p-ico red" id="ico-p3"></span>
+            <div><b>Série actuelle</b><em class="muted">Progression de la série</em></div></div>
+          <div class="p-val"><span id="p-streak">0</span><em>%</em></div>
+          <div class="progress-bar thin"><div class="progress-fill red" id="p-streak-fill"></div></div>
+        </div>
+        <div class="card p-card">
+          <div class="p-head"><span class="p-ico teal" id="ico-p4"></span>
+            <div><b>Score de productivité</b><em class="muted">Voir votre progression</em></div></div>
+          <div class="p-score-row">
+            <div class="ring" id="p-score-ring"><span id="p-score">0 %</span></div>
+            <em class="muted">Basé sur votre semaine</em>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Réalisations</h3>
+      <div class="ach-grid" id="achievements"></div>
+
+      <button class="settings-link" id="open-settings">Réglages de l'application</button>
+    </div>
+  </section>
+
+  <!-- ================= MES BADGES ================= -->
+  <section class="screen" id="screen-badges">
+    <header class="topbar">
+      <button class="icon-btn" data-back="journey" id="ico-back-b"></button>
+      <span></span>
+    </header>
+    <div class="screen-body">
+      <h2 class="page-title left">Mes badges</h2>
+      <p class="muted">8 badges à débloquer, sans pression : ils ne se perdent jamais.</p>
+      <div class="badges-grid" id="badges-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= AVATARS ================= -->
+  <section class="screen" id="screen-avatars">
+    <header class="topbar">
+      <button class="icon-btn" data-back="profile" id="ico-back-a"></button>
+      <h2 class="page-title">Choisir un avatar</h2>
+      <span></span>
+    </header>
+    <div class="screen-body">
+      <p class="muted center">Choisissez l'objet qui vous représente.</p>
+      <div class="avatars-grid" id="avatars-grid"></div>
+      <div class="avatar-preview">
+        <div class="profile-avatar" id="avatar-preview"></div>
+        <p class="muted">Aperçu</p>
+      </div>
+      <button class="btn-primary block" id="avatar-validate">Valider cet avatar</button>
+    </div>
+  </section>
+
+  <!-- ================= RÉGLAGES ================= -->
+  <section class="screen" id="screen-settings">
+    <header class="topbar">
+      <button class="icon-btn" data-back="profile" id="ico-back-s"></button>
+      <h2 class="page-title">Réglages</h2>
+      <span></span>
+    </header>
+    <div class="screen-body">
+      <div class="card settings-card">
+        <div class="set-row"><span>Son de fin de session</span><label class="switch"><input type="checkbox" id="set-sound"><i></i></label></div>
+        <div class="set-row"><span>Vibrations <em class="muted">(si disponibles)</em></span><label class="switch"><input type="checkbox" id="set-vib"><i></i></label></div>
+        <div class="set-row"><span>Garder l'écran allumé <em class="muted">(selon le navigateur)</em></span><label class="switch"><input type="checkbox" id="set-wake"><i></i></label></div>
+      </div>
+      <h3 class="section-title">Thème</h3>
+      <div class="theme-grid" id="theme-grid">
+        <button data-theme="clair">Clair</button>
+        <button data-theme="chaud">Chaleureux</button>
+        <button data-theme="nuit">Nuit</button>
+        <button data-theme="galaxie">Galaxie</button>
+      </div>
+      <div class="card settings-card">
+        <button class="set-action" id="set-tuto">Revoir le tutoriel</button>
+        <button class="set-action" id="set-legal">Mentions légales et confidentialité</button>
+      </div>
+      <p class="muted small">Vos données restent uniquement sur cet appareil (stockage local).</p>
+    </div>
+  </section>
+
+  <!-- ================= MODÈLES ================= -->
+  <section class="screen" id="screen-templates">
+    <header class="topbar">
+      <button class="icon-btn" data-back="home" id="ico-back-tpl"></button>
+      <h2 class="page-title">Modèles</h2>
+      <span></span>
+    </header>
+    <div class="screen-body">
+      <p class="muted">Partez d'une base prête à l'emploi, puis adaptez-la.</p>
+      <div id="templates-list" class="tpl-list"></div>
+    </div>
+  </section>
+
+  <!-- ================= PLANIFICATEUR ================= -->
+  <section class="screen" id="screen-planner">
+    <header class="topbar">
+      <button class="icon-btn" data-back="home" id="ico-back-pl"></button>
+      <h2 class="page-title">Planifier ma journée</h2>
+      <span></span>
+    </header>
+    <div class="screen-body">
+      <p class="muted">Sélectionnez les tâches à faire aujourd'hui. Le Focus du jour suivra ce plan.</p>
+      <div id="planner-list" class="planner-list"></div>
+    </div>
+  </section>
+
+  <!-- ================= NAVIGATION ================= -->
+  <nav id="bottom-nav">
+    <button data-tab="home" class="nav-item active"><span id="ico-n1"></span><em>Accueil</em></button>
+    <button data-tab="tasks" class="nav-item"><span id="ico-n2"></span><em>Mes tâches</em></button>
+    <button id="nav-plus" class="nav-plus"><span>+</span></button>
+    <button data-tab="journey" class="nav-item"><span id="ico-n4"></span><em>Parcours</em></button>
+    <button data-tab="profile" class="nav-item"><span id="ico-n5"></span><em>Profil</em></button>
+  </nav>
 </div>
 
-<nav class="bottom-nav">
-    <div class="nav-item active" onclick="showTab('taches')" id="nav-taches">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-        Tâches
+<!-- ================= OVERLAYS ================= -->
+<div class="overlay hidden" id="ov-create">
+  <div class="sheet tall">
+    <div class="sheet-head"><h3 id="create-title">Nouvelle tâche</h3><button class="icon-btn" data-close="ov-create">✕</button></div>
+    <div class="sheet-body">
+      <label class="field"><span>Nom de la tâche</span><input id="f-name" type="text" placeholder="Ex : Réviser le chapitre 3"></label>
+      <div class="field-row">
+        <label class="field"><span>Catégorie</span><select id="f-cat"></select></label>
+        <button class="pill-btn" id="f-cat-manage">Gérer</button>
+      </div>
+      <div class="field"><span>Icône</span><div class="icon-grid" id="f-icons"></div></div>
+      <div class="field"><span>Étapes</span><div id="f-steps" class="steps-edit"></div>
+        <div class="add-step"><input id="f-step-input" type="text" placeholder="Ajouter une étape"><button id="f-step-add">+</button></div>
+      </div>
+      <div class="field"><span>Durée</span>
+        <div class="dur-row">
+          <button class="dur-chip" data-min="1">1</button><button class="dur-chip" data-min="5">5</button>
+          <button class="dur-chip" data-min="10">10</button><button class="dur-chip" data-min="15">15</button>
+          <button class="dur-chip" data-min="30">30</button><button class="dur-chip" data-min="60">60</button>
+          <button class="dur-chip wide" id="dur-pad">Saisir…</button>
+        </div>
+        <label class="free-row"><input type="checkbox" id="f-free"> Session libre (sans compte à rebours)</label>
+      </div>
     </div>
-    <div class="nav-item" onclick="showTab('preparer')" id="nav-preparer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        Préparer
+    <div class="sheet-foot">
+      <button class="btn-ghost" id="create-save">Enregistrer</button>
+      <button class="btn-primary" id="create-start">Commencer</button>
     </div>
-    <div class="nav-item" onclick="showTab('appareil')" id="nav-appareil">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-        Appareil
-    </div>
-    <div class="nav-item" onclick="showTab('bloque')" id="nav-bloque">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        Bloque
-    </div>
-    <div class="nav-item" onclick="showTab('quetes')" id="nav-quetes">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        Quêtes
-    </div>
-    <div class="nav-item" onclick="showTab('parcours')" id="nav-parcours">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Parcours
-    </div>
-</nav>
-
-<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
-    <div class="modal-content" id="modal-content"></div>
+  </div>
 </div>
 
-<script>
-// ==========================================
-// ÉTAT GLOBAL & INITIALISATION
-// ==========================================
-const defaultState = {
-    tasks: [],
-    sessionQueue: [],
-    currentSession: null,
-    quests: {
-        points: 0, level: 1,
-        daily: [], weekly: [], special: []
-    },
-    history: [],
-    settings: { theme: 'clair', sound: 'carillon', vibration: true, keepAwake: true, onboardingCompleted: false },
-    currentTab: 'taches',
-    lastDailyReset: null,
-    lastWeeklyReset: null,
-    streak: 0,
-    lastActiveDate: null
-};
-
-let state = JSON.parse(JSON.stringify(defaultState));
-let timerInterval = null;
-let pickerStr = "000500"; // HHMMSS pour le sélecteur de temps
-
-function saveState() {
-    try { localStorage.setItem('start_app_v3', JSON.stringify(state)); } catch(e) {}
-}
-
-function loadState() {
-    try {
-        const saved = localStorage.getItem('start_app_v3');
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            state = { ...defaultState, ...parsed, settings: { ...defaultState.settings, ...(parsed.settings || {}) } };
-            if (!state.quests.daily) state.quests.daily = [];
-            if (!state.quests.weekly) state.quests.weekly = [];
-            if (!state.quests.special) state.quests.special = [];
-        }
-        checkQuestResets();
-    } catch(e) { console.error("Erreur chargement", e); }
-}
-
-function checkQuestResets() {
-    const now = new Date();
-    const today = now.toDateString();
-    if (state.lastDailyReset !== today) {
-        state.quests.daily = generateDailyQuests();
-        state.lastDailyReset = today;
-    }
-    const weekId = now.getFullYear() + '-' + getWeekNumber(now);
-    if (state.lastWeeklyReset !== weekId) {
-        state.quests.weekly = generateWeeklyQuests();
-        state.lastWeeklyReset = weekId;
-    }
-    saveState();
-}
-
-function getWeekNumber(d) {
-    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
-    var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
-    return weekNo;
-}
-
-// ==========================================
-// NAVIGATION
-// ==========================================
-function showTab(tabName) {
-    state.currentTab = tabName;
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    const navEl = document.getElementById('nav-' + tabName);
-    if (navEl) navEl.classList.add('active');
-    
-    document.body.className = '';
-    if (state.settings.theme !== 'clair') document.body.classList.add('theme-' + state.settings.theme);
-
-    const main = document.getElementById('main-content');
-    main.innerHTML = '';
-    
-    switch(tabName) {
-        case 'taches': renderTaches(main); break;
-        case 'preparer': renderPreparer(main); break;
-        case 'appareil': renderAppareil(main); break;
-        case 'bloque': renderBloque(main); break;
-        case 'quetes': renderQuetes(main); break;
-        case 'parcours': renderParcours(main); break;
-        case 'reglages': renderReglages(main); break;
-    }
-    saveState();
-}
-
-// ==========================================
-// 1. MES TÂCHES
-// ==========================================
-function renderTaches(container) {
-    container.innerHTML = `
-        <h2>Mes tâches</h2>
-        <p>Choisissez une tâche, chargez-la sur le boîtier, et avancez pas à pas.</p>
-        ${state.tasks.length === 0 ? '<div class="card" style="text-align:center; padding:40px;"><p>Aucune tâche pour l\'instant.</p><button class="btn btn-primary" onclick="showTab(\'preparer\')">Créer une tâche</button></div>' : ''}
-        <div id="tasks-list"></div>
-    `;
-    const list = document.getElementById('tasks-list');
-    state.tasks.forEach((task, index) => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:start;">
-                <div>
-                    <h3 style="margin:0;">${task.name}</h3>
-                    <p style="margin:4px 0 0 0; font-size:0.9rem;">${task.steps.length} étapes • ${task.duration} min</p>
-                </div>
-                <div style="display:flex; gap:8px;">
-                    <button class="btn btn-small btn-primary" onclick="loadTaskToSession(${index})">Charger</button>
-                    <button class="btn btn-small btn-danger" onclick="deleteTask(${index})" style="padding:8px 12px;">✕</button>
-                </div>
-            </div>
-        `;
-        list.appendChild(div);
-    });
-}
-
-function deleteTask(index) {
-    if(confirm('Supprimer cette tâche ?')) {
-        state.tasks.splice(index, 1);
-        saveState();
-        showTab('taches');
-    }
-}
-
-function loadTaskToSession(index) {
-    const task = state.tasks[index];
-    state.sessionQueue = [{ name: task.name, duration: task.duration, steps: [...task.steps] }];
-    showModal(`"${task.name}" chargée dans l'appareil.`, () => { closeModal(); showTab('appareil'); });
-}
-
-// ==========================================
-// 2. PRÉPARER & SÉLECTEUR DE TEMPS (Photo 4)
-// ==========================================
-let currentFormSteps = [''];
-let currentSessionName = "Ma session";
-
-function renderPreparer(container) {
-    container.innerHTML = `
-        <h2>Préparer</h2>
-        <p>Décrivez ce que vous voulez accomplir.</p>
-        
-        <div class="card">
-            <label style="font-weight:700; font-size:0.9rem;">Nom de la tâche</label>
-            <input type="text" id="task-name" placeholder="Ex: Réviser les maths">
-            
-            <label style="font-weight:700; font-size:0.9rem; margin-top:8px; display:block;">Micro-étapes</label>
-            <div id="steps-container"></div>
-            <button class="btn btn-secondary" onclick="addStepField()" style="margin-top:8px;">+ Ajouter une étape</button>
-        </div>
-
-        <div class="card time-picker-card">
-            <label style="font-weight:700; font-size:0.9rem; display:block; text-align:left; margin-bottom:10px;">Durée</label>
-            <div class="time-display" id="picker-display">00 : 05 : 00</div>
-            <div class="quick-durations">
-                <button class="chip" onclick="setPickerTime(1)">1 min</button>
-                <button class="chip" onclick="setPickerTime(5)">5 min</button>
-                <button class="chip" onclick="setPickerTime(10)">10 min</button>
-                <button class="chip" onclick="setPickerTime(15)">15 min</button>
-            </div>
-            <div class="numpad">
-                <button onclick="numpadPress('1')">1</button>
-                <button onclick="numpadPress('2')">2</button>
-                <button onclick="numpadPress('3')">3</button>
-                <button onclick="numpadPress('4')">4</button>
-                <button onclick="numpadPress('5')">5</button>
-                <button onclick="numpadPress('6')">6</button>
-                <button onclick="numpadPress('7')">7</button>
-                <button onclick="numpadPress('8')">8</button>
-                <button onclick="numpadPress('9')">9</button>
-                <button class="back-btn" onclick="numpadPress('back')">⌫</button>
-                <button onclick="numpadPress('0')">0</button>
-                <button class="ok-btn" onclick="confirmPickerTime()">OK</button>
-            </div>
-        </div>
-
-        <div style="display:flex; gap:10px; margin-top:16px;">
-            <button class="btn btn-secondary" onclick="saveCurrentTask()" style="flex:1;">Enregistrer</button>
-            <button class="btn btn-primary" onclick="addToSessionQueue()" style="flex:1;">Ajouter à la session</button>
-        </div>
-
-        <div class="card" id="session-card" style="margin-top:20px; display:none;">
-            <h3>Session multi-tâches</h3>
-            <input type="text" id="session-name-input" value="${currentSessionName}" onchange="currentSessionName = this.value" placeholder="Nom de la session">
-            <div id="multi-task-list"></div>
-            <div class="total-duration">Total: <span id="total-duration">0</span> min</div>
-            <button class="btn btn-primary" onclick="startMultiSession()">Démarrer la session</button>
-            <button class="btn btn-secondary" onclick="clearSession()">Annuler</button>
-        </div>
-    `;
-    renderStepFields();
-    updateSessionUI();
-    updatePickerDisplay();
-}
-
-function setPickerTime(min) {
-    const str = min.toString().padStart(4, '0') + "00";
-    pickerStr = str.slice(-6);
-    updatePickerDisplay();
-}
-
-function numpadPress(key) {
-    if (key === 'back') {
-        pickerStr = pickerStr.slice(0, -1).padStart(6, '0');
-    } else {
-        pickerStr = (pickerStr + key).slice(-6);
-    }
-    updatePickerDisplay();
-}
-
-function updatePickerDisplay() {
-    const h = pickerStr.slice(0, 2);
-    const m = pickerStr.slice(2, 4);
-    const s = pickerStr.slice(4, 6);
-    const el = document.getElementById('picker-display');
-    if (el) el.textContent = `${h} : ${m} : ${s}`;
-}
-
-function confirmPickerTime() {
-    // Le temps est déjà dans pickerStr, on peut juste fermer ou valider visuellement
-    const el = document.getElementById('picker-display');
-    if (el) {
-        el.style.transform = "scale(1.1)";
-        setTimeout(() => el.style.transform = "scale(1)", 200);
-    }
-}
-
-function getDurationFromPicker() {
-    const h = parseInt(pickerStr.slice(0, 2)) || 0;
-    const m = parseInt(pickerStr.slice(2, 4)) || 0;
-    const s = parseInt(pickerStr.slice(4, 6)) || 0;
-    return Math.max(1, Math.round((h * 3600 + m * 60 + s) / 60)); // Retourne en minutes, min 1
-}
-
-function renderStepFields() {
-    const container = document.getElementById('steps-container');
-    if (!container) return;
-    container.innerHTML = '';
-    currentFormSteps.forEach((step, idx) => {
-        const div = document.createElement('div');
-        div.className = 'session-item';
-        div.style.marginBottom = '8px';
-        div.innerHTML = `
-            <input type="text" value="${step}" placeholder="Étape ${idx + 1}" oninput="currentFormSteps[${idx}] = this.value" style="flex:1; margin:0;">
-            ${currentFormSteps.length > 1 ? `<button class="btn btn-small btn-danger" onclick="removeStepField(${idx})" style="width:40px; height:40px; padding:0;">✕</button>` : ''}
-        `;
-        container.appendChild(div);
-    });
-}
-
-function addStepField() { currentFormSteps.push(''); renderStepFields(); }
-function removeStepField(idx) { currentFormSteps.splice(idx, 1); renderStepFields(); }
-
-function getFormData() {
-    const name = document.getElementById('task-name').value.trim();
-    if (!name) return null;
-    const duration = getDurationFromPicker();
-    const steps = currentFormSteps.filter(s => s.trim() !== '');
-    return { name, duration, steps: steps.length > 0 ? steps : ['Avancer pas à pas'] };
-}
-
-function saveCurrentTask() {
-    const task = getFormData();
-    if (!task) { showModal("Veuillez donner un nom à la tâche."); return; }
-    state.tasks.push(task);
-    saveState();
-    showModal('Tâche enregistrée !', () => {
-        closeModal();
-        document.getElementById('task-name').value = '';
-        currentFormSteps = [''];
-        renderStepFields();
-        setPickerTime(5);
-    });
-}
-
-function addToSessionQueue() {
-    const task = getFormData();
-    if (!task) { showModal("Veuillez donner un nom et une durée à la tâche."); return; }
-    state.sessionQueue.push(task);
-    saveState();
-    document.getElementById('task-name').value = '';
-    currentFormSteps = [''];
-    renderStepFields();
-    setPickerTime(5);
-    updateSessionUI();
-}
-
-function updateSessionUI() {
-    const card = document.getElementById('session-card');
-    if (!card) return;
-    if (state.sessionQueue.length > 0) {
-        card.style.display = 'block';
-        const list = document.getElementById('multi-task-list');
-        list.innerHTML = '';
-        let total = 0;
-        state.sessionQueue.forEach((task, index) => {
-            total += task.duration;
-            list.innerHTML += `
-                <div class="session-item">
-                    <input type="text" value="${task.name}" onchange="updateTaskName(${index}, this.value)" style="flex:2; margin:0;">
-                    <input type="number" value="${task.duration}" onchange="updateTaskDuration(${index}, this.value)" style="flex:1; margin:0; min-width:60px;">
-                    <button class="btn btn-small" style="width:32px; height:32px; padding:0;" onclick="moveTask(${index}, -1)">↑</button>
-                    <button class="btn btn-small" style="width:32px; height:32px; padding:0;" onclick="moveTask(${index}, 1)">↓</button>
-                    <button class="btn btn-small btn-danger" style="width:32px; height:32px; padding:0;" onclick="removeTask(${index})">✕</button>
-                </div>
-            `;
-        });
-        document.getElementById('total-duration').textContent = total;
-    } else {
-        card.style.display = 'none';
-    }
-}
-
-function updateTaskName(idx, val) { state.sessionQueue[idx].name = val.trim() || "Tâche"; saveState(); }
-function updateTaskDuration(idx, val) { state.sessionQueue[idx].duration = Math.max(1, parseInt(val) || 1); saveState(); updateSessionUI(); }
-function moveTask(idx, dir) {
-    if (idx + dir < 0 || idx + dir >= state.sessionQueue.length) return;
-    const temp = state.sessionQueue[idx];
-    state.sessionQueue[idx] = state.sessionQueue[idx + dir];
-    state.sessionQueue[idx + dir] = temp;
-    saveState(); updateSessionUI();
-}
-function removeTask(idx) { state.sessionQueue.splice(idx, 1); saveState(); updateSessionUI(); }
-function clearSession() { state.sessionQueue = []; saveState(); updateSessionUI(); }
-
-// ==========================================
-// 3. APPAREIL & MULTI-TÂCHES (Fonctionnel)
-// ==========================================
-function startMultiSession() {
-    if (state.sessionQueue.length === 0) return;
-    state.currentSession = {
-        name: currentSessionName,
-        queue: JSON.parse(JSON.stringify(state.sessionQueue)),
-        currentIndex: 0,
-        timeRemaining: state.sessionQueue[0].duration * 60,
-        isRunning: false,
-        isPaused: false,
-        currentStepIndex: 0,
-        completedTasks: []
-    };
-    state.sessionQueue = [];
-    saveState();
-    showTab('appareil');
-}
-
-function renderAppareil(container) {
-    if (!container) container = document.getElementById('main-content');
-    
-    if (!state.currentSession) {
-        container.innerHTML = `
-            <h2>Appareil</h2>
-            <p>Votre boîtier START simulé. Sélectionnez ou préparez une tâche.</p>
-            <div class="card" style="text-align:center; padding:40px;">
-                <div style="font-size:4rem; margin-bottom:20px;">📻</div>
-                <h3>En attente</h3>
-                <button class="btn btn-primary" onclick="showTab('preparer')" style="margin-top:16px;">Préparer une session</button>
-                <button class="btn btn-secondary" onclick="showTab('taches')">Choisir une tâche</button>
-            </div>
-        `;
-        return;
-    }
-
-    const sess = state.currentSession;
-    const currentTask = sess.queue[sess.currentIndex];
-    const currentStepText = currentTask.steps[sess.currentStepIndex] || "Tâche terminée ! Prêt pour la suite ?";
-    const totalSec = currentTask.duration * 60;
-    const progress = ((totalSec - sess.timeRemaining) / totalSec) * 100;
-
-    container.innerHTML = `
-        <div class="appareil-header">
-            <button onclick="togglePause()">${sess.isPaused ? 'Reprendre' : 'Pause'}</button>
-            <button onclick="showTab('bloque')">Je bloque</button>
-            <button onclick="quitSession()" style="color:var(--accent-coral);">Quitter</button>
-        </div>
-
-        <div class="card" style="text-align:center; padding:30px 20px;">
-            <div style="font-size:0.9rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; font-weight:700;">
-                ${sess.name} • Tâche ${sess.currentIndex + 1}/${sess.queue.length}
-            </div>
-            <div class="current-task-name">${currentTask.name}</div>
-            
-            <div class="timer-display" id="timer-display">${formatTime(sess.timeRemaining)}</div>
-            
-            <div style="background:var(--border-color); height:8px; border-radius:4px; margin:20px 0; overflow:hidden;">
-                <div style="background:var(--accent-coral); height:100%; width:${progress}%; transition:width 1s linear;"></div>
-            </div>
-
-            <div class="current-step">➜ ${currentStepText}</div>
-
-            <button class="start-btn ${sess.isPaused ? 'paused' : ''}" onclick="handleStartPress()">
-                ${sess.isPaused ? '▶' : 'START'}
-            </button>
-            <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:10px;">
-                ${sess.isPaused ? 'Appuyez pour reprendre' : 'Appuyez pour valider l\'étape (le chrono continue)'}
-            </p>
-            
-            ${sess.currentStepIndex >= currentTask.steps.length ? `<button class="btn btn-primary" onclick="nextTask()" style="margin-top:20px;">Passer à la tâche suivante →</button>` : ''}
-        </div>
-    `;
-}
-
-function handleStartPress() {
-    const sess = state.currentSession;
-    if (!sess) return;
-
-    if (!sess.isRunning || sess.isPaused) {
-        sess.isRunning = true;
-        sess.isPaused = false;
-        startTimer();
-        renderAppareil();
-    } else {
-        sess.currentStepIndex++;
-        addQuestProgress('daily', 'steps_validated', 1);
-        addQuestProgress('weekly', 'steps_validated', 1);
-        saveState();
-        renderAppareil();
-        if (state.settings.vibration && navigator.vibrate) navigator.vibrate(50);
-    }
-}
-
-function startTimer() {
-    if (timerInterval) clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-        const sess = state.currentSession;
-        if (sess && sess.isRunning && !sess.isPaused) {
-            sess.timeRemaining--;
-            const timerEl = document.getElementById('timer-display');
-            if (timerEl) timerEl.textContent = formatTime(sess.timeRemaining);
-            
-            if (sess.timeRemaining <= 0) {
-                handleTaskTimeUp();
-            }
-        }
-    }, 1000);
-}
-
-function handleTaskTimeUp() {
-    playEndSound();
-    const sess = state.currentSession;
-    const completedTask = sess.queue[sess.currentIndex];
-    
-    if (!sess.completedTasks.includes(completedTask.name)) {
-        sess.completedTasks.push(completedTask.name);
-    }
-
-    sess.currentIndex++;
-    if (sess.currentIndex < sess.queue.length) {
-        sess.timeRemaining = sess.queue[sess.currentIndex].duration * 60;
-        sess.currentStepIndex = 0;
-        sess.isPaused = true;
-        saveState();
-        showModal(`⏱️ Temps écoulé pour "${completedTask.name}" !`, [
-            { text: "Démarrer la suite", action: () => { closeModal(); handleStartPress(); } }
-        ]);
-    } else {
-        endSession(true);
-    }
-    renderAppareil();
-}
-
-function nextTask() {
-    const sess = state.currentSession;
-    const completedTask = sess.queue[sess.currentIndex];
-    if (!sess.completedTasks.includes(completedTask.name)) sess.completedTasks.push(completedTask.name);
-    
-    sess.currentIndex++;
-    if (sess.currentIndex < sess.queue.length) {
-        sess.timeRemaining = sess.queue[sess.currentIndex].duration * 60;
-        sess.currentStepIndex = 0;
-        sess.isPaused = true;
-        saveState();
-        renderAppareil();
-    } else {
-        endSession(true);
-    }
-}
-
-function endSession(completed) {
-    clearInterval(timerInterval);
-    const sess = state.currentSession;
-    
-    // Calculer la durée réelle passée
-    let totalDuration = 0;
-    sess.queue.forEach((t, i) => {
-        if (i < sess.currentIndex) totalDuration += t.duration;
-        else if (i === sess.currentIndex) totalDuration += Math.floor((t.duration * 60 - sess.timeRemaining) / 60);
-    });
-
-    // Historique
-    state.history.push({
-        id: Date.now(),
-        date: new Date().toISOString(),
-        sessionName: sess.name,
-        tasksCompleted: sess.completedTasks,
-        totalDuration: Math.max(1, totalDuration),
-        status: completed ? 'completed' : 'abandoned'
-    });
-
-    // Quêtes
-    if (completed) {
-        addQuestProgress('daily', 'tasks_completed', sess.completedTasks.length);
-        addQuestProgress('weekly', 'tasks_completed', sess.completedTasks.length);
-        addQuestProgress('daily', 'sessions_completed', 1);
-        addQuestProgress('weekly', 'sessions_completed', 1);
-        addQuestProgress('special', 'sessions_completed', 1);
-    }
-    addQuestProgress('daily', 'minutes_focused', totalDuration);
-    addQuestProgress('weekly', 'minutes_focused', totalDuration);
-    addQuestProgress('special', 'minutes_focused', totalDuration);
-
-    // Streak
-    const today = new Date().toDateString();
-    if (state.lastActiveDate !== today) {
-        const yesterday = new Date(Date.now() - 86400000).toDateString();
-        state.streak = (state.lastActiveDate === yesterday) ? state.streak + 1 : 1;
-        state.lastActiveDate = today;
-    }
-
-    state.currentSession = null;
-    saveState();
-    
-    showModal(completed ? "🎉 Session terminée ! Bravo." : "Session enregistrée dans le parcours.", [
-        { text: "Voir mon parcours", action: () => { closeModal(); showTab('parcours'); } },
-        { text: "Retour à l'accueil", action: () => { closeModal(); showTab('taches'); } }
-    ]);
-}
-
-function togglePause() {
-    if (!state.currentSession) return;
-    state.currentSession.isPaused = !state.currentSession.isPaused;
-    renderAppareil();
-}
-
-function quitSession() {
-    if (confirm("Quitter la session en cours ? La progression sera sauvegardée.")) {
-        clearInterval(timerInterval);
-        endSession(false);
-    }
-}
-
-function formatTime(seconds) {
-    if (seconds < 0) seconds = 0;
-    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-    const s = (seconds % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-}
-
-function playEndSound() {
-    if (state.settings.sound === 'silencieux') return;
-    try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain); gain.connect(ctx.destination);
-        osc.frequency.value = state.settings.sound === 'pulsation' ? 220 : 660;
-        gain.gain.value = 0.1;
-        osc.start();
-        gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.8);
-        osc.stop(ctx.currentTime + 0.8);
-    } catch(e) {}
-    if (state.settings.vibration && navigator.vibrate) navigator.vibrate([200, 100, 200]);
-}
-
-// ==========================================
-// 4. JE BLOQUE
-// ==========================================
-function renderBloque(container) {
-    const currentTaskName = state.currentSession ? state.currentSession.queue[state.currentSession.currentIndex].name : "votre tâche";
-    container.innerHTML = `
-        <h2>Je bloque</h2>
-        <p>Tu n'y arrives pas ? Ça arrive. On va t'aider concrètement.</p>
-        
-        <div class="card block-card" onclick="showBlockDetails('start', '${currentTaskName}')">
-            <h4>Je ne sais pas par où commencer</h4>
-            <p>Trois premières actions concrètes pour démarrer en douceur.</p>
-        </div>
-        <div class="card block-card" onclick="showBlockDetails('big', '${currentTaskName}')">
-            <h4>C'est trop gros</h4>
-            <p>Découpage en 3 micro-étapes pour rendre la montagne escaladable.</p>
-        </div>
-        <div class="card block-card" onclick="showBlockDetails('tired', '${currentTaskName}')">
-            <h4>Je suis à plat</h4>
-            <p>Version minimaliste + option pause. Prends soin de toi.</p>
-        </div>
-        
-        <div class="card" style="background:rgba(255,107,107,0.1); border-color:rgba(255,107,107,0.3); margin-top:20px;">
-            <p style="color:#D04040; margin:0; font-size:0.9rem; text-align:center;">
-                START aide à démarrer, ce n'est pas un outil médical.<br>En période difficile, parle à un proche.
-            </p>
-        </div>
-    `;
-}
-
-function showBlockDetails(type, taskName) {
-    let steps = [];
-    if (type === 'start') steps = [`1. Ouvrir le cahier/dossier pour "${taskName}"`, "2. Lire la première consigne ou paragraphe", "3. Écrire la date et le titre en haut de la page"];
-    else if (type === 'big') steps = [`1. Identifier la toute première petite action pour "${taskName}"`, "2. La découper en une action de moins de 5 minutes", "3. Faire uniquement cette micro-action maintenant"];
-    else steps = ["1. Faire 3 grandes respirations profondes", "2. Boire un verre d'eau", `3. Faire seulement 2 minutes de "${taskName}", puis pause`];
-    
-    showModal(`<h3 style="margin-top:0;">Plan d'action</h3><ul style="text-align:left; line-height:1.8;">${steps.map(s => `<li>${s}</li>`).join('')}</ul>`, [{ text: "J'ai compris, merci", action: closeModal }]);
-    addQuestProgress('daily', 'block_used', 1);
-}
-
-// ==========================================
-// 5. QUÊTES (Système robuste)
-// ==========================================
-function generateDailyQuests() {
-    const pool = [
-        { id: 'd1', text: 'Terminer 1 tâche', target: 1, metric: 'tasks_completed', reward: 20 },
-        { id: 'd2', text: 'Terminer 2 tâches', target: 2, metric: 'tasks_completed', reward: 40 },
-        { id: 'd3', text: 'Cumuler 15 min de concentration', target: 15, metric: 'minutes_focused', reward: 30 },
-        { id: 'd4', text: 'Cumuler 30 min de concentration', target: 30, metric: 'minutes_focused', reward: 60 },
-        { id: 'd5', text: 'Utiliser l\'onglet "Je bloque"', target: 1, metric: 'block_used', reward: 10 },
-        { id: 'd6', text: 'Créer une nouvelle tâche', target: 1, metric: 'tasks_created', reward: 15 },
-        { id: 'd7', text: 'Compléter une session multi-tâches', target: 1, metric: 'sessions_completed', reward: 50 },
-        { id: 'd8', text: 'Valider 5 micro-étapes', target: 5, metric: 'steps_validated', reward: 25 },
-        { id: 'd9', text: 'Consulter son parcours', target: 1, metric: 'parcours_viewed', reward: 5 },
-        { id: 'd10', text: 'Changer de thème', target: 1, metric: 'theme_changed', reward: 10 },
-        { id: 'd11', text: 'Mettre en pause et reprendre', target: 1, metric: 'pause_used', reward: 10 },
-        { id: 'd12', text: 'Ajouter une tâche à une session', target: 1, metric: 'task_added', reward: 15 }
-    ];
-    return pool.sort(() => 0.5 - Math.random()).slice(0, 4).map(q => ({...q, progress: 0, completed: false}));
-}
-
-function generateWeeklyQuests() {
-    const pool = [
-        { id: 'w1', text: 'Cumuler 2 heures de concentration', target: 120, metric: 'minutes_focused', reward: 100 },
-        { id: 'w2', text: 'Terminer 5 tâches', target: 5, metric: 'tasks_completed', reward: 80 },
-        { id: 'w3', text: 'Compléter 2 sessions multi-tâches', target: 2, metric: 'sessions_completed', reward: 150 },
-        { id: 'w4', text: 'Utiliser "Je bloque" 2 fois', target: 2, metric: 'block_used', reward: 30 },
-        { id: 'w5', text: 'Valider 20 micro-étapes', target: 20, metric: 'steps_validated', reward: 60 },
-        { id: 'w6', text: 'Se connecter 3 jours différents', target: 3, metric: 'days_active', reward: 50 },
-        { id: 'w7', text: 'Atteindre un nouveau niveau', target: 1, metric: 'level_up', reward: 200 },
-        { id: 'w8', text: 'Cumuler 45 min en une seule session', target: 45, metric: 'single_session_minutes', reward: 70 }
-    ];
-    return pool.sort(() => 0.5 - Math.random()).slice(0, 3).map(q => ({...q, progress: 0, completed: false}));
-}
-
-function initSpecialQuests() {
-    if (state.quests.special.length === 0) {
-        state.quests.special = [
-            { id: 's1', text: 'Première tâche terminée', target: 1, metric: 'tasks_completed', reward: 50, completed: false },
-            { id: 's2', text: 'Première session multi-tâches', target: 1, metric: 'sessions_completed', reward: 100, completed: false },
-            { id: 's3', text: '1 heure cumulée', target: 60, metric: 'minutes_focused', reward: 100, completed: false },
-            { id: 's4', text: '5 heures cumulées', target: 300, metric: 'minutes_focused', reward: 300, completed: false },
-            { id: 's5', text: '10 heures cumulées', target: 600, metric: 'minutes_focused', reward: 500, completed: false },
-            { id: 's6', text: 'Niveau 5 atteint', target: 5, metric: 'level_reached', reward: 500, completed: false },
-            { id: 's7', text: '10 tâches terminées', target: 10, metric: 'tasks_completed', reward: 200, completed: false },
-            { id: 's8', text: '50 tâches terminées', target: 50, metric: 'tasks_completed', reward: 1000, completed: false },
-            { id: 's9', text: 'Utiliser les 4 thèmes', target: 4, metric: 'themes_used', reward: 100, completed: false },
-            { id: 's10', text: 'Série de 7 jours', target: 7, metric: 'streak_reached', reward: 500, completed: false }
-        ];
-        saveState();
-    }
-}
-
-function addQuestProgress(type, metric, value) {
-    initSpecialQuests();
-    const list = type === 'daily' ? state.quests.daily : (type === 'weekly' ? state.quests.weekly : state.quests.special);
-    let changed = false;
-    list.forEach(q => {
-        if (!q.completed && q.metric === metric) {
-            q.progress += value;
-            if (q.progress >= q.target) {
-                q.completed = true;
-                state.quests.points += q.reward;
-                changed = true;
-                checkLevelUp();
-            }
-        }
-    });
-    if (changed) saveState();
-}
-
-function checkLevelUp() {
-    const pointsForNext = state.quests.level * 100;
-    if (state.quests.points >= pointsForNext) {
-        state.quests.points -= pointsForNext;
-        state.quests.level++;
-        addQuestProgress('weekly', 'level_up', 1);
-        addQuestProgress('special', 'level_reached', 1);
-        showModal(`🎉 Niveau ${state.quests.level} atteint !`);
-    }
-}
-
-function renderQuetes(container) {
-    const q = state.quests;
-    const pointsForNext = q.level * 100;
-    const progress = (q.points / pointsForNext) * 100;
-    
-    container.innerHTML = `
-        <h2>Quêtes</h2>
-        <p>Des objectifs doux pour avancer pas à pas.</p>
-        
-        <div class="card" style="text-align:center; background:linear-gradient(135deg, var(--accent-coral), #FF9A85); color:white; border:none;">
-            <div style="font-size:3rem; font-family:var(--font-hand); font-weight:700;">${q.points} pts</div>
-            <div style="font-size:1.2rem; font-weight:700; margin-bottom:8px;">Niveau ${q.level}</div>
-            <div style="background:rgba(255,255,255,0.3); height:10px; border-radius:5px; overflow:hidden;">
-                <div style="background:white; height:100%; width:${progress}%;"></div>
-            </div>
-            <div style="font-size:0.8rem; margin-top:4px; opacity:0.9;">${q.points} / ${pointsForNext} pour le niveau ${q.level + 1}</div>
-        </div>
-
-        <h3>Quêtes du jour</h3>
-        ${q.daily.map(q => renderQuestCard(q)).join('')}
-        
-        <h3>Défis de la semaine</h3>
-        ${q.weekly.map(q => renderQuestCard(q)).join('')}
-        
-        <h3>Succès permanents</h3>
-        ${q.special.filter(q => q.completed).length === 0 ? '<p style="color:var(--text-secondary); font-style:italic;">Aucun succès débloqué encore.</p>' : ''}
-        ${q.special.filter(q => q.completed).map(q => renderQuestCard(q)).join('')}
-    `;
-}
-
-function renderQuestCard(q) {
-    const pct = Math.min(100, (q.progress / q.target) * 100);
-    return `
-        <div class="card quest-card ${q.completed ? 'quest-completed' : ''}">
-            <div class="quest-header">
-                <span class="quest-text">${q.text}</span>
-                <span class="quest-reward">${q.completed ? '✓' : '+' + q.reward + ' pts'}</span>
-            </div>
-            <div class="quest-bar"><div class="quest-fill" style="width:${pct}%"></div></div>
-            <div class="quest-progress">${Math.min(q.progress, q.target)} / ${q.target}</div>
-        </div>
-    `;
-}
-
-// ==========================================
-// 6. PARCOURS
-// ==========================================
-function renderParcours(container) {
-    addQuestProgress('daily', 'parcours_viewed', 1);
-    const totalMinutes = state.history.reduce((acc, curr) => acc + (curr.totalDuration || 0), 0);
-    const totalTasks = state.history.reduce((acc, curr) => acc + (curr.tasksCompleted ? curr.tasksCompleted.length : 0), 0);
-    
-    // 7 derniers jours chart
-    const days = [];
-    for (let i = 6; i >= 0; i--) {
-        const d = new Date(); d.setDate(d.getDate() - i);
-        const dateStr = d.toDateString();
-        const dayMinutes = state.history.filter(h => new Date(h.date).toDateString() === dateStr).reduce((acc, curr) => acc + curr.totalDuration, 0);
-        days.push({ label: d.toLocaleDateString('fr-FR', {weekday:'short'}), value: dayMinutes });
-    }
-    const maxVal = Math.max(10, ...days.map(d => d.value));
-
-    container.innerHTML = `
-        <h2>Parcours</h2>
-        <p>Ton historique, tes sessions, ta progression.</p>
-        
-        <div class="stat-grid">
-            <div class="stat-box">
-                <div class="stat-value">${totalMinutes}</div>
-                <div class="stat-label">Minutes totales</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-value">${totalTasks}</div>
-                <div class="stat-label">Tâches terminées</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-value">${state.streak}</div>
-                <div class="stat-label">Jours de suite</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-value">${state.history.length}</div>
-                <div class="stat-label">Sessions</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>7 derniers jours</h3>
-            <div style="display:flex; align-items:flex-end; justify-content:space-between; height:100px; gap:8px; margin-top:16px;">
-                ${days.map(d => `
-                    <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
-                        <div style="width:100%; background:var(--accent-coral); border-radius:4px 4px 0 0; height:${(d.value/maxVal)*80}px; min-height:4px;"></div>
-                        <span style="font-size:0.7rem; color:var(--text-secondary); font-weight:700;">${d.label}</span>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-
-        <h3>Sessions récentes</h3>
-        ${state.history.length === 0 ? '<p style="color:var(--text-secondary);">Aucune session pour l\'instant.</p>' : ''}
-        <div class="card">
-            ${[...state.history].reverse().slice(0, 10).map(h => {
-                const date = new Date(h.date);
-                return `
-                <div class="history-item">
-                    <div>
-                        <div style="font-weight:700;">${h.sessionName}</div>
-                        <div style="font-size:0.8rem; color:var(--text-secondary);">${date.toLocaleDateString('fr-FR')} à ${date.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</div>
-                        <div style="font-size:0.75rem; color:var(--accent-coral); margin-top:2px;">${h.tasksCompleted.join(', ') || 'Aucune'}</div>
-                    </div>
-                    <div style="text-align:right;">
-                        <div style="font-weight:800; color:var(--text-primary);">${h.totalDuration} min</div>
-                        <div style="font-size:0.75rem; color:${h.status === 'completed' ? '#30D158' : 'var(--text-secondary)'}; font-weight:700;">
-                            ${h.status === 'completed' ? 'Terminée' : 'Abandonnée'}
-                        </div>
-                    </div>
-                </div>
-                `;
-            }).join('')}
-        </div>
-        
-        <button class="btn btn-secondary" onclick="showTab('reglages')" style="margin-top:20px;">⚙️ Réglages et mentions légales</button>
-    `;
-}
-
-// ==========================================
-// 7. RÉGLAGES (Photos finales)
-// ==========================================
-function renderReglages(container) {
-    container.innerHTML = `
-        <h2>Réglages</h2>
-        
-        <div class="card">
-            <h3>Apparence</h3>
-            <div class="theme-grid">
-                <div class="theme-option ${state.settings.theme === 'clair' ? 'active' : ''}" onclick="changeTheme('clair')" style="background:#F9F6F0; color:#4A3B2A;">
-                    <div class="theme-preview" style="background:linear-gradient(135deg, #FFFFFF 50%, #FF7F66 50%);"></div>
-                    Clair
-                </div>
-                <div class="theme-option ${state.settings.theme === 'nuit' ? 'active' : ''}" onclick="changeTheme('nuit')" style="background:#121212; color:#E0E0E0;">
-                    <div class="theme-preview" style="background:linear-gradient(135deg, #1E1E1E 50%, #FF9A85 50%);"></div>
-                    Nuit
-                </div>
-                <div class="theme-option ${state.settings.theme === 'galaxie' ? 'active' : ''}" onclick="changeTheme('galaxie')" style="background:#0B1026; color:#E0E7FF;">
-                    <div class="theme-preview" style="background:linear-gradient(135deg, #151E3F 50%, #818CF8 50%);"></div>
-                    Galaxie
-                </div>
-                <div class="theme-option ${state.settings.theme === 'chaleureux' ? 'active' : ''}" onclick="changeTheme('chaleureux')" style="background:#FFF8F0; color:#5D4037;">
-                    <div class="theme-preview" style="background:linear-gradient(135deg, #FFFBF5 50%, #E87A5D 50%);"></div>
-                    Chaleureux
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>Appareil</h3>
-            <div style="margin-bottom:16px;">
-                <label style="font-weight:700; font-size:0.9rem; display:block; margin-bottom:8px;">Alerte de fin de session</label>
-                <div class="sound-options">
-                    <div class="sound-option ${state.settings.sound === 'carillon' ? 'active' : ''}" onclick="changeSound('carillon')">Carillon doux</div>
-                    <div class="sound-option ${state.settings.sound === 'pulsation' ? 'active' : ''}" onclick="changeSound('pulsation')">Pulsation</div>
-                    <div class="sound-option ${state.settings.sound === 'silencieux' ? 'active' : ''}" onclick="changeSound('silencieux')">Silencieux</div>
-                </div>
-            </div>
-            
-            <div class="settings-row">
-                <span>Vibration (haptique)</span>
-                <div class="toggle ${state.settings.vibration ? 'active' : ''}" onclick="toggleSetting('vibration')"></div>
-            </div>
-            <div class="settings-row">
-                <span>Écran allumé pendant la session</span>
-                <div class="toggle ${state.settings.keepAwake ? 'active' : ''}" onclick="toggleSetting('keepAwake')"></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>Aide & À propos</h3>
-            <button class="btn btn-secondary" onclick="showOnboarding()">Revoir l'accueil guidé</button>
-            <button class="btn btn-secondary" onclick="showModal('<h3>Mentions légales</h3><p style=text-align:left;>START est une application d\\'aide à l\\'organisation personnelle. Les données sont stockées localement sur votre appareil (localStorage). Aucune donnée n\\'est envoyée sur un serveur externe.<br><br>© 2026 START App.</p>', [{text:'Fermer', action:closeModal}])">Confidentialité & Mentions légales</button>
-            <button class="btn btn-danger" onclick="if(confirm('Tout effacer ? Cette action est irréversible.')){localStorage.clear(); location.reload();}" style="margin-top:16px;">Réinitialiser toutes les données</button>
-        </div>
-    `;
-}
-
-function changeTheme(val) {
-    state.settings.theme = val;
-    addQuestProgress('daily', 'theme_changed', 1);
-    addQuestProgress('special', 'themes_used', 1); // Simplifié pour l'exemple
-    saveState();
-    showTab('reglages');
-}
-
-function changeSound(val) {
-    state.settings.sound = val;
-    saveState();
-    showTab('reglages');
-}
-
-function toggleSetting(key) {
-    state.settings[key] = !state.settings[key];
-    saveState();
-    showTab('reglages');
-}
-
-// ==========================================
-// UTILITAIRES
-// ==========================================
-function showModal(htmlContent, buttons = [{text: 'OK', action: closeModal}]) {
-    const overlay = document.getElementById('modal-overlay');
-    const content = document.getElementById('modal-content');
-    let buttonsHtml = buttons.map((b, i) => 
-        `<button class="btn ${i===0 ? 'btn-primary' : 'btn-secondary'}" style="margin-top:10px;" onclick="window.modalActions[${i}]()">${b.text}</button>`
-    ).join('');
-    content.innerHTML = htmlContent + buttonsHtml;
-    overlay.classList.add('active');
-    window.modalActions = buttons.map(b => b.action);
-}
-
-function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('active');
-}
-
-function showOnboarding() {
-    state.settings.onboardingCompleted = true;
-    saveState();
-    showModal(`
-        <h2 style="color:var(--accent-coral);">Bienvenue sur START</h2>
-        <p style="text-align:left;">1. <strong>Préparez</strong> votre tâche en la découpant en micro-étapes.</p>
-        <p style="text-align:left;">2. <strong>Ajoutez</strong> plusieurs tâches pour une session multi-tâches.</p>
-        <p style="text-align:left;">3. <strong>Appuyez sur START</strong> pour lancer le chrono. Validez les étapes sans arrêter le temps.</p>
-        <p style="text-align:left; font-size:0.9rem; color:var(--text-secondary);">Le chronomètre ne se réinitialise jamais quand vous validez une étape. Avancez à votre rythme.</p>
-    `, [{text: 'C\'est parti !', action: closeModal}]);
-}
-
-// ==========================================
-// INITIALISATION
-// ==========================================
-window.onload = function() {
-    loadState();
-    if (state.settings.keepAwake && 'wakeLock' in navigator) {
-        navigator.wakeLock.request('screen').catch(() => {});
-    }
-    if (!state.settings.onboardingCompleted) showOnboarding();
-    showTab(state.currentTab);
-};
-
-window.onbeforeunload = function() {
-    if (state.currentSession && state.currentSession.isRunning) {
-        return "Une session est en cours. Voulez-vous vraiment quitter ?";
-    }
-};
-</script>
+<div class="overlay hidden" id="ov-sheet">
+  <div class="sheet"><div class="sheet-head"><h3 id="sheet-title">Tâche</h3><button class="icon-btn" data-close="ov-sheet">✕</button></div>
+  <div class="sheet-body" id="sheet-body"></div></div>
+</div>
+
+<div class="overlay hidden" id="ov-pad">
+  <div class="sheet">
+    <div class="sheet-head"><h3>Durée de la session</h3><button class="icon-btn" data-close="ov-pad">✕</button></div>
+    <div class="pad-display"><b id="pad-val">0</b><em>min</em></div>
+    <div class="pad-grid">
+      <button data-d="1">1</button><button data-d="2">2</button><button data-d="3">3</button>
+      <button data-d="4">4</button><button data-d="5">5</button><button data-d="6">6</button>
+      <button data-d="7">7</button><button data-d="8">8</button><button data-d="9">9</button>
+      <button id="pad-back">⌫</button><button data-d="0">0</button><button id="pad-ok">OK</button>
+    </div>
+    <p class="muted small center">Vous pouvez saisir plus de 120 minutes.</p>
+  </div>
+</div>
+
+<div class="overlay hidden" id="ov-multi">
+  <div class="sheet tall">
+    <div class="sheet-head"><h3>Session multi-tâches</h3><button class="icon-btn" data-close="ov-multi">✕</button></div>
+    <div class="sheet-body"><div id="multi-list"></div>
+      <div class="add-step"><select id="multi-pick"></select><input id="multi-dur" type="number" min="1" placeholder="min"><button id="multi-add">+</button></div>
+    </div>
+    <div class="sheet-foot">
+      <div class="multi-total">Total : <b id="multi-total">0 min</b></div>
+      <button class="btn-primary" id="multi-start">Démarrer</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="ov-session">
+  <div class="session-root" id="session-root"></div>
+</div>
+
+<div class="overlay hidden" id="ov-block">
+  <div class="sheet">
+    <div class="sheet-head"><h3>Je bloque</h3><button class="icon-btn" data-close="ov-block">✕</button></div>
+    <div class="sheet-body" id="block-body"></div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="ov-summary">
+  <div class="sheet"><div class="sheet-head"><h3>Session terminée</h3><button class="icon-btn" data-close="ov-summary">✕</button></div>
+  <div class="sheet-body" id="summary-body"></div>
+  <div class="sheet-foot"><button class="btn-primary block" data-close="ov-summary">Continuer</button></div></div>
+</div>
+
+<div class="overlay hidden" id="ov-profile">
+  <div class="sheet">
+    <div class="sheet-head"><h3>Mon profil</h3><button class="icon-btn" data-close="ov-profile">✕</button></div>
+    <div class="sheet-body">
+      <label class="field"><span>Pseudo</span><input id="pf-name" type="text" maxlength="24"></label>
+      <div class="field"><span>Avatar</span><div class="avatar-preview small"><div class="profile-avatar" id="pf-avatar"></div></div>
+        <button class="btn-ghost block" id="pf-goto-avatars">Choisir un avatar</button></div>
+    </div>
+    <div class="sheet-foot"><button class="btn-primary block" id="pf-save">Enregistrer</button></div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="ov-cat">
+  <div class="sheet">
+    <div class="sheet-head"><h3>Catégories</h3><button class="icon-btn" data-close="ov-cat">✕</button></div>
+    <div class="sheet-body"><div id="cat-list"></div>
+      <div class="add-step"><input id="cat-name" type="text" placeholder="Nom de la catégorie"><input id="cat-color" type="color" value="#F97316"><button id="cat-add">+</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="ov-legal">
+  <div class="sheet tall"><div class="sheet-head"><h3>Mentions et confidentialité</h3><button class="icon-btn" data-close="ov-legal">✕</button></div>
+  <div class="sheet-body legal">
+    <p><b>CLIC — Commencez simplement.</b></p>
+    <p>CLIC est une application web de productivité personnelle. Aucune donnée n'est envoyée sur un serveur : tâches, sessions, statistiques et préférences sont enregistrées uniquement dans le stockage local de votre navigateur (localStorage).</p>
+    <p>Vous pouvez supprimer toutes vos données à tout moment via « Réinitialiser mes données » dans les réglages, ou en vidant les données du site de votre navigateur.</p>
+    <p>Le bouton CLIC affiché à l'écran est une commande logicielle. Un boîtier physique Bluetooth pourra être connecté dans une version ultérieure ; il n'est pas encore disponible.</p>
+    <p>CLIC ne bloque pas d'autres applications : un site web ne le peut pas. L'anti-distraction se limite à une détection honnête et à une mise en pause de la session.</p>
+    <button class="btn-ghost block" id="reset-data">Réinitialiser mes données</button>
+  </div></div>
+</div>
+
+<div class="overlay hidden" id="ov-tutorial">
+  <div class="tuto-card">
+    <div class="tuto-visual" id="tuto-visual"></div>
+    <h3 id="tuto-title"></h3>
+    <p id="tuto-text"></p>
+    <div class="tuto-dots" id="tuto-dots"></div>
+    <div class="tuto-foot">
+      <button class="btn-ghost" id="tuto-skip">Passer</button>
+      <button class="btn-primary" id="tuto-next">Suivant</button>
+    </div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script src="app.js"></script>
 </body>
 </html>
