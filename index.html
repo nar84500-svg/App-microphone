@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Clic – Commencez simplement</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect x='1' y='1' width='54' height='54' rx='17' fill='%23FFFDF6'/%3E%3Cpath d='M38 15A17 17 0 1 0 38 41' fill='none' stroke='%233B1A10' stroke-width='7.5' stroke-linecap='round'/%3E%3Cpath d='M25 22.5L35.5 28L25 33.5Z' fill='%23F26A1B' stroke='%23F26A1B' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat+Brush&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#FFF3EE;--accent:#F26A1B;--accent-light:#FFF0E6;
   --text:#3B1A10;--text2:#8A5F55;--card:#fff;--border:#FDE8E0;
   --shadow:0 2px 12px rgba(242,106,27,.08);--shadow-lg:0 6px 22px rgba(242,106,27,.14);
-  --r:20px;--r-lg:26px;--nav-h:72px;
+  --r:20px;--nav-h:64px;
 }
 html,body{height:100%;font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overflow:hidden}
 body{display:flex;justify-content:center}
@@ -24,56 +25,54 @@ body{display:flex;justify-content:center}
 
 /* ---------- Header ---------- */
 .app-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;
-  padding-top:calc(12px + env(safe-area-inset-top));z-index:10;flex-shrink:0;min-height:64px}
+  padding-top:calc(12px + env(safe-area-inset-top));z-index:10;flex-shrink:0;min-height:72px}
 .app-header.hidden{display:none}
-.header-left{display:flex;align-items:center;gap:10px}
-.logo-icon{width:42px;height:42px;background:#fff;border-radius:13px;display:flex;align-items:center;
-  justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.logo-text .name{font-size:23px;font-weight:800;font-style:italic;line-height:1.05}
-.logo-text .slogan{font-size:11px;color:var(--text2);font-weight:600}
+.header-left{display:flex;align-items:center;gap:12px}
+.logo-icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;
+  justify-content:center;box-shadow:0 3px 12px rgba(59,26,16,.12);flex-shrink:0}
+.logo-icon svg{width:56px;height:56px;display:block}
+.logo-text .name{font-family:'Caveat Brush',cursive;font-size:32px;line-height:1.05;color:var(--text)}
+.logo-text .slogan{font-size:12px;color:var(--text2);font-weight:600}
 .header-right{display:flex;align-items:center;gap:10px}
-.bell-btn{width:44px;height:44px;background:#fff;border:none;border-radius:14px;display:flex;
+.bell-btn{width:48px;height:48px;background:#fff;border:none;border-radius:15px;display:flex;
   align-items:center;justify-content:center;cursor:pointer;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.bell-dot{position:absolute;top:9px;right:9px;width:9px;height:9px;background:var(--accent);border-radius:50%;border:2px solid #fff}
-.round-avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;cursor:pointer;background:#FFE3D0;
+.bell-dot{position:absolute;top:10px;right:10px;width:9px;height:9px;background:var(--accent);border-radius:50%;border:2px solid #fff}
+.round-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;cursor:pointer;background:#FFE3D0;
   border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0}
 .round-avatar svg{width:100%;height:100%;display:block}
 
-/* ---------- Content ---------- */
-.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 18px;
-  padding-bottom:calc(var(--nav-h) + 26px + env(safe-area-inset-bottom));position:relative;z-index:1;
+/* ---------- Content (scroll) ---------- */
+.content{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0 18px;
+  padding-bottom:calc(var(--nav-h) + 44px + env(safe-area-inset-bottom));position:relative;z-index:1;
   -webkit-overflow-scrolling:touch;scrollbar-width:none}
 .content::-webkit-scrollbar{display:none}
 .screen{display:none}.screen.active{display:block}
 
-/* ---------- Bottom nav ---------- */
-.bottom-nav{position:absolute;bottom:0;left:10px;right:10px;background:#fff;border-radius:26px;
-  display:flex;align-items:center;justify-content:space-around;padding:6px 6px;
-  padding-bottom:calc(6px + env(safe-area-inset-bottom));box-shadow:0 -2px 22px rgba(0,0,0,.09);z-index:100;
-  height:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+/* ---------- Bottom nav (flottante, marge dessous) ---------- */
+.bottom-nav{position:absolute;bottom:calc(10px + env(safe-area-inset-bottom));left:10px;right:10px;background:#fff;
+  border-radius:26px;display:flex;align-items:center;justify-content:space-around;padding:8px;
+  box-shadow:0 4px 22px rgba(0,0,0,.1);z-index:100;height:var(--nav-h)}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;
   cursor:pointer;padding:6px 10px;min-width:52px;min-height:48px;color:var(--text2);
   font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;transition:color .2s}
 .nav-item.active{color:var(--accent)}
 .nav-item svg{width:24px;height:24px}
 .nav-add{width:54px;height:54px;background:var(--accent);border:none;border-radius:50%;display:flex;
-  align-items:center;justify-content:center;cursor:pointer;margin-top:-22px;
+  align-items:center;justify-content:center;cursor:pointer;margin-top:-24px;
   box-shadow:0 4px 16px rgba(242,106,27,.4);transition:transform .15s}
 .nav-add:active{transform:scale(.92)}
 .nav-add svg{width:28px;height:28px}
 
 /* ---------- Mini banner ---------- */
-#focusBanner{position:absolute;left:10px;right:10px;bottom:calc(var(--nav-h) + 8px + env(safe-area-inset-bottom));
+#focusBanner{position:absolute;left:10px;right:10px;bottom:calc(var(--nav-h) + 22px + env(safe-area-inset-bottom));
   background:var(--text);color:#fff;border-radius:16px;padding:12px 16px;display:none;align-items:center;
-  gap:10px;z-index:99;box-shadow:var(--shadow-lg);cursor:pointer;font-weight:700;font-size:14px;
-  animation:slideIn .3s ease}
+  gap:10px;z-index:99;box-shadow:var(--shadow-lg);cursor:pointer;font-weight:700;font-size:14px}
 #focusBanner.show{display:flex}
 #focusBanner .fb-dot{width:10px;height:10px;border-radius:50%;background:#4ADE80;flex-shrink:0;animation:pulse 1.4s infinite}
 #focusBanner .fb-time{margin-left:auto;font-variant-numeric:tabular-nums;color:#FFC9A3}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@keyframes slideIn{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
 
-/* ---------- Typography / common ---------- */
+/* ---------- Typo / commun ---------- */
 h1{font-size:28px;font-weight:800}
 h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .subtitle{font-size:15px;color:var(--text2);font-weight:600;margin-bottom:16px}
@@ -84,6 +83,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
   display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 20px;font-size:15px;transition:transform .1s}
 .btn:active{transform:scale(.96)}
 .btn-primary{background:var(--accent);color:#fff}
+.btn-primary:disabled{background:#E7D5CC;color:#fff;box-shadow:none;cursor:default}
 .btn-outline{background:#fff;color:var(--text);border:1.5px solid var(--border)}
 .btn-pill{background:#fff;border:1.5px solid var(--border);border-radius:50px;padding:8px 16px;font-size:13px;
   font-weight:800;color:var(--text);cursor:pointer;font-family:'Nunito',sans-serif;min-height:38px}
@@ -93,6 +93,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
   justify-content:center;border-radius:50%;color:var(--text);flex-shrink:0}
 .back-btn svg{width:24px;height:24px}
 .page-title{font-size:21px;font-weight:800}
+.page-title.big{font-size:34px}
 .header-spacer{width:44px}
 
 /* ---------- Search ---------- */
@@ -163,7 +164,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .stat-tile .stat-num{font-size:21px;font-weight:800}
 .stat-tile .stat-label{font-size:11px;font-weight:700;color:var(--text2)}
 
-/* ---------- Progress card / badges row ---------- */
+/* ---------- Progress / badges row ---------- */
 .progress-card{padding:18px}
 .progress-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .badges-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
@@ -183,7 +184,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .session-chevron{color:var(--text2);flex-shrink:0}
 .session-chevron svg{width:20px;height:20px}
 
-/* ---------- Sheets ---------- */
+/* ---------- Sheets (modèles) ---------- */
 .sheet-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(59,26,16,.35);z-index:200;
   display:none;align-items:flex-end;justify-content:center}
 .sheet-overlay.show{display:flex}
@@ -193,42 +194,44 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .sheet-overlay.show .sheet{transform:translateY(0)}
 .sheet-handle{width:42px;height:5px;background:#E7D5CC;border-radius:3px;margin:0 auto 18px}
 .sheet-title{font-size:20px;font-weight:800;margin-bottom:16px}
-.sheet-input{width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:14px;
-  font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;color:var(--text);outline:none;margin-bottom:16px;background:var(--bg)}
-.sheet-input:focus{border-color:var(--accent)}
-.duration-label{font-size:14px;font-weight:800;margin-bottom:10px;color:var(--text2)}
-.duration-pills{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.duration-pill{padding:9px 16px;border-radius:50px;border:1.5px solid var(--border);background:#fff;
-  font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;cursor:pointer;color:var(--text);min-height:42px}
-.duration-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.stepper{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:6px}
-.step-btn{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--border);background:#fff;
-  font-size:26px;font-weight:800;color:var(--accent);cursor:pointer;display:flex;align-items:center;
-  justify-content:center;font-family:'Nunito',sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}
-.step-btn:active{background:var(--accent-light)}
-.dur-input{width:130px;text-align:center;border:none;outline:none;font-family:'Nunito',sans-serif;
-  font-size:30px;font-weight:800;color:var(--text);background:var(--bg);border-radius:16px;padding:10px 6px}
-.dur-hint{text-align:center;font-size:13px;color:var(--text2);font-weight:700;margin-bottom:18px}
-.sheet-actions{display:flex;gap:10px}
-.sheet-actions .btn{flex:1}
-.choice-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--bg);border-radius:18px;
-  border:1px solid var(--border);margin-bottom:12px;cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;width:100%}
-.choice-item .ci-icon{width:48px;height:48px;border-radius:14px;background:#fff;display:flex;align-items:center;
-  justify-content:center;box-shadow:var(--shadow);flex-shrink:0}
-.choice-item .ci-icon svg{width:26px;height:26px}
-.choice-item h4{font-size:16px;font-weight:800}
-.choice-item p{font-size:12px;color:var(--text2);font-weight:700}
+
+/* ---------- Timer keypad screen ---------- */
+#screen-timer.active{display:flex;flex-direction:column}
+.timer-name{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:16px;
+  font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;color:var(--text);outline:none;
+  background:#fff;margin-bottom:14px}
+.timer-name:focus{border-color:var(--accent)}
+.timer-name::placeholder{color:#C4A090;font-weight:700}
+.timer-display{display:flex;align-items:flex-start;justify-content:center;gap:6px;margin-bottom:14px}
+.td-col{display:flex;flex-direction:column;align-items:center;width:84px}
+.td-col span{font-size:40px;font-weight:800;font-variant-numeric:tabular-nums;color:#CDBAB1;line-height:1.1;transition:color .2s}
+.td-col span.on{color:var(--text)}
+.td-col label{font-size:12px;font-weight:700;color:var(--text2);margin-top:2px}
+.td-sep{font-size:34px;font-weight:800;color:#CDBAB1;line-height:1.4}
+.quick-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.quick-pills button{padding:9px 14px;border-radius:50px;border:1.5px solid var(--border);background:#fff;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;cursor:pointer;color:var(--text);min-height:40px}
+.quick-pills button:active{background:var(--accent-light);border-color:var(--accent)}
+.timer-cta{display:flex;gap:10px;margin-bottom:18px}
+.timer-cta .btn-primary{flex:1.7}
+.timer-cta .btn-outline{flex:1}
+.keypad{display:grid;grid-template-columns:repeat(3,72px);justify-content:center;gap:14px}
+.keypad button{width:72px;height:72px;border-radius:50%;border:1px solid var(--border);background:#fff;
+  font-family:'Nunito',sans-serif;font-size:26px;font-weight:800;color:var(--text);cursor:pointer;
+  box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none;touch-action:none}
+.keypad button:active{background:var(--accent-light);transform:scale(.94)}
+.keypad svg{width:26px;height:26px}
 
 /* ---------- Focus screen ---------- */
 #screen-focus{padding-top:6px}
 .focus-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .focus-top .ft-label{font-size:15px;font-weight:800;color:var(--text2)}
-.timer-wrap{position:relative;width:min(300px,80vw);aspect-ratio:1;margin:18px auto}
+.timer-wrap{position:relative;width:min(300px,78vw);aspect-ratio:1;margin:18px auto}
 .timer-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
 .timer-track{fill:none;stroke:#F7DFD3;stroke-width:14}
 .timer-prog{fill:none;stroke:var(--accent);stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .25s linear}
 .timer-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.timer-time{font-size:46px;font-weight:800;font-variant-numeric:tabular-nums}
+.timer-time{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums}
 .timer-task{font-size:16px;font-weight:800;color:var(--text2);text-align:center;padding:0 24px}
 .timer-msg{font-size:13px;font-weight:700;color:#C4A090}
 .focus-actions{display:flex;flex-direction:column;gap:12px;margin-top:22px}
@@ -284,57 +287,58 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .avatar-actions{display:flex;gap:12px;padding-bottom:10px}
 .avatar-actions .btn{flex:1}
 
-/* ---------- Profile ---------- */
-.cloud-wrap{position:relative;width:230px;height:200px;margin:6px auto 0}
-.cloud-blob{position:absolute;inset:0;border-radius:50%;filter:blur(26px);opacity:.85;
-  background:radial-gradient(circle at 30% 25%,#C9A6F5 0%,transparent 45%),
-             radial-gradient(circle at 70% 20%,#F7B9D2 0%,transparent 45%),
-             radial-gradient(circle at 60% 75%,#FBB07B 0%,transparent 50%),
-             radial-gradient(circle at 20% 70%,#F9C9B8 0%,transparent 45%)}
-.cloud-bubble{position:absolute;top:6px;right:2px;width:34px;height:34px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#FBC49A,#F2915C);box-shadow:0 2px 8px rgba(242,106,27,.3)}
+/* ---------- Profil (image 2) ---------- */
+.cloud-wrap{position:relative;width:290px;height:215px;margin:4px auto 0}
+.blob{position:absolute;border-radius:50%;filter:blur(22px);opacity:.85}
+.b1{width:160px;height:160px;left:80px;top:-16px;background:radial-gradient(circle,#C9A6F5 0%,transparent 68%)}
+.b2{width:150px;height:150px;left:2px;top:52px;background:radial-gradient(circle,#F9A8C9 0%,transparent 68%)}
+.b3{width:160px;height:160px;right:0;bottom:-14px;background:radial-gradient(circle,#FBB07B 0%,transparent 68%)}
+.cloud-bubble{position:absolute;top:2px;right:22px;width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#FFD9B8,#F2915C);box-shadow:0 2px 8px rgba(242,106,27,.35)}
 .profile-avatar-zone{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.profile-avatar{width:150px;height:150px;border-radius:50%;background:#FFE3D0;border:5px solid #fff;
-  box-shadow:0 8px 26px rgba(242,106,27,.22);display:flex;align-items:center;justify-content:center;position:relative}
-.profile-avatar svg{width:120px;height:120px}
-.edit-avatar-btn{position:absolute;bottom:4px;right:4px;width:40px;height:40px;border-radius:50%;background:#fff;
+.profile-avatar{width:150px;height:150px;border-radius:50%;background:#FFE3D0;border:6px solid #fff;
+  box-shadow:0 8px 26px rgba(242,106,27,.22);display:flex;align-items:center;justify-content:center;position:relative;overflow:visible}
+.profile-avatar svg{width:138px;height:138px}
+.edit-avatar-btn{position:absolute;bottom:2px;right:2px;width:40px;height:40px;border-radius:50%;background:#fff;
   border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.15)}
 .edit-avatar-btn svg{width:19px;height:19px;color:var(--text)}
-.profile-name{font-size:30px;font-weight:800;text-align:center;margin-top:14px;cursor:pointer;border-radius:12px;padding:2px 8px}
-.profile-name:hover,.profile-motto:hover{background:rgba(242,106,27,.06)}
-.profile-motto{font-size:16px;color:var(--text2);font-weight:700;text-align:center;cursor:pointer;border-radius:12px;padding:2px 8px;margin-bottom:18px}
-.inline-edit{font-family:'Nunito',sans-serif;font-weight:800;text-align:center;border:1.5px solid var(--accent);
-  border-radius:12px;padding:2px 8px;outline:none;background:#fff;width:100%;max-width:280px;font-size:inherit;color:var(--text)}
-.profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
-.pstat{background:#fff;border-radius:20px;border:1px solid var(--border);padding:16px 10px;text-align:center;box-shadow:var(--shadow)}
-.pstat .ps-icon{width:40px;height:40px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center}
+.profile-name{display:block;width:100%;text-align:center;border:none;outline:none;background:transparent;
+  font-family:'Nunito',sans-serif;font-size:40px;font-weight:800;color:var(--text);padding:6px 12px;margin-top:14px}
+.profile-name::placeholder{color:var(--text)}
+.profile-motto{display:block;width:100%;text-align:center;border:none;outline:none;background:transparent;
+  font-family:'Nunito',sans-serif;font-size:22px;font-weight:600;color:var(--text2);padding:2px 12px 16px}
+.profile-motto::placeholder{color:var(--text2)}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.pstat{background:#fff;border-radius:22px;border:1px solid var(--border);padding:12px 10px;text-align:center;box-shadow:var(--shadow);min-height:90px}
+.pstat .ps-icon{width:40px;height:40px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center}
 .pstat .ps-icon svg{width:22px;height:22px}
-.pstat .ps-num{font-size:26px;font-weight:800}
+.pstat .ps-num{font-size:24px;font-weight:800}
 .pstat .ps-label{font-size:12px;color:var(--text2);font-weight:700}
 .realis-head{display:flex;align-items:center;justify-content:space-between;margin:22px 0 12px}
 .realis-head h2{margin:0}
 .realis-link{background:none;border:none;color:var(--accent);font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;cursor:pointer;padding:8px}
 .realis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.realis-card{border-radius:20px;padding:14px 8px;text-align:center;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
-.realis-card h4{font-size:13px;font-weight:800;margin-bottom:6px}
+.realis-card{border-radius:18px;padding:12px 6px;text-align:center;display:flex;flex-direction:column;
+  justify-content:space-between;gap:8px;box-shadow:var(--shadow)}
+.realis-card h4{font-size:13px;font-weight:800;line-height:1.25}
 .realis-card p{font-size:10.5px;font-weight:700;line-height:1.3;opacity:.85}
-.realis-card svg{width:44px;height:44px;margin:8px auto 0;display:block}
-.rc-green{background:linear-gradient(160deg,#E4F7E4,#C9EFCB);color:#1E6B34}
-.rc-orange{background:linear-gradient(160deg,#FCEBDC,#F8D3B4);color:#8A4A1E}
-.rc-purple{background:linear-gradient(160deg,#F3E4FB,#E3CBF2);color:#6B2E86}
+.realis-card svg{width:42px;height:42px;margin:0 auto;display:block}
+.rc-green{background:linear-gradient(160deg,#E7F8E7,#CDEED0);color:#1E6B34;border:1px solid #BFE6C4}
+.rc-orange{background:linear-gradient(160deg,#FCEBDC,#F8D3B4);color:#8A4A1E;border:1px solid #F2C79F}
+.rc-purple{background:linear-gradient(160deg,#F3E4FB,#E3CBF2);color:#6B2E86;border:1px solid #DFC2EF}
 .realis-card.locked{opacity:.5}
 </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- Global header (Accueil / Avatar) -->
+  <!-- Global header -->
   <header class="app-header" id="appHeader">
     <div class="header-left">
-      <div class="logo-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 3a9 9 0 1 0 0 18" stroke="#3B1A10" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M10.5 8.5L15.5 12L10.5 15.5Z" fill="#F26A1B"/>
+      <div class="logo-icon" aria-label="Logo Clic">
+        <svg viewBox="0 0 56 56" role="img" aria-hidden="true">
+          <path d="M38 15A17 17 0 1 0 38 41" fill="none" stroke="#3B1A10" stroke-width="7.5" stroke-linecap="round"/>
+          <path d="M25 22.5L35.5 28L25 33.5Z" fill="#F26A1B" stroke="#F26A1B" stroke-width="3" stroke-linejoin="round"/>
         </svg>
       </div>
       <div class="logo-text">
@@ -386,7 +390,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 
       <h2 class="section-title">Actions rapides</h2>
       <div class="quick-actions">
-        <button class="quick-tile" onclick="openAddSheet()">
+        <button class="quick-tile" onclick="openTimer()">
           <svg viewBox="0 0 32 32" fill="none" stroke="#F26A1B" stroke-width="2.5" stroke-linecap="round"><circle cx="16" cy="16" r="12"/><path d="M16 10v12M10 16h12"/></svg>
           <span>Ajouter une tâche</span>
         </button>
@@ -425,11 +429,39 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
       </div>
       <div id="taskList"></div>
       <div style="margin-top:10px;">
-        <button class="btn btn-primary" style="width:100%;" onclick="openAddSheet()">
+        <button class="btn btn-primary" style="width:100%;" onclick="openTimer()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
           Ajouter une tâche
         </button>
       </div>
+    </section>
+
+    <!-- ===== TIMER (ajouter une tâche / focus libre) ===== -->
+    <section class="screen" id="screen-timer">
+      <div class="page-header">
+        <button class="back-btn" onclick="cancelTimer()" aria-label="Retour">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="page-title">Ajouter une tâche</span>
+        <div class="header-spacer"></div>
+      </div>
+      <input class="timer-name" type="text" id="timerName" placeholder="Nom de la tâche (optionnel)" autocomplete="off" aria-label="Nom de la tâche">
+      <div class="timer-display">
+        <div class="td-col"><span id="tdH">00</span><label>Heures</label></div>
+        <span class="td-sep">:</span>
+        <div class="td-col"><span id="tdM">00</span><label>Minutes</label></div>
+        <span class="td-sep">:</span>
+        <div class="td-col"><span id="tdS">00</span><label>Secondes</label></div>
+      </div>
+      <div class="quick-pills" id="quickPills"></div>
+      <div class="timer-cta">
+        <button class="btn btn-primary" id="btnStart" onclick="startFromTimer()" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          Commencer
+        </button>
+        <button class="btn btn-outline" id="btnAddOnly" onclick="addFromTimer()" disabled>Ajouter</button>
+      </div>
+      <div class="keypad" id="keypad"></div>
     </section>
 
     <!-- ===== FOCUS ===== -->
@@ -528,22 +560,18 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
         <button class="back-btn" onclick="navigateTo('accueil')" aria-label="Retour">
           <svg viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         </button>
-        <span class="page-title">Profil</span>
+        <span class="page-title big">Profil</span>
         <div class="header-spacer"></div>
       </div>
       <div class="cloud-wrap">
-        <div class="cloud-blob"></div>
+        <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
         <div class="cloud-bubble"></div>
         <div class="profile-avatar-zone">
-          <div class="profile-avatar" id="profileAvatar">
-            <button class="edit-avatar-btn" onclick="navigateTo('avatar')" aria-label="Changer d'avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-            </button>
-          </div>
+          <div class="profile-avatar" id="profileAvatar"></div>
         </div>
       </div>
-      <div class="profile-name" id="profileName" role="button" tabindex="0" onclick="editField('name')" aria-label="Modifier le prénom">Ton prénom</div>
-      <div class="profile-motto" id="profileMotto" role="button" tabindex="0" onclick="editField('motto')" aria-label="Modifier la devise">Ajoute une devise</div>
+      <input class="profile-name" id="profileName" placeholder="Ton prénom" aria-label="Prénom" autocomplete="off">
+      <input class="profile-motto" id="profileMotto" placeholder="Ajoute une devise" aria-label="Devise" autocomplete="off">
       <div class="profile-stats">
         <div class="pstat">
           <div class="ps-icon" style="background:#F3E8FF;"><svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div>
@@ -576,9 +604,9 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
         </div>
         <div class="realis-card rc-orange" id="realStreak">
           <div><h4>Champion de la régularité</h4><p>15 jours consécutifs de productivité</p></div>
-          <svg viewBox="0 0 48 48" fill="none" stroke="#E2620F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M24 6c4 8-2 12-2 18 0 4 2 7 6 7 3 0 5-2 6-5 2 4 3 7 3 11 0 8-6 13-13 13S11 45 11 37c0-12 9-18 13-31z"/>
-            <path d="M24 44c-4 0-7-3-7-7 0-5 5-7 7-12 2 5 7 7 7 12 0 4-3 7-7 7z" fill="#F59E0B" stroke="none" opacity=".35"/>
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M24 4c5 9-2 13-2 19 0 3 1.5 5 4 5 2.5 0 4-1.5 4.5-3.5C33 29 34 32 34 35c0 6-4.5 9-10 9S14 41 14 35c0-10 7-16 10-31z" fill="#EF4444"/>
+            <path d="M24 27c2 4-1 6-1 9 0 3 1.5 4 3.5 4S30 38 30 35c0-4-3-5-6-8z" fill="#FBBF24"/>
           </svg>
         </div>
         <div class="realis-card rc-purple" id="realTasks">
@@ -600,7 +628,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
   </div>
 
   <!-- Bottom nav -->
-  <nav class="bottom-nav">
+  <nav class="bottom-nav" id="bottomNav">
     <button class="nav-item active" data-screen="accueil" onclick="navigateTo('accueil')" aria-label="Accueil">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V10"/></svg>
       Accueil
@@ -609,7 +637,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
       Mes tâches
     </button>
-    <button class="nav-add" onclick="openPlusSheet()" aria-label="Ajouter">
+    <button class="nav-add" onclick="openTimer()" aria-label="Ajouter une tâche ou un focus">
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
     </button>
     <button class="nav-item" data-screen="parcours" onclick="navigateTo('parcours')" aria-label="Parcours">
@@ -622,73 +650,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </button>
   </nav>
 
-  <!-- Plus sheet -->
-  <div class="sheet-overlay" id="plusOverlay" onclick="closeSheet('plusOverlay',event)">
-    <div class="sheet" onclick="event.stopPropagation()">
-      <div class="sheet-handle"></div>
-      <div class="sheet-title">Que voulez-vous faire ?</div>
-      <button class="choice-item" onclick="closeSheet('plusOverlay');openAddSheet()">
-        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></div>
-        <div><h4>Ajouter une tâche</h4><p>Nom, durée, et c'est parti</p></div>
-      </button>
-      <button class="choice-item" onclick="closeSheet('plusOverlay');openFreeFocus()">
-        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <div><h4>Focus libre</h4><p>Choisissez votre durée, ça démarre aussitôt</p></div>
-      </button>
-      <div class="sheet-actions" style="margin-top:6px;">
-        <button class="btn btn-outline" style="width:100%;" onclick="closeSheet('plusOverlay')">Fermer</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add task sheet -->
-  <div class="sheet-overlay" id="addOverlay" onclick="closeSheet('addOverlay',event)">
-    <div class="sheet" onclick="event.stopPropagation()">
-      <div class="sheet-handle"></div>
-      <div class="sheet-title">Ajouter une tâche</div>
-      <label class="duration-label" for="newTaskName">Nom de la tâche</label>
-      <input class="sheet-input" type="text" id="newTaskName" placeholder="Ex. Réviser un cours" autocomplete="off">
-      <div class="duration-label">Durée estimée</div>
-      <div class="duration-pills" id="pills-add"></div>
-      <div class="stepper">
-        <button class="step-btn" id="minus-add" aria-label="Diminuer">−</button>
-        <input class="dur-input" id="val-add" inputmode="numeric" aria-label="Durée en minutes">
-        <button class="step-btn" id="plus-add" aria-label="Augmenter">+</button>
-      </div>
-      <div class="dur-hint" id="hint-add"></div>
-      <div class="sheet-actions">
-        <button class="btn btn-outline" onclick="addTask(false)">Ajouter</button>
-        <button class="btn btn-primary" onclick="addTask(true)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-          Ajouter et lancer
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Free focus sheet -->
-  <div class="sheet-overlay" id="freeOverlay" onclick="closeSheet('freeOverlay',event)">
-    <div class="sheet" onclick="event.stopPropagation()">
-      <div class="sheet-handle"></div>
-      <div class="sheet-title">Focus libre</div>
-      <div class="duration-label">Durée de la session</div>
-      <div class="duration-pills" id="pills-free"></div>
-      <div class="stepper">
-        <button class="step-btn" id="minus-free" aria-label="Diminuer">−</button>
-        <input class="dur-input" id="val-free" inputmode="numeric" aria-label="Durée en minutes">
-        <button class="step-btn" id="plus-free" aria-label="Augmenter">+</button>
-      </div>
-      <div class="dur-hint" id="hint-free"></div>
-      <div class="sheet-actions">
-        <button class="btn btn-outline" onclick="closeSheet('freeOverlay')">Annuler</button>
-        <button class="btn btn-primary" onclick="startFreeFocus()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-          Lancer
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- Models sheet -->
   <div class="sheet-overlay" id="modelsOverlay" onclick="closeSheet('modelsOverlay',event)">
     <div class="sheet" onclick="event.stopPropagation()">
@@ -696,7 +657,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
       <div class="sheet-title">Modèles de tâches</div>
       <p style="font-size:14px;color:var(--text2);font-weight:700;margin-bottom:16px;">Ajoutez en un clic</p>
       <div id="modelsList"></div>
-      <div class="sheet-actions" style="margin-top:16px;">
+      <div style="margin-top:16px;">
         <button class="btn btn-outline" style="width:100%;" onclick="closeSheet('modelsOverlay')">Fermer</button>
       </div>
     </div>
@@ -705,8 +666,8 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 
 <script>
 /* ================= SVG helpers ================= */
-const face = (cx,cy,s)=>`<path d="M${cx-7*s} ${cy}q${3.5*s} ${3.5*s} ${7*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
-const eyesClosed=(cx,cy,s)=>`<path d="M${cx-8*s} ${cy}q${2.5*s} ${2.5*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M${cx+3*s} ${cy}q${2.5*s} ${2.5*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
+const face=(cx,cy,s)=>`<path d="M${cx-3.5*s} ${cy}q${3.5*s} ${3.5*s} ${7*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
+const happyEyes=(cx,cy,s)=>`<path d="M${cx-9*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M${cx+4*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
 const eyesDots=(cx,cy,s)=>`<circle cx="${cx-5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/><circle cx="${cx+5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/>`;
 const cheeks=(cx,cy,s)=>`<circle cx="${cx-9*s}" cy="${cy+3*s}" r="${2.6*s}" fill="#F9A8A8" opacity=".6"/><circle cx="${cx+9*s}" cy="${cy+3*s}" r="${2.6*s}" fill="#F9A8A8" opacity=".6"/>`;
 const spark=(x,y)=>`<path d="M${x} ${y-4}v8M${x-4} ${y}h8" stroke="#F26A1B" stroke-width="2" stroke-linecap="round" opacity=".8"/>`;
@@ -714,33 +675,32 @@ const spark2=(x,y)=>`<path d="M${x} ${y-3}v6M${x-3} ${y}h6" stroke="#F26A1B" str
 
 const AVATARS=[
  {id:'plante',name:'La petite plante',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="82" rx="20" ry="4" fill="#000" opacity=".06"/>
-   <path d="M50 58V40" stroke="#3FA34D" stroke-width="3.4" stroke-linecap="round"/>
-   <path d="M50 46c-3-12-13-15-19-14 1 10 10 16 19 14z" fill="#6FCF7F"/><path d="M50 46c-3-12-13-15-19-14" fill="none" stroke="#4DA55A" stroke-width="1.4"/>
-   <path d="M50 42c3-13 13-16 19-15-1 11-10 17-19 15z" fill="#8FE39D"/><path d="M50 42c3-13 13-16 19-15" fill="none" stroke="#4DA55A" stroke-width="1.4"/>
-   <path d="M34 58h32l-3 16a4 4 0 0 1-4 3.5H41a4 4 0 0 1-4-3.5z" fill="url(#potG)"/>
-   <rect x="31" y="54" width="38" height="8" rx="4" fill="#E8956B"/>
-   <defs><linearGradient id="potG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8956B"/><stop offset="1" stop-color="#D97742"/></linearGradient></defs>
-   ${eyesClosed(50,68,1)}${face(50,72,.8)}${cheeks(50,68,1)}
-   ${spark(74,30)}${spark2(68,22)}</svg>`},
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
+   <ellipse cx="50" cy="85" rx="19" ry="3" fill="#000" opacity=".05"/>
+   <path d="M50 62V46" stroke="#3FA34D" stroke-width="3.2" stroke-linecap="round"/>
+   <path d="M49 50C41 50 34 44 33 35c9-1 15 5 16 15z" fill="#57B65B"/>
+   <path d="M51 46C57 42 63 36 64 28c-8 1-13 8-13 18z" fill="#78CE7C"/>
+   <path d="M33 62h34l-3.5 17a5 5 0 0 1-5 4.5H41.5a5 5 0 0 1-5-4.5z" fill="#E08A5A"/>
+   <rect x="30" y="57" width="40" height="8" rx="4" fill="#E8956B"/>
+   ${happyEyes(50,70,1)}${face(50,74,.8)}${cheeks(50,70,1)}
+   ${spark(72,32)}${spark2(78,40)}</svg>`},
  {id:'livres',name:'La pile de livres',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
    <ellipse cx="50" cy="80" rx="22" ry="4" fill="#000" opacity=".06"/>
    <rect x="26" y="62" width="48" height="12" rx="3" fill="#8B5CF6"/><rect x="26" y="62" width="48" height="4" rx="2" fill="#7C3AED"/><rect x="70" y="64" width="4" height="8" rx="1" fill="#EDE9FE"/>
    <rect x="30" y="50" width="40" height="12" rx="3" fill="#F59E0B"/><rect x="30" y="50" width="40" height="4" rx="2" fill="#D97706"/><rect x="66" y="52" width="4" height="8" rx="1" fill="#FEF3C7"/>
    <rect x="34" y="36" width="32" height="14" rx="3" fill="#F97316"/><rect x="34" y="36" width="32" height="4" rx="2" fill="#EA580C"/>
-   ${eyesClosed(50,45,1)}${face(50,48,.7)}${cheeks(50,45,.9)}
+   ${happyEyes(50,44,1)}${face(50,48,.7)}${cheeks(50,44,.9)}
    ${spark(74,28)}${spark2(26,30)}</svg>`},
  {id:'cible',name:'La cible',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
    <ellipse cx="50" cy="80" rx="18" ry="4" fill="#000" opacity=".06"/>
    <circle cx="48" cy="52" r="20" fill="#F87171"/><circle cx="48" cy="52" r="14" fill="#fff"/><circle cx="48" cy="52" r="8.5" fill="#EF4444"/><circle cx="48" cy="52" r="3.5" fill="#fff"/>
    <line x1="66" y1="26" x2="52" y2="46" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
    <path d="M66 26l6-2-2 6z" fill="#DC2626"/><path d="M62 30l4 4" stroke="#DC2626" stroke-width="2.4" stroke-linecap="round"/><path d="M66 26l4 8" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
    ${spark(26,32)}${spark2(76,60)}</svg>`},
  {id:'calendrier',name:'Le calendrier',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
    <ellipse cx="50" cy="82" rx="20" ry="4" fill="#000" opacity=".06"/>
    <rect x="26" y="34" width="48" height="42" rx="8" fill="#FDF3DC" stroke="#EAD9B0" stroke-width="1.5"/>
    <path d="M26 42a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8v4H26z" fill="#EF4444"/>
@@ -749,7 +709,7 @@ const AVATARS=[
    ${eyesDots(50,63,1)}${face(50,67,.8)}${cheeks(50,63,1)}
    ${spark(78,30)}${spark2(22,60)}</svg>`},
  {id:'cafe',name:'La tasse de café',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
    <ellipse cx="50" cy="82" rx="22" ry="4" fill="#000" opacity=".06"/>
    <path d="M40 26q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/>
    <path d="M50 24q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/>
@@ -758,10 +718,10 @@ const AVATARS=[
    <ellipse cx="47" cy="42" rx="17" ry="4.5" fill="#6B4226"/>
    <path d="M64 46h4a7 7 0 0 1 0 14h-3" fill="none" stroke="#EAD9CE" stroke-width="3"/>
    <ellipse cx="47" cy="74" rx="24" ry="5" fill="#F2915C"/>
-   ${eyesClosed(47,54,1)}${face(47,58,.7)}${cheeks(47,54,.9)}
+   ${happyEyes(47,52,1)}${face(47,56,.7)}${cheeks(47,52,.9)}
    ${spark(78,40)}${spark2(20,44)}</svg>`},
  {id:'crayon',name:'Le crayon',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
    <ellipse cx="50" cy="82" rx="16" ry="4" fill="#000" opacity=".06"/>
    <g transform="rotate(35 50 50)">
      <rect x="42" y="24" width="16" height="44" rx="3" fill="#FCD34D"/>
@@ -772,7 +732,7 @@ const AVATARS=[
    </g>
    ${spark(24,34)}${spark2(76,64)}</svg>`},
  {id:'ampoule',name:'L\'ampoule',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
    <ellipse cx="50" cy="82" rx="14" ry="4" fill="#000" opacity=".06"/>
    <path d="M38 44a14 14 0 1 1 24 0c0 7-5 9-6 14h-12c-1-5-6-7-6-14z" fill="url(#bulbG)"/>
    <defs><linearGradient id="bulbG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDE68A"/><stop offset="1" stop-color="#FACC15"/></linearGradient></defs>
@@ -781,11 +741,11 @@ const AVATARS=[
    ${eyesDots(50,42,1)}${face(50,46,.7)}${cheeks(50,42,.9)}
    ${spark(78,40)}${spark2(22,44)}</svg>`},
  {id:'coeur',name:'Le cœur',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="44" fill="#FFE3D0"/>
+   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
    <ellipse cx="50" cy="80" rx="18" ry="4" fill="#000" opacity=".06"/>
    <path d="M50 72c-16-10-24-19-24-28a11 11 0 0 1 24-4 11 11 0 0 1 24 4c0 9-8 18-24 28z" fill="url(#heartG)"/>
    <defs><linearGradient id="heartG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCA5A5"/><stop offset="1" stop-color="#F87171"/></linearGradient></defs>
-   ${eyesClosed(50,46,1)}${face(50,50,.8)}${cheeks(50,46,1)}
+   ${happyEyes(50,44,1)}${face(50,49,.8)}${cheeks(50,45,1)}
    ${spark(76,30)}${spark2(24,32)}</svg>`}
 ];
 
@@ -806,25 +766,24 @@ const BADGE_ICONS={
  calendar:'<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/><path d="M14 25l4 4 8-9"/></svg>',
  layers:'<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L5 14l15 8 15-8z"/><path d="M5 22l15 8 15-8"/><path d="M5 29l15 8 15-8"/></svg>',
  buoy:'<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><circle cx="20" cy="20" r="13"/><circle cx="20" cy="20" r="5.5"/><path d="M20 7v5.5M20 27.5V33M7 20h5.5M27.5 20H33"/></svg>',
- heart:'<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 31c-9-6.5-14-12-14-18a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 6-5 11.5-14 18z" fill="#fff" stroke="none"/></svg>',
+ heart:'<svg viewBox="0 0 40 40" fill="none"><path d="M20 31c-9-6.5-14-12-14-18a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 6-5 11.5-14 18z" fill="#fff"/></svg>',
  trophy:'<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7h16v8a8 8 0 0 1-16 0z"/><path d="M12 10H7a4 4 0 0 0 4 7h1M28 10h5a4 4 0 0 1-4 7h-1"/><path d="M20 23v5M15 33h10M17 28h6v5h-6z"/></svg>'
 };
 
-const MODELS=[{name:'Réviser un chapitre',duration:25},{name:'Faire du sport',duration:45},{name:'Lire 10 pages',duration:15}];
+const MODELS=[{name:'Réviser un chapitre',duration:1500},{name:'Faire du sport',duration:2700},{name:'Lire 10 pages',duration:900}];
 
 /* ================= State ================= */
 const DEFAULT_TASKS=[
- {id:1,name:'Réviser un cours',done:true,duration:25},
- {id:2,name:'Projet TER',done:true,duration:45},
- {id:3,name:'Lecture article',done:true,duration:25},
- {id:4,name:'Répondre aux e-mails',done:false,duration:10},
- {id:5,name:'Préparer l\'exposé',done:false,duration:45}
+ {id:1,name:'Réviser un cours',done:true,duration:1500},
+ {id:2,name:'Projet TER',done:true,duration:2700},
+ {id:3,name:'Lecture article',done:true,duration:1500},
+ {id:4,name:'Répondre aux e-mails',done:false,duration:600},
+ {id:5,name:'Préparer l\'exposé',done:false,duration:2700}
 ];
 let tasks=[],currentAvatar='plante',tempAvatar='plante',currentFilter='all';
 let profile={name:'',motto:''};
-let stats={focusMinutes:0,totalCompleted:0,sessions:[],activeDays:[],abandons:0,lastVisit:'',seenBadges:[]};
-let focus=null; // {taskId,name,total,endTs,paused,remaining,done}
-let focusScreen=false, prevScreen='accueil';
+let stats={focusSeconds:0,totalCompleted:0,sessions:[],activeDays:[],abandons:0,lastVisit:'',seenBadges:[]};
+let focus=null,prevScreen='accueil';
 
 function load(){
   try{
@@ -834,7 +793,13 @@ function load(){
     stats=Object.assign(stats,JSON.parse(localStorage.getItem('clic_stats')||'null')||{});
     focus=JSON.parse(localStorage.getItem('clic_focus')||'null');
   }catch(e){tasks=JSON.parse(JSON.stringify(DEFAULT_TASKS));}
-  // return-after-absence badge check
+  if(!localStorage.getItem('clic_v2')){
+    tasks.forEach(t=>{if(t.duration<=480)t.duration*=60;});
+    if(stats.focusMinutes!=null){stats.focusSeconds=(stats.focusMinutes||0)*60;delete stats.focusMinutes;}
+    (stats.sessions||[]).forEach(s=>{if(s.minutes!=null){s.seconds=s.minutes*60;delete s.minutes;}});
+    localStorage.setItem('clic_v2','1');
+  }
+  if(stats.focusSeconds==null)stats.focusSeconds=0;
   const today=todayISO();
   if(stats.lastVisit&&stats.lastVisit!==today){
     const gap=Math.round((new Date(today)-new Date(stats.lastVisit))/864e5);
@@ -859,9 +824,13 @@ function computeStreak(){
   while(set.has(d.toISOString().slice(0,10))){n++;d.setDate(d.getDate()-1);}
   return n;
 }
-function level(){return 1+Math.floor((stats.totalCompleted*3+stats.focusMinutes)/30);}
-function fmtMin(m){if(m<60)return m+' min';const h=Math.floor(m/60),r=m%60;return r?`${h} h ${r}`:`${h} h`;}
-function fmtDur(m){return fmtMin(m);}
+function level(){return 1+Math.floor((stats.totalCompleted*3+stats.focusSeconds/60)/30);}
+function fmtDur(sec){
+  if(sec<60)return sec+' s';
+  if(sec<3600){const m=Math.round(sec/60);return m+' min';}
+  const h=Math.floor(sec/3600),m=Math.round(sec%3600/60);
+  return m?`${h} h ${String(m).padStart(2,'0')}`:`${h} h`;
+}
 function fmtClock(s){s=Math.max(0,s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),sec=s%60;
   return h?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;}
 function badgeUnlocked(b){
@@ -870,26 +839,26 @@ function badgeUnlocked(b){
   switch(b.id){
     case 'premier_pas':return stats.totalCompleted>=1;
     case 'objectif':return tasks.length>0&&done===tasks.length;
-    case 'une_heure':return stats.focusMinutes>=60;
+    case 'une_heure':return stats.focusSeconds>=3600;
     case 'jours_actifs':return stats.activeDays.length>=3;
     case 'multi':return stats.totalCompleted>=3;
     case 'debloque':return stats.abandons>=1;
     case 'retour':return false;
-    case 'marathon':return stats.focusMinutes>=600;
+    case 'marathon':return stats.focusSeconds>=36000;
   }
   return false;
 }
 
 /* ================= Navigation ================= */
-const SCREENS=['accueil','taches','focus','parcours','badges','avatar','profil'];
+const SCREENS=['accueil','taches','timer','focus','parcours','badges','avatar','profil'];
 function navigateTo(s){
   if(s==='focus'&&!focus){s='accueil';}
-  prevScreen=(s==='focus')?prevScreen:s;
-  focusScreen=(s==='focus');
+  prevScreen=(s==='focus'||s==='timer')?prevScreen:s;
   document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
   document.getElementById('screen-'+s).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.screen===s));
   document.getElementById('appHeader').classList.toggle('hidden',!(s==='accueil'||s==='avatar'));
+  document.getElementById('bottomNav').style.display=(s==='timer')?'none':'flex';
   location.hash='#'+s;
   document.getElementById('contentArea').scrollTop=0;
   if(s==='accueil')renderAccueil();
@@ -913,8 +882,10 @@ function updateAvatarDisplays(){
   document.getElementById('headerAvatar').innerHTML=svg;
   document.getElementById('tachesHeaderAvatar').innerHTML=svg;
   document.getElementById('parcoursAvatar').innerHTML=svg;
-  const pa=document.getElementById('profileAvatar');
-  pa.innerHTML=svg+`<button class="edit-avatar-btn" onclick="navigateTo('avatar')" aria-label="Changer d'avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>`;
+  document.getElementById('profileAvatar').innerHTML=svg+
+    `<button class="edit-avatar-btn" onclick="navigateTo('avatar')" aria-label="Changer d'avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+    </button>`;
 }
 function renderAvatars(){
   document.getElementById('avatarPreviewCircle').innerHTML=avatarSvg(tempAvatar);
@@ -943,7 +914,7 @@ function renderTasks(){
     list.innerHTML=`<div class="empty-state">
       <svg viewBox="0 0 64 64" fill="none" stroke="#C4A090" stroke-width="2.4" stroke-linecap="round"><rect x="12" y="12" width="40" height="40" rx="10"/><path d="M24 32l6 6 12-12"/></svg>
       <p>Votre liste est vide.<br>Chaque petit pas compte !</p>
-      <button class="btn btn-primary" onclick="openAddSheet()">Ajouter ma première tâche</button></div>`;
+      <button class="btn btn-primary" onclick="openTimer()">Ajouter ma première tâche</button></div>`;
     return;
   }
   if(!f.length){
@@ -956,12 +927,13 @@ function renderTasks(){
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
       </button>
       <div class="task-main"><span class="task-name">${t.name}</span><span class="task-dur">${fmtDur(t.duration)}</span></div>
-      ${t.done?'':`<button class="task-launch" onclick="startFocus(${t.id},'${t.name.replace(/'/g,"\\'")}',${t.duration})" aria-label="Lancer ${t.name}">
+      ${t.done?'':`<button class="task-launch" onclick="startFocus(${t.id},'${esc(t.name)}',${t.duration})" aria-label="Lancer ${t.name}">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>`}
       <button class="task-delete" onclick="deleteTask(${t.id})" aria-label="Supprimer ${t.name}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></svg></button>
     </div>`).join('');
 }
+const esc=s=>s.replace(/'/g,"\\'").replace(/"/g,'&quot;');
 function toggleTask(id){
   const t=tasks.find(x=>x.id===id);if(!t)return;
   t.done=!t.done;
@@ -977,74 +949,72 @@ function setFilter(f,btn){currentFilter=f;
   document.querySelectorAll('.filter-row .btn-pill').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');renderTasks();}
 
-/* ================= Duration controls ================= */
-const durState={add:25,free:25};
-const PILLS=[5,10,15,25,45,60];
-function buildPills(prefix){
-  document.getElementById('pills-'+prefix).innerHTML=PILLS.map(p=>
-    `<button class="duration-pill ${durState[prefix]===p?'active':''}" onclick="setDur('${prefix}',${p})">${p} min</button>`).join('');
+/* ================= Timer keypad ================= */
+let kpNum=0,kpTotal=0;
+const PILLS=[1,5,10,15,25,45];
+function openTimer(){kpNum=0;renderKeypad();renderTimerDisplay();document.getElementById('timerName').value='';navigateTo('timer');}
+function cancelTimer(){navigateTo(prevScreen||'accueil');}
+function renderKeypad(){
+  document.getElementById('quickPills').innerHTML=PILLS.map(m=>
+    `<button onclick="kpAddMin(${m})">${m}m</button>`).join('');
+  const keys=['1','2','3','4','5','6','7','8','9','00','0','del'];
+  document.getElementById('keypad').innerHTML=keys.map(k=>{
+    if(k==='del')return `<button id="keyDel" aria-label="Effacer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H8L2 12l6 7h13a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/><path d="M18 9l-6 6M12 9l6 6"/></svg></button>`;
+    return `<button onclick="kpDigit('${k}')" aria-label="Chiffre ${k}">${k}</button>`;
+  }).join('');
+  const del=document.getElementById('keyDel');
+  let holdT,longFired;
+  del.addEventListener('pointerdown',e=>{e.preventDefault();longFired=false;
+    holdT=setTimeout(()=>{longFired=true;kpNum=0;renderTimerDisplay();},500);});
+  ['pointerup','pointerleave','pointercancel'].forEach(ev=>del.addEventListener(ev,()=>clearTimeout(holdT)));
+  del.addEventListener('click',()=>{if(!longFired){kpNum=Math.floor(kpNum/10);renderTimerDisplay();}});
 }
-function setDur(prefix,v){durState[prefix]=v;refreshDur(prefix);}
-function refreshDur(prefix){
-  buildPills(prefix);
-  const inp=document.getElementById('val-'+prefix);
-  if(document.activeElement!==inp)inp.value=fmtDur(durState[prefix]);
-  document.getElementById('hint-'+prefix).textContent='De 1 à 480 minutes · appuyez longuement sur − ou +';
+function kpDigit(d){
+  const n=kpNum*parseInt(d,10)+(d==='00'?0:parseInt(d,10));
+  if(d==='00'){ if(String(kpNum).length>=5)return; kpNum=kpNum*100; }
+  else{ if(String(kpNum).length>=6)return; kpNum=kpNum*10+parseInt(d,10); }
+  renderTimerDisplay();
 }
-function wireDur(prefix){
-  const inp=document.getElementById('val-'+prefix);
-  inp.addEventListener('focus',()=>{inp.value=durState[prefix];inp.select();});
-  inp.addEventListener('input',()=>{
-    const n=parseInt(inp.value.replace(/\D/g,''),10);
-    if(!isNaN(n))durState[prefix]=Math.min(480,Math.max(1,n));
-  });
-  inp.addEventListener('blur',()=>{refreshDur(prefix);});
-  const hold=(btn,fn)=>{let t,i;
-    const start=e=>{e.preventDefault();fn();t=setTimeout(()=>{i=setInterval(fn,110);},380);};
-    const stop=()=>{clearTimeout(t);clearInterval(i);};
-    btn.addEventListener('pointerdown',start);
-    ['pointerup','pointerleave','pointercancel'].forEach(ev=>btn.addEventListener(ev,stop));};
-  hold(document.getElementById('minus-'+prefix),()=>{durState[prefix]=Math.max(1,durState[prefix]-5);refreshDur(prefix);});
-  hold(document.getElementById('plus-'+prefix),()=>{durState[prefix]=Math.min(480,durState[prefix]+5);refreshDur(prefix);});
-  refreshDur(prefix);
+function kpAddMin(m){
+  const total=Math.min(359999,kpTotal+m*60);
+  kpNum=Math.floor(total/3600)*10000+Math.floor(total%3600/60)*100+total%60;
+  renderTimerDisplay();
 }
-
-/* ================= Sheets ================= */
-function openSheet(id){document.getElementById(id).classList.add('show');}
-function closeSheet(id,e){if(e&&e.target!==e.currentTarget)return;document.getElementById(id).classList.remove('show');}
-function openPlusSheet(){openSheet('plusOverlay');}
-function openAddSheet(){durState.add=25;refreshDur('add');openSheet('addOverlay');
-  const inp=document.getElementById('newTaskName');inp.value='';
-  setTimeout(()=>{inp.focus();},350);}
-function openFreeFocus(){durState.free=25;refreshDur('free');openSheet('freeOverlay');}
-function addTask(launch){
-  const name=document.getElementById('newTaskName').value.trim();
-  if(!name){document.getElementById('newTaskName').focus();return;}
-  const id=tasks.reduce((m,t)=>Math.max(m,t.id),0)+1;
-  tasks.push({id,name,done:false,duration:durState.add});
-  save();closeSheet('addOverlay');
-  if(location.hash.includes('taches'))renderTasks();
-  if(launch)startFocus(id,name,durState.add);
-  else{renderAccueil();navigateTo('taches');}
+function renderTimerDisplay(){
+  const n=kpNum;
+  let total=Math.floor(n/10000)*3600+Math.floor(n/100)%100*60+n%100;
+  total=Math.min(total,359999);
+  kpTotal=total;
+  const h=Math.floor(total/3600),m=Math.floor(total%3600/60),s=total%60;
+  const pad=v=>String(v).padStart(2,'0');
+  const set=(id,v)=>{const el=document.getElementById(id);el.textContent=pad(v);el.classList.toggle('on',v!==0);};
+  set('tdH',h);set('tdM',m);set('tdS',s);
+  document.getElementById('btnStart').disabled=total===0;
+  document.getElementById('btnAddOnly').disabled=total===0;
 }
-function startFreeFocus(){closeSheet('freeOverlay');startFocus(null,'Focus libre',durState.free);}
-function showModels(){
-  document.getElementById('modelsList').innerHTML=MODELS.map((m,i)=>`
-    <div class="model-item" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg);border-radius:16px;border:1px solid var(--border);margin-bottom:10px;">
-      <div><h4 style="font-size:15px;font-weight:800;">${m.name}</h4><p style="font-size:12px;color:var(--text2);font-weight:700;">${fmtDur(m.duration)} estimées</p></div>
-      <button class="btn-pill" style="background:var(--accent-light);color:var(--accent);border-color:transparent;" onclick="addModel(${i})">Ajouter</button>
-    </div>`).join('');
-  openSheet('modelsOverlay');
+function startFromTimer(){
+  if(kpTotal===0)return;
+  const name=document.getElementById('timerName').value.trim();
+  if(name){
+    const id=tasks.reduce((mx,t)=>Math.max(mx,t.id),0)+1;
+    tasks.push({id,name,done:false,duration:kpTotal});
+    save();
+    startFocus(id,name,kpTotal);
+  }else{
+    startFocus(null,'Focus libre',kpTotal);
+  }
 }
-function addModel(i){
-  const m=MODELS[i];
-  tasks.push({id:tasks.reduce((mx,t)=>Math.max(mx,t.id),0)+1,name:m.name,done:false,duration:m.duration});
-  save();closeSheet('modelsOverlay');renderTasks();renderAccueil();navigateTo('taches');
+function addFromTimer(){
+  if(kpTotal===0)return;
+  const name=document.getElementById('timerName').value.trim()||'Focus libre';
+  tasks.push({id:tasks.reduce((mx,t)=>Math.max(mx,t.id),0)+1,name,done:false,duration:kpTotal});
+  save();navigateTo('taches');
 }
 
 /* ================= Focus engine ================= */
-function startFocus(taskId,name,minutes){
-  const total=Math.max(1,minutes)*60;
+function startFocus(taskId,name,seconds){
+  const total=Math.max(1,Math.round(seconds));
   focus={taskId,name,total,endTs:Date.now()+total*1000,paused:false,remaining:total,done:false};
   save();navigateTo('focus');
 }
@@ -1077,14 +1047,13 @@ function abandonFocus(){
 }
 function completeFocus(auto){
   if(!focus)return;
-  const elapsedSec=focus.total-focusRemaining();
-  const minutes=Math.max(1,Math.round(elapsedSec/60));
+  const elapsed=Math.max(1,focus.total-focusRemaining());
   if(focus.taskId!=null){
     const t=tasks.find(x=>x.id===focus.taskId);
     if(t&&!t.done){t.done=true;stats.totalCompleted++;}
   }
-  stats.focusMinutes+=minutes;
-  stats.sessions.unshift({name:focus.name,date:todayISO(),minutes});
+  stats.focusSeconds+=elapsed;
+  stats.sessions.unshift({name:focus.name,date:todayISO(),seconds:elapsed});
   stats.sessions=stats.sessions.slice(0,30);
   markActiveDay();
   if(navigator.vibrate)navigator.vibrate([40,60,40]);
@@ -1129,14 +1098,15 @@ function renderFocus(success){
         <button class="btn btn-primary" onclick="pauseResume()">${focus.paused?'Reprendre':'Pause'}</button>
         <button class="btn btn-outline" onclick="addFive()">+5 min</button>
       </div>
-      <button class="btn btn-primary" style="width:100%;" onclick="completeFocus(false)">Terminer maintenant</button>
+      <button class="btn btn-primary" style="width:100%;" onclick="completeFocus(false)">Terminer</button>
       <button class="btn btn-danger" style="width:100%;" onclick="askAbandon()">Abandonner</button>
     </div>`}`;
 }
 function finishSuccess(){focus=null;save();navigateTo('accueil');}
 function updateBanner(){
   const b=document.getElementById('focusBanner');
-  if(focus&&!focus.done&&!focusScreen){
+  const s=(location.hash||'#accueil').replace('#','');
+  if(focus&&!focus.done&&s!=='focus'&&s!=='timer'){
     b.classList.add('show');
     document.getElementById('fbText').textContent='Focus en cours · '+focus.name;
     document.getElementById('fbTime').textContent=fmtClock(focusRemaining());
@@ -1144,7 +1114,8 @@ function updateBanner(){
 }
 setInterval(()=>{
   if(focus&&!focus.done){
-    if(focusScreen&&!confirming){
+    const s=(location.hash||'').replace('#','');
+    if(s==='focus'&&!confirming){
       const el=document.getElementById('fTime');
       if(el)el.textContent=fmtClock(focusRemaining());
       const prog=document.querySelector('.timer-prog');
@@ -1152,7 +1123,7 @@ setInterval(()=>{
     }
     if(!focus.paused&&focusRemaining()<=0){completeFocus(true);}
     updateBanner();
-    if(prevScreen==='accueil'&&!focusScreen)renderContinueCard();
+    if(s==='accueil')renderContinueCard();
   }
 },500);
 
@@ -1179,12 +1150,12 @@ function renderContinueCard(){
       card.innerHTML=`<div class="continue-info">
           <h3>${next.name}</h3><div class="status">À lancer</div>
           <div class="time"><svg viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${fmtDur(next.duration)} estimées</div>
-        </div><button class="continue-btn" onclick="startFocus(${next.id},'${next.name.replace(/'/g,"\\'")}',${next.duration})">Lancer
+        </div><button class="continue-btn" onclick="startFocus(${next.id},'${esc(next.name)}',${next.duration})">Lancer
           <svg viewBox="0 0 24 24" fill="#F26A1B"><path d="M8 5v14l11-7z"/></svg></button>`;
     }else{
       card.innerHTML=`<div class="continue-info">
           <h3>Rien en cours</h3><div class="status">${tasks.length?'Tout est terminé !':'Ajoute une tâche ou lance un focus.'}</div>
-        </div><button class="continue-btn" onclick="openFreeFocus()">Lancer un focus
+        </div><button class="continue-btn" onclick="openTimer()">Lancer un focus
           <svg viewBox="0 0 24 24" fill="#F26A1B"><path d="M8 5v14l11-7z"/></svg></button>`;
     }
   }
@@ -1195,8 +1166,8 @@ function renderParcours(){
   const done=tasks.filter(t=>t.done).length,total=tasks.length;
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('statDone').textContent=done;
-  document.getElementById('statTime').textContent=fmtMin(stats.focusMinutes);
-  document.getElementById('statStreak').textContent=computeStreak()+' jours';
+  document.getElementById('statTime').textContent=fmtDur(stats.focusSeconds);
+  document.getElementById('statStreak').textContent=computeStreak();
   document.getElementById('parcoursPct').textContent=pct+' %';
   document.getElementById('parcoursFill').style.width=pct+'%';
   document.getElementById('badgesRow').innerHTML=BADGES.slice(0,4).map(b=>{
@@ -1207,7 +1178,7 @@ function renderParcours(){
   const sl=document.getElementById('sessionsList');
   if(!stats.sessions.length){
     sl.innerHTML=`<div class="empty-state" style="padding:24px;"><p>Aucune session pour le moment.<br>Lance ton premier focus !</p>
-      <button class="btn btn-primary" onclick="openFreeFocus()">Lancer un focus</button></div>`;
+      <button class="btn btn-primary" onclick="openTimer()">Lancer un focus</button></div>`;
   }else{
     sl.innerHTML=stats.sessions.slice(0,5).map(s=>{
       const d=new Date(s.date);const today=todayISO();
@@ -1216,7 +1187,7 @@ function renderParcours(){
       return `<div class="session-item">
         <div class="session-info"><h4>${s.name}</h4>
           <div class="session-date"><svg viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${label}</div></div>
-        <div style="display:flex;align-items:center;"><span class="session-duration">${s.minutes} min</span>
+        <div style="display:flex;align-items:center;"><span class="session-duration">${fmtDur(s.seconds)}</span>
           <span class="session-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></span></div>
       </div>`;}).join('');
   }
@@ -1237,31 +1208,36 @@ function renderBadges(){
 /* ================= Profil ================= */
 function renderProfil(){
   document.getElementById('profDone').textContent=stats.totalCompleted;
-  document.getElementById('profFocus').textContent=fmtMin(stats.focusMinutes);
+  document.getElementById('profFocus').textContent=fmtDur(stats.focusSeconds);
   document.getElementById('profDays').textContent=stats.activeDays.length;
   document.getElementById('profLevel').textContent=level();
-  document.getElementById('profileName').textContent=profile.name||'Ton prénom';
-  document.getElementById('profileMotto').textContent=profile.motto||'Ajoute une devise';
-  const sessions=stats.sessions.length;
-  document.getElementById('realFocus').classList.toggle('locked',sessions<100);
+  document.getElementById('profileName').value=profile.name||'';
+  document.getElementById('profileMotto').value=profile.motto||'';
+  document.getElementById('realFocus').classList.toggle('locked',stats.sessions.length<100);
   document.getElementById('realStreak').classList.toggle('locked',computeStreak()<15);
   document.getElementById('realTasks').classList.toggle('locked',stats.totalCompleted<100);
   updateAvatarDisplays();
 }
-function editField(which){
-  const el=document.getElementById(which==='name'?'profileName':'profileMotto');
-  const cur=which==='name'?profile.name:profile.motto;
-  const inp=document.createElement('input');
-  inp.className='inline-edit';inp.value=cur;
-  inp.placeholder=which==='name'?'Ton prénom':'Ajoute une devise';
-  inp.style.fontSize=which==='name'?'24px':'15px';
-  el.replaceWith(inp);inp.focus();inp.select();
-  const done=()=>{
-    const v=inp.value.trim();
-    if(which==='name')profile.name=v;else profile.motto=v;
-    save();renderProfil();};
-  inp.addEventListener('blur',done);
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();});
+document.getElementById('profileName').addEventListener('input',function(){profile.name=this.value;save();});
+document.getElementById('profileMotto').addEventListener('input',function(){profile.motto=this.value;save();});
+[['profileName','name'],['profileMotto','motto']].forEach(([id,key])=>{
+  document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur();});
+});
+
+/* ================= Models sheet ================= */
+function closeSheet(id,e){if(e&&e.target!==e.currentTarget)return;document.getElementById(id).classList.remove('show');}
+function showModels(){
+  document.getElementById('modelsList').innerHTML=MODELS.map((m,i)=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg);border-radius:16px;border:1px solid var(--border);margin-bottom:10px;">
+      <div><h4 style="font-size:15px;font-weight:800;">${m.name}</h4><p style="font-size:12px;color:var(--text2);font-weight:700;">${fmtDur(m.duration)} estimées</p></div>
+      <button class="btn-pill" style="background:var(--accent-light);color:var(--accent);border-color:transparent;" onclick="addModel(${i})">Ajouter</button>
+    </div>`).join('');
+  document.getElementById('modelsOverlay').classList.add('show');
+}
+function addModel(i){
+  const m=MODELS[i];
+  tasks.push({id:tasks.reduce((mx,t)=>Math.max(mx,t.id),0)+1,name:m.name,done:false,duration:m.duration});
+  save();closeSheet('modelsOverlay');renderTasks();renderAccueil();navigateTo('taches');
 }
 
 /* ================= Search ================= */
@@ -1278,11 +1254,9 @@ document.getElementById('searchInput').addEventListener('input',function(){
 
 /* ================= Init ================= */
 load();
-wireDur('add');wireDur('free');
 updateAvatarDisplays();
 const h=(location.hash||'#accueil').replace('#','');
 navigateTo(SCREENS.includes(h)?h:'accueil');
 </script>
 </body>
 </html>
-  
