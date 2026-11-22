@@ -2,778 +2,1513 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#FF6B0F">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Clic — Commence simplement</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clic - Commencez simplement</title>
 <style>
-/* ==========================================================================
-   1. RESET & SCROLL INFAILLIBLE (La clé pour que ça marche sur mobile)
-   ========================================================================== */
-html {
-  height: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  /* C'est ici que se joue le scroll : on autorise le scroll vertical sur le body */
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* Scroll fluide sur iOS */
-  
-  font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 500;
-  color: #3A1A12;
-  background: linear-gradient(180deg, #FFF3EF 0%, #FFE6EA 100%);
-}
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
-/* ==========================================================================
-   2. FOND DÉCORATIF FIXE
-   ========================================================================== */
-.bg-blob {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.45;
-  pointer-events: none;
-  z-index: 0;
-}
-.bg-blob-1 { width: 340px; height: 340px; background: #FFD3C2; top: -80px; right: -70px; }
-.bg-blob-2 { width: 300px; height: 300px; background: #FFC9D6; bottom: 150px; left: -90px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ==========================================================================
-   3. CONTENEUR D'ÉCRAN (Padding bas énorme pour ne JAMAIS être caché par la nav)
-   ========================================================================== */
-.screen {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  /* 160px de padding en bas : 72px (nav) + 16px (marge) + 72px (marge de sécurité pour le scroll) */
-  padding: 20px 20px 160px 20px; 
-}
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #f0e8e4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-/* ==========================================================================
-   4. HEADER STANDARD (Flèche gauche, Titre centré, Espace droite)
-   ========================================================================== */
-.screen-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 44px;
-  margin-bottom: 24px;
-}
-.header-side {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.header-title {
-  flex: 1;
-  text-align: center;
-  font-size: 24px;
-  font-weight: 800;
-  color: #3A1A12;
-  line-height: 1.2;
-}
+  .screen {
+    width: 390px;
+    height: 844px;
+    background: #FFF3EE;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(180,140,130,0.25);
+    flex-shrink: 0;
+  }
 
-/* ==========================================================================
-   5. BOUTONS & COMPOSANTS
-   ========================================================================== */
-.btn-primary {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  background: linear-gradient(135deg, #FF7A1A, #F25A00);
-  color: #fff; border: none; border-radius: 16px; padding: 14px 28px;
-  font-family: inherit; font-size: 16px; font-weight: 700;
-  cursor: pointer; transition: transform 150ms ease, box-shadow 150ms ease;
-  min-height: 48px; width: 100%;
-}
-.btn-primary:active { transform: scale(0.98); }
+  .bg-blob-1 {
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(245,180,170,0.45) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -80px; right: -60px;
+    filter: blur(30px);
+    pointer-events: none;
+  }
+  .bg-blob-2 {
+    position: absolute;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(255,200,180,0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: 100px; left: -80px;
+    filter: blur(35px);
+    pointer-events: none;
+  }
+  .bg-blob-3 {
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(250,190,175,0.35) 0%, transparent 70%);
+    border-radius: 50%;
+    top: 300px; right: -40px;
+    filter: blur(25px);
+    pointer-events: none;
+  }
 
-.btn-secondary {
-  display: inline-flex; align-items: center; justify-content: center;
-  background: #fff; color: #3A1A12; border: 1px solid rgba(58,26,18,0.08);
-  border-radius: 16px; padding: 14px 28px;
-  font-family: inherit; font-size: 16px; font-weight: 700;
-  cursor: pointer; transition: background 150ms ease; min-height: 48px; width: 100%;
-}
-.btn-secondary:active { background: #FFE8DC; }
+  .content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+  }
 
-.btn-round {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, #FF7A1A, #F25A00);
-  color: #fff; border: none; cursor: pointer; flex-shrink: 0;
-}
-.btn-round svg { width: 22px; height: 22px; }
+  /* Header */
+  .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0 12px;
+  }
+  .app-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-box {
+    width: 44px; height: 44px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(180,140,130,0.15);
+    position: relative;
+  }
+  .logo-c {
+    font-size: 22px;
+    font-weight: 900;
+    color: #3B1A10;
+    font-style: italic;
+    line-height: 1;
+  }
+  .logo-play {
+    position: absolute;
+    bottom: 6px; right: 6px;
+    width: 0; height: 0;
+    border-left: 7px solid #F26A1B;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .app-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #3B1A10;
+    font-style: italic;
+    line-height: 1.1;
+  }
+  .app-subtitle {
+    font-size: 11px;
+    color: #8A5F55;
+    font-weight: 600;
+  }
+  .bell-btn {
+    width: 44px; height: 44px;
+    background: white;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(180,140,130,0.15);
+    position: relative;
+  }
+  .bell-dot {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 10px; height: 10px;
+    background: #F26A1B;
+    border-radius: 50%;
+    border: 2px solid white;
+  }
 
-.btn-back {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9);
-  cursor: pointer; flex-shrink: 0;
-}
-.btn-back svg { width: 22px; height: 22px; color: #3A1A12; }
+  /* Screen titles */
+  .screen-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #3B1A10;
+    margin-top: 8px;
+    line-height: 1.2;
+  }
+  .screen-subtitle {
+    font-size: 14px;
+    color: #8A5F55;
+    font-weight: 600;
+    margin-top: 4px;
+  }
 
-.card {
-  background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9);
-  border-radius: 24px; box-shadow: 0 8px 24px rgba(180,90,60,0.08);
-  padding: 20px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-}
+  /* Cards */
+  .card {
+    background: rgba(255,255,255,0.85);
+    border-radius: 22px;
+    border: 1px solid rgba(240,210,205,0.6);
+    box-shadow: 0 4px 20px rgba(200,170,160,0.12);
+    padding: 18px;
+    margin-top: 14px;
+  }
 
-/* ==========================================================================
-   6. BARRE DE NAVIGATION (Le + au milieu, surélevé)
-   ========================================================================== */
-.bottom-nav {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 440px;
-  height: 72px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(255,255,255,0.9);
-  border-radius: 36px;
-  box-shadow: 0 8px 32px rgba(180, 90, 60, 0.15);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  display: flex;
-  justify-content: space-between; /* Espacement égal */
-  align-items: center;
-  padding: 0 12px;
-  z-index: 1000; /* Toujours au-dessus */
-}
+  /* Nav bar */
+  .nav-bar {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 8px;
+    box-shadow: 0 4px 24px rgba(180,140,130,0.18);
+    border: 1px solid rgba(240,210,205,0.4);
+    z-index: 10;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .nav-item span {
+    font-size: 10px;
+    font-weight: 700;
+    color: #8A5F55;
+  }
+  .nav-item.active span {
+    color: #F26A1B;
+  }
+  .nav-center {
+    width: 52px; height: 52px;
+    background: #F26A1B;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(242,106,27,0.35);
+    margin-top: -20px;
+  }
+  .nav-center svg { stroke: white; }
 
-.nav-item {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; padding: 8px 12px; border-radius: 20px;
-  cursor: pointer; background: none; border: none;
-  font-family: inherit; min-width: 56px; min-height: 56px;
-  transition: background 150ms ease;
-}
-.nav-item.active { background: #FFE8DC; }
-.nav-item.active .nav-icon { color: #B8420A; }
-.nav-item.active .nav-label { color: #B8420A; }
+  /* Search bar */
+  .search-bar {
+    background: rgba(255,255,255,0.9);
+    border-radius: 18px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    border: 1px solid rgba(240,210,205,0.5);
+    box-shadow: 0 2px 12px rgba(200,170,160,0.1);
+  }
+  .search-bar input {
+    border: none;
+    background: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    color: #8A5F55;
+    outline: none;
+    width: 100%;
+    font-weight: 600;
+  }
 
-.nav-icon { width: 24px; height: 24px; color: #7A5446; display: flex; }
-.nav-icon svg { width: 24px; height: 24px; }
-.nav-label { font-size: 11px; font-weight: 700; color: #7A5446; line-height: 1; }
+  /* Focus card */
+  .focus-card {
+    background: linear-gradient(135deg, rgba(255,210,210,0.7), rgba(255,220,215,0.5));
+    border-radius: 22px;
+    border: 1px solid rgba(240,200,195,0.5);
+    padding: 20px;
+    margin-top: 16px;
+    box-shadow: 0 4px 20px rgba(220,170,160,0.15);
+  }
+  .focus-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .focus-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .focus-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #3B1A10;
+  }
+  .btn-outline {
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(240,210,205,0.6);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #3B1A10;
+    font-family: 'Nunito', sans-serif;
+  }
+  .focus-info {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3B1A10;
+    margin-bottom: 10px;
+  }
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 12px;
+    background: rgba(240,210,205,0.5);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #F26A1B, #F5873A);
+    border-radius: 6px;
+  }
+  .progress-pct {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3B1A10;
+  }
 
-/* Le bouton + central, surélevé */
-.nav-center {
-  width: 64px; height: 64px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.nav-center-btn {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: linear-gradient(135deg, #FF7A1A, #F25A00);
-  border: 4px solid #FFF3EF; /* Bordure qui se fond avec le fond de l'app */
-  color: #fff; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  margin-top: -26px; /* C'est ça qui le fait dépasser vers le haut */
-  box-shadow: 0 8px 24px rgba(255, 107, 15, 0.4);
-  transition: transform 150ms ease;
-}
-.nav-center-btn:active { transform: scale(0.95); }
-.nav-center-btn svg { width: 28px; height: 28px; }
+  /* Section title */
+  .section-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3B1A10;
+    margin-top: 22px;
+    margin-bottom: 4px;
+  }
 
-/* ==========================================================================
-   7. ÉLÉMENTS SPÉCIFIQUES (Accueil, Tâches, Profil, etc.)
-   ========================================================================== */
-.home-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 20px; position: relative; z-index: 1; }
-.home-logo { display: flex; align-items: center; gap: 12px; }
-.home-logo-icon { width: 48px; height: 48px; background: #fff; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(180,90,60,0.1); }
-.home-logo-text h1 { font-size: 26px; font-weight: 800; color: #3A1A12; line-height: 1.1; margin: 0; }
-.home-logo-text p { font-size: 14px; font-weight: 500; color: #7A5446; line-height: 1.2; margin: 0; }
+  /* Continue card */
+  .continue-card {
+    background: linear-gradient(135deg, rgba(230,200,240,0.6), rgba(255,210,200,0.5));
+    border-radius: 22px;
+    border: 1px solid rgba(230,200,210,0.5);
+    padding: 20px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(200,170,180,0.12);
+  }
+  .continue-info h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3B1A10;
+  }
+  .continue-info .status {
+    font-size: 13px;
+    color: #8A5F55;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .continue-info .time-left {
+    font-size: 13px;
+    color: #3B1A10;
+    font-weight: 700;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .btn-continue {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(240,210,205,0.5);
+    border-radius: 22px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #F26A1B;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(200,170,160,0.1);
+  }
 
-.greeting { margin-bottom: 20px; }
-.greeting-title { font-size: 28px; font-weight: 800; color: #3A1A12; margin-bottom: 4px; }
-.greeting-subtitle { font-size: 16px; font-weight: 500; color: #7A5446; }
+  /* Quick actions */
+  .quick-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .qa-tile {
+    background: rgba(255,255,255,0.9);
+    border-radius: 18px;
+    border: 1px solid rgba(240,210,205,0.5);
+    padding: 14px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 12px rgba(200,170,160,0.1);
+    text-align: center;
+  }
+  .qa-tile span {
+    font-size: 10px;
+    font-weight: 700;
+    color: #3B1A10;
+    line-height: 1.2;
+  }
 
-.search-bar { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid rgba(58,26,18,0.08); border-radius: 16px; padding: 12px 18px; margin-bottom: 20px; }
-.search-bar svg { width: 20px; height: 20px; color: #7A5446; flex-shrink: 0; }
-.search-bar input { flex: 1; border: none; background: none; font-family: inherit; font-size: 15px; font-weight: 500; color: #3A1A12; outline: none; }
-.search-bar input::placeholder { color: #7A5446; opacity: 0.6; }
+  /* Parcours stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .stat-tile {
+    background: rgba(255,255,255,0.85);
+    border-radius: 18px;
+    border: 1px solid rgba(240,210,205,0.5);
+    padding: 14px 10px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(200,170,160,0.1);
+  }
+  .stat-tile.purple {
+    background: rgba(230,215,255,0.6);
+  }
+  .stat-tile.green {
+    background: rgba(220,245,225,0.6);
+  }
+  .stat-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #3B1A10;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: #8A5F55;
+    font-weight: 600;
+    margin-top: 2px;
+  }
 
-.focus-card { background: linear-gradient(135deg, rgba(255,200,180,0.35), rgba(255,180,200,0.25)); border: 1px solid rgba(255,255,255,0.9); border-radius: 24px; padding: 20px; margin-bottom: 20px; }
-.focus-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.focus-card-title { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; color: #3A1A12; }
-.focus-card-stats { font-size: 16px; font-weight: 600; color: #3A1A12; margin-bottom: 12px; }
-.progress-bar { width: 100%; height: 10px; background: rgba(58,26,18,0.08); border-radius: 5px; overflow: hidden; }
-.progress-bar-fill { height: 100%; background: linear-gradient(90deg, #FF7A1A, #F25A00); border-radius: 5px; transition: width 300ms ease; }
-.focus-card-progress { display: flex; align-items: center; gap: 12px; }
-.focus-card-percent { font-size: 20px; font-weight: 800; color: #3A1A12; min-width: 50px; text-align: right; }
+  /* Progress card */
+  .progress-card {
+    background: rgba(255,255,255,0.85);
+    border-radius: 20px;
+    border: 1px solid rgba(240,210,205,0.5);
+    padding: 16px 18px;
+    margin-top: 14px;
+    box-shadow: 0 2px 12px rgba(200,170,160,0.1);
+  }
+  .progress-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-card-header h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #3B1A10;
+  }
+  .progress-card-header .pct {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3B1A10;
+  }
 
-.section { margin-bottom: 28px; }
-.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.section-title { font-size: 20px; font-weight: 800; color: #3A1A12; }
-.section-link { font-size: 14px; font-weight: 700; color: #FF6B0F; background: none; border: none; cursor: pointer; font-family: inherit; }
+  /* Badges row */
+  .badges-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .badge-card {
+    background: rgba(255,255,255,0.85);
+    border-radius: 16px;
+    border: 1px solid rgba(240,210,205,0.5);
+    padding: 12px 8px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(200,170,160,0.1);
+  }
+  .badge-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .badge-card span {
+    font-size: 10px;
+    font-weight: 700;
+    color: #3B1A10;
+    line-height: 1.2;
+  }
+  .badge-locked {
+    opacity: 0.5;
+  }
 
-.resume-card { background: linear-gradient(135deg, rgba(220,180,255,0.25), rgba(255,200,180,0.35)); border: 1px solid rgba(255,255,255,0.9); border-radius: 24px; padding: 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; margin-bottom: 20px; }
-.resume-card-content { flex: 1; min-width: 0; }
-.resume-card-title { font-size: 18px; font-weight: 800; color: #3A1A12; margin-bottom: 4px; }
-.resume-card-status { font-size: 14px; font-weight: 500; color: #7A5446; margin-bottom: 4px; }
-.resume-card-time { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #3A1A12; }
-.resume-card-btn { display: flex; align-items: center; gap: 6px; padding: 10px 18px; background: #fff; border: 1px solid rgba(58,26,18,0.08); border-radius: 14px; font-family: inherit; font-size: 14px; font-weight: 700; color: #FF6B0F; cursor: pointer; flex-shrink: 0; }
+  /* Session list */
+  .session-list {
+    margin-top: 12px;
+  }
+  .session-item {
+    background: rgba(255,255,255,0.85);
+    border-radius: 16px;
+    border: 1px solid rgba(240,210,205,0.4);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 10px rgba(200,170,160,0.08);
+  }
+  .session-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #3B1A10;
+  }
+  .session-date {
+    font-size: 12px;
+    color: #8A5F55;
+    font-weight: 600;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .session-duration {
+    background: rgba(242,106,27,0.12);
+    color: #F26A1B;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
 
-.quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.quick-action { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 6px; background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; cursor: pointer; text-align: center; }
-.quick-action-icon { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
-.quick-action-icon svg { width: 24px; height: 24px; }
-.quick-action-label { font-size: 12px; font-weight: 700; color: #3A1A12; line-height: 1.2; }
+  /* Badges grid screen 3 */
+  .badges-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .badge-full-card {
+    background: rgba(255,255,255,0.88);
+    border-radius: 20px;
+    border: 1px solid rgba(240,210,205,0.5);
+    padding: 18px 14px;
+    text-align: center;
+    box-shadow: 0 3px 16px rgba(200,170,160,0.1);
+  }
+  .badge-full-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .badge-full-icon::before {
+    content: '';
+    position: absolute;
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    opacity: 0.2;
+  }
+  .badge-full-card h4 {
+    font-size: 14px;
+    font-weight: 800;
+    color: #3B1A10;
+    margin-bottom: 4px;
+  }
+  .badge-full-card p {
+    font-size: 11px;
+    color: #8A5F55;
+    font-weight: 600;
+    line-height: 1.3;
+  }
 
-.task-card { background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9); border-radius: 24px; padding: 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; margin-bottom: 12px; position: relative; overflow: hidden; }
-.task-card-bar { position: absolute; left: 0; top: 16px; bottom: 16px; width: 5px; border-radius: 3px; }
-.task-card-bar.orange { background: #FF6B0F; }
-.task-card-bar.amber { background: #F2A300; }
-.task-card-bar.peach { background: #F48A57; }
-.task-card-bar.magenta { background: #C43AA5; }
-.task-card-content { flex: 1; padding-left: 12px; min-width: 0; }
-.task-card-category { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-.task-card-category.orange { color: #B8420A; }
-.task-card-category.amber { color: #8A5A00; }
-.task-card-category.peach { color: #A8501F; }
-.task-card-category.magenta { color: #9A2A82; }
-.task-card-title { font-size: 18px; font-weight: 800; color: #3A1A12; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.task-card-subtitle { font-size: 14px; font-weight: 500; color: #7A5446; }
+  /* Avatar screen */
+  .avatar-preview {
+    background: rgba(255,255,255,0.88);
+    border-radius: 22px;
+    border: 1px solid rgba(240,210,205,0.5);
+    padding: 18px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 3px 16px rgba(200,170,160,0.1);
+  }
+  .avatar-preview-circle {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(255,220,200,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .avatar-preview-info {
+    flex: 1;
+  }
+  .avatar-preview-info .label {
+    font-size: 12px;
+    color: #8A5F55;
+    font-weight: 600;
+  }
+  .avatar-preview-info .name {
+    font-size: 20px;
+    font-weight: 800;
+    color: #3B1A10;
+    margin-top: 2px;
+  }
+  .avatar-selected-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(242,106,27,0.1);
+    color: #F26A1B;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
 
-/* ==========================================================================
-   8. PROFIL & AVATAR (Fond décoratif derrière l'avatar)
-   ========================================================================== */
-.profile-hero { text-align: center; padding: 10px 0 30px; position: relative; }
-.avatar-bg-container {
-  position: relative;
-  width: 200px;
-  height: 180px;
-  margin: 0 auto 20px;
-}
-.avatar-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(12px);
-  opacity: 0.85;
-}
-.avatar-blob-1 { width: 140px; height: 120px; top: 0; left: 30px; background: linear-gradient(135deg, #D9A6F0, #F5A8C8); }
-.avatar-blob-2 { width: 110px; height: 100px; bottom: 10px; left: 0; background: linear-gradient(135deg, #FFB088, #FF8AA8); }
-.avatar-blob-3 { width: 100px; height: 90px; bottom: 0; right: 10px; background: linear-gradient(135deg, #FFCBA0, #FF98B8); }
-.avatar-blob-4 { width: 80px; height: 70px; top: 20px; right: 20px; background: linear-gradient(135deg, #C9A0F0, #FFB0C8); opacity: 0.7; }
+  .avatar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .avatar-option {
+    background: rgba(255,255,255,0.88);
+    border-radius: 18px;
+    border: 2px solid rgba(240,210,205,0.4);
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(200,170,160,0.08);
+    position: relative;
+    min-height: 100px;
+  }
+  .avatar-option.selected {
+    border-color: #F26A1B;
+  }
+  .avatar-option .check-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 24px; height: 24px;
+    background: #F26A1B;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar-circle {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: rgba(255,220,200,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.avatar-main {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #FFE3D8;
-  border: 4px solid #fff;
-  box-shadow: 0 10px 30px rgba(180, 90, 60, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-.avatar-main svg { width: 90px; height: 90px; }
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .btn-cancel {
+    flex: 1;
+    background: rgba(255,255,255,0.9);
+    border: 2px solid rgba(240,200,195,0.6);
+    border-radius: 24px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3B1A10;
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+  }
+  .btn-choose {
+    flex: 1;
+    background: #F26A1B;
+    border: none;
+    border-radius: 24px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(242,106,27,0.3);
+  }
 
-.avatar-edit-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 25px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid #fff;
-  box-shadow: 0 4px 12px rgba(180, 90, 60, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 3;
-}
-.avatar-edit-btn svg { width: 18px; height: 18px; color: #7A5446; }
+  .scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 90px;
+  }
+  .scroll-content::-webkit-scrollbar { display: none; }
 
-.profile-name { font-size: 28px; font-weight: 800; color: #3A1A12; margin-bottom: 4px; }
-.profile-motto { font-size: 16px; font-weight: 500; color: #7A5446; }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-row-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .avatar-small {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,200,180,0.5);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .plus-btn {
+    width: 36px; height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-.stat-card { background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; padding: 16px 12px; text-align: center; }
-.stat-card-value { font-size: 24px; font-weight: 800; color: #3A1A12; line-height: 1.1; }
-.stat-card-label { font-size: 12px; font-weight: 600; color: #7A5446; margin-top: 4px; line-height: 1.2; }
+  .section-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .btn-tout-voir {
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(240,210,205,0.5);
+    border-radius: 18px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #F26A1B;
+    font-family: 'Nunito', sans-serif;
+  }
 
-.settings-list { background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; overflow: hidden; margin-bottom: 16px; }
-.settings-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(58,26,18,0.08); cursor: pointer; min-height: 48px; }
-.settings-row:last-child { border-bottom: none; }
-.settings-row:active { background: #FFE8DC; }
-.settings-row-label { font-size: 16px; font-weight: 600; color: #3A1A12; }
-
-.avatar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-.avatar-option { background: rgba(255,255,255,0.8); border: 2px solid transparent; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; position: relative; }
-.avatar-option.selected { border-color: #FF6B0F; background: #FFE8DC; }
-.avatar-option.selected::after {
-  content: ''; position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; border-radius: 50%;
-  background: #FF6B0F url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/14px no-repeat;
-}
-.avatar-option svg { width: 64px; height: 64px; }
-.avatar-option-name { font-size: 13px; font-weight: 700; color: #3A1A12; text-align: center; }
-
-.badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.badge-card { background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; padding: 16px; text-align: center; }
-.badge-card.locked { opacity: 0.5; filter: grayscale(100%); }
-.badge-card svg { width: 80px; height: 80px; margin: 0 auto 10px; }
-.badge-card-name { font-size: 13px; font-weight: 700; color: #3A1A12; margin-bottom: 4px; }
-.badge-card-condition { font-size: 11px; font-weight: 500; color: #7A5446; line-height: 1.3; }
-
-.bloque-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
-.bloque-card { background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; }
-.bloque-card:active { background: #FFE8DC; }
-.bloque-card-icon { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.bloque-card-icon svg { width: 26px; height: 26px; }
-.bloque-card-title { font-size: 16px; font-weight: 700; color: #3A1A12; }
-.bloque-card-desc { font-size: 13px; font-weight: 500; color: #7A5446; margin-top: 2px; }
-.bloque-note { font-size: 12px; font-weight: 500; color: #7A5446; text-align: center; padding: 16px; line-height: 1.5; opacity: 0.7; }
-
-.input-field { width: 100%; padding: 14px 18px; border: 1px solid rgba(58,26,18,0.08); border-radius: 14px; font-family: inherit; font-size: 16px; font-weight: 500; color: #3A1A12; background: #fff; outline: none; margin-bottom: 16px; }
-.select-field { width: 100%; padding: 14px; border: 1px solid rgba(58,26,18,0.08); border-radius: 14px; font-family: inherit; font-size: 16px; background: #fff; color: #3A1A12; outline: none; margin-bottom: 16px; }
-
-/* Session Screen */
-.session-screen { position: fixed; inset: 0; background: linear-gradient(180deg, #1A110D 0%, #0D0806 100%); z-index: 2000; display: flex; flex-direction: column; padding: 20px; overflow-y: auto; }
-.session-top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-shrink: 0; }
-.session-top-btn { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.session-top-btn svg { width: 22px; height: 22px; color: #fff; }
-.session-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
-.session-task-name { font-family: 'Caveat', 'Comic Sans MS', cursive; font-size: 28px; font-weight: 700; color: #fff; text-align: center; }
-.session-step-info { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.7); text-align: center; }
-.session-step-text { font-size: 18px; font-weight: 500; color: rgba(255,255,255,0.9); text-align: center; max-width: 300px; line-height: 1.4; }
-.session-timer { font-size: 48px; font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; letter-spacing: 2px; }
-.start-button-wrapper { position: relative; width: 160px; height: 160px; display: flex; align-items: center; justify-content: center; margin: 32px auto; }
-.start-button { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, #FF7A1A, #F25A00); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: 'Caveat', 'Comic Sans MS', cursive; font-size: 30px; font-weight: 700; color: #fff; box-shadow: 0 8px 32px rgba(255,107,15,0.25); animation: breathe 3s ease-in-out infinite; }
-@keyframes breathe { 0%,100% { box-shadow: 0 8px 32px rgba(255,107,15,0.25); } 50% { box-shadow: 0 8px 48px rgba(255,107,15,0.4); } }
-
-/* Toast */
-.toast-container { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; padding: 0 16px; width: calc(100% - 32px); max-width: 400px; }
-.toast { background: #fff; border: 1px solid rgba(58,26,18,0.08); border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 24px rgba(180,90,60,0.1); font-size: 14px; font-weight: 600; color: #3A1A12; pointer-events: auto; animation: toastIn 250ms ease; }
-@keyframes toastIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Tutorial */
-.tutorial-screen { position: fixed; inset: 0; background: linear-gradient(180deg, #FFF3EF 0%, #FFE6EA 100%); z-index: 3000; display: flex; flex-direction: column; padding: 20px; overflow-y: auto; }
-.tutorial-progress { width: 100%; height: 6px; background: rgba(58,26,18,0.08); border-radius: 3px; margin-bottom: 32px; overflow: hidden; flex-shrink: 0; }
-.tutorial-progress-fill { height: 100%; background: #FF6B0F; border-radius: 3px; transition: width 300ms ease; }
-.tutorial-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 0; }
-.tutorial-title { font-size: 28px; font-weight: 800; color: #3A1A12; margin-bottom: 16px; }
-.tutorial-text { font-size: 16px; font-weight: 500; color: #7A5446; line-height: 1.6; max-width: 320px; margin-bottom: 32px; }
-.tutorial-actions { display: flex; gap: 12px; width: 100%; max-width: 320px; }
-
-/* Theme Picker */
-.sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; display: flex; align-items: flex-end; justify-content: center; }
-.sheet { background: #fff; border-radius: 24px 24px 0 0; padding: 24px 20px; width: 100%; max-width: 500px; max-height: 85vh; overflow-y: auto; }
-.sheet-handle { width: 40px; height: 4px; background: rgba(58,26,18,0.08); border-radius: 2px; margin: 0 auto 16px; }
-.theme-option { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; cursor: pointer; margin-bottom: 8px; border: 2px solid transparent; }
-.theme-option.active { background: #FFE8DC; border-color: #FF6B0F; }
-.theme-preview { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; border: 1px solid rgba(58,26,18,0.08); }
-.theme-preview.clair { background: linear-gradient(135deg, #FFF3EF, #FFE6EA); }
-.theme-preview.nuit { background: linear-gradient(135deg, #17120F, #241C17); }
-.theme-preview.galaxie { background: linear-gradient(135deg, #14142B, #1F1B3D); }
-.theme-preview.chaleureux { background: linear-gradient(135deg, #F7EBD8, #F0DFC4); }
-
-@media (min-width: 768px) {
-  .screen { max-width: 600px; margin: 0 auto; }
-  .bottom-nav { max-width: 440px; }
-}
+  .scrollable {
+    overflow-y: auto;
+    flex: 1;
+    padding-bottom: 90px;
+  }
+  .scrollable::-webkit-scrollbar { display: none; }
 </style>
 </head>
 <body>
 
-<!-- Fond décoratif fixe -->
-<div class="bg-blob bg-blob-1"></div>
-<div class="bg-blob bg-blob-2"></div>
+<!-- SCREEN 1: ACCUEIL -->
+<div class="screen">
+  <div class="bg-blob-1"></div>
+  <div class="bg-blob-2"></div>
+  <div class="bg-blob-3"></div>
+  <div class="content">
+    <div class="app-header">
+      <div class="app-header-left">
+        <div class="logo-box">
+          <span class="logo-c">C</span>
+          <div class="logo-play"></div>
+        </div>
+        <div>
+          <div class="app-title">Clic</div>
+          <div class="app-subtitle">Commencez simplement</div>
+        </div>
+      </div>
+      <div class="bell-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="bell-dot"></div>
+      </div>
+    </div>
 
-<!-- Contenu principal -->
-<main id="app"></main>
+    <div class="scrollable">
+      <div class="screen-title">Bonjour !</div>
+      <div class="screen-subtitle">Rendons votre journée productive !</div>
 
-<!-- Barre de navigation -->
-<nav id="bottom-nav" class="bottom-nav"></nav>
+      <div class="search-bar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Rechercher une tâche, un parcours…" readonly>
+      </div>
 
-<!-- Toasts -->
-<div id="toast-container" class="toast-container"></div>
+      <div class="focus-card">
+        <div class="focus-header">
+          <div class="focus-title-row">
+            <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="16" fill="rgba(242,106,27,0.15)" stroke="#F26A1B" stroke-width="2"/>
+              <circle cx="20" cy="20" r="10" fill="rgba(242,106,27,0.2)" stroke="#F26A1B" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="4" fill="#F26A1B"/>
+              <line x1="20" y1="4" x2="20" y2="10" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="28" y1="8" x2="24" y2="12" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="focus-title">Focus du jour</span>
+          </div>
+          <button class="btn-outline">Tout voir</button>
+        </div>
+        <div class="focus-info">3 sur 5 tâches terminées</div>
+        <div class="progress-row">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width:60%"></div>
+          </div>
+          <span class="progress-pct">60 %</span>
+        </div>
+      </div>
 
-<script>
-/* ==========================================================================
-   DONNÉES & ICÔNES SVG
-   ========================================================================== */
-var I = {
-  maison: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3L21 12"/><path d="M5 10V20C5 20.55 5.45 21 6 21H9V15H15V21H18C18.55 21 19 20.55 19 20V10"/></svg>',
-  coche: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><polyline points="9 12 11 14 15 10"/></svg>',
-  calendrier: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>',
-  profil: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21C4 17 7 14 12 14C17 14 20 17 20 21"/></svg>',
-  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
-  cible: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
-  horloge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-  bouee: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>',
-  retour: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>',
-  chevron: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
-  cloche: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',
-  loupe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-  play: '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>',
-  pause: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1.5"/><rect x="14" y="4" width="4" height="16" rx="1.5"/></svg>',
-  croix: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
-  logoC: '<svg viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="14" fill="white"/><path d="M30 18C28 16 25 15 22 15C17 15 14 19 14 24C14 29 17 33 22 33C25 33 28 32 30 30" stroke="#FF6B0F" stroke-width="4" stroke-linecap="round" fill="none"/><polygon points="24,20 32,24 24,28" fill="#FF6B0F"/></svg>',
-  document: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
-  stats: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
-  crayon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',
-  coeur: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
-};
+      <div class="section-title">Continuer là où vous avez laissé</div>
+      <div class="continue-card">
+        <div class="continue-info">
+          <h3>Réviser un cours</h3>
+          <div class="status">En cours</div>
+          <div class="time-left">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Reste 10 min
+          </div>
+        </div>
+        <button class="btn-continue">
+          Continuer
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F26A1B"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+      </div>
 
-var Avatars = [
-  {id:'plante',name:'La petite plante',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><rect x="42" y="72" width="36" height="30" rx="6" fill="#D4956A"/><path d="M60 72V52" stroke="#5A8C3C" stroke-width="4" stroke-linecap="round"/><path d="M60 58C50 58 44 50 44 42C52 42 58 48 60 58Z" fill="#7AB85A"/><path d="M60 52C60 44 66 38 76 38C76 48 70 54 60 54Z" fill="#8CC86A"/><path d="M50 82Q52 80 54 82" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M66 82Q68 80 70 82" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 88Q60 91 64 88" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="48" cy="86" r="3" fill="#FFB0B0" opacity="0.6"/><circle cx="72" cy="86" r="3" fill="#FFB0B0" opacity="0.6"/></svg>'},
-  {id:'livres',name:'Les livres',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><rect x="36" y="70" width="48" height="14" rx="3" fill="#8B5CF6"/><rect x="40" y="56" width="40" height="14" rx="3" fill="#F97316"/><path d="M52 63Q54 61 56 63" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M64 63Q66 61 68 63" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 69Q60 72 64 69" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="50" cy="67" r="2.5" fill="#FFB0B0" opacity="0.6"/><circle cx="70" cy="67" r="2.5" fill="#FFB0B0" opacity="0.6"/></svg>'},
-  {id:'cible',name:'La cible',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><circle cx="60" cy="62" r="30" fill="#FEE2E2" stroke="#EF4444" stroke-width="3"/><circle cx="60" cy="62" r="20" fill="#FECACA" stroke="#EF4444" stroke-width="3"/><circle cx="60" cy="62" r="10" fill="#FCA5A5" stroke="#EF4444" stroke-width="3"/><circle cx="60" cy="62" r="4" fill="#EF4444"/><line x1="60" y1="62" x2="80" y2="38" stroke="#6B7280" stroke-width="3" stroke-linecap="round"/><path d="M78 36L84 34L82 40Z" fill="#6B7280"/><path d="M50 72Q52 70 54 72" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M66 72Q68 70 70 72" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 78Q60 81 64 78" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="48" cy="76" r="2.5" fill="#FFB0B0" opacity="0.6"/><circle cx="72" cy="76" r="2.5" fill="#FFB0B0" opacity="0.6"/></svg>'},
-  {id:'calendrier',name:'Le calendrier',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><rect x="38" y="48" width="44" height="44" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/><rect x="38" y="48" width="44" height="12" rx="4" fill="#F59E0B"/><line x1="50" y1="42" x2="50" y2="52" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/><line x1="70" y1="42" x2="70" y2="52" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="70" r="2.5" fill="#F59E0B"/><circle cx="60" cy="70" r="2.5" fill="#F59E0B"/><circle cx="70" cy="70" r="2.5" fill="#F59E0B"/><circle cx="50" cy="80" r="2.5" fill="#F59E0B"/><circle cx="60" cy="80" r="2.5" fill="#F59E0B"/><path d="M52 62Q54 60 56 62" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M64 62Q66 60 68 62" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 68Q60 71 64 68" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="46" cy="66" r="2.5" fill="#FFB0B0" opacity="0.6"/><circle cx="74" cy="66" r="2.5" fill="#FFB0B0" opacity="0.6"/></svg>'},
-  {id:'cafe',name:'La tasse de café',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><path d="M42 68C42 68 42 90 60 90C78 90 78 68 78 68Z" fill="#F5E6D3" stroke="#D4A574" stroke-width="2"/><path d="M78 72C84 72 88 76 88 80C88 84 84 86 78 86" fill="none" stroke="#D4A574" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="68" rx="18" ry="4" fill="#8B6F47"/><path d="M52 58Q54 52 56 58" stroke="#D4A574" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/><path d="M60 56Q62 48 64 56" stroke="#D4A574" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/><path d="M68 58Q70 52 72 58" stroke="#D4A574" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/><path d="M52 78Q54 76 56 78" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M64 78Q66 76 68 78" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 84Q60 87 64 84" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="48" cy="82" r="2.5" fill="#FFB0B0" opacity="0.6"/><circle cx="72" cy="82" r="2.5" fill="#FFB0B0" opacity="0.6"/></svg>'},
-  {id:'crayon',name:'Le crayon',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><g transform="rotate(-30 60 70)"><rect x="52" y="40" width="16" height="50" rx="2" fill="#FCD34D"/><rect x="52" y="40" width="16" height="8" rx="2" fill="#F59E0B"/><polygon points="52,90 68,90 60,102" fill="#FDE68A"/><polygon points="57,97 63,97 60,102" fill="#3A2A1B"/><rect x="52" y="36" width="16" height="6" rx="2" fill="#FCA5A5"/></g><path d="M52 70Q54 68 56 70" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M64 66Q66 64 68 66" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 76Q60 79 64 76" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="48" cy="74" r="2.5" fill="#FFB0B0" opacity="0.6"/><circle cx="72" cy="70" r="2.5" fill="#FFB0B0" opacity="0.6"/></svg>'},
-  {id:'ampoule',name:'L\'ampoule',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><circle cx="60" cy="56" r="26" fill="#FDE047"/><circle cx="52" cy="48" r="8" fill="#FEF08A" opacity="0.6"/><rect x="52" y="80" width="16" height="10" rx="2" fill="#9CA3AF"/><line x1="52" y1="84" x2="68" y2="84" stroke="#6B7280" stroke-width="1.5"/><line x1="52" y1="87" x2="68" y2="87" stroke="#6B7280" stroke-width="1.5"/><path d="M52 54Q54 52 56 54" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M64 54Q66 52 68 54" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 62Q60 65 64 62" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="48" cy="60" r="2.5" fill="#FFB0B0" opacity="0.6"/><circle cx="72" cy="60" r="2.5" fill="#FFB0B0" opacity="0.6"/><path d="M60 22L60 16M54 24L50 20M66 24L70 20" stroke="#FDE047" stroke-width="2" stroke-linecap="round"/></svg>'},
-  {id:'coeur',name:'Le cœur',svg:'<svg viewBox="0 0 120 120"><circle cx="60" cy="62" r="50" fill="#FFE3D8"/><path d="M60 88C40 72 34 56 44 48C50 44 56 48 60 54C64 48 70 44 76 48C86 56 80 72 60 88Z" fill="#F472B6"/><path d="M50 54C46 52 44 54 44 56" stroke="#FBCFE8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/><path d="M52 66Q54 64 56 66" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M64 66Q66 64 68 66" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M56 74Q60 77 64 74" stroke="#3A2A1B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="48" cy="72" r="2.5" fill="#FFB0B0" opacity="0.6"/><circle cx="72" cy="72" r="2.5" fill="#FFB0B0" opacity="0.6"/></svg>'}
-];
-function getAvatar(id){ for(var i=0;i<Avatars.length;i++){ if(Avatars[i].id===id) return Avatars[i]; } return Avatars[0]; }
+      <div class="section-title">Actions rapides</div>
+      <div class="quick-actions">
+        <div class="qa-tile">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="16" fill="rgba(242,106,27,0.12)" stroke="#F26A1B" stroke-width="2"/>
+            <line x1="20" y1="13" x2="20" y2="27" stroke="#F26A1B" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="13" y1="20" x2="27" y2="20" stroke="#F26A1B" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span>Ajouter une tâche</span>
+        </div>
+        <div class="qa-tile">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <rect x="8" y="10" width="24" height="22" rx="4" fill="rgba(160,130,240,0.15)" stroke="#9B7FE8" stroke-width="2"/>
+            <line x1="8" y1="18" x2="32" y2="18" stroke="#9B7FE8" stroke-width="1.5"/>
+            <circle cx="15" cy="24" r="2" fill="#9B7FE8"/>
+            <circle cx="22" cy="24" r="2" fill="#9B7FE8"/>
+            <circle cx="29" cy="24" r="2" fill="#9B7FE8"/>
+            <circle cx="15" cy="30" r="2" fill="#9B7FE8"/>
+            <circle cx="22" cy="30" r="2" fill="#9B7FE8"/>
+          </svg>
+          <span>Planifier ma journée</span>
+        </div>
+        <div class="qa-tile">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <rect x="10" y="8" width="20" height="26" rx="3" fill="rgba(240,190,60,0.15)" stroke="#E8B830" stroke-width="2"/>
+            <line x1="15" y1="16" x2="25" y2="16" stroke="#E8B830" stroke-width="2" stroke-linecap="round"/>
+            <line x1="15" y1="22" x2="25" y2="22" stroke="#E8B830" stroke-width="2" stroke-linecap="round"/>
+            <line x1="15" y1="28" x2="21" y2="28" stroke="#E8B830" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Modèles</span>
+        </div>
+        <div class="qa-tile">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <rect x="10" y="22" width="5" height="12" rx="2" fill="rgba(80,190,120,0.3)"/>
+            <rect x="18" y="16" width="5" height="18" rx="2" fill="rgba(80,190,120,0.4)"/>
+            <rect x="26" y="10" width="5" height="24" rx="2" fill="rgba(80,190,120,0.5)"/>
+          </svg>
+          <span>Statistiques</span>
+        </div>
+      </div>
+    </div>
 
-var Badges = [
-  {id:'premier_pas',name:'Premier pas',condition:'Terminer 1 tâche',c1:'#7ED17A',c2:'#3FA24A',teinte:'#E3F5E1',icone:'<path d="M60 80V56"/><path d="M60 66C47 66 41 58 41 47 53 47 60 54 60 66Z" fill="#fff"/><path d="M60 56C60 44 67 37 80 37 80 49 73 56 60 56Z" fill="#fff"/>'},
-  {id:'objectif_atteint',name:'Objectif atteint',condition:'Quêtes du jour finies',c1:'#FF7A8A',c2:'#E8405C',teinte:'#FFE0E4',icone:'<circle cx="56" cy="64" r="22"/><circle cx="56" cy="64" r="11"/><circle cx="56" cy="64" r="2" fill="#fff"/><path d="M58 62L82 38M82 38V30M82 38H90"/>'},
-  {id:'une_heure',name:'Une heure de focus',condition:'60 min travaillées',c1:'#B388FF',c2:'#7B4FE0',teinte:'#EEE3FF',icone:'<circle cx="60" cy="64" r="22"/><path d="M60 50V64L69 70M60 42V36M54 36H66"/>'},
-  {id:'jours_actifs',name:'Jours actifs',condition:'3 jours actifs',c1:'#FFA24C',c2:'#F4600C',teinte:'#FFE6D2',icone:'<rect x="38" y="44" width="44" height="38" rx="9"/><path d="M38 57H82M50 37V48M70 37V48M51 70L58 77L70 64"/>'},
-  {id:'multi_taches',name:'Multi-tâches',condition:'Session multi-tâches',c1:'#4FD1B8',c2:'#1E9E8A',teinte:'#D9F4EE',icone:'<path d="M60 38L84 50L60 62L36 50Z"/><path d="M36 61L60 73L84 61"/><path d="M36 72L60 84L84 72"/>'},
-  {id:'je_me_debloque',name:'Je me débloque',condition:'Utiliser Je bloque',c1:'#FFC94D',c2:'#F29A0A',teinte:'#FFF0CC',icone:'<circle cx="60" cy="60" r="23"/><circle cx="60" cy="60" r="9"/><path d="M44 44L52 52M76 44L68 52M44 76L52 68M76 76L68 68"/>'},
-  {id:'retour_douceur',name:'Retour en douceur',condition:'Revenir après 3 jours',c1:'#FF8FB6',c2:'#E8457F',teinte:'#FFE0EC',icone:'<path d="M60 82C38 67 36 50 47 43 54 39 60 44 60 49 60 44 66 39 73 43 84 50 82 67 60 82Z" fill="#fff"/>'},
-  {id:'grand_marathon',name:'Grand marathon',condition:'10 h de travail',c1:'#E060C2',c2:'#A02D8E',teinte:'#F8DDF1',icone:'<path d="M49 39H71V54C71 62 66 67 60 67S49 62 49 54Z"/><path d="M49 44H41C41 53 45 57 50 58M71 44H79C79 53 75 57 70 58M60 67V76M51 80H69"/>'}
-];
-function renderBadge(b){ var gid='g_'+b.id; return '<svg viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="'+b.name+'"><defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+b.c1+'"/><stop offset="1" stop-color="'+b.c2+'"/></linearGradient></defs><circle cx="60" cy="60" r="58" fill="'+b.teinte+'"/><circle cx="60" cy="60" r="46" fill="url(#'+gid+')"/><path d="M31 50A31 31 0 0 1 50 31" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="4" stroke-linecap="round"/><g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">'+b.icone+'</g></svg>'; }
+    <div class="nav-bar">
+      <div class="nav-item active">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Accueil</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Mes tâches</span>
+      </div>
+      <div class="nav-center">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Parcours</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profil</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-var Models = [
-  {id:'reviser',name:'Réviser un cours',dur:1800,steps:['Sors le cours et ouvre-le','Lis les titres','Surligne 3 mots','Écris une question','Relis tes notes']},
-  {id:'exercice',name:'Faire un exercice difficile',dur:1800,steps:['Lis l\'énoncé','Souligne les données','Écris ce qu\'on demande','Fais le premier calcul','Vérifie']},
-  {id:'rediger',name:'Rédiger un devoir',dur:2400,steps:['Ouvre un document','Écris le plan','Rédige l\'intro','Rédige la partie 1','Relis']},
-  {id:'ranger',name:'Ranger mon bureau',dur:900,steps:['Pose une boîte','Jette les déchets','Range les stylos','Empile les livres','Essuie']},
-  {id:'lire',name:'Lire un article',dur:1200,steps:['Lis le titre','Lis la 1ère section','Note 2 idées','Lis la suite','Synthèse']},
-  {id:'mail',name:'Écrire un mail',dur:600,steps:['Ouvre un message','Écris l\'objet','1ère phrase','Explique en 2 phrases','Envoie']}
-];
+<!-- SCREEN 2: PARCOURS -->
+<div class="screen">
+  <div class="bg-blob-1"></div>
+  <div class="bg-blob-2"></div>
+  <div class="bg-blob-3"></div>
+  <div class="content">
+    <div class="app-header">
+      <div class="app-header-left">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </div>
+      <div style="font-size:22px;font-weight:800;color:#3B1A10;">Parcours</div>
+      <div class="avatar-small">
+        <svg width="36" height="36" viewBox="0 0 40 40"><circle cx="20" cy="14" r="8" fill="#D4A574"/><path d="M8 36c0-6.6 5.4-12 12-12s12 5.4 12 12" fill="#D4A574"/><circle cx="20" cy="14" r="7" fill="#E8C9A0"/></svg>
+      </div>
+    </div>
 
-/* ==========================================================================
-   LOGIQUE MÉTIER (Stockage, État, Session, Routeur)
-   ========================================================================== */
-var Store = {
-  data: {
-    profile: {name:'',motto:'',avatar:'plante'},
-    settings: {theme:'clair'},
-    lists: [
-      {id:'etudes',name:'Études',desc:'Cours, fiches, exercices',color:'orange'},
-      {id:'projet',name:'Projet',desc:'Lectures, analyses, rédaction',color:'amber'},
-      {id:'stage',name:'Stage',desc:'Notes, bilans, compétences',color:'peach'},
-      {id:'perso',name:'Perso',desc:'Organisation, bien-être, routines',color:'magenta'}
-    ],
-    tasks: [], sessions: [], badges: {},
-    tutorial: {completed:false, step:0},
-    points: 0, level: 1
-  },
-  load: function() { try { var s=localStorage.getItem('clic_data'); if(s) this.data=Object.assign(this.data,JSON.parse(s)); } catch(e){} },
-  save: function() { try { localStorage.setItem('clic_data',JSON.stringify(this.data)); } catch(e){} },
-  id: function() { return 'id_'+Date.now()+'_'+Math.random().toString(36).substr(2,9); }
-};
+    <div class="scrollable">
+      <div class="header-row" style="margin-top:4px;">
+        <div>
+          <div class="screen-title" style="font-size:24px;">Mes parcours</div>
+          <div class="screen-subtitle">Suivez vos progrès et vos réussites !</div>
+        </div>
+        <div class="plus-btn">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
 
-var State = {
-  today: function() { var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); },
-  addPoints: function(n) { this.data.points+=n; this.data.level=1+Math.floor(this.data.points/100); Store.save(); },
-  recalc: function() {
-    var p=0;
-    this.data.tasks.forEach(function(t){ if(t.completed) p+=5; if(t.steps) t.steps.forEach(function(s){ if(s&&s.done) p+=1; }); });
-    this.data.sessions.forEach(function(s){ if(s.real) p+=Math.floor(s.real/300); });
-    this.data.points=p; this.data.level=1+Math.floor(p/100);
-  }
-};
+      <div class="stats-row">
+        <div class="stat-tile">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="12" fill="rgba(242,106,27,0.1)" stroke="#F26A1B" stroke-width="2"/>
+            <polyline points="10,16 14,20 22,12" stroke="#F26A1B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <div class="stat-value">12</div>
+          <div class="stat-label">Tâches terminées</div>
+        </div>
+        <div class="stat-tile purple">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="12" fill="rgba(160,130,240,0.12)" stroke="#9B7FE8" stroke-width="2"/>
+            <polyline points="16,10 16,16 20,18" stroke="#9B7FE8" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
+          <div class="stat-value">6 h 20</div>
+          <div class="stat-label">Temps total</div>
+        </div>
+        <div class="stat-tile green">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="8" width="20" height="16" rx="3" fill="rgba(80,190,120,0.12)" stroke="#50BE78" stroke-width="2"/>
+            <line x1="6" y1="14" x2="26" y2="14" stroke="#50BE78" stroke-width="1.5"/>
+            <line x1="12" y1="8" x2="12" y2="11" stroke="#50BE78" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="8" x2="20" y2="11" stroke="#50BE78" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="stat-value">4 jours</div>
+          <div class="stat-label">Consécutifs</div>
+        </div>
+      </div>
 
-var Router = {
-  routes: {}, current: '',
-  register: function(p,h) { this.routes[p]=h; },
-  go: function(p) { window.location.hash='#/'+p; },
-  handle: function() {
-    var h=window.location.hash||'#/accueil';
-    var p=h.replace('#/','').split('/')[0];
-    this.current=p;
-    if(this.routes[p]) this.routes[p]();
-    else if(this.routes['accueil']) this.routes['accueil']();
-    this.nav(p);
-  },
-  nav: function(active) {
-    var n=document.getElementById('bottom-nav'); if(!n) return;
-    n.innerHTML='';
-    var items=[
-      {r:'accueil',l:'Accueil',i:I.maison},
-      {r:'taches',l:'Mes tâches',i:I.coche},
-      {r:'parcours',l:'Parcours',i:I.calendrier},
-      {r:'profil',l:'Profil',i:I.profil}
-    ];
-    var addCenter = function() {
-      var c=document.createElement('div'); c.className='nav-center';
-      var b=document.createElement('button'); b.className='nav-center-btn'; b.innerHTML=I.plus; b.setAttribute('aria-label','Ajouter');
-      b.onclick=function(){ Router.go('creer'); };
-      c.appendChild(b); n.appendChild(c);
-    };
-    items.forEach(function(it, idx){
-      var b=document.createElement('button');
-      b.className='nav-item'+(active===it.r?' active':'');
-      b.innerHTML='<span class="nav-icon">'+it.i+'</span><span class="nav-label">'+it.l+'</span>';
-      b.onclick=function(){ Router.go(it.r); };
-      n.appendChild(b);
-      if(idx===1) addCenter(); // Insère le + pile au milieu (après "Mes tâches")
-    });
-  },
-  init: function() { window.addEventListener('hashchange', this.handle.bind(this)); this.handle(); }
-};
+      <div class="progress-card">
+        <div class="progress-card-header">
+          <h3>Ma progression</h3>
+          <span class="pct">60 %</span>
+        </div>
+        <div class="progress-bar-bg" style="height:14px;">
+          <div class="progress-bar-fill" style="width:60%"></div>
+        </div>
+      </div>
 
-function fmtDur(s) { if(!s||s<0)s=0; s=Math.round(s); if(s<60)return s+' min'; var h=Math.floor(s/3600),m=Math.floor((s%3600)/60); if(h===0)return m+' min'; if(m===0)return h+' h'; return h+' h '+m+' min'; }
-function fmtTimer(s) { if(!s||s<0)s=0; s=Math.round(s); var h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60; if(h>0) return h+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0'); return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0'); }
-function greeting() { var h=new Date().getHours(); if(h<12) return 'Bonjour'; if(h<18) return 'Bon après-midi'; return 'Bonsoir'; }
-function toast(msg) { var c=document.getElementById('toast-container'); if(!c) return; var t=document.createElement('div'); t.className='toast'; t.textContent=msg; c.appendChild(t); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 3000); }
+      <div class="section-header-row">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="12" fill="rgba(242,106,27,0.15)"/>
+            <polygon points="16,8 18,13 23,13 19,16 20.5,21 16,18 11.5,21 13,16 9,13 14,13" fill="#F26A1B"/>
+          </svg>
+          <span class="section-title" style="margin-top:0;">Mes badges</span>
+        </div>
+        <button class="btn-tout-voir">Tout voir</button>
+      </div>
 
-function headerHTML(title, backRoute, rightHTML) {
-  var left = backRoute ? '<div class="header-side"><button class="btn-back" id="bback">'+I.retour+'</button></div>' : '<div class="header-side"></div>';
-  var right = rightHTML ? '<div class="header-side">'+rightHTML+'</div>' : '<div class="header-side"></div>';
-  return '<div class="screen-header">'+left+'<h1 class="header-title">'+title+'</h1>'+right+'</div>';
-}
-function bindBack() { var b=document.getElementById('bback'); if(b) b.onclick=function(){ Router.go('accueil'); }; }
+      <div class="badges-row">
+        <div class="badge-card">
+          <div class="badge-icon" style="background:rgba(80,190,120,0.15);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 20c0-4-4-6-4-10a4 4 0 0 1 8 0c0 4-4 6-4 10z" fill="#50BE78"/><line x1="12" y1="14" x2="12" y2="20" stroke="#50BE78" stroke-width="1.5"/></svg>
+          </div>
+          <span>Premier pas</span>
+        </div>
+        <div class="badge-card">
+          <div class="badge-icon" style="background:rgba(240,190,60,0.15);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" fill="rgba(240,190,60,0.3)" stroke="#E8B830" stroke-width="1.5"/><polyline points="8,12 11,15 16,9" stroke="#E8B830" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Série en cours</span>
+        </div>
+        <div class="badge-card">
+          <div class="badge-icon" style="background:rgba(242,106,27,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" fill="rgba(242,106,27,0.2)" stroke="#F26A1B" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="#F26A1B"/><line x1="12" y1="2" x2="12" y2="5" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <span>Objectif atteint</span>
+        </div>
+        <div class="badge-card badge-locked">
+          <div class="badge-icon" style="background:rgba(180,180,180,0.15);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="7" y="11" width="10" height="8" rx="2" fill="rgba(180,180,180,0.3)" stroke="#B0B0B0" stroke-width="1.5"/><path d="M9 11V8a3 3 0 0 1 6 0v3" stroke="#B0B0B0" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="12" cy="15" r="1.5" fill="#B0B0B0"/></svg>
+          </div>
+          <span>Régularité</span>
+        </div>
+      </div>
 
-/* --- SESSION --- */
-var sess=null, timerInt=null, timerRem=0, timerTot=0, timerSt='idle';
-function startSession(task) {
-  sess={id:Store.id(), taskId:task.id, taskTitle:task.title, start:Date.now(), planned:task.dur||1800, real:0, status:'running', date:State.today(), steps:task.steps||['Commencer'], cur:0};
-  timerTot=sess.planned; timerRem=timerTot; timerSt='running';
-  renderSession(); startTimer();
-}
-function startTimer() {
-  var t0=Date.now(), tR=timerRem;
-  timerInt=setInterval(function(){
-    var el=Math.floor((Date.now()-t0)/1000);
-    timerRem=Math.max(0, tR-el);
-    var te=document.getElementById('stimer'); if(te) te.textContent=fmtTimer(timerRem);
-    if(timerRem<=0) endSession();
-  }, 250);
-}
-function renderSession() {
-  var app=document.getElementById('app'), nav=document.getElementById('bottom-nav');
-  nav.style.display='none'; // Cache la nav pendant la session
-  var st=sess, step=st.steps[st.cur]||st.steps[0];
-  app.innerHTML='<div class="session-screen"><div class="session-top-bar"><button class="session-top-btn" id="bpause">'+I.pause+'</button><button class="session-top-btn" id="bbloq">'+I.bouee+'</button><button class="session-top-btn" id="bquit">'+I.croix+'</button></div><div class="session-center"><div class="session-task-name">'+st.taskTitle+'</div><div class="session-step-info">Étape '+(st.cur+1)+' / '+st.steps.length+'</div><div class="session-step-text">'+(typeof step==='string'?step:step.text)+'</div><div class="session-timer" id="stimer">'+fmtTimer(timerRem)+'</div><div class="start-button-wrapper"><button class="start-button" id="bstart">START</button></div></div></div>';
-  document.getElementById('bpause').onclick=function(){
-    if(timerSt==='running'){ clearInterval(timerInt); timerSt='paused'; this.innerHTML=I.play; }
-    else if(timerSt==='paused'){ timerSt='running'; this.innerHTML=I.pause; startTimer(); }
-  };
-  document.getElementById('bquit').onclick=function(){ if(confirm('Quitter la session ?')){ clearInterval(timerInt); nav.style.display='flex'; Router.go('accueil'); } };
-  document.getElementById('bbloq').onclick=function(){ Router.go('bloque'); };
-  document.getElementById('bstart').onclick=function(){ nextStep(); };
-}
-function nextStep() { if(!sess) return; sess.cur++; if(sess.cur>=sess.steps.length) endSession(); else renderSession(); }
-function endSession() {
-  clearInterval(timerInt);
-  if(sess){ sess.end=Date.now(); sess.real=Math.floor((sess.end-sess.start)/1000); sess.status='completed'; State.data.sessions.push(sess); State.addPoints(Math.floor(sess.real/300)); State.recalc(); Store.save(); }
-  var nav=document.getElementById('bottom-nav'); nav.style.display='flex';
-  toast('Bien joué ! Tu as travaillé '+fmtDur(sess?sess.real:0));
-  Router.go('accueil');
-}
+      <div class="section-title" style="display:flex;align-items:center;gap:8px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Historique des sessions
+      </div>
 
-/* ==========================================================================
-   RENDU DES ÉCRANS
-   ========================================================================== */
-function renderHome() {
-  var app=document.getElementById('app'), p=State.data.profile, tasks=State.data.tasks, today=State.today();
-  var todayDone=tasks.filter(function(t){ return t.completed && t.completed.indexOf(today)===0; }).length;
-  var todayPlanned=tasks.filter(function(t){ return t.planned===today; }).length;
-  var pct=todayPlanned>0 ? Math.round((todayDone/todayPlanned)*100) : 0;
-  var nextTask=tasks.find(function(t){ return !t.completed; });
-  
-  app.innerHTML='<div class="home-header"><div class="home-logo"><div class="home-logo-icon">'+I.logoC+'</div><div class="home-logo-text"><h1>Clic</h1><p>Commence simplement</p></div></div><button class="btn-icon" id="bnotif" aria-label="Nouveautés">'+I.cloche+'</button></div><div class="screen"><div class="greeting"><h2 class="greeting-title">'+greeting()+(p.name?' '+p.name:'')+'</h2><p class="greeting-subtitle">Une étape à la fois, et c\'est lancé.</p></div><div class="search-bar">'+I.loupe+'<input type="text" placeholder="Rechercher une tâche..."></div><div class="focus-card"><div class="focus-card-header"><div class="focus-card-title">'+I.cible+' Focus du jour</div><button class="section-link">Tout voir</button></div><div class="focus-card-stats">'+todayDone+' sur '+(todayPlanned||0)+' tâches terminées</div><div class="focus-card-progress"><div class="progress-bar"><div class="progress-bar-fill" style="width:'+pct+'%"></div></div><div class="focus-card-percent">'+pct+'%</div></div></div>'+(nextTask?'<div class="section"><div class="section-header"><h3 class="section-title">Reprendre où tu en étais</h3></div><div class="resume-card" id="rresume"><div class="resume-card-content"><div class="resume-card-title">'+nextTask.title+'</div><div class="resume-card-status">Étape 1 sur '+(nextTask.steps?nextTask.steps.length:1)+'</div><div class="resume-card-time">'+I.horloge+' '+fmtDur(nextTask.dur||1800)+'</div></div><button class="resume-card-btn">'+I.play+' Continuer</button></div></div>':'<div class="section"><div class="card" style="text-align:center;padding:30px"><p style="color:#7A5446">Rien de prévu aujourd\'hui.<br>Planifie ta journée en 1 minute.</p></div></div>')+'<div class="section"><div class="section-header"><h3 class="section-title">Actions rapides</h3></div><div class="quick-actions"><button class="quick-action" id="qa1"><div class="quick-action-icon" style="background:rgba(255,107,15,0.25);color:#FF6B0F">'+I.plus+'</div><div class="quick-action-label">Ajouter</div></button><button class="quick-action" id="qa2"><div class="quick-action-icon" style="background:#F0E6FF;color:#8B5CF6">'+I.calendrier+'</div><div class="quick-action-label">Planifier</div></button><button class="quick-action" id="qa3"><div class="quick-action-icon" style="background:#FFF0CC;color:#D4900A">'+I.document+'</div><div class="quick-action-label">Modèles</div></button><button class="quick-action" id="qa4"><div class="quick-action-icon" style="background:#E3F5E1;color:#3FA24A">'+I.stats+'</div><div class="quick-action-label">Stats</div></button></div></div><div style="display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;margin-top:8px"><span style="font-size:14px;font-weight:600;color:#7A5446">Tu bloques ?</span><button class="btn-round" style="width:36px;height:36px" id="bbloq2" aria-label="Je bloque">'+I.bouee+'</button></div></div>';
-  
-  document.getElementById('qa1').onclick=function(){ Router.go('creer'); };
-  document.getElementById('qa2').onclick=function(){ Router.go('planifier'); };
-  document.getElementById('qa3').onclick=function(){ Router.go('modeles'); };
-  document.getElementById('qa4').onclick=function(){ Router.go('parcours'); };
-  document.getElementById('bbloq2').onclick=function(){ Router.go('bloque'); };
-  document.getElementById('bnotif').onclick=function(){ toast('Aucune nouveauté pour le moment.'); };
-  var rr=document.getElementById('rresume'); if(rr) rr.onclick=function(){ if(nextTask) startSession(nextTask); };
-}
+      <div class="session-list">
+        <div class="session-item">
+          <div>
+            <div class="session-name">Réviser un cours</div>
+            <div class="session-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Aujourd'hui
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="session-duration">25 min</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="session-item">
+          <div>
+            <div class="session-name">Projet TER</div>
+            <div class="session-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Hier
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="session-duration">40 min</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="session-item">
+          <div>
+            <div class="session-name">Lecture article</div>
+            <div class="session-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              12 nov.
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="session-duration">30 min</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
 
-function renderTasks() {
-  var app=document.getElementById('app'), lists=State.data.lists, tasks=State.data.tasks;
-  var h='<div class="screen">'+headerHTML('Mes tâches', 'accueil', '<button class="btn-round" id="badd" aria-label="Ajouter">'+I.plus+'</button>');
-  lists.forEach(function(l){
-    var lt=tasks.filter(function(t){ return t.listId===l.id; }).length;
-    h+='<div class="task-card" data-l="'+l.id+'"><div class="task-card-bar '+l.color+'"></div><div class="task-card-content"><div class="task-card-category '+l.color+'">Tâches '+l.name+'</div><div class="task-card-title">'+l.name+'</div><div class="task-card-subtitle">'+l.desc+' · '+lt+' tâche'+(lt>1?'s':'')+'</div></div><button class="btn-round" style="width:40px;height:40px" aria-label="Ouvrir">'+I.chevron+'</button></div>';
-  });
-  h+='</div>'; app.innerHTML=h;
-  document.getElementById('badd').onclick=function(){ Router.go('creer'); };
-  app.querySelectorAll('.task-card').forEach(function(c){ c.onclick=function(){ renderTaskList(c.getAttribute('data-l')); }; });
-}
+    <div class="nav-bar">
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Accueil</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Mes tâches</span>
+      </div>
+      <div class="nav-center">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+      <div class="nav-item active">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Parcours</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profil</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-function renderTaskList(lid) {
-  var app=document.getElementById('app'), list=State.data.lists.find(function(l){ return l.id===lid; }), tasks=State.data.tasks.filter(function(t){ return t.listId===lid; });
-  var h='<div class="screen">'+headerHTML(list?list.name:'Liste', 'taches', '<button class="btn-round" id="badd2" aria-label="Ajouter">'+I.plus+'</button>');
-  if(tasks.length===0) h+='<div class="card" style="text-align:center;padding:40px 20px"><p style="color:#7A5446">Aucune tâche.<br>Appuie sur + pour en créer.</p></div>';
-  else tasks.forEach(function(t){
-    h+='<div class="task-card" style="padding-left:20px"><div class="task-card-bar '+(list?list.color:'orange')+'"></div><div class="task-card-content"><div class="task-card-title">'+t.title+'</div><div class="task-card-subtitle">'+(t.steps?t.steps.length:0)+' étapes · '+fmtDur(t.dur||1800)+'</div></div><button class="btn-round btn-start" data-tid="'+t.id+'" style="width:40px;height:40px" aria-label="Lancer">'+I.play+'</button></div>';
-  });
-  h+='</div>'; app.innerHTML=h;
-  bindBack();
-  document.getElementById('badd2').onclick=function(){ Router.go('creer'); };
-  app.querySelectorAll('.btn-start').forEach(function(b){ b.onclick=function(e){ e.stopPropagation(); var t=State.data.tasks.find(function(x){ return x.id===b.getAttribute('data-tid'); }); if(t) startSession(t); }; });
-}
+<!-- SCREEN 3: MES BADGES -->
+<div class="screen">
+  <div class="bg-blob-1"></div>
+  <div class="bg-blob-2"></div>
+  <div class="bg-blob-3"></div>
+  <div class="content">
+    <div class="app-header">
+      <div class="app-header-left">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </div>
+      <div style="font-size:22px;font-weight:800;color:#3B1A10;">Mes badges</div>
+      <div class="avatar-small">
+        <svg width="36" height="36" viewBox="0 0 40 40"><circle cx="20" cy="14" r="8" fill="#D4A574"/><path d="M8 36c0-6.6 5.4-12 12-12s12 5.4 12 12" fill="#D4A574"/><circle cx="20" cy="14" r="7" fill="#E8C9A0"/></svg>
+      </div>
+    </div>
 
-function renderCreate() {
-  var app=document.getElementById('app'), lists=State.data.lists;
-  app.innerHTML='<div class="screen">'+headerHTML('Nouvelle tâche', 'taches')+'<div class="card" style="margin-bottom:16px"><label style="display:block;font-size:14px;font-weight:700;color:#7A5446;margin-bottom:8px">Titre</label><input type="text" class="input-field" id="ttitre" placeholder="Que veux-tu faire ?" style="margin-bottom:0"></div><div class="card" style="margin-bottom:16px"><label style="display:block;font-size:14px;font-weight:700;color:#7A5446;margin-bottom:8px">Liste</label><select id="tliste" class="select-field" style="margin-bottom:0">'+lists.map(function(l){ return '<option value="'+l.id+'">'+l.name+'</option>'; }).join('')+'</select></div><div class="card" style="margin-bottom:16px"><label style="display:block;font-size:14px;font-weight:700;color:#7A5446;margin-bottom:8px">Durée</label><select id="tdur" class="select-field" style="margin-bottom:0"><option value="300">5 min</option><option value="600">10 min</option><option value="900">15 min</option><option value="1800" selected>30 min</option><option value="3600">1 h</option></select></div><button class="btn-primary" id="bsave">Enregistrer</button></div>';
-  bindBack();
-  document.getElementById('bsave').onclick=function(){
-    var ti=document.getElementById('ttitre').value.trim();
-    if(!ti){ toast('Ajoute un titre'); return; }
-    var li=document.getElementById('tliste').value, du=parseInt(document.getElementById('tdur').value);
-    State.data.tasks.push({id:Store.id(), title:ti, listId:li, dur:du, steps:['Commencer '+ti], created:Date.now(), completed:null, planned:null});
-    Store.save(); toast('Tâche ajoutée !'); Router.go('taches');
-  };
-}
+    <div class="scrollable">
+      <div class="screen-title" style="font-size:24px;">Mes badges</div>
+      <div class="screen-subtitle">8 badges à débloquer, sans pression : ils ne se perdent jamais.</div>
 
-function renderParcours() {
-  var app=document.getElementById('app'), sess2=State.data.sessions, tasks=State.data.tasks;
-  var totMin=0; sess2.forEach(function(s){ totMin+=Math.floor((s.real||0)/60); });
-  var done=tasks.filter(function(t){ return t.completed; }).length;
-  var days={}; sess2.forEach(function(s){ if(s.date) days[s.date]=true; });
-  var h='<div class="screen">'+headerHTML('Parcours', 'accueil')+'<div class="stats-grid"><div class="stat-card"><div class="stat-card-value">'+done+'</div><div class="stat-card-label">Tâches</div></div><div class="stat-card"><div class="stat-card-value">'+fmtDur(totMin*60)+'</div><div class="stat-card-label">Temps total</div></div><div class="stat-card"><div class="stat-card-value">'+Object.keys(days).length+'</div><div class="stat-card-label">Jours actifs</div></div></div><div class="card" style="margin-bottom:24px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-size:18px;font-weight:800">Niveau '+State.data.level+'</span><span style="font-size:14px;font-weight:600;color:#7A5446">'+State.data.points+' pts</span></div><div class="progress-bar"><div class="progress-bar-fill" style="width:'+(State.data.points%100)+'%"></div></div></div><div class="section"><div class="section-header"><h3 class="section-title">Mes badges</h3><button class="section-link">Tout voir</button></div><div class="badges-grid">';
-  Badges.slice(0,4).forEach(function(b){ var u=State.data.badges[b.id]; h+='<div class="badge-card'+(u?'':' locked')+'">'+renderBadge(b)+'<div class="badge-card-name">'+b.name+'</div><div class="badge-card-condition">'+(u?'Débloqué':b.condition)+'</div></div>'; });
-  h+='</div></div><div class="section"><div class="section-header"><h3 class="section-title">Historique</h3></div>';
-  if(sess2.length===0) h+='<div class="card" style="text-align:center;padding:30px"><p style="color:#7A5446">Ton parcours commence ici.</p></div>';
-  else sess2.slice(-3).reverse().forEach(function(s){ h+='<div class="task-card" style="padding:14px 20px"><div class="task-card-content"><div class="task-card-title">'+(s.taskTitle||'Session')+'</div><div class="task-card-subtitle">'+s.date+'</div></div><div style="padding:6px 14px;background:#FFE8DC;border-radius:12px;font-size:14px;font-weight:700;color:#B8420A">'+fmtDur(s.real||0)+'</div></div>'; });
-  h+='</div></div>'; app.innerHTML=h;
-  bindBack();
-}
+      <div class="badges-grid">
+        <!-- Badge 1: Premier pas -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#A8E6A3,#7DD87A);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(125,216,122,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <path d="M20 32c0-5-5-8-5-14a5 5 0 0 1 10 0c0 6-5 9-5 14z" fill="white" opacity="0.9"/>
+              <line x1="20" y1="24" x2="20" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <path d="M16 34h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Premier pas</h4>
+          <p>Termine ta première tâche</p>
+        </div>
 
-function renderProfile() {
-  var app=document.getElementById('app'), p=State.data.profile, av=getAvatar(p.avatar);
-  app.innerHTML='<div class="screen">'+headerHTML('Profil', 'accueil')+'<div class="profile-hero"><div class="avatar-bg-container"><div class="avatar-blob avatar-blob-1"></div><div class="avatar-blob avatar-blob-2"></div><div class="avatar-blob avatar-blob-3"></div><div class="avatar-blob avatar-blob-4"></div><div class="avatar-main">'+av.svg+'</div><button class="avatar-edit-btn" id="bavedit" aria-label="Modifier l\'avatar">'+I.crayon+'</button></div><div class="profile-name">'+(p.name||'Ton profil')+'</div><div class="profile-motto">'+(p.motto||'Commence simplement')+'</div></div><div class="stats-grid"><div class="stat-card"><div class="stat-card-value">'+State.data.tasks.filter(function(t){ return t.completed; }).length+'</div><div class="stat-card-label">Tâches</div></div><div class="stat-card"><div class="stat-card-value">'+State.data.level+'</div><div class="stat-card-label">Niveau</div></div><div class="stat-card"><div class="stat-card-value">'+State.data.points+'</div><div class="stat-card-label">Points</div></div></div><div class="settings-list"><div class="settings-row" id="rav"><span class="settings-row-label">Choisir mon avatar</span>'+I.chevron+'</div><div class="settings-row" id="rth"><span class="settings-row-label">Apparence</span>'+I.chevron+'</div><div class="settings-row" id="rtu"><span class="settings-row-label">Revoir le tuto</span>'+I.chevron+'</div></div><div class="settings-list"><div class="settings-row" id="rlg"><span class="settings-row-label">Mentions légales</span>'+I.chevron+'</div><div class="settings-row" id="rpv"><span class="settings-row-label">Confidentialité</span>'+I.chevron+'</div></div></div>';
-  bindBack();
-  document.getElementById('bavedit').onclick=function(){ Router.go('avatar'); };
-  document.getElementById('rav').onclick=function(){ Router.go('avatar'); };
-  document.getElementById('rth').onclick=function(){ showThemePicker(); };
-  document.getElementById('rtu').onclick=function(){ State.data.tutorial.completed=false; State.data.tutorial.step=0; Store.save(); Router.go('tuto'); };
-  document.getElementById('rlg').onclick=function(){ Router.go('legal'); };
-  document.getElementById('rpv').onclick=function(){ Router.go('privacy'); };
-}
+        <!-- Badge 2: Objectif atteint -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#F5A0A0,#E87070);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(232,112,112,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="12" fill="white" opacity="0.3" stroke="white" stroke-width="2"/>
+              <circle cx="20" cy="20" r="7" fill="white" opacity="0.5" stroke="white" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="3" fill="white"/>
+              <line x1="20" y1="4" x2="20" y2="10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Objectif atteint</h4>
+          <p>Termine toutes tes quêtes du jour</p>
+        </div>
 
-function showThemePicker() {
-  var themes=[{id:'clair',n:'Clair',d:'Doux et lumineux'},{id:'nuit',n:'Nuit',d:'Sombre et reposant'},{id:'galaxie',n:'Galaxie',d:'Cosmique'},{id:'chaleureux',n:'Chaleureux',d:'Doré'}];
-  var cur=State.data.settings.theme;
-  var h='<div class="sheet-handle"></div><h3 style="font-size:20px;font-weight:800;margin-bottom:20px">Choisis ton apparence</h3>';
-  themes.forEach(function(t){ h+='<div class="theme-option'+(cur===t.id?' active':'')+'" data-tid="'+t.id+'"><div class="theme-preview '+t.id+'"></div><div style="flex:1"><div style="font-size:16px;font-weight:700">'+t.n+'</div><div style="font-size:13px;color:#7A5446">'+t.d+'</div></div></div>'; });
-  var ov=document.createElement('div'); ov.className='sheet-overlay'; ov.innerHTML='<div class="sheet">'+h+'</div>';
-  ov.onclick=function(e){ if(e.target===ov) ov.remove(); }; document.body.appendChild(ov);
-  ov.querySelectorAll('.theme-option').forEach(function(o){ o.onclick=function(){ State.data.settings.theme=o.getAttribute('data-tid'); document.documentElement.setAttribute('data-theme', o.getAttribute('data-tid')); try{localStorage.setItem('clic_theme',o.getAttribute('data-tid'))}catch(e){} Store.save(); ov.remove(); toast('Thème appliqué !'); }; });
-}
+        <!-- Badge 3: Une heure de focus -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#C4B0F0,#A78BFA);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(167,139,250,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="12" fill="white" opacity="0.3" stroke="white" stroke-width="2"/>
+              <polyline points="20,12 20,20 25,23" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <line x1="20" y1="6" x2="20" y2="9" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Une heure de focus</h4>
+          <p>Travaille 1 h au total</p>
+        </div>
 
-function renderAvatar() {
-  var app=document.getElementById('app'), cur=State.data.profile.avatar, sel=cur;
-  var h='<div class="screen">'+headerHTML('Choisis ton avatar', 'profil')+'<p style="font-size:14px;color:#7A5446;margin-bottom:20px;text-align:center">Sélectionne un style qui te ressemble</p><div class="avatar-grid">';
-  Avatars.forEach(function(a){ h+='<div class="avatar-option'+(cur===a.id?' selected':'')+'" data-aid="'+a.id+'">'+a.svg+'<div class="avatar-option-name">'+a.name+'</div></div>'; });
-  h+='</div><div style="display:flex;gap:12px;padding-bottom:20px"><button class="btn-secondary" id="bcanc" style="flex:1">Annuler</button><button class="btn-primary" id="bchoi" style="flex:1">Choisir</button></div></div>';
-  app.innerHTML=h;
-  bindBack();
-  document.getElementById('bcanc').onclick=function(){ Router.go('profil'); };
-  app.querySelectorAll('.avatar-option').forEach(function(o){ o.onclick=function(){ app.querySelectorAll('.avatar-option').forEach(function(x){ x.classList.remove('selected'); }); o.classList.add('selected'); sel=o.getAttribute('data-aid'); }; });
-  document.getElementById('bchoi').onclick=function(){ State.data.profile.avatar=sel; Store.save(); toast('Avatar choisi !'); Router.go('profil'); };
-}
+        <!-- Badge 4: Jours actifs -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#F5B87A,#F29A3B);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(242,154,59,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <rect x="10" y="12" width="20" height="18" rx="3" fill="white" opacity="0.3" stroke="white" stroke-width="2"/>
+              <line x1="10" y1="18" x2="30" y2="18" stroke="white" stroke-width="1.5"/>
+              <polyline points="16,24 19,27 25,20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <line x1="15" y1="10" x2="15" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="25" y1="10" x2="25" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Jours actifs</h4>
+          <p>3 jours actifs, pas forcément à la suite</p>
+        </div>
 
-function renderBloque() {
-  var app=document.getElementById('app');
-  app.innerHTML='<div class="screen">'+headerHTML('Je bloque', 'accueil')+'<p style="font-size:16px;color:#7A5446;margin-bottom:24px;text-align:center">Tu n\'y arrives pas ? Ça arrive. On fait plus petit.</p><div class="bloque-grid"><div class="bloque-card"><div class="bloque-card-icon" style="background:rgba(255,107,15,0.25);color:#FF6B0F">'+I.cible+'</div><div><div class="bloque-card-title">C\'est trop gros</div><div class="bloque-card-desc">On découpe en micro-étapes</div></div></div><div class="bloque-card"><div class="bloque-card-icon" style="background:#FFE8DC;color:#B8420A">'+I.loupe+'</div><div><div class="bloque-card-title">Je ne sais pas par où commencer</div><div class="bloque-card-desc">Je te propose les premières actions</div></div></div><div class="bloque-card"><div class="bloque-card-icon" style="background:#FFF0CC;color:#D4900A">'+I.bouee+'</div><div><div class="bloque-card-title">Je me laisse distraire</div><div class="bloque-card-desc">On prépare ton environnement</div></div></div><div class="bloque-card"><div class="bloque-card-icon" style="background:#FCE4EC;color:#C43AA5">'+I.coeur+'</div><div><div class="bloque-card-title">Je suis à plat</div><div class="bloque-card-desc">Version ultra-facile + respiration</div></div></div><div class="bloque-card"><div class="bloque-card-icon" style="background:#E3F5E1;color:#3FA24A">'+I.horloge+'</div><div><div class="bloque-card-title">Juste 2 minutes</div><div class="bloque-card-desc">Ce qu\'on peut faire rapidement</div></div></div></div><p class="bloque-note">Clic aide à démarrer, ce n\'est pas un outil médical. En période difficile, parle à un proche ou à un professionnel.</p></div>';
-  bindBack();
-  app.querySelectorAll('.bloque-card').forEach(function(c){ c.onclick=function(){ toast('Micro-étapes adaptées !'); }; });
-}
+        <!-- Badge 5: Multi-tâches -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#7DD8D0,#5BC0B8);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(91,192,184,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <rect x="10" y="20" width="20" height="10" rx="3" fill="white" opacity="0.4" stroke="white" stroke-width="1.5"/>
+              <rect x="13" y="14" width="14" height="10" rx="3" fill="white" opacity="0.6" stroke="white" stroke-width="1.5"/>
+              <rect x="16" y="8" width="8" height="10" rx="3" fill="white" opacity="0.9" stroke="white" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h4>Multi-tâches</h4>
+          <p>Termine une session de plusieurs tâches</p>
+        </div>
 
-function renderTutorial() {
-  var app=document.getElementById('app'), nav=document.getElementById('bottom-nav');
-  nav.style.display='none';
-  var step=State.data.tutorial.step||0, total=5, pct=((step+1)/total)*100;
-  var h='<div class="tutorial-screen"><div class="tutorial-progress"><div class="tutorial-progress-fill" style="width:'+pct+'%"></div></div><div class="tutorial-content">';
-  if(step===0){ h+='<h2 class="tutorial-title">Salut !</h2><p class="tutorial-text">Je suis là pour t\'aider à commencer, doucement.<br><br>Un seul bouton. Pas de pression. On y va à ton rythme.</p><div class="start-button-wrapper"><button class="start-button" id="tstart">START</button></div><div class="tutorial-actions"><button class="btn-secondary" id="tskip">Passer</button><button class="btn-primary" id="tnext">Continuer</button></div>'; }
-  else if(step===1){ h+='<h2 class="tutorial-title">1 appui</h2><p class="tutorial-text">On passe à l\'étape suivante.</p><div class="start-button-wrapper"><button class="start-button" id="ttap">START</button></div><div class="tutorial-actions"><button class="btn-primary" id="tnext" style="flex:1">Parfait, continuons</button></div>'; }
-  else if(step===2){ h+='<h2 class="tutorial-title">2 appuis</h2><p class="tutorial-text">Tu as terminé, bravo.</p><div class="start-button-wrapper"><button class="start-button" id="tdbl">START</button></div><div class="tutorial-actions"><button class="btn-primary" id="tnext" style="flex:1">Super, continuons</button></div>'; }
-  else if(step===3){ h+='<h2 class="tutorial-title">Appui long</h2><p class="tutorial-text">Une pause, sans pression.</p><div class="start-button-wrapper"><button class="start-button" id="tlong">START</button></div><div class="tutorial-actions"><button class="btn-primary" id="tnext" style="flex:1">Compris, continuons</button></div>'; }
-  else if(step===4){ h+='<h2 class="tutorial-title">Comment t\'appelles-tu ?</h2><input type="text" class="input-field" id="tname" placeholder="Ton prénom (facultatif)" style="margin:20px auto;display:block"><div class="tutorial-actions"><button class="btn-secondary" id="tskip2">Passer</button><button class="btn-primary" id="tfin">C\'est parti</button></div>'; }
-  h+='</div></div>'; app.innerHTML=h;
-  
-  var goNext=function(){ State.data.tutorial.step=step+1; Store.save(); renderTutorial(); };
-  var finish=function(){ var n=document.getElementById('tname'); if(n&&n.value.trim()) State.data.profile.name=n.value.trim(); State.data.tutorial.completed=true; Store.save(); nav.style.display='flex'; Router.go('accueil'); };
-  var bn=document.getElementById('tnext'); if(bn) bn.onclick=goNext;
-  var bs=document.getElementById('tskip'); if(bs) bs.onclick=function(){ State.data.tutorial.completed=true; Store.save(); nav.style.display='flex'; Router.go('accueil'); };
-  var bs2=document.getElementById('tskip2'); if(bs2) bs2.onclick=finish;
-  var bf=document.getElementById('tfin'); if(bf) bf.onclick=finish;
-  ['tstart','ttap','tdbl','tlong'].forEach(function(id){ var b=document.getElementById(id); if(b) b.onclick=function(){ b.style.transform='scale(0.95)'; setTimeout(function(){ b.style.transform=''; }, 150); }; });
-}
+        <!-- Badge 6: Je me débloque -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#F5E07A,#E8C830);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(232,200,48,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <ellipse cx="20" cy="24" rx="12" ry="8" fill="white" opacity="0.4" stroke="white" stroke-width="2"/>
+              <circle cx="20" cy="16" r="6" fill="white" opacity="0.7" stroke="white" stroke-width="1.5"/>
+              <line x1="20" y1="10" x2="20" y2="8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="14" y1="12" x2="12" y2="10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="26" y1="12" x2="28" y2="10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Je me débloque</h4>
+          <p>Utilise « Je bloque » pour repartir</p>
+        </div>
 
-function renderLegal() {
-  var app=document.getElementById('app');
-  app.innerHTML='<div class="screen">'+headerHTML('Mentions légales', 'profil')+'<div class="card" style="padding:24px"><p style="font-size:15px;line-height:1.7;color:#7A5446">Site édité à titre non professionnel par une personne physique, qui a choisi de préserver son anonymat conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN).<br><br>Hébergeur : GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820.</p></div></div>';
-  bindBack();
-}
-function renderPrivacy() {
-  var app=document.getElementById('app');
-  app.innerHTML='<div class="screen">'+headerHTML('Confidentialité', 'profil')+'<div class="card" style="padding:24px"><p style="font-size:15px;line-height:1.7;color:#7A5446">Clic ne crée pas de compte et n\'envoie aucune donnée à un serveur. Tes tâches, ton historique et tes réglages restent sur ton appareil.<br><br>Pas de publicité, pas de traceur.<br><br>Clic aide à démarrer une tâche : ce n\'est pas un outil médical.<br><br>Contact : [À REMPLIR]</p></div></div>';
-  bindBack();
-}
+        <!-- Badge 7: Retour en douceur -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#F5B0C0,#E8889A);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(232,136,154,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <path d="M20 30c-6-4-10-8-10-13a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 5-4 9-10 13z" fill="white" opacity="0.7" stroke="white" stroke-width="1.5"/>
+              <path d="M17 20c0-2 1.5-3.5 3-3.5s3 1.5 3 3.5" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <h4>Retour en douceur</h4>
+          <p>Reviens après quelques jours d'absence</p>
+        </div>
 
-function renderModels() {
-  var app=document.getElementById('app');
-  var h='<div class="screen">'+headerHTML('Modèles', 'accueil');
-  Models.forEach(function(m){ h+='<div class="task-card" data-mid="'+m.id+'"><div class="task-card-content"><div class="task-card-title">'+m.name+'</div><div class="task-card-subtitle">'+m.steps.length+' étapes · '+fmtDur(m.dur)+'</div></div><button class="btn-round" style="width:40px;height:40px" aria-label="Utiliser">'+I.play+'</button></div>'; });
-  h+='</div>'; app.innerHTML=h;
-  bindBack();
-  app.querySelectorAll('.task-card').forEach(function(c){ c.onclick=function(){ var m=Models.find(function(x){ return x.id===c.getAttribute('data-mid'); }); if(m){ State.data.tasks.push({id:Store.id(), title:m.name, listId:'perso', dur:m.dur, steps:m.steps, created:Date.now(), completed:null}); Store.save(); toast('Tâche créée !'); Router.go('taches'); } }; });
-}
+        <!-- Badge 8: Grand marathon -->
+        <div class="badge-full-card">
+          <div class="badge-full-icon" style="background:linear-gradient(135deg,#D870C8,#C040A8);">
+            <div style="position:absolute;width:76px;height:76px;border-radius:50%;background:rgba(192,64,168,0.15);"></div>
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+              <path d="M12 14h16l-2 12c0 3-3 5-6 5s-6-2-6-5l-2-12z" fill="white" opacity="0.5" stroke="white" stroke-width="2"/>
+              <line x1="10" y1="14" x2="30" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="14" y1="8" x2="14" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="26" y1="8" x2="26" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <polygon points="20,18 21.5,21.5 25,21.5 22,23.5 23,27 20,25 17,27 18,23.5 15,21.5 18.5,21.5" fill="white" opacity="0.8"/>
+            </svg>
+          </div>
+          <h4>Grand marathon</h4>
+          <p>10 h de travail au total</p>
+        </div>
+      </div>
+    </div>
 
-function renderPlanifier() {
-  var app=document.getElementById('app');
-  app.innerHTML='<div class="screen">'+headerHTML('Planifier ma journée', 'accueil')+'<div class="card" style="text-align:center;padding:40px 20px"><p style="color:#7A5446;margin-bottom:20px">Choisis tes tâches et définis un temps global.</p><button class="btn-primary" id="bstart2">Démarrer une session</button></div></div>';
-  bindBack();
-  document.getElementById('bstart2').onclick=function(){ toast('Fonctionnalité en cours de développement'); };
-}
+    <div class="nav-bar">
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Accueil</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Mes tâches</span>
+      </div>
+      <div class="nav-center">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Parcours</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profil</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-/* ==========================================================================
-   INITIALISATION
-   ========================================================================== */
-(function(){
-  try { var st=localStorage.getItem('clic_theme'); if(st && ['clair','nuit','galaxie','chaleureux'].indexOf(st)!==-1) document.documentElement.setAttribute('data-theme', st); } catch(e){}
-  Store.load(); State.recalc();
-  
-  Router.register('accueil', renderHome);
-  Router.register('taches', renderTasks);
-  Router.register('creer', renderCreate);
-  Router.register('parcours', renderParcours);
-  Router.register('profil', renderProfile);
-  Router.register('avatar', renderAvatar);
-  Router.register('bloque', renderBloque);
-  Router.register('tuto', renderTutorial);
-  Router.register('legal', renderLegal);
-  Router.register('privacy', renderPrivacy);
-  Router.register('modeles', renderModels);
-  Router.register('planifier', renderPlanifier);
-  
-  if(!State.data.tutorial.completed) {
-    Router.register('accueil', function(){ renderTutorial(); });
-  }
-  
-  Router.init();
-})();
-</script>
+<!-- SCREEN 4: CHOIX DE L'AVATAR -->
+<div class="screen">
+  <div class="bg-blob-1"></div>
+  <div class="bg-blob-2"></div>
+  <div class="bg-blob-3"></div>
+  <div class="content">
+    <div class="app-header">
+      <div class="app-header-left">
+        <div class="logo-box">
+          <span class="logo-c">C</span>
+          <div class="logo-play"></div>
+        </div>
+        <div>
+          <div class="app-title">Clic</div>
+          <div class="app-subtitle">Commencez simplement</div>
+        </div>
+      </div>
+      <div class="bell-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B1A10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="bell-dot"></div>
+      </div>
+    </div>
+
+    <div class="scrollable">
+      <div class="screen-title">Choisis ton avatar</div>
+      <div class="screen-subtitle">Sélectionnez un style qui vous ressemble</div>
+
+      <div class="avatar-preview">
+        <div class="avatar-preview-circle">
+          <svg width="60" height="60" viewBox="0 0 80 80">
+            <!-- Pot -->
+            <rect x="22" y="42" width="36" height="28" rx="6" fill="#D4845A"/>
+            <rect x="18" y="38" width="44" height="8" rx="4" fill="#C47040"/>
+            <!-- Terre -->
+            <ellipse cx="40" cy="44" rx="16" ry="4" fill="#8B5E3C"/>
+            <!-- Tige -->
+            <line x1="40" y1="42" x2="40" y2="26" stroke="#5A9E4B" stroke-width="3" stroke-linecap="round"/>
+            <!-- Feuille gauche -->
+            <path d="M40 30c-8-2-14-6-14-12 6 0 12 4 14 12z" fill="#6BBF5A"/>
+            <!-- Feuille droite -->
+            <path d="M40 28c8-2 14-6 14-12-6 0-12 4-14 12z" fill="#7DD06A"/>
+            <!-- Visage -->
+            <circle cx="34" cy="52" r="2" fill="#3B1A10"/>
+            <circle cx="46" cy="52" r="2" fill="#3B1A10"/>
+            <path d="M36 57c2 2 6 2 8 0" stroke="#3B1A10" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <circle cx="30" cy="55" r="2.5" fill="rgba(240,180,170,0.5)"/>
+            <circle cx="50" cy="55" r="2.5" fill="rgba(240,180,170,0.5)"/>
+            <!-- Étincelles -->
+            <line x1="62" y1="36" x2="66" y2="32" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+            <line x1="64" y1="42" x2="68" y2="42" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+            <line x1="14" y1="44" x2="10" y2="40" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="avatar-preview-info">
+          <div class="label">Avatar sélectionné</div>
+          <div class="name">La petite plante</div>
+          <div class="avatar-selected-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Sélectionné
+          </div>
+        </div>
+      </div>
+
+      <div class="avatar-grid">
+        <!-- Avatar 1: La petite plante (selected) -->
+        <div class="avatar-option selected">
+          <div class="check-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <rect x="22" y="42" width="36" height="28" rx="6" fill="#D4845A"/>
+              <rect x="18" y="38" width="44" height="8" rx="4" fill="#C47040"/>
+              <ellipse cx="40" cy="44" rx="16" ry="4" fill="#8B5E3C"/>
+              <line x1="40" y1="42" x2="40" y2="26" stroke="#5A9E4B" stroke-width="3" stroke-linecap="round"/>
+              <path d="M40 30c-8-2-14-6-14-12 6 0 12 4 14 12z" fill="#6BBF5A"/>
+              <path d="M40 28c8-2 14-6 14-12-6 0-12 4-14 12z" fill="#7DD06A"/>
+              <circle cx="34" cy="52" r="2" fill="#3B1A10"/>
+              <circle cx="46" cy="52" r="2" fill="#3B1A10"/>
+              <path d="M36 57c2 2 6 2 8 0" stroke="#3B1A10" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <circle cx="30" cy="55" r="2.5" fill="rgba(240,180,170,0.5)"/>
+              <circle cx="50" cy="55" r="2.5" fill="rgba(240,180,170,0.5)"/>
+              <line x1="62" y1="36" x2="66" y2="32" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="64" y1="42" x2="68" y2="42" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Avatar 2: La pile de livres -->
+        <div class="avatar-option">
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <rect x="18" y="48" width="44" height="12" rx="4" fill="#8B6FAF"/>
+              <rect x="20" y="38" width="40" height="12" rx="4" fill="#C47040"/>
+              <rect x="22" y="28" width="36" height="12" rx="4" fill="#E8A060"/>
+              <!-- Visage sur le livre du haut -->
+              <circle cx="34" cy="34" r="2" fill="#3B1A10"/>
+              <circle cx="46" cy="34" r="2" fill="#3B1A10"/>
+              <path d="M36 39c2 2 6 2 8 0" stroke="#3B1A10" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <circle cx="30" cy="37" r="2" fill="rgba(240,180,170,0.5)"/>
+              <circle cx="50" cy="37" r="2" fill="rgba(240,180,170,0.5)"/>
+              <!-- Pages -->
+              <line x1="24" y1="44" x2="56" y2="44" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+              <line x1="22" y1="54" x2="58" y2="54" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <!-- Étincelles -->
+              <line x1="62" y1="30" x2="66" y2="26" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="14" y1="40" x2="10" y2="36" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Avatar 3: La cible -->
+        <div class="avatar-option">
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="26" fill="rgba(232,112,112,0.2)" stroke="#E87070" stroke-width="2"/>
+              <circle cx="40" cy="40" r="18" fill="rgba(232,112,112,0.3)" stroke="#E87070" stroke-width="1.5"/>
+              <circle cx="40" cy="40" r="10" fill="rgba(232,112,112,0.4)" stroke="#E87070" stroke-width="1.5"/>
+              <circle cx="40" cy="40" r="4" fill="#E87070"/>
+              <!-- Flèche -->
+              <line x1="22" y1="18" x2="38" y2="36" stroke="#8B5E3C" stroke-width="2.5" stroke-linecap="round"/>
+              <polygon points="38,36 34,32 42,34" fill="#8B5E3C"/>
+              <!-- Plumes -->
+              <line x1="22" y1="18" x2="16" y2="14" stroke="#E87070" stroke-width="2" stroke-linecap="round"/>
+              <line x1="22" y1="18" x2="18" y2="12" stroke="#F5A0A0" stroke-width="2" stroke-linecap="round"/>
+              <!-- Visage -->
+              <circle cx="36" cy="44" r="1.5" fill="#3B1A10"/>
+              <circle cx="44" cy="44" r="1.5" fill="#3B1A10"/>
+              <path d="M37 48c1.5 1.5 4.5 1.5 6 0" stroke="#3B1A10" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+              <!-- Étincelles -->
+              <line x1="64" y1="22" x2="68" y2="18" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="16" y1="60" x2="12" y2="64" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Avatar 4: Le calendrier -->
+        <div class="avatar-option">
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <rect x="18" y="22" width="44" height="42" rx="6" fill="rgba(245,200,180,0.6)" stroke="#E8A080" stroke-width="2"/>
+              <rect x="18" y="22" width="44" height="14" rx="6" fill="#E87070"/>
+              <rect x="18" y="30" width="44" height="6" fill="#E87070"/>
+              <!-- Anneaux -->
+              <line x1="30" y1="16" x2="30" y2="26" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
+              <line x1="50" y1="16" x2="50" y2="26" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round"/>
+              <!-- Grille -->
+              <line x1="30" y1="44" x2="30" y2="58" stroke="rgba(180,140,130,0.3)" stroke-width="1"/>
+              <line x1="42" y1="44" x2="42" y2="58" stroke="rgba(180,140,130,0.3)" stroke-width="1"/>
+              <line x1="54" y1="44" x2="54" y2="58" stroke="rgba(180,140,130,0.3)" stroke-width="1"/>
+              <line x1="24" y1="50" x2="56" y2="50" stroke="rgba(180,140,130,0.3)" stroke-width="1"/>
+              <!-- Case cochée -->
+              <rect x="33" y="46" width="8" height="8" rx="2" fill="rgba(242,106,27,0.3)" stroke="#F26A1B" stroke-width="1.5"/>
+              <polyline points="35,50 37,52 40,47" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <!-- Visage -->
+              <circle cx="34" cy="30" r="1.5" fill="white"/>
+              <circle cx="46" cy="30" r="1.5" fill="white"/>
+              <path d="M37 34c1.5 1.5 4.5 1.5 6 0" stroke="white" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+              <!-- Étincelles -->
+              <line x1="64" y1="28" x2="68" y2="24" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="66" y1="34" x2="70" y2="34" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Avatar 5: La tasse de café -->
+        <div class="avatar-option">
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <!-- Vapeur -->
+              <path d="M32 22c0-4 3-6 3-10" stroke="rgba(180,140,130,0.4)" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M40 18c0-3 2-5 2-8" stroke="rgba(180,140,130,0.3)" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M48 22c0-4 3-6 3-10" stroke="rgba(180,140,130,0.4)" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- Tasse -->
+              <path d="M22 36h36v20c0 6-4 10-10 10H32c-6 0-10-4-10-10V36z" fill="#F5E6D0" stroke="#D4A574" stroke-width="2"/>
+              <!-- Anse -->
+              <path d="M58 42c8 0 12 4 12 10s-4 10-12 10" fill="none" stroke="#D4A574" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Café -->
+              <ellipse cx="40" cy="38" rx="16" ry="5" fill="#8B5E3C"/>
+              <!-- Visage -->
+              <circle cx="34" cy="50" r="2" fill="#3B1A10"/>
+              <circle cx="46" cy="50" r="2" fill="#3B1A10"/>
+              <path d="M36 56c2 2 6 2 8 0" stroke="#3B1A10" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <circle cx="30" cy="53" r="2.5" fill="rgba(240,180,170,0.5)"/>
+              <circle cx="50" cy="53" r="2.5" fill="rgba(240,180,170,0.5)"/>
+              <!-- Soucoupe -->
+              <ellipse cx="40" cy="68" rx="22" ry="5" fill="rgba(212,165,116,0.3)" stroke="#D4A574" stroke-width="1.5"/>
+              <!-- Étincelles -->
+              <line x1="64" y1="34" x2="68" y2="30" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="14" y1="42" x2="10" y2="38" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Avatar 6: Le crayon -->
+        <div class="avatar-option">
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <!-- Corps crayon -->
+              <rect x="30" y="16" width="20" height="40" rx="4" fill="#F5D76E" stroke="#E8C830" stroke-width="1.5"/>
+              <!-- Bande métal -->
+              <rect x="30" y="12" width="20" height="8" rx="2" fill="#D0D0D0" stroke="#B0B0B0" stroke-width="1"/>
+              <!-- Gomme -->
+              <rect x="32" y="6" width="16" height="8" rx="4" fill="#F0A0A0" stroke="#E88080" stroke-width="1"/>
+              <!-- Pointe -->
+              <polygon points="30,56 50,56 40,72" fill="#F5E6D0" stroke="#D4A574" stroke-width="1.5"/>
+              <polygon points="36,66 44,66 40,74" fill="#3B1A10"/>
+              <!-- Ligne crayon -->
+              <line x1="36" y1="16" x2="36" y2="56" stroke="rgba(200,170,50,0.3)" stroke-width="1"/>
+              <line x1="44" y1="16" x2="44" y2="56" stroke="rgba(200,170,50,0.3)" stroke-width="1"/>
+              <!-- Visage -->
+              <circle cx="36" cy="32" r="2" fill="#3B1A10"/>
+              <circle cx="44" cy="32" r="2" fill="#3B1A10"/>
+              <path d="M37 38c1.5 1.5 4.5 1.5 6 0" stroke="#3B1A10" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <circle cx="32" cy="36" r="2" fill="rgba(240,180,170,0.5)"/>
+              <circle cx="48" cy="36" r="2" fill="rgba(240,180,170,0.5)"/>
+              <!-- Étincelles -->
+              <line x1="58" y1="26" x2="62" y2="22" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="18" y1="44" x2="14" y2="40" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Avatar 7: L'ampoule -->
+        <div class="avatar-option">
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <!-- Ampoule -->
+              <circle cx="40" cy="32" r="20" fill="#F5E07A" stroke="#E8C830" stroke-width="2"/>
+              <!-- Culot -->
+              <rect x="32" y="50" width="16" height="8" rx="2" fill="#D0D0D0" stroke="#B0B0B0" stroke-width="1.5"/>
+              <rect x="34" y="56" width="12" height="4" rx="2" fill="#B0B0B0"/>
+              <!-- Filament -->
+              <path d="M36 38c2-4 6-4 8 0" stroke="#E8C830" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- Rayons -->
+              <line x1="40" y1="6" x2="40" y2="10" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="18" y1="14" x2="22" y2="18" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="62" y1="14" x2="58" y2="18" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="14" y1="32" x2="18" y2="32" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="66" y1="32" x2="62" y2="32" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Visage -->
+              <circle cx="34" cy="30" r="2.5" fill="#3B1A10"/>
+              <circle cx="46" cy="30" r="2.5" fill="#3B1A10"/>
+              <path d="M35 38c2.5 2.5 7.5 2.5 10 0" stroke="#3B1A10" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <circle cx="29" cy="35" r="2.5" fill="rgba(240,180,170,0.5)"/>
+              <circle cx="51" cy="35" r="2.5" fill="rgba(240,180,170,0.5)"/>
+              <!-- Étincelles supplémentaires -->
+              <line x1="64" y1="44" x2="68" y2="40" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Avatar 8: Le cœur -->
+        <div class="avatar-option">
+          <div class="avatar-circle">
+            <svg width="50" height="50" viewBox="0 0 80 80">
+              <!-- Cœur -->
+              <path d="M40 62c-12-8-22-16-22-26a12 12 0 0 1 22-6 12 12 0 0 1 22 6c0 10-10 18-22 26z" fill="#F0A0B0" stroke="#E88090" stroke-width="2"/>
+              <!-- Reflet -->
+              <path d="M30 34c-4-2-6-6-4-10 4 0 8 3 10 8" fill="rgba(255,255,255,0.3)"/>
+              <!-- Visage -->
+              <circle cx="34" cy="42" r="2" fill="#3B1A10"/>
+              <circle cx="46" cy="42" r="2" fill="#3B1A10"/>
+              <path d="M36 48c2 2 6 2 8 0" stroke="#3B1A10" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <circle cx="30" cy="46" r="2.5" fill="rgba(255,200,200,0.6)"/>
+              <circle cx="50" cy="46" r="2.5" fill="rgba(255,200,200,0.6)"/>
+              <!-- Étincelles -->
+              <line x1="62" y1="28" x2="66" y2="24" stroke="#F26A1B" stroke-width="2" stroke-linecap="round"/>
+              <line x1="64" y1="34" x2="68" y2="34" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="14" y1="36" x2="10" y2="32" stroke="#F26A1B" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row" style="margin-bottom:20px;">
+        <button class="btn-cancel">Annuler</button>
+        <button class="btn-choose">Choisir</button>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div class="nav-item active">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F26A1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Accueil</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Mes tâches</span>
+      </div>
+      <div class="nav-center">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Parcours</span>
+      </div>
+      <div class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A5F55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profil</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
