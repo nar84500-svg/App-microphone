@@ -36,7 +36,7 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .round-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;cursor:pointer;background:#FFE3D0;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0}
 .round-avatar svg{width:100%;height:100%;display:block}
 
-/* ---------- Écrans (un seul visible, chacun défile) ---------- */
+/* ---------- Écrans ---------- */
 .screen{display:none;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
   padding:0 20px calc(var(--nav-h) + env(safe-area-inset-bottom) + 32px);position:relative;z-index:1}
 .screen::-webkit-scrollbar{display:none}
@@ -150,10 +150,11 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .progress-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .badges-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
 .badge-mini{background:#fff;border-radius:14px;border:1px solid var(--border);padding:12px 5px;text-align:center;box-shadow:var(--shadow)}
+.badge-mini .badge-halo{margin:0 auto 6px}
 .badge-mini .badge-icon{width:44px;height:44px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center}
 .badge-mini .badge-icon svg{width:24px;height:24px}
 .badge-mini .badge-name{font-size:10px;font-weight:800;line-height:1.2}
-.badge-mini.locked{opacity:.45}
+.badge-mini.locked{opacity:.55}
 .session-item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);gap:10px}
 .session-item:last-child{border-bottom:none}
 .session-info h4{font-size:15px;font-weight:800}
@@ -163,7 +164,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .session-chevron{color:var(--text2);flex-shrink:0}
 .session-chevron svg{width:20px;height:20px}
 
-/* ---------- Feuille modèles ---------- */
+/* ---------- Feuilles ---------- */
 .sheet-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(59,26,16,.35);z-index:200;display:none;align-items:flex-end;justify-content:center}
 .sheet-overlay.show{display:flex}
 .sheet{background:#fff;border-radius:26px 26px 0 0;width:100%;max-width:430px;padding:20px 20px 28px;max-height:82dvh;overflow-y:auto;
@@ -171,8 +172,10 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .sheet-overlay.show .sheet{transform:translateY(0)}
 .sheet-handle{width:42px;height:5px;background:#E7D5CC;border-radius:3px;margin:0 auto 18px}
 .sheet-title{font-size:20px;font-weight:800;margin-bottom:16px}
+.sheet-actions{display:flex;gap:10px}
+.sheet-actions .btn{flex:1}
 
-/* ---------- Écran minuteur (sans barre, sans scroll) ---------- */
+/* ---------- Clavier minuteur ---------- */
 #screen-timer.active{display:flex;flex-direction:column}
 #screen-timer{padding-top:6px}
 .timer-name{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:16px;font-family:'Nunito',sans-serif;
@@ -223,15 +226,15 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .success-disc svg{width:56px;height:56px;color:#fff}
 @keyframes pop{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
 
-/* ---------- Badges ---------- */
+/* ---------- Badges (définition unique) ---------- */
 .badges-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(min-width:700px){.badges-grid{grid-template-columns:repeat(4,1fr)}}
 .badge-card{background:#fff;border-radius:24px;border:1px solid var(--border);padding:20px 12px;text-align:center;box-shadow:var(--shadow)}
 .badge-card.locked{opacity:.55}
-.badge-halo{width:84px;height:84px;border-radius:50%;background:var(--halo);display:grid;place-items:center;margin:0 auto 12px}
-.badge-disc{width:64px;height:64px;border-radius:50%;background:linear-gradient(155deg,var(--c1),var(--c2));position:relative;display:grid;place-items:center}
-.badge-disc::before{content:'';position:absolute;top:7px;left:10px;width:18px;height:9px;background:rgba(255,255,255,.45);border-radius:50%;transform:rotate(-24deg)}
-.badge-disc svg{width:34px;height:34px;stroke:#fff;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.badge-halo{border-radius:50%;display:grid;place-items:center;margin:0 auto 12px}
+.badge-disc{border-radius:50%;position:relative;display:grid;place-items:center}
+.badge-disc::before{content:'';position:absolute;top:11%;left:15%;width:28%;height:14%;background:rgba(255,255,255,.45);border-radius:50%;transform:rotate(-24deg)}
+.badge-disc svg{stroke:#fff;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .badge-lock{position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid var(--border);display:grid;place-items:center;box-shadow:var(--shadow)}
 .badge-lock svg{width:11px;height:11px;color:var(--text2)}
 .badge-card h4{font-size:16px;font-weight:800;margin-bottom:4px}
@@ -286,11 +289,17 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .realis-card{border-radius:18px;padding:12px 6px;text-align:center;display:flex;flex-direction:column;justify-content:space-between;gap:8px;box-shadow:var(--shadow)}
 .realis-card h4{font-size:13px;font-weight:800;line-height:1.25}
 .realis-card p{font-size:10.5px;font-weight:700;line-height:1.3;opacity:.85}
-.realis-card svg{width:48px;height:48px;margin:0 auto;display:block}
+.realis-card .realis-icon{display:flex;justify-content:center;margin-top:6px}
 .rc-green{background:linear-gradient(160deg,#E7F8E7,#CDEED0);color:#1E6B34;border:1px solid #BFE6C4}
 .rc-orange{background:linear-gradient(160deg,#FCEBDC,#F8D3B4);color:#8A4A1E;border:1px solid #F2C79F}
 .rc-purple{background:linear-gradient(160deg,#F3E4FB,#E3CBF2);color:#6B2E86;border:1px solid #DFC2EF}
 .realis-card.locked{opacity:.5}
+
+/* ---------- Fenêtre « Temps terminé » / « Je bloque » ---------- */
+.end-q{font-size:16px;font-weight:700;color:var(--text2);margin-bottom:18px}
+.help-suggest{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:20px;min-height:56px}
+#endActions{display:flex;flex-direction:column;gap:10px}
+#endActions .btn{width:100%}
 
 /* ---------- Tutoriel ---------- */
 .tut-overlay{position:fixed;inset:0;background:var(--bg);z-index:400;display:none;align-items:center;justify-content:center;padding:24px}
@@ -310,7 +319,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 <body>
 <div class="app" id="app">
 
-  <!-- ===== Header global (Accueil / Avatar) ===== -->
+  <!-- ===== Header global ===== -->
   <header class="app-header" id="appHeader">
     <div class="header-left">
       <div class="logo-icon" aria-label="Logo Clic">
@@ -574,24 +583,15 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     <div class="realis-grid">
       <div class="realis-card rc-green" id="realFocus">
         <div><h4>Maître du focus</h4><p>Plus de 100 sessions de focus terminées</p></div>
-        <svg viewBox="0 0 48 48" fill="none" stroke="#1E9E4A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M24 40c-9-3-15-11-15-20 6 0 12 3 15 9 3-6 9-9 15-9 0 9-6 17-15 20z"/>
-          <path d="M24 40V22"/><path d="M14 30c2-5 6-8 10-8M34 30c-2-5-6-8-10-8"/>
-        </svg>
+        <div class="realis-icon" id="riFocus"></div>
       </div>
       <div class="realis-card rc-orange" id="realStreak">
         <div><h4>Champion de la régularité</h4><p>15 jours consécutifs de productivité</p></div>
-        <svg viewBox="0 0 48 48" fill="none">
-          <path d="M24 4c5 9-2 13-2 19 0 3 1.5 5 4 5 2.5 0 4-1.5 4.5-3.5C33 29 34 32 34 35c0 6-4.5 9-10 9S14 41 14 35c0-10 7-16 10-31z" fill="#EF4444"/>
-          <path d="M24 27c2 4-1 6-1 9 0 3 1.5 4 3.5 4S30 38 30 35c0-4-3-5-6-8z" fill="#FBBF24"/>
-        </svg>
+        <div class="realis-icon" id="riStreak"></div>
       </div>
       <div class="realis-card rc-purple" id="realTasks">
         <div><h4>Expert des tâches</h4><p>Plus de 100 tâches de focus terminées</p></div>
-        <svg viewBox="0 0 48 48" fill="none" stroke="#9333EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 8h20v10a10 10 0 0 1-20 0V8z"/><path d="M14 12H8a4 4 0 0 0 4 8h2M34 12h6a4 4 0 0 1-4 8h-2"/>
-          <path d="M24 28v6M18 40h12M20 34h8v6h-8z"/><path d="M24 12l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4-2.9-2.8 4-.6z"/>
-        </svg>
+        <div class="realis-icon" id="riTasks"></div>
       </div>
     </div>
   </section>
@@ -639,7 +639,30 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </div>
 
-  <!-- Tutoriel (une seule fois) -->
+  <!-- Feuille « Temps terminé ! » -->
+  <div class="sheet-overlay" id="endOverlay">
+    <div class="sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      <div class="sheet-title" id="endTitle">Temps terminé !</div>
+      <p class="end-q" id="endQ">As-tu fini ta tâche ?</p>
+      <div id="endActions"></div>
+    </div>
+  </div>
+
+  <!-- Feuille « Je bloque » -->
+  <div class="sheet-overlay" id="helpOverlay" onclick="closeSheet('helpOverlay',event)">
+    <div class="sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      <div class="sheet-title">Je bloque</div>
+      <p class="help-suggest" id="helpSuggest"></p>
+      <div class="sheet-actions">
+        <button class="btn btn-outline" onclick="helpOther()">Autre idée</button>
+        <button class="btn btn-primary" onclick="helpGo()">C'est parti</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tutoriel -->
   <div class="tut-overlay" id="tutOverlay">
     <div class="tut-card">
       <div class="tut-disc" id="tutDisc"></div>
@@ -668,7 +691,7 @@ function fmtClock(s){s=Math.max(0,Math.round(num(s)));const h=Math.floor(s/3600)
 function todayISO(){return new Date().toISOString().slice(0,10);}
 const esc=s=>String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;');
 
-/* ================= Avatars (stickers) ================= */
+/* ================= Avatars ================= */
 const happyEyes=(cx,cy,s)=>`<path d="M${cx-9*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M${cx+4*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
 const eyesDots=(cx,cy,s)=>`<circle cx="${cx-5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/><circle cx="${cx+5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/>`;
 const smile=(cx,cy,s)=>`<path d="M${cx-3.5*s} ${cy}q${3.5*s} ${3.5*s} ${7*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
@@ -751,39 +774,76 @@ const AVATARS=[
 ];
 function avatarSvg(id){const a=AVATARS.find(x=>x.id===id);return a?a.svg:'';}
 
-/* ================= Badges ================= */
-const BADGES=[
- {id:'premier_pas',name:'Premier pas',desc:'Termine ta première tâche',c1:'#7ED06E',c2:'#3FA74E',halo:'#DFF2D9',ic:'plant'},
- {id:'objectif',name:'Objectif atteint',desc:'Termine toutes tes quêtes du jour',c1:'#FF7F8F',c2:'#E8405E',halo:'#FFDCE1',ic:'target'},
- {id:'une_heure',name:'Une heure de focus',desc:'Travaille 1 h au total',c1:'#B08CFA',c2:'#7E4FE3',halo:'#E9DFFF',ic:'clock'},
- {id:'jours_actifs',name:'Jours actifs',desc:'3 jours actifs, pas forcément à la suite',c1:'#FFA040',c2:'#F96A12',halo:'#FFE2CB',ic:'calendar'},
- {id:'multi',name:'Multi-tâches',desc:'Termine une session de plusieurs tâches',c1:'#46CDB2',c2:'#1FA08A',halo:'#D2F3EA',ic:'layers'},
- {id:'debloque',name:'Je me débloque',desc:'Utilise Je bloque pour repartir',c1:'#FFCB4A',c2:'#F5A011',halo:'#FFEFC4',ic:'buoy'},
- {id:'retour',name:'Retour en douceur',desc:'Reviens après quelques jours d\'absence',c1:'#FA85AF',c2:'#E84C87',halo:'#FFDDEA',ic:'heart'},
- {id:'marathon',name:'Grand marathon',desc:'10 h de travail au total',c1:'#D067C6',c2:'#A63A9C',halo:'#F5DBF2',ic:'trophy'}
-];
-const BADGE_ICONS={
- plant:'<svg viewBox="0 0 24 24"><path d="M12 20v-8"/><path d="M12 14c-5 0-8-4-8-8 4 0 7 3 8 6"/><path d="M12 12c4-1 7-4 7-8-4 0-6 3-7 5"/></svg>',
- target:'<svg viewBox="0 0 24 24"><circle cx="11" cy="13" r="7.5"/><circle cx="11" cy="13" r="4"/><circle cx="11" cy="13" r="1" fill="#fff"/><path d="M17 7l4-4"/><path d="M21 3l-1 4-3-3z" fill="#fff"/></svg>',
- clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M12 10v4l3 2.5"/><path d="M9 3h6"/><path d="M12 3v3"/></svg>',
- calendar:'<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/><path d="M9 15l2.2 2.2L15 13.5"/></svg>',
- layers:'<svg viewBox="0 0 24 24"><path d="M12 4L4 8l8 4 8-4z"/><path d="M4 12.5l8 4 8-4"/><path d="M4 17l8 4 8-4"/></svg>',
- buoy:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/></svg>',
- heart:'<svg viewBox="0 0 24 24"><path d="M12 20c-6-4.5-8.5-8-8.5-11a4.5 4.5 0 0 1 8.5-2 4.5 4.5 0 0 1 8.5 2c0 3-2.5 6.5-8.5 11z"/></svg>',
- trophy:'<svg viewBox="0 0 24 24"><path d="M7 4h10v6a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 5M17 6h3a3 3 0 0 1-3 5"/><path d="M12 15v3M9 21h6M10 18h4v3h-4z"/><path d="M12 6l.9 1.8 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9.1 8.1l2-.3z" fill="#fff" stroke-width="1.2"/></svg>'
+/* ================= BADGES : UNE SEULE DÉFINITION ================= */
+/* Valeurs (couleurs, halos, tracés) copiées telles quelles de la page Badges */
+const BADGES={
+ premier_pas:{title:'Premier pas',desc:'Termine ta première tâche',c1:'#7ED06E',c2:'#3FA74E',halo:'#DFF2D9',
+   icon:'<path d="M12 20v-8"/><path d="M12 14c-5 0-8-4-8-8 4 0 7 3 8 6"/><path d="M12 12c4-1 7-4 7-8-4 0-6 3-7 5"/>'},
+ objectif:{title:'Objectif atteint',desc:'Termine toutes tes quêtes du jour',c1:'#FF7F8F',c2:'#E8405E',halo:'#FFDCE1',
+   icon:'<circle cx="11" cy="13" r="7.5"/><circle cx="11" cy="13" r="4"/><circle cx="11" cy="13" r="1" fill="#fff"/><path d="M17 7l4-4"/><path d="M21 3l-1 4-3-3z" fill="#fff"/>'},
+ une_heure:{title:'Une heure de focus',desc:'Travaille 1 h au total',c1:'#B08CFA',c2:'#7E4FE3',halo:'#E9DFFF',
+   icon:'<circle cx="12" cy="14" r="8"/><path d="M12 10v4l3 2.5"/><path d="M9 3h6"/><path d="M12 3v3"/>'},
+ jours_actifs:{title:'Jours actifs',desc:'3 jours actifs, pas forcément à la suite',c1:'#FFA040',c2:'#F96A12',halo:'#FFE2CB',
+   icon:'<rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/><path d="M9 15l2.2 2.2L15 13.5"/>'},
+ multi:{title:'Multi-tâches',desc:'Termine une session de plusieurs tâches',c1:'#46CDB2',c2:'#1FA08A',halo:'#D2F3EA',
+   icon:'<path d="M12 4L4 8l8 4 8-4z"/><path d="M4 12.5l8 4 8-4"/><path d="M4 17l8 4 8-4"/>'},
+ debloque:{title:'Je me débloque',desc:'Utilise Je bloque pour repartir',c1:'#FFCB4A',c2:'#F5A011',halo:'#FFEFC4',
+   icon:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/>'},
+ retour:{title:'Retour en douceur',desc:'Reviens après quelques jours d’absence',c1:'#FA85AF',c2:'#E84C87',halo:'#FFDDEA',
+   icon:'<path d="M12 20c-6-4.5-8.5-8-8.5-11a4.5 4.5 0 0 1 8.5-2 4.5 4.5 0 0 1 8.5 2c0 3-2.5 6.5-8.5 11z"/>'},
+ marathon:{title:'Grand marathon',desc:'10 h de travail au total',c1:'#D067C6',c2:'#A63A9C',halo:'#F5DBF2',
+   icon:'<path d="M7 4h10v6a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 14v3M9 19h6M10 17h4v3h-4z"/><path d="M12 6l.9 1.8 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9.1 8.1l2-.3z" fill="#fff" stroke-width="1.2"/>'}
 };
+const BADGE_ORDER=['premier_pas','objectif','une_heure','jours_actifs','multi','debloque','retour','marathon'];
 const LOCK_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 
+/* Halo + disque + reflet + icône — proportions Badges : halo = size×1.3, icône = size×0.53 */
+function badgeIcon(id,size,locked){
+  const b=BADGES[id];const halo=Math.round(size*1.3),ic=Math.round(size*0.53);
+  return `<div class="badge-halo" style="width:${halo}px;height:${halo}px;background:${b.halo};">
+    <div class="badge-disc" style="width:${size}px;height:${size}px;background:linear-gradient(155deg,${b.c1},${b.c2});">
+      <svg viewBox="0 0 24 24" width="${ic}" height="${ic}" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${b.icon}</svg>
+      ${locked?`<span class="badge-lock">${LOCK_SVG}</span>`:''}
+    </div>
+  </div>`;
+}
+
+/* Source unique de vérité : état sauvegardé */
+function isUnlocked(id){return !!(state.badgesUnlocked&&state.badgesUnlocked[id]);}
+function badgeUnlocked(b){return isUnlocked(b.id);} /* wrapper conservé */
+
+/* Conditions — une seule fonction, appelée après chaque événement */
+function checkBadges(){
+  if(!state.badgesUnlocked)state.badgesUnlocked={};
+  const unlock=(id)=>{if(!state.badgesUnlocked[id])state.badgesUnlocked[id]=new Date().toISOString();};
+  const real=state.tasks.filter(t=>!t.demo);
+  const today=todayISO();
+  if(real.some(t=>t.done))unlock('premier_pas');
+  if(real.length>0&&real.every(t=>t.done)&&real.some(t=>t.done&&t.doneAt===today))unlock('objectif');
+  if(state.focusMinutes>=60)unlock('une_heure');
+  if(state.focusMinutes>=600)unlock('marathon');
+  const days=new Set(state.activeDays);
+  state.sessions.forEach(s=>{if(s.minutes>=1)days.add(s.date);});
+  real.forEach(t=>{if(t.done&&t.doneAt)days.add(t.doneAt);});
+  if(days.size>=3)unlock('jours_actifs');
+  if(state.sessions.some(s=>(s.tasksDone||[]).length>=2))unlock('multi');
+  if(state.sessions.some(s=>s.aideUtilisee))unlock('debloque');
+  if(state._pendingReturn&&state.activeDays.includes(today)){unlock('retour');state._pendingReturn=false;}
+  save();
+}
+
+/* ================= TÂCHES DE DÉMO ================= */
+const DEFAULT_TASKS=[
+ {id:1,name:'Réviser un cours',done:false,duration:1500,demo:true},
+ {id:2,name:'Projet TER',done:false,duration:2700,demo:true},
+ {id:3,name:'Lecture article',done:false,duration:1500,demo:true},
+ {id:4,name:'Répondre aux e-mails',done:false,duration:600,demo:true},
+ {id:5,name:'Préparer l\'exposé',done:false,duration:2700,demo:true}
+];
+const DEMO_NAMES=['Réviser un cours','Projet TER','Lecture article','Répondre aux e-mails','Préparer l\'exposé'];
 const MODELS=[{name:'Réviser un chapitre',duration:1500},{name:'Faire du sport',duration:2700},{name:'Lire 10 pages',duration:900}];
 
-/* ================= État unique (source de vérité) ================= */
-const DEFAULT_TASKS=[
- {id:1,name:'Réviser un cours',done:true,duration:1500},
- {id:2,name:'Projet TER',done:true,duration:2700},
- {id:3,name:'Lecture article',done:true,duration:1500},
- {id:4,name:'Répondre aux e-mails',done:false,duration:600},
- {id:5,name:'Préparer l\'exposé',done:false,duration:2700}
-];
+/* ================= État unique ================= */
 let state=null;
 
 function sanitize(){
@@ -791,11 +851,22 @@ function sanitize(){
   state.totalCompleted=num(state.totalCompleted);
   state.abandons=num(state.abandons);
   if(!Array.isArray(state.tasks))state.tasks=JSON.parse(JSON.stringify(DEFAULT_TASKS));
-  state.tasks.forEach(t=>{t.duration=num(t.duration);t.done=!!t.done;t.name=String(t.name||'Tâche');t.id=num(t.id)||1;});
+  state.tasks.forEach(t=>{
+    t.duration=num(t.duration);t.done=!!t.done;t.name=String(t.name||'Tâche');t.id=num(t.id)||1;
+    /* migration : UNIQUEMENT les tâches créées par l'ancien code de démo (ids 1–5 + noms exacts) */
+    if(!t.demo&&t.id>=1&&t.id<=5&&DEMO_NAMES.includes(t.name))t.demo=true;
+    if(!t.done)t.doneAt=null;
+    if(t.done&&!t.doneAt)t.doneAt=null;
+    t.workedSeconds=num(t.workedSeconds);
+  });
   if(!Array.isArray(state.sessions))state.sessions=[];
-  state.sessions.forEach(s=>{s.minutes=num(s.minutes);});
+  state.sessions.forEach(s=>{s.minutes=num(s.minutes);s.tasksDone=Array.isArray(s.tasksDone)?s.tasksDone:[];s.aideUtilisee=!!s.aideUtilisee;});
   if(!Array.isArray(state.activeDays))state.activeDays=[];
-  if(!Array.isArray(state.seenBadges))state.seenBadges=[];
+  if(!state.badgesUnlocked){
+    state.badgesUnlocked={};
+    (state.seenBadges||[]).forEach(id=>{if(BADGES[id])state.badgesUnlocked[id]=new Date().toISOString();});
+  }
+  state.lastActivityDate=state.lastActivityDate||state.lastVisit||null;
   if(!state.avatar||!AVATARS.find(a=>a.id===state.avatar))state.avatar='plante';
   state.name=typeof state.name==='string'?state.name:'';
   state.motto=typeof state.motto==='string'?state.motto:'';
@@ -806,41 +877,37 @@ function load(){
     const raw=localStorage.getItem('clic_state');
     if(raw){state=JSON.parse(raw);}
     else{
-      // Migration depuis les anciennes clés
       const oldTasks=JSON.parse(localStorage.getItem('clic_tasks')||'null');
       const oldStats=JSON.parse(localStorage.getItem('clic_stats')||'null')||{};
+      const oldProf=JSON.parse(localStorage.getItem('clic_profile')||'null')||{};
       state={
         tasks:oldTasks||JSON.parse(JSON.stringify(DEFAULT_TASKS)),
-        sessions:(oldStats.sessions||[]).map(s=>({name:s.name,date:s.date,minutes:num(s.minutes)||num(s.seconds)/60})),
+        sessions:(oldStats.sessions||[]).map(s=>({name:s.name,date:s.date,minutes:num(s.minutes)||num(s.seconds)/60,tasksDone:[],aideUtilisee:false})),
         focusMinutes:num(oldStats.focusMinutes)||num(oldStats.focusSeconds)/60,
-        totalCompleted:num(oldStats.totalCompleted),
-        activeDays:oldStats.activeDays||[],
-        abandons:num(oldStats.abandons),
-        lastVisit:oldStats.lastVisit||'',
-        seenBadges:oldStats.seenBadges||[],
-        avatar:localStorage.getItem('clic_avatar')||'plante',
-        name:(JSON.parse(localStorage.getItem('clic_profile')||'null')||{}).name||'',
-        motto:(JSON.parse(localStorage.getItem('clic_profile')||'null')||{}).motto||'',
-        tutorialSeen:false,
-        focus:JSON.parse(localStorage.getItem('clic_focus')||'null')
+        totalCompleted:num(oldStats.totalCompleted),activeDays:oldStats.activeDays||[],
+        abandons:num(oldStats.abandons),lastVisit:oldStats.lastVisit||'',seenBadges:oldStats.seenBadges||[],
+        avatar:localStorage.getItem('clic_avatar')||'plante',name:oldProf.name||'',motto:oldProf.motto||'',
+        tutorialSeen:false,focus:JSON.parse(localStorage.getItem('clic_focus')||'null'),pendingConfirm:null
       };
-      // anciennes durées en secondes → minutes
       if(oldTasks)state.tasks.forEach(t=>{if(num(t.duration)<=480)t.duration=num(t.duration)*60;});
     }
   }catch(e){state=null;}
-  if(!state)state={tasks:JSON.parse(JSON.stringify(DEFAULT_TASKS)),sessions:[],focusMinutes:0,totalCompleted:0,activeDays:[],abandons:0,lastVisit:'',seenBadges:[],avatar:'plante',name:'',motto:'',tutorialSeen:false,focus:null};
+  if(!state)state={tasks:JSON.parse(JSON.stringify(DEFAULT_TASKS)),sessions:[],focusMinutes:0,totalCompleted:0,activeDays:[],abandons:0,lastVisit:'',seenBadges:[],avatar:'plante',name:'',motto:'',tutorialSeen:false,focus:null,pendingConfirm:null};
   sanitize();
+  /* « Retour en douceur » : écart calculé AVANT toute activité d'aujourd'hui */
   const today=todayISO();
-  if(state.lastVisit&&state.lastVisit!==today){
-    const gap=Math.round((new Date(today)-new Date(state.lastVisit))/864e5);
-    if(gap>=3&&!state.seenBadges.includes('retour'))state.seenBadges.push('retour');
+  if(state.lastActivityDate&&state.lastActivityDate!==today){
+    const gap=Math.round((new Date(today)-new Date(state.lastActivityDate))/864e5);
+    if(gap>=3)state._pendingReturn=true;
   }
   state.lastVisit=today;
-  if(state.focus&&!state.focus.done&&!state.focus.paused&&state.focus.endTs<=Date.now())completeFocus(true,true);
+  /* minuteur expiré pendant la fermeture : temps enregistré UNE fois, fenêtre à afficher */
+  if(state.focus&&!state.focus.done&&focusRemaining()<=0)recordExpiry();
+  checkBadges();
   save();
 }
 function save(){localStorage.setItem('clic_state',JSON.stringify(state));}
-function markActiveDay(){const d=todayISO();if(!state.activeDays.includes(d))state.activeDays.push(d);}
+function markActiveDay(){const d=todayISO();if(!state.activeDays.includes(d))state.activeDays.push(d);state.lastActivityDate=d;}
 function computeStreak(){
   const set=new Set(state.activeDays);let n=0;const d=new Date();
   if(!set.has(d.toISOString().slice(0,10)))d.setDate(d.getDate()-1);
@@ -848,21 +915,6 @@ function computeStreak(){
   return n;
 }
 function level(){return 1+Math.floor((state.totalCompleted*3+state.focusMinutes)/30);}
-function badgeUnlocked(b){
-  if(state.seenBadges.includes(b.id))return true;
-  const done=state.tasks.filter(t=>t.done).length;
-  switch(b.id){
-    case 'premier_pas':return state.totalCompleted>=1;
-    case 'objectif':return state.tasks.length>0&&done===state.tasks.length;
-    case 'une_heure':return state.focusMinutes>=60;
-    case 'jours_actifs':return state.activeDays.length>=3;
-    case 'multi':return state.totalCompleted>=3;
-    case 'debloque':return state.abandons>=1;
-    case 'retour':return false;
-    case 'marathon':return state.focusMinutes>=600;
-  }
-  return false;
-}
 
 /* ================= Navigation ================= */
 const SCREENS=['accueil','taches','timer','focus','parcours','badges','avatar','profil'];
@@ -918,13 +970,14 @@ function confirmAvatar(){state.avatar=tempAvatar;save();updateAvatarDisplays();n
 /* ================= Tâches ================= */
 function renderTasks(){
   const list=document.getElementById('taskList');
-  const done=state.tasks.filter(t=>t.done).length,total=state.tasks.length;
+  const real=state.tasks.filter(t=>!t.demo);
+  const done=real.filter(t=>t.done).length,total=real.length;
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('taskCounterText').textContent=total?`${done} sur ${total} terminées`:'Aucune tâche pour le moment';
   document.getElementById('taskProgressFill').style.width=pct+'%';
   let f=state.tasks;
-  if(currentFilter==='todo')f=state.tasks.filter(t=>!t.done);
-  if(currentFilter==='done')f=state.tasks.filter(t=>t.done);
+  if(currentFilter==='todo')f=f.filter(t=>!t.done);
+  if(currentFilter==='done')f=f.filter(t=>t.done);
   if(!total){
     list.innerHTML=`<div class="empty-state">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 12l2 2 4-5"/></svg>
@@ -932,31 +985,39 @@ function renderTasks(){
       <button class="btn btn-primary" onclick="openTimer()">Ajouter ma première tâche</button></div>`;
     return;
   }
-  if(!f.length){
-    list.innerHTML=`<div class="empty-state"><p>${currentFilter==='done'?'Aucune tâche terminée pour le moment. Courage !':'Tout est terminé ici. Bravo !'}</p></div>`;
-    return;
-  }
-  list.innerHTML=f.map(t=>`
-    <div class="task-item ${t.done?'done':''}">
-      <button class="task-check ${t.done?'checked':''}" onclick="toggleTask(${t.id})" role="checkbox" aria-checked="${t.done}" aria-label="${t.done?'Rouvrir':'Terminer'} ${t.name}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
-      </button>
-      <div class="task-main"><span class="task-name">${t.name}</span><span class="task-dur">${fmtDuration(t.duration/60)}</span></div>
-      ${t.done?'':`<button class="task-launch" onclick="startFocus(${t.id},'${esc(t.name)}',${t.duration})" aria-label="Lancer ${t.name}">
-        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"/></svg></button>`}
-      <button class="task-delete" onclick="deleteTask(${t.id})" aria-label="Supprimer ${t.name}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></svg></button>
-    </div>`).join('');
+  const row=t=>`<div class="task-item ${t.done?'done':''}">
+    <button class="task-check ${t.done?'checked':''}" onclick="toggleTask(${t.id})" role="checkbox" aria-checked="${t.done}" aria-label="${t.done?'Rouvrir':'Terminer'} ${t.name}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></button>
+    <div class="task-main"><span class="task-name">${t.name}</span><span class="task-dur">${fmtDuration(t.duration/60)}</span></div>
+    ${t.done||t.demo?'':`<button class="task-launch" onclick="startFocus(${t.id},'${esc(t.name)}',${t.duration})" aria-label="Lancer ${t.name}">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"/></svg></button>`}
+    <button class="task-delete" onclick="deleteTask(${t.id})" aria-label="Supprimer ${t.name}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></svg></button></div>`;
+  const demos=f.filter(t=>t.demo),mine=f.filter(t=>!t.demo);
+  let html=mine.length?mine.map(row).join(''):
+    `<div class="empty-state"><p>${currentFilter==='done'?'Aucune tâche terminée pour le moment. Courage !':'Tout est terminé ici. Bravo !'}</p></div>`;
+  if(demos.length)html+=`<div class="section-title" style="font-size:13px;opacity:.7;margin-top:18px;">Exemples</div>`+demos.map(row).join('');
+  list.innerHTML=html;
 }
 function toggleTask(id){
   const t=state.tasks.find(x=>x.id===id);if(!t)return;
   t.done=!t.done;
-  if(t.done){state.totalCompleted++;markActiveDay();}
-  save();renderTasks();updateBanner();
+  if(t.done){
+    t.doneAt=todayISO();
+    if(!t.demo){
+      state.totalCompleted++;markActiveDay();
+      if(state.focus&&!state.focus.done&&!state.focus.expired){
+        state.focus.tasksCompleted=state.focus.tasksCompleted||[];
+        state.focus.tasksCompleted.push(id);
+      }
+    }
+  }else{t.doneAt=null;}
+  checkBadges();save();renderTasks();updateBanner();
 }
 function deleteTask(id){
   state.tasks=state.tasks.filter(t=>t.id!==id);
   if(state.focus&&state.focus.taskId===id)state.focus=null;
+  if(state.pendingConfirm&&state.pendingConfirm.taskId===id)state.pendingConfirm=null;
   save();renderTasks();renderAccueil();updateBanner();
 }
 let currentFilter='all';
@@ -1028,23 +1089,24 @@ function addFromTimer(){
 /* ================= Moteur focus ================= */
 function startFocus(taskId,name,seconds){
   const total=Math.max(1,Math.round(num(seconds)));
-  state.focus={taskId,name,total,endTs:Date.now()+total*1000,paused:false,remaining:total,done:false};
+  state.focus={taskId,name,total,endTs:Date.now()+total*1000,paused:false,remaining:total,done:false,
+    timeRecorded:false,expired:false,aideUtilisee:false,tasksCompleted:[]};
   save();navigateTo('focus');
 }
 function focusRemaining(){
   const f=state.focus;if(!f)return 0;
-  if(f.paused)return num(f.remaining);
+  if(f.paused||f.expired)return num(f.remaining);
   return Math.max(0,Math.round((f.endTs-Date.now())/1000));
 }
 function minimizeFocus(){navigateTo(prevScreen||'accueil');}
 function pauseResume(){
-  const f=state.focus;if(!f)return;
+  const f=state.focus;if(!f||f.expired)return;
   if(f.paused){f.endTs=Date.now()+f.remaining*1000;f.paused=false;}
   else{f.remaining=focusRemaining();f.paused=true;}
   save();renderFocus();
 }
 function addFive(){
-  const f=state.focus;if(!f)return;
+  const f=state.focus;if(!f||f.expired)return;
   f.total+=300;
   if(f.paused)f.remaining+=300;else f.endTs+=300000;
   save();renderFocus();
@@ -1055,24 +1117,81 @@ function cancelAbandon(){confirming=false;renderFocus();}
 function abandonFocus(){
   confirming=false;
   state.abandons++;markActiveDay();
-  state.focus=null;save();
-  navigateTo(prevScreen||'accueil');
+  state.focus=null;state.pendingConfirm=null; /* abandon → aucune session enregistrée, aucun badge »Je me débloque » */
+  save();checkBadges();navigateTo(prevScreen||'accueil');
 }
-function completeFocus(auto,silent){
-  const f=state.focus;if(!f)return;
+/* enregistre les secondes réellement travaillées, UNE SEULE FOIS, dans session + tâche + stats */
+function recordExpiry(){
+  const f=state.focus;if(!f||f.timeRecorded)return;
   const elapsed=Math.max(1,f.total-focusRemaining());
-  if(f.taskId!=null){
-    const t=state.tasks.find(x=>x.id===f.taskId);
-    if(t&&!t.done){t.done=true;state.totalCompleted++;}
-  }
+  f.timeRecorded=true;f.expired=true;f.remaining=0;
   state.focusMinutes+=elapsed/60;
-  state.sessions.unshift({name:f.name,date:todayISO(),minutes:elapsed/60});
+  if(f.taskId!=null){const t=state.tasks.find(x=>x.id===f.taskId);if(t)t.workedSeconds=num(t.workedSeconds)+elapsed;}
+  state.sessions.unshift({name:f.name,date:todayISO(),minutes:elapsed/60,tasksDone:(f.tasksCompleted||[]).slice(),aideUtilisee:!!f.aideUtilisee});
   state.sessions=state.sessions.slice(0,30);
   markActiveDay();
+  if(f.taskId!=null)state.pendingConfirm={taskId:f.taskId,name:f.name};
+  save();checkBadges();
+}
+/* Fin naturelle : NE PASSE PAS la tâche à terminée, ouvre la fenêtre */
+function handleExpiry(){
+  recordExpiry();
   if(navigator.vibrate)navigator.vibrate([40,60,40]);
-  f.done=true;
-  save();
+  showEndSheet();
+}
+/* « Terminer » manuel = l'utilisateur déclare avoir fini (comportement d'avant) */
+function completeFocus(auto,silent){
+  const f=state.focus;if(!f)return;
+  if(auto){handleExpiry();return;}
+  const elapsed=Math.max(1,f.total-focusRemaining());
+  if(!f.timeRecorded){
+    f.timeRecorded=true;state.focusMinutes+=elapsed/60;
+    if(f.taskId!=null){const t=state.tasks.find(x=>x.id===f.taskId);if(t){t.workedSeconds=num(t.workedSeconds)+elapsed;
+      if(!t.demo){t.done=true;t.doneAt=todayISO();state.totalCompleted++;}}}
+    state.sessions.unshift({name:f.name,date:todayISO(),minutes:elapsed/60,tasksDone:(f.tasksCompleted||[]).slice(),aideUtilisee:!!f.aideUtilisee});
+    state.sessions=state.sessions.slice(0,30);markActiveDay();
+  }
+  if(navigator.vibrate)navigator.vibrate([40,60,40]);
+  f.done=true;state.pendingConfirm=null;save();checkBadges();
   if(!silent)renderFocus(true);
+}
+function showEndSheet(){
+  const p=state.pendingConfirm;
+  document.getElementById('endTitle').textContent='Temps terminé !';
+  document.getElementById('endQ').textContent=p?`As-tu fini « ${p.name} » ?`:'As-tu fini ta tâche ?';
+  document.getElementById('endActions').innerHTML=`
+    <button class="btn btn-primary" onclick="endYes()">Oui, j'ai terminé</button>
+    <button class="btn btn-outline" onclick="endNo()">Pas encore</button>`;
+  document.getElementById('endOverlay').classList.add('show');
+}
+function endYes(){
+  const p=state.pendingConfirm;
+  if(p){
+    const t=state.tasks.find(x=>x.id===p.taskId);
+    if(t&&!t.done){t.done=true;t.doneAt=todayISO();
+      if(!t.demo){state.totalCompleted++;markActiveDay();
+        const s=state.sessions[0];if(s)s.tasksDone=(s.tasksDone||[]).concat([t.id]);}}
+  }
+  state.pendingConfirm=null;state.focus=null;
+  document.getElementById('endOverlay').classList.remove('show');
+  save();checkBadges();
+  if(document.getElementById('screen-focus').classList.contains('active'))renderFocus(true);
+  else navigateTo(prevScreen||'accueil');
+}
+function endNo(){
+  document.getElementById('endActions').innerHTML=`
+    <button class="btn btn-primary" onclick="extendFive()">Prolonger de 5 min</button>
+    <button class="btn btn-outline" onclick="endLater()">Plus tard</button>`;
+}
+function extendFive(){
+  const p=state.pendingConfirm;state.pendingConfirm=null;
+  document.getElementById('endOverlay').classList.remove('show');
+  if(p)startFocus(p.taskId,p.name,300);else startFocus(null,'Focus libre',300);
+}
+function endLater(){
+  state.pendingConfirm=null;state.focus=null;save();
+  document.getElementById('endOverlay').classList.remove('show');
+  navigateTo(prevScreen||'accueil');
 }
 function renderFocus(success){
   const body=document.getElementById('focusBody');
@@ -1112,14 +1231,17 @@ function renderFocus(success){
         <button class="btn btn-outline" onclick="addFive()">+5 min</button>
       </div>
       <button class="btn btn-primary" style="width:100%;" onclick="completeFocus(false)">Terminer</button>
-      <button class="btn btn-danger" style="width:100%;" onclick="askAbandon()">Abandonner</button>
+      <div class="row">
+        <button class="btn btn-outline" onclick="openHelp()">Je bloque</button>
+        <button class="btn btn-danger" onclick="askAbandon()">Abandonner</button>
+      </div>
     </div>`}`;
 }
 function finishSuccess(){state.focus=null;save();navigateTo('accueil');}
 function updateBanner(){
   const b=document.getElementById('focusBanner');
   const s=(location.hash||'#accueil').replace('#','');
-  if(state.focus&&!state.focus.done&&s!=='focus'&&s!=='timer'){
+  if(state.focus&&!state.focus.done&&!state.focus.expired&&s!=='focus'&&s!=='timer'){
     b.classList.add('show');
     document.getElementById('fbText').textContent='Focus en cours · '+state.focus.name;
     document.getElementById('fbTime').textContent=fmtClock(focusRemaining());
@@ -1134,15 +1256,42 @@ setInterval(()=>{
       const prog=document.querySelector('.timer-prog');
       if(prog){const R=120,C=2*Math.PI*R;prog.style.strokeDashoffset=C*(1-focusRemaining()/state.focus.total);}
     }
-    if(!state.focus.paused&&focusRemaining()<=0)completeFocus(true);
+    if(!state.focus.paused&&!state.focus.expired&&focusRemaining()<=0)handleExpiry();
     updateBanner();
     if(s==='accueil')renderContinueCard();
   }
 },500);
 
+/* ================= « Je bloque » ================= */
+const HELP_IDEAS=[
+ 'Ouvre ton document et écris juste le titre.',
+ 'Mets-toi 2 minutes et fais seulement la toute première chose.',
+ 'Prépare ce dont tu as besoin, sans commencer.',
+ 'Écris une seule phrase, même mauvaise. Elle sera à corriger, pas à inventer.'
+];
+let helpIdx=0;
+function openHelp(){
+  helpIdx=Math.floor(Math.random()*HELP_IDEAS.length);
+  document.getElementById('helpSuggest').textContent=HELP_IDEAS[helpIdx];
+  document.getElementById('helpOverlay').classList.add('show');
+}
+function helpOther(){
+  helpIdx=(helpIdx+1)%HELP_IDEAS.length;
+  document.getElementById('helpSuggest').textContent=HELP_IDEAS[helpIdx];
+}
+function helpGo(){
+  document.getElementById('helpOverlay').classList.remove('show');
+  if(state.focus&&!state.focus.done){
+    state.focus.aideUtilisee=true;
+    if(state.focus.paused)pauseResume(); /* relance la session immédiatement */
+    save();
+  }
+}
+
 /* ================= Accueil ================= */
 function renderAccueil(){
-  const done=state.tasks.filter(t=>t.done).length,total=state.tasks.length;
+  const real=state.tasks.filter(t=>!t.demo);
+  const done=real.filter(t=>t.done).length,total=real.length;
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('focusProgressText').textContent=total?`${done} sur ${total} tâches terminées`:'Prêt à commencer ? Ajoute une tâche !';
   document.getElementById('focusProgressFill').style.width=pct+'%';
@@ -1158,7 +1307,7 @@ function renderContinueCard(){
       </div><button class="continue-btn" onclick="navigateTo('focus')">Continuer
         <svg viewBox="0 0 24 24" fill="#F26A1B" stroke="none"><path d="M8 5v14l11-7z"/></svg></button>`;
   }else{
-    const next=state.tasks.find(t=>!t.done);
+    const next=state.tasks.find(t=>!t.demo&&!t.done);
     if(next){
       card.innerHTML=`<div class="continue-info">
           <h3>${next.name}</h3><div class="status">À lancer</div>
@@ -1176,18 +1325,18 @@ function renderContinueCard(){
 
 /* ================= Parcours ================= */
 function renderParcours(){
-  const done=state.tasks.filter(t=>t.done).length,total=state.tasks.length;
+  const real=state.tasks.filter(t=>!t.demo);
+  const done=real.filter(t=>t.done).length,total=real.length;
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('statDone').textContent=done;
   document.getElementById('statTime').textContent=fmtDuration(state.focusMinutes);
   document.getElementById('statStreak').textContent=computeStreak();
   document.getElementById('parcoursPct').textContent=pct+' %';
   document.getElementById('parcoursFill').style.width=pct+'%';
-  document.getElementById('badgesRow').innerHTML=BADGES.slice(0,4).map(b=>{
-    const u=badgeUnlocked(b);
-    return `<div class="badge-mini ${u?'':'locked'}">
-      <div class="badge-icon" style="background:linear-gradient(155deg,${b.c1},${b.c2});">${BADGE_ICONS[b.ic]}</div>
-      <div class="badge-name">${b.name}</div></div>`;}).join('');
+  document.getElementById('badgesRow').innerHTML=BADGE_ORDER.slice(0,4).map(id=>{
+    const b=BADGES[id],u=isUnlocked(id);
+    return `<div class="badge-mini ${u?'':'locked'}">${badgeIcon(id,34,!u)}
+      <div class="badge-name">${b.title}</div></div>`;}).join('');
   const sl=document.getElementById('sessionsList');
   if(!state.sessions.length){
     sl.innerHTML=`<div class="empty-state" style="padding:24px;"><p>Aucune session pour le moment.<br>Lance ton premier focus !</p>
@@ -1208,16 +1357,11 @@ function renderParcours(){
 
 /* ================= Badges ================= */
 function renderBadges(){
-  document.getElementById('badgesGrid').innerHTML=BADGES.map(b=>{
-    const u=badgeUnlocked(b);
-    return `<div class="badge-card ${u?'':'locked'}" style="--halo:${b.halo};--c1:${b.c1};--c2:${b.c2};">
-      <div class="badge-halo">
-        <div class="badge-disc">
-          ${BADGE_ICONS[b.ic]}
-          ${u?'':`<span class="badge-lock">${LOCK_SVG}</span>`}
-        </div>
-      </div>
-      <h4>${b.name}</h4><p>${b.desc}</p></div>`;}).join('');
+  document.getElementById('badgesGrid').innerHTML=BADGE_ORDER.map(id=>{
+    const b=BADGES[id],u=isUnlocked(id);
+    return `<div class="badge-card ${u?'':'locked'}">
+      ${badgeIcon(id,64,!u)}
+      <h4>${b.title}</h4><p>${b.desc}</p></div>`;}).join('');
 }
 
 /* ================= Profil ================= */
@@ -1228,6 +1372,9 @@ function renderProfil(){
   document.getElementById('profLevel').textContent=level();
   document.getElementById('profileName').value=state.name||'';
   document.getElementById('profileMotto').value=state.motto||'';
+  document.getElementById('riFocus').innerHTML=badgeIcon('une_heure',40,isUnlocked('une_heure'));
+  document.getElementById('riStreak').innerHTML=badgeIcon('jours_actifs',40,isUnlocked('jours_actifs'));
+  document.getElementById('riTasks').innerHTML=badgeIcon('marathon',40,isUnlocked('marathon'));
   document.getElementById('realFocus').classList.toggle('locked',state.sessions.length<100);
   document.getElementById('realStreak').classList.toggle('locked',computeStreak()<15);
   document.getElementById('realTasks').classList.toggle('locked',state.totalCompleted<100);
@@ -1267,7 +1414,7 @@ document.getElementById('searchInput').addEventListener('input',function(){
     :`<div class="empty-state" style="padding:18px;"><p>Aucun résultat pour « ${q} »</p></div>`;
 });
 
-/* ================= Tutoriel (une seule fois) ================= */
+/* ================= Tutoriel ================= */
 const TUT=[
  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>',
   title:'Bienvenue sur Clic',text:'Touchez le + orange pour ajouter une tâche ou lancer un focus libre.'},
@@ -1298,6 +1445,7 @@ tempAvatar=state.avatar;
 updateAvatarDisplays();
 const h=(location.hash||'#accueil').replace('#','');
 navigateTo(SCREENS.includes(h)?h:'accueil');
+if(state.pendingConfirm)showEndSheet();   /* fin survenue écran éteint / rechargé */
 if(!state.tutorialSeen)showTutorial();
 </script>
 </body>
