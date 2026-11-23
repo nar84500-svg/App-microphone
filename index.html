@@ -22,7 +22,7 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .app::before{content:'';position:absolute;top:-120px;right:-110px;width:320px;height:320px;background:radial-gradient(circle,rgba(255,170,150,.4),transparent 70%);pointer-events:none;z-index:0}
 .app::after{content:'';position:absolute;bottom:-90px;left:-90px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,200,160,.35),transparent 70%);pointer-events:none;z-index:0}
 
-/* ---------- Header global ---------- */
+/* Header */
 .app-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;padding-top:calc(12px + env(safe-area-inset-top));z-index:10;flex-shrink:0}
 .app-header.hidden{display:none}
 .header-left{display:flex;align-items:center;gap:12px}
@@ -36,7 +36,7 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .round-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;cursor:pointer;background:#FFE3D0;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0}
 .round-avatar svg{width:100%;height:100%;display:block}
 
-/* ---------- Écrans ---------- */
+/* Écrans */
 .screen{display:none;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
   padding:0 20px calc(var(--nav-h) + env(safe-area-inset-bottom) + 32px);position:relative;z-index:1}
 .screen::-webkit-scrollbar{display:none}
@@ -44,7 +44,7 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .screen.no-pad{padding-bottom:calc(20px + env(safe-area-inset-bottom))}
 .screen.no-scroll{overflow:hidden}
 
-/* ---------- Barre du bas ---------- */
+/* Barre du bas */
 .nav{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));height:var(--nav-h);
   display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;background:rgba(255,255,255,.94);
   border-radius:38px;box-shadow:var(--shadow-lg);z-index:100}
@@ -58,7 +58,7 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .nav .plus:active{transform:scale(.92)}
 .nav .plus svg{width:26px;height:26px}
 
-/* ---------- Bandeau focus ---------- */
+/* Bandeau focus */
 #focusBanner{position:fixed;left:12px;right:12px;bottom:calc(var(--nav-h) + 22px + env(safe-area-inset-bottom));
   background:var(--text);color:#fff;border-radius:16px;padding:12px 16px;display:none;align-items:center;gap:10px;
   z-index:99;box-shadow:var(--shadow-lg);cursor:pointer;font-weight:700;font-size:14px}
@@ -67,7 +67,7 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 #focusBanner .fb-time{margin-left:auto;font-variant-numeric:tabular-nums;color:#FFC9A3}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-/* ---------- Typo / commun ---------- */
+/* Typo / commun */
 h1{font-size:28px;font-weight:800}
 h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .subtitle{font-size:15px;color:var(--text2);font-weight:600;margin-bottom:16px}
@@ -90,13 +90,13 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .page-title.big{font-size:34px}
 .header-spacer{width:44px}
 
-/* ---------- Recherche ---------- */
+/* Recherche */
 .search-bar{display:flex;align-items:center;background:#fff;border-radius:16px;padding:13px 16px;border:1.5px solid var(--border);margin-bottom:14px;gap:10px}
 .search-bar input{flex:1;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:15px;color:var(--text);background:transparent;min-width:0}
 .search-bar input::placeholder{color:#C4A090}
 .search-bar svg{width:22px;height:22px;color:var(--text2);flex-shrink:0}
 
-/* ---------- Focus du jour ---------- */
+/* Focus du jour / continuer */
 .focus-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px}
 .focus-title{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800}
 .focus-title svg{width:30px;height:30px;flex-shrink:0}
@@ -117,7 +117,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .quick-tile svg{width:30px;height:30px}
 .quick-tile span{font-size:11px;font-weight:800;line-height:1.2}
 
-/* ---------- Tâches ---------- */
+/* Tâches */
 .task-item{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fff;border-radius:16px;border:1px solid var(--border);margin-bottom:10px;box-shadow:var(--shadow);transition:opacity .3s}
 .task-item.done{opacity:.55}
 .task-item.done .task-name{text-decoration:line-through}
@@ -138,7 +138,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .empty-state svg{width:60px;height:60px;margin-bottom:12px;opacity:.4}
 .empty-state p{font-size:15px;font-weight:700;line-height:1.45;margin-bottom:14px}
 
-/* ---------- Tuiles parcours ---------- */
+/* Parcours */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 .stat-tile{background:#fff;border-radius:16px;border:1px solid var(--border);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
 .stat-tile.purple{background:#F6EEFF;border-color:#EADCFB}
@@ -151,8 +151,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .badges-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
 .badge-mini{background:#fff;border-radius:14px;border:1px solid var(--border);padding:12px 5px;text-align:center;box-shadow:var(--shadow)}
 .badge-mini .badge-halo{margin:0 auto 6px}
-.badge-mini .badge-icon{width:44px;height:44px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center}
-.badge-mini .badge-icon svg{width:24px;height:24px}
 .badge-mini .badge-name{font-size:10px;font-weight:800;line-height:1.2}
 .badge-mini.locked{opacity:.55}
 .session-item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);gap:10px}
@@ -164,7 +162,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .session-chevron{color:var(--text2);flex-shrink:0}
 .session-chevron svg{width:20px;height:20px}
 
-/* ---------- Feuilles ---------- */
+/* Feuilles */
 .sheet-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(59,26,16,.35);z-index:200;display:none;align-items:flex-end;justify-content:center}
 .sheet-overlay.show{display:flex}
 .sheet{background:#fff;border-radius:26px 26px 0 0;width:100%;max-width:430px;padding:20px 20px 28px;max-height:82dvh;overflow-y:auto;
@@ -174,8 +172,12 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .sheet-title{font-size:20px;font-weight:800;margin-bottom:16px}
 .sheet-actions{display:flex;gap:10px}
 .sheet-actions .btn{flex:1}
+.end-q{font-size:16px;font-weight:700;color:var(--text2);margin-bottom:18px}
+.help-suggest{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:20px;min-height:56px}
+#endActions{display:flex;flex-direction:column;gap:10px}
+#endActions .btn{width:100%}
 
-/* ---------- Clavier minuteur ---------- */
+/* Clavier minuteur */
 #screen-timer.active{display:flex;flex-direction:column}
 #screen-timer{padding-top:6px}
 .timer-name{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:16px;font-family:'Nunito',sans-serif;
@@ -202,7 +204,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .keypad button:active{background:var(--accent-light);transform:scale(.94)}
 .keypad svg{width:26px;height:26px}
 
-/* ---------- Écran focus ---------- */
+/* Focus */
 #screen-focus{padding-top:6px}
 .focus-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .focus-top .ft-label{font-size:15px;font-weight:800;color:var(--text2)}
@@ -226,21 +228,21 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .success-disc svg{width:56px;height:56px;color:#fff}
 @keyframes pop{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
 
-/* ---------- Badges (définition unique) ---------- */
+/* Badges — définition unique */
 .badges-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(min-width:700px){.badges-grid{grid-template-columns:repeat(4,1fr)}}
 .badge-card{background:#fff;border-radius:24px;border:1px solid var(--border);padding:20px 12px;text-align:center;box-shadow:var(--shadow)}
 .badge-card.locked{opacity:.55}
 .badge-halo{border-radius:50%;display:grid;place-items:center;margin:0 auto 12px}
 .badge-disc{border-radius:50%;position:relative;display:grid;place-items:center}
-.badge-disc::before{content:'';position:absolute;top:11%;left:15%;width:28%;height:14%;background:rgba(255,255,255,.45);border-radius:50%;transform:rotate(-24deg)}
-.badge-disc svg{stroke:#fff;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.badge-disc::before{content:'';position:absolute;top:9%;left:14%;width:28%;height:14%;background:rgba(255,255,255,.45);border-radius:50%;transform:rotate(-24deg)}
+.badge-disc svg{display:block}
 .badge-lock{position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid var(--border);display:grid;place-items:center;box-shadow:var(--shadow)}
 .badge-lock svg{width:11px;height:11px;color:var(--text2)}
 .badge-card h4{font-size:16px;font-weight:800;margin-bottom:4px}
 .badge-card p{font-size:13px;color:var(--text2);font-weight:600;line-height:1.35}
 
-/* ---------- Avatar ---------- */
+/* Avatar */
 .avatar-preview{display:flex;align-items:center;gap:16px;background:#fff;border-radius:22px;border:1px solid var(--border);padding:18px;margin-bottom:20px;box-shadow:var(--shadow)}
 .avatar-preview-circle{width:104px;height:104px;border-radius:50%;background:#FFE3D0;display:grid;place-items:center;flex-shrink:0;border:4px solid #fff;box-shadow:0 4px 14px rgba(242,106,27,.18)}
 .avatar-preview-circle svg{width:88px;height:88px}
@@ -260,7 +262,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .avatar-actions{display:flex;gap:12px;padding-bottom:10px}
 .avatar-actions .btn{flex:1}
 
-/* ---------- Profil ---------- */
+/* Profil */
 .cloud-wrap{position:relative;width:290px;height:210px;margin:4px auto 0}
 .blob{position:absolute;border-radius:50%;filter:blur(14px);opacity:.8}
 .b-violet{width:190px;height:190px;left:50px;top:-18px;background:#C58BFF}
@@ -289,19 +291,14 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .realis-card{border-radius:18px;padding:12px 6px;text-align:center;display:flex;flex-direction:column;justify-content:space-between;gap:8px;box-shadow:var(--shadow)}
 .realis-card h4{font-size:13px;font-weight:800;line-height:1.25}
 .realis-card p{font-size:10.5px;font-weight:700;line-height:1.3;opacity:.85}
-.realis-card .realis-icon{display:flex;justify-content:center;margin-top:6px}
+.realis-icon{display:flex;justify-content:center}
+.realis-icon .badge-halo{margin:0}
 .rc-green{background:linear-gradient(160deg,#E7F8E7,#CDEED0);color:#1E6B34;border:1px solid #BFE6C4}
 .rc-orange{background:linear-gradient(160deg,#FCEBDC,#F8D3B4);color:#8A4A1E;border:1px solid #F2C79F}
 .rc-purple{background:linear-gradient(160deg,#F3E4FB,#E3CBF2);color:#6B2E86;border:1px solid #DFC2EF}
 .realis-card.locked{opacity:.5}
 
-/* ---------- Fenêtre « Temps terminé » / « Je bloque » ---------- */
-.end-q{font-size:16px;font-weight:700;color:var(--text2);margin-bottom:18px}
-.help-suggest{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:20px;min-height:56px}
-#endActions{display:flex;flex-direction:column;gap:10px}
-#endActions .btn{width:100%}
-
-/* ---------- Tutoriel ---------- */
+/* Tutoriel */
 .tut-overlay{position:fixed;inset:0;background:var(--bg);z-index:400;display:none;align-items:center;justify-content:center;padding:24px}
 .tut-overlay.show{display:flex}
 .tut-card{background:#fff;border-radius:26px;border:1px solid var(--border);box-shadow:var(--shadow-lg);padding:28px 22px;text-align:center;max-width:340px;width:100%}
@@ -319,7 +316,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 <body>
 <div class="app" id="app">
 
-  <!-- ===== Header global ===== -->
   <header class="app-header" id="appHeader">
     <div class="header-left">
       <div class="logo-icon" aria-label="Logo Clic">
@@ -420,7 +416,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </section>
 
-  <!-- ===== MINUTEUR / AJOUTER UNE TÂCHE ===== -->
+  <!-- ===== MINUTEUR / AJOUTER ===== -->
   <section class="screen no-pad no-scroll" id="screen-timer">
     <div class="page-header">
       <button class="back-btn" onclick="cancelTimer()" aria-label="Retour">
@@ -603,7 +599,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     <span class="fb-time" id="fbTime">00:00</span>
   </div>
 
-  <!-- ===== Barre du bas ===== -->
+  <!-- Barre du bas -->
   <nav class="nav" aria-label="Navigation principale">
     <button class="nav-tab active" data-screen="accueil" onclick="navigateTo('accueil')" aria-label="Accueil">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V10"/></svg>
@@ -650,7 +646,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
   </div>
 
   <!-- Feuille « Je bloque » -->
-  <div class="sheet-overlay" id="helpOverlay" onclick="closeSheet('helpOverlay',event)">
+  <div class="sheet-overlay" id="helpOverlay">
     <div class="sheet" onclick="event.stopPropagation()">
       <div class="sheet-handle"></div>
       <div class="sheet-title">Je bloque</div>
@@ -691,7 +687,7 @@ function fmtClock(s){s=Math.max(0,Math.round(num(s)));const h=Math.floor(s/3600)
 function todayISO(){return new Date().toISOString().slice(0,10);}
 const esc=s=>String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;');
 
-/* ================= Avatars ================= */
+/* ================= Avatars (stickers) ================= */
 const happyEyes=(cx,cy,s)=>`<path d="M${cx-9*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M${cx+4*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
 const eyesDots=(cx,cy,s)=>`<circle cx="${cx-5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/><circle cx="${cx+5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/>`;
 const smile=(cx,cy,s)=>`<path d="M${cx-3.5*s} ${cy}q${3.5*s} ${3.5*s} ${7*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
@@ -774,8 +770,7 @@ const AVATARS=[
 ];
 function avatarSvg(id){const a=AVATARS.find(x=>x.id===id);return a?a.svg:'';}
 
-/* ================= BADGES : UNE SEULE DÉFINITION ================= */
-/* Valeurs (couleurs, halos, tracés) copiées telles quelles de la page Badges */
+/* ================= BADGES : une seule définition ================= */
 const BADGES={
  premier_pas:{title:'Premier pas',desc:'Termine ta première tâche',c1:'#7ED06E',c2:'#3FA74E',halo:'#DFF2D9',
    icon:'<path d="M12 20v-8"/><path d="M12 14c-5 0-8-4-8-8 4 0 7 3 8 6"/><path d="M12 12c4-1 7-4 7-8-4 0-6 3-7 5"/>'},
@@ -797,7 +792,7 @@ const BADGES={
 const BADGE_ORDER=['premier_pas','objectif','une_heure','jours_actifs','multi','debloque','retour','marathon'];
 const LOCK_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 
-/* Halo + disque + reflet + icône — proportions Badges : halo = size×1.3, icône = size×0.53 */
+/* Halo + disque + reflet + icône — proportions de la page Badges (halo = size×1.3, icône = size×0.53) */
 function badgeIcon(id,size,locked){
   const b=BADGES[id];const halo=Math.round(size*1.3),ic=Math.round(size*0.53);
   return `<div class="badge-halo" style="width:${halo}px;height:${halo}px;background:${b.halo};">
@@ -808,14 +803,14 @@ function badgeIcon(id,size,locked){
   </div>`;
 }
 
-/* Source unique de vérité : état sauvegardé */
+/* Source unique de vérité : état sauvegardé, avec date de déblocage */
 function isUnlocked(id){return !!(state.badgesUnlocked&&state.badgesUnlocked[id]);}
-function badgeUnlocked(b){return isUnlocked(b.id);} /* wrapper conservé */
+function badgeUnlocked(b){return isUnlocked(b.id);}
 
-/* Conditions — une seule fonction, appelée après chaque événement */
+/* Conditions — une seule fonction, appelée partout */
 function checkBadges(){
   if(!state.badgesUnlocked)state.badgesUnlocked={};
-  const unlock=(id)=>{if(!state.badgesUnlocked[id])state.badgesUnlocked[id]=new Date().toISOString();};
+  const unlock=(id)=>{if(!state.badgesUnlocked[id]){state.badgesUnlocked[id]=new Date().toISOString();}};
   const real=state.tasks.filter(t=>!t.demo);
   const today=todayISO();
   if(real.some(t=>t.done))unlock('premier_pas');
@@ -828,11 +823,11 @@ function checkBadges(){
   if(days.size>=3)unlock('jours_actifs');
   if(state.sessions.some(s=>(s.tasksDone||[]).length>=2))unlock('multi');
   if(state.sessions.some(s=>s.aideUtilisee))unlock('debloque');
-  if(state._pendingReturn&&state.activeDays.includes(today)){unlock('retour');state._pendingReturn=false;}
+  if(state._retourEligible&&days.has(today)){unlock('retour');state._retourEligible=false;}
   save();
 }
 
-/* ================= TÂCHES DE DÉMO ================= */
+/* ================= État unique ================= */
 const DEFAULT_TASKS=[
  {id:1,name:'Réviser un cours',done:false,duration:1500,demo:true},
  {id:2,name:'Projet TER',done:false,duration:2700,demo:true},
@@ -842,8 +837,6 @@ const DEFAULT_TASKS=[
 ];
 const DEMO_NAMES=['Réviser un cours','Projet TER','Lecture article','Répondre aux e-mails','Préparer l\'exposé'];
 const MODELS=[{name:'Réviser un chapitre',duration:1500},{name:'Faire du sport',duration:2700},{name:'Lire 10 pages',duration:900}];
-
-/* ================= État unique ================= */
 let state=null;
 
 function sanitize(){
@@ -853,10 +846,10 @@ function sanitize(){
   if(!Array.isArray(state.tasks))state.tasks=JSON.parse(JSON.stringify(DEFAULT_TASKS));
   state.tasks.forEach(t=>{
     t.duration=num(t.duration);t.done=!!t.done;t.name=String(t.name||'Tâche');t.id=num(t.id)||1;
-    /* migration : UNIQUEMENT les tâches créées par l'ancien code de démo (ids 1–5 + noms exacts) */
+    /* migration : uniquement les tâches créées par l'ancien code de démo (ids 1–5 + noms exacts) */
     if(!t.demo&&t.id>=1&&t.id<=5&&DEMO_NAMES.includes(t.name))t.demo=true;
     if(!t.done)t.doneAt=null;
-    if(t.done&&!t.doneAt)t.doneAt=null;
+    if(t.done&&!t.doneAt)t.doneAt=todayISO();
     t.workedSeconds=num(t.workedSeconds);
   });
   if(!Array.isArray(state.sessions))state.sessions=[];
@@ -871,6 +864,7 @@ function sanitize(){
   state.name=typeof state.name==='string'?state.name:'';
   state.motto=typeof state.motto==='string'?state.motto:'';
   state.tutorialSeen=!!state.tutorialSeen;
+  state.pendingConfirm=state.pendingConfirm||null;
 }
 function load(){
   try{
@@ -894,15 +888,14 @@ function load(){
   }catch(e){state=null;}
   if(!state)state={tasks:JSON.parse(JSON.stringify(DEFAULT_TASKS)),sessions:[],focusMinutes:0,totalCompleted:0,activeDays:[],abandons:0,lastVisit:'',seenBadges:[],avatar:'plante',name:'',motto:'',tutorialSeen:false,focus:null,pendingConfirm:null};
   sanitize();
-  /* « Retour en douceur » : écart calculé AVANT toute activité d'aujourd'hui */
-  const today=todayISO();
-  if(state.lastActivityDate&&state.lastActivityDate!==today){
-    const gap=Math.round((new Date(today)-new Date(state.lastActivityDate))/864e5);
-    if(gap>=3)state._pendingReturn=true;
+  /* éligibilité « retour en douceur » : ≥3 jours sans activité */
+  if(state.lastActivityDate&&state.lastActivityDate!==todayISO()){
+    const gap=Math.round((new Date(todayISO())-new Date(state.lastActivityDate))/864e5);
+    if(gap>=3)state._retourEligible=true;
   }
-  state.lastVisit=today;
-  /* minuteur expiré pendant la fermeture : temps enregistré UNE fois, fenêtre à afficher */
-  if(state.focus&&!state.focus.done&&focusRemaining()<=0)recordExpiry();
+  state.lastVisit=todayISO();
+  /* minuteur expiré pendant la fermeture : temps enregistré UNE fois + fenêtre à afficher */
+  if(state.focus&&!state.focus.done&&focusRemaining()<=0){recordExpiry();state.focus.done=true;}
   checkBadges();
   save();
 }
@@ -953,6 +946,7 @@ function updateAvatarDisplays(){
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
     </button>`;
 }
+let tempAvatar='plante';
 function renderAvatars(){
   document.getElementById('avatarPreviewCircle').innerHTML=avatarSvg(tempAvatar);
   document.getElementById('avatarPreviewName').textContent=(AVATARS.find(a=>a.id===tempAvatar)||{}).name||'';
@@ -963,7 +957,6 @@ function renderAvatars(){
       <span class="avatar-label">${a.name}</span>
     </button>`).join('');
 }
-let tempAvatar='plante';
 function cancelAvatar(){tempAvatar=state.avatar;navigateTo(prevScreen||'accueil');}
 function confirmAvatar(){state.avatar=tempAvatar;save();updateAvatarDisplays();navigateTo('profil');}
 
@@ -989,7 +982,7 @@ function renderTasks(){
     <button class="task-check ${t.done?'checked':''}" onclick="toggleTask(${t.id})" role="checkbox" aria-checked="${t.done}" aria-label="${t.done?'Rouvrir':'Terminer'} ${t.name}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></button>
     <div class="task-main"><span class="task-name">${t.name}</span><span class="task-dur">${fmtDuration(t.duration/60)}</span></div>
-    ${t.done||t.demo?'':`<button class="task-launch" onclick="startFocus(${t.id},'${esc(t.name)}',${t.duration})" aria-label="Lancer ${t.name}">
+    ${t.done?'':`<button class="task-launch" onclick="startFocus(${t.id},'${esc(t.name)}',${t.duration})" aria-label="Lancer ${t.name}">
       <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"/></svg></button>`}
     <button class="task-delete" onclick="deleteTask(${t.id})" aria-label="Supprimer ${t.name}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></svg></button></div>`;
@@ -1004,20 +997,14 @@ function toggleTask(id){
   t.done=!t.done;
   if(t.done){
     t.doneAt=todayISO();
-    if(!t.demo){
-      state.totalCompleted++;markActiveDay();
-      if(state.focus&&!state.focus.done&&!state.focus.expired){
-        state.focus.tasksCompleted=state.focus.tasksCompleted||[];
-        state.focus.tasksCompleted.push(id);
-      }
-    }
+    if(!t.demo){state.totalCompleted++;markActiveDay();
+      if(state.focus&&!state.focus.done){state.focus.tasksCompleted=state.focus.tasksCompleted||[];state.focus.tasksCompleted.push(id);}}
   }else{t.doneAt=null;}
   checkBadges();save();renderTasks();updateBanner();
 }
 function deleteTask(id){
   state.tasks=state.tasks.filter(t=>t.id!==id);
   if(state.focus&&state.focus.taskId===id)state.focus=null;
-  if(state.pendingConfirm&&state.pendingConfirm.taskId===id)state.pendingConfirm=null;
   save();renderTasks();renderAccueil();updateBanner();
 }
 let currentFilter='all';
@@ -1090,23 +1077,23 @@ function addFromTimer(){
 function startFocus(taskId,name,seconds){
   const total=Math.max(1,Math.round(num(seconds)));
   state.focus={taskId,name,total,endTs:Date.now()+total*1000,paused:false,remaining:total,done:false,
-    timeRecorded:false,expired:false,aideUtilisee:false,tasksCompleted:[]};
+    timeRecorded:false,aideUtilisee:false,tasksCompleted:[]};
   save();navigateTo('focus');
 }
 function focusRemaining(){
   const f=state.focus;if(!f)return 0;
-  if(f.paused||f.expired)return num(f.remaining);
+  if(f.paused)return num(f.remaining);
   return Math.max(0,Math.round((f.endTs-Date.now())/1000));
 }
 function minimizeFocus(){navigateTo(prevScreen||'accueil');}
 function pauseResume(){
-  const f=state.focus;if(!f||f.expired)return;
+  const f=state.focus;if(!f)return;
   if(f.paused){f.endTs=Date.now()+f.remaining*1000;f.paused=false;}
   else{f.remaining=focusRemaining();f.paused=true;}
   save();renderFocus();
 }
 function addFive(){
-  const f=state.focus;if(!f||f.expired)return;
+  const f=state.focus;if(!f)return;
   f.total+=300;
   if(f.paused)f.remaining+=300;else f.endTs+=300000;
   save();renderFocus();
@@ -1117,14 +1104,14 @@ function cancelAbandon(){confirming=false;renderFocus();}
 function abandonFocus(){
   confirming=false;
   state.abandons++;markActiveDay();
-  state.focus=null;state.pendingConfirm=null; /* abandon → aucune session enregistrée, aucun badge »Je me débloque » */
+  state.focus=null;state.pendingConfirm=null;   /* un abandon n'enregistre aucune session → ne débloque rien */
   save();checkBadges();navigateTo(prevScreen||'accueil');
 }
 /* enregistre les secondes réellement travaillées, UNE SEULE FOIS, dans session + tâche + stats */
 function recordExpiry(){
   const f=state.focus;if(!f||f.timeRecorded)return;
   const elapsed=Math.max(1,f.total-focusRemaining());
-  f.timeRecorded=true;f.expired=true;f.remaining=0;
+  f.timeRecorded=true;
   state.focusMinutes+=elapsed/60;
   if(f.taskId!=null){const t=state.tasks.find(x=>x.id===f.taskId);if(t)t.workedSeconds=num(t.workedSeconds)+elapsed;}
   state.sessions.unshift({name:f.name,date:todayISO(),minutes:elapsed/60,tasksDone:(f.tasksCompleted||[]).slice(),aideUtilisee:!!f.aideUtilisee});
@@ -1133,13 +1120,14 @@ function recordExpiry(){
   if(f.taskId!=null)state.pendingConfirm={taskId:f.taskId,name:f.name};
   save();checkBadges();
 }
-/* Fin naturelle : NE PASSE PAS la tâche à terminée, ouvre la fenêtre */
+/* Fin naturelle : on NE coche PAS la tâche, on ouvre la fenêtre de confirmation */
 function handleExpiry(){
   recordExpiry();
+  state.focus.done=true;save();
   if(navigator.vibrate)navigator.vibrate([40,60,40]);
   showEndSheet();
 }
-/* « Terminer » manuel = l'utilisateur déclare avoir fini (comportement d'avant) */
+/* « Terminer » manuel = l'utilisateur déclare avoir fini → comportement d'avant, inchangé */
 function completeFocus(auto,silent){
   const f=state.focus;if(!f)return;
   if(auto){handleExpiry();return;}
@@ -1147,7 +1135,7 @@ function completeFocus(auto,silent){
   if(!f.timeRecorded){
     f.timeRecorded=true;state.focusMinutes+=elapsed/60;
     if(f.taskId!=null){const t=state.tasks.find(x=>x.id===f.taskId);if(t){t.workedSeconds=num(t.workedSeconds)+elapsed;
-      if(!t.demo){t.done=true;t.doneAt=todayISO();state.totalCompleted++;}}}
+      if(!t.demo&&!t.done){t.done=true;t.doneAt=todayISO();state.totalCompleted++;}}}
     state.sessions.unshift({name:f.name,date:todayISO(),minutes:elapsed/60,tasksDone:(f.tasksCompleted||[]).slice(),aideUtilisee:!!f.aideUtilisee});
     state.sessions=state.sessions.slice(0,30);markActiveDay();
   }
@@ -1241,7 +1229,7 @@ function finishSuccess(){state.focus=null;save();navigateTo('accueil');}
 function updateBanner(){
   const b=document.getElementById('focusBanner');
   const s=(location.hash||'#accueil').replace('#','');
-  if(state.focus&&!state.focus.done&&!state.focus.expired&&s!=='focus'&&s!=='timer'){
+  if(state.focus&&!state.focus.done&&s!=='focus'&&s!=='timer'){
     b.classList.add('show');
     document.getElementById('fbText').textContent='Focus en cours · '+state.focus.name;
     document.getElementById('fbTime').textContent=fmtClock(focusRemaining());
@@ -1256,7 +1244,7 @@ setInterval(()=>{
       const prog=document.querySelector('.timer-prog');
       if(prog){const R=120,C=2*Math.PI*R;prog.style.strokeDashoffset=C*(1-focusRemaining()/state.focus.total);}
     }
-    if(!state.focus.paused&&!state.focus.expired&&focusRemaining()<=0)handleExpiry();
+    if(!state.focus.paused&&focusRemaining()<=0)handleExpiry();
     updateBanner();
     if(s==='accueil')renderContinueCard();
   }
@@ -1283,7 +1271,7 @@ function helpGo(){
   document.getElementById('helpOverlay').classList.remove('show');
   if(state.focus&&!state.focus.done){
     state.focus.aideUtilisee=true;
-    if(state.focus.paused)pauseResume(); /* relance la session immédiatement */
+    if(state.focus.paused)pauseResume();   /* relance la session immédiatement */
     save();
   }
 }
@@ -1307,7 +1295,7 @@ function renderContinueCard(){
       </div><button class="continue-btn" onclick="navigateTo('focus')">Continuer
         <svg viewBox="0 0 24 24" fill="#F26A1B" stroke="none"><path d="M8 5v14l11-7z"/></svg></button>`;
   }else{
-    const next=state.tasks.find(t=>!t.demo&&!t.done);
+    const next=state.tasks.find(t=>!t.done);
     if(next){
       card.innerHTML=`<div class="continue-info">
           <h3>${next.name}</h3><div class="status">À lancer</div>
@@ -1372,9 +1360,9 @@ function renderProfil(){
   document.getElementById('profLevel').textContent=level();
   document.getElementById('profileName').value=state.name||'';
   document.getElementById('profileMotto').value=state.motto||'';
-  document.getElementById('riFocus').innerHTML=badgeIcon('une_heure',40,isUnlocked('une_heure'));
-  document.getElementById('riStreak').innerHTML=badgeIcon('jours_actifs',40,isUnlocked('jours_actifs'));
-  document.getElementById('riTasks').innerHTML=badgeIcon('marathon',40,isUnlocked('marathon'));
+  document.getElementById('riFocus').innerHTML=badgeIcon('une_heure',40,!isUnlocked('une_heure'));
+  document.getElementById('riStreak').innerHTML=badgeIcon('jours_actifs',40,!isUnlocked('jours_actifs'));
+  document.getElementById('riTasks').innerHTML=badgeIcon('marathon',40,!isUnlocked('marathon'));
   document.getElementById('realFocus').classList.toggle('locked',state.sessions.length<100);
   document.getElementById('realStreak').classList.toggle('locked',computeStreak()<15);
   document.getElementById('realTasks').classList.toggle('locked',state.totalCompleted<100);
@@ -1382,7 +1370,7 @@ function renderProfil(){
 }
 document.getElementById('profileName').addEventListener('input',function(){state.name=this.value;save();});
 document.getElementById('profileMotto').addEventListener('input',function(){state.motto=this.value;save();});
-[['profileName'],['profileMotto']].forEach(([id])=>{
+['profileName','profileMotto'].forEach(id=>{
   document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur();});
 });
 
