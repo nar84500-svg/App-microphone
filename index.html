@@ -295,6 +295,17 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .tut-dots i.on{background:var(--accent)}
 .tut-btns{display:flex;gap:10px}
 .tut-btns .btn{flex:1}
+
+/* ===== Bluetooth ===== */
+.bt-status{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.bt-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.bt-dot.off{background:#D4A090}
+.bt-dot.on{background:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,.2);animation:pulse 1.4s infinite}
+.bt-dot.err{background:#EF4444}
+.bt-status-text{font-size:15px;font-weight:700}
+.bt-msg{font-size:13px;color:var(--text2);font-weight:600;margin-top:10px;min-height:18px;line-height:1.4}
+.bt-msg.err{color:#C0503A}
+.bt-msg.ok{color:#16A34A}
 </style>
 </head>
 <body>
@@ -566,6 +577,25 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
         <div class="realis-icon" id="riTasks"></div>
       </div>
     </div>
+
+    <!-- ===== SECTION BLUETOOTH RESTAURÉE ===== -->
+    <div class="section-title" style="margin-top:24px;">Mon boîtier Clic</div>
+    <div class="card" style="padding:18px;">
+      <div class="bt-status">
+        <span class="bt-dot off" id="btDot"></span>
+        <span class="bt-status-text" id="btStatusText">Non connecté</span>
+      </div>
+      <button class="btn btn-primary" id="btConnectBtn" onclick="connectBluetooth()" style="width:100%;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11L12 23V1l5.5 5.5-11 11"/></svg>
+        Connecter mon boîtier
+      </button>
+      <button class="btn btn-outline" id="btDisconnectBtn" onclick="disconnectBluetooth()" style="width:100%;margin-top:10px;display:none;">
+        Déconnecter
+      </button>
+      <div class="bt-msg" id="btMessage"></div>
+    </div>
+    <!-- ===== FIN SECTION BLUETOOTH ===== -->
+
   </section>
 
   <div id="focusBanner" role="button" tabindex="0" aria-label="Reprendre le focus" onclick="navigateTo('focus')">
@@ -677,7 +707,7 @@ const AVATARS=[
 ];
 function avatarSvg(id){const a=AVATARS.find(x=>x.id===id);return a?a.svg:'';}
 
-/* ============ BADGES : UNE SEULE DÉFINITION ============ */
+/* ============ BADGES ============ */
 const BADGES={
  premier_pas:{title:'Premier pas',desc:'Termine ta première tâche',c1:'#7ED06E',c2:'#3FA74E',halo:'#DFF2D9',
    icon:'<path d="M12 20v-8"/><path d="M12 14c-5 0-8-4-8-8 4 0 7 3 8 6"/><path d="M12 12c4-1 7-4 7-8-4 0-6 3-7 5"/>'},
@@ -828,7 +858,7 @@ function navigateTo(s){
   if(s==='parcours')renderParcours();
   if(s==='badges')renderBadges();
   if(s==='avatar')renderAvatars();
-  if(s==='profil')renderProfil();
+  if(s==='profil'){renderProfil();updateBluetoothUI();}
   if(s==='focus')renderFocus();
   updateBanner();
 }
@@ -1329,6 +1359,125 @@ function tutNext(){
   else closeTutorial();
 }
 function closeTutorial(){state.tutorialSeen=true;save();document.getElementById('tutOverlay').classList.remove('show');}
+
+/* ============ BLUETOOTH (ESP32-C3-Zero-M « Clic-Bouton ») ============ */
+const BT_SERVICE='8c4f0001-5a9e-4f68-9c27-190aefc10001';
+const BT_CHAR='8c4f0002-5a9e-4f68-9c27-190aefc10001';
+const BT_NAME='Clic-Bouton';
+let btDevice=null, btChar=null, btConnected=false, btConnecting=false;
+
+function btEl(id){return document.getElementById(id);}
+
+function updateBluetoothUI(){
+  const dot=btEl('btDot'), txt=btEl('btStatusText');
+  const connectBtn=btEl('btConnectBtn'), discBtn=btEl('btDisconnectBtn');
+  const msg=btEl('btMessage');
+  if(!dot) return; // Profil pas encore affiché
+  if(btConnected){
+    dot.className='bt-dot on';
+    txt.textContent='Connecté à '+BT_NAME;
+    connectBtn.style.display='none';
+    discBtn.style.display='flex';
+  }else{
+    dot.className='bt-dot off';
+    txt.textContent='Non connecté';
+    connectBtn.style.display='flex';
+    discBtn.style.display='none';
+  }
+}
+function btShowMsg(text,kind){
+  const msg=btEl('btMessage');
+  if(!msg) return;
+  msg.textContent=text;
+  msg.className='bt-msg'+(kind==='err'?' err':kind==='ok'?' ok':'');
+  if(kind!=='err') setTimeout(()=>{if(msg.textContent===text)msg.textContent='';},4000);
+}
+
+async function connectBluetooth(){
+  if(btConnecting) return;
+  if(!('bluetooth' in navigator)){
+    btShowMsg('Bluetooth non supporté par ce navigateur. Utilise Chrome sur Android ou desktop.', 'err');
+    return;
+  }
+  btConnecting=true;
+  btEl('btConnectBtn').disabled=true;
+  btEl('btConnectBtn').textContent='Recherche…';
+  try{
+    btDevice=await navigator.bluetooth.requestDevice({
+      filters:[{name:BT_NAME}],
+      optionalServices:[BT_SERVICE]
+    });
+    btDevice.addEventListener('gattserverdisconnected', onBluetoothDisconnect);
+    const server=await btDevice.gatt.connect();
+    const service=await server.getPrimaryService(BT_SERVICE);
+    btChar=await service.getCharacteristic(BT_CHAR);
+    await btChar.startNotifications();
+    btChar.addEventListener('characteristicvaluechanged', onBluetoothMessage);
+    btConnected=true;
+    btShowMsg('Boîtier connecté. Appuie sur le bouton pour démarrer.','ok');
+  }catch(e){
+    btConnected=false; btDevice=null; btChar=null;
+    let msg='Connexion annulée.';
+    if(e.name==='NotFoundError') msg='Boîtier « '+BT_NAME+' » introuvable. Allume-le et réessaie.';
+    else if(e.name==='SecurityError') msg='Bluetooth désactivé ou non autorisé.';
+    else if(e.name==='NetworkError') msg='Erreur réseau Bluetooth. Réessaie.';
+    else if(e.message) msg=e.message;
+    btShowMsg(msg,'err');
+  }finally{
+    btConnecting=false;
+    btEl('btConnectBtn').disabled=false;
+    btEl('btConnectBtn').innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11L12 23V1l5.5 5.5-11 11"/></svg>Connecter mon boîtier';
+    updateBluetoothUI();
+  }
+}
+
+function disconnectBluetooth(){
+  if(btDevice && btDevice.gatt.connected){
+    btDevice.gatt.disconnect();
+  }else{
+    btConnected=false; btDevice=null; btChar=null;
+    updateBluetoothUI();
+  }
+}
+
+function onBluetoothDisconnect(){
+  btConnected=false; btDevice=null; btChar=null;
+  btShowMsg('Boîtier déconnecté (hors de portée ou éteint).','err');
+  updateBluetoothUI();
+}
+
+function onBluetoothMessage(event){
+  try{
+    const value=new TextDecoder().decode(event.target.value).trim();
+    if(value==='START'){
+      handleBluetoothStart();
+    }
+  }catch(e){/* valeur binaire ignorée */}
+}
+
+/* Logique anti-doublon : ne crée jamais de session en double */
+function handleBluetoothStart(){
+  // 1. Si une session existe et n'est pas terminée : reprendre si en pause, sinon ignorer
+  if(state.focus && !state.focus.done){
+    if(state.focus.paused){
+      pauseResume();
+      btShowMsg('Session reprise.','ok');
+    }else{
+      btShowMsg('Session déjà en cours.','ok');
+    }
+    return;
+  }
+  // 2. Sinon : chercher une tâche utilisable (non démo, non terminée)
+  const next=state.tasks.find(t=>!t.demo && !t.done);
+  if(next){
+    startFocus(next.id, next.name, next.duration);
+    btShowMsg('« '+next.name+' » lancé.','ok');
+  }else{
+    // 3. Fallback : ouvrir le minuteur (l'utilisateur choisit)
+    openTimer();
+    btShowMsg('Aucune tâche à lancer. Choisis une durée.','ok');
+  }
+}
 
 /* ============ Init ============ */
 load();
