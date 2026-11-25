@@ -22,7 +22,6 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .app::before{content:'';position:absolute;top:-120px;right:-110px;width:320px;height:320px;background:radial-gradient(circle,rgba(255,170,150,.4),transparent 70%);pointer-events:none;z-index:0}
 .app::after{content:'';position:absolute;bottom:-90px;left:-90px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,200,160,.35),transparent 70%);pointer-events:none;z-index:0}
 
-/* Header */
 .app-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;padding-top:calc(12px + env(safe-area-inset-top));z-index:10;flex-shrink:0}
 .app-header.hidden{display:none}
 .header-left{display:flex;align-items:center;gap:12px}
@@ -36,7 +35,6 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .round-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;cursor:pointer;background:#FFE3D0;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.1);flex-shrink:0}
 .round-avatar svg{width:100%;height:100%;display:block}
 
-/* Écrans */
 .screen{display:none;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
   padding:0 20px calc(var(--nav-h) + env(safe-area-inset-bottom) + 32px);position:relative;z-index:1}
 .screen::-webkit-scrollbar{display:none}
@@ -44,7 +42,6 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .screen.no-pad{padding-bottom:calc(20px + env(safe-area-inset-bottom))}
 .screen.no-scroll{overflow:hidden}
 
-/* Barre du bas */
 .nav{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));height:var(--nav-h);
   display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;background:rgba(255,255,255,.94);
   border-radius:38px;box-shadow:var(--shadow-lg);z-index:100}
@@ -58,7 +55,6 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 .nav .plus:active{transform:scale(.92)}
 .nav .plus svg{width:26px;height:26px}
 
-/* Bandeau focus */
 #focusBanner{position:fixed;left:12px;right:12px;bottom:calc(var(--nav-h) + 22px + env(safe-area-inset-bottom));
   background:var(--text);color:#fff;border-radius:16px;padding:12px 16px;display:none;align-items:center;gap:10px;
   z-index:99;box-shadow:var(--shadow-lg);cursor:pointer;font-weight:700;font-size:14px}
@@ -67,7 +63,6 @@ body{font-family:'Nunito',sans-serif;background:#efe6e1;color:var(--text);overfl
 #focusBanner .fb-time{margin-left:auto;font-variant-numeric:tabular-nums;color:#FFC9A3}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-/* Typo / commun */
 h1{font-size:28px;font-weight:800}
 h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .subtitle{font-size:15px;color:var(--text2);font-weight:600;margin-bottom:16px}
@@ -90,13 +85,11 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .page-title.big{font-size:34px}
 .header-spacer{width:44px}
 
-/* Recherche */
 .search-bar{display:flex;align-items:center;background:#fff;border-radius:16px;padding:13px 16px;border:1.5px solid var(--border);margin-bottom:14px;gap:10px}
 .search-bar input{flex:1;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:15px;color:var(--text);background:transparent;min-width:0}
 .search-bar input::placeholder{color:#C4A090}
 .search-bar svg{width:22px;height:22px;color:var(--text2);flex-shrink:0}
 
-/* Focus du jour / continuer */
 .focus-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px}
 .focus-title{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800}
 .focus-title svg{width:30px;height:30px;flex-shrink:0}
@@ -117,7 +110,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .quick-tile svg{width:30px;height:30px}
 .quick-tile span{font-size:11px;font-weight:800;line-height:1.2}
 
-/* Tâches */
 .task-item{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fff;border-radius:16px;border:1px solid var(--border);margin-bottom:10px;box-shadow:var(--shadow);transition:opacity .3s}
 .task-item.done{opacity:.55}
 .task-item.done .task-name{text-decoration:line-through}
@@ -138,7 +130,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .empty-state svg{width:60px;height:60px;margin-bottom:12px;opacity:.4}
 .empty-state p{font-size:15px;font-weight:700;line-height:1.45;margin-bottom:14px}
 
-/* Parcours */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 .stat-tile{background:#fff;border-radius:16px;border:1px solid var(--border);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
 .stat-tile.purple{background:#F6EEFF;border-color:#EADCFB}
@@ -162,7 +153,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .session-chevron{color:var(--text2);flex-shrink:0}
 .session-chevron svg{width:20px;height:20px}
 
-/* Feuilles */
 .sheet-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(59,26,16,.35);z-index:200;display:none;align-items:flex-end;justify-content:center}
 .sheet-overlay.show{display:flex}
 .sheet{background:#fff;border-radius:26px 26px 0 0;width:100%;max-width:430px;padding:20px 20px 28px;max-height:82dvh;overflow-y:auto;
@@ -172,12 +162,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .sheet-title{font-size:20px;font-weight:800;margin-bottom:16px}
 .sheet-actions{display:flex;gap:10px}
 .sheet-actions .btn{flex:1}
-.end-q{font-size:16px;font-weight:700;color:var(--text2);margin-bottom:18px}
-.help-suggest{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:20px;min-height:56px}
-#endActions{display:flex;flex-direction:column;gap:10px}
-#endActions .btn{width:100%}
 
-/* Clavier minuteur */
 #screen-timer.active{display:flex;flex-direction:column}
 #screen-timer{padding-top:6px}
 .timer-name{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:16px;font-family:'Nunito',sans-serif;
@@ -204,7 +189,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .keypad button:active{background:var(--accent-light);transform:scale(.94)}
 .keypad svg{width:26px;height:26px}
 
-/* Focus */
 #screen-focus{padding-top:6px}
 .focus-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .focus-top .ft-label{font-size:15px;font-weight:800;color:var(--text2)}
@@ -228,21 +212,19 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .success-disc svg{width:56px;height:56px;color:#fff}
 @keyframes pop{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
 
-/* Badges — définition unique */
 .badges-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(min-width:700px){.badges-grid{grid-template-columns:repeat(4,1fr)}}
 .badge-card{background:#fff;border-radius:24px;border:1px solid var(--border);padding:20px 12px;text-align:center;box-shadow:var(--shadow)}
 .badge-card.locked{opacity:.55}
 .badge-halo{border-radius:50%;display:grid;place-items:center;margin:0 auto 12px}
 .badge-disc{border-radius:50%;position:relative;display:grid;place-items:center}
-.badge-disc::before{content:'';position:absolute;top:9%;left:14%;width:28%;height:14%;background:rgba(255,255,255,.45);border-radius:50%;transform:rotate(-24deg)}
-.badge-disc svg{display:block}
+.badge-disc::before{content:'';position:absolute;top:11%;left:15%;width:28%;height:14%;background:rgba(255,255,255,.45);border-radius:50%;transform:rotate(-24deg)}
+.badge-disc svg{stroke:#fff;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .badge-lock{position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid var(--border);display:grid;place-items:center;box-shadow:var(--shadow)}
 .badge-lock svg{width:11px;height:11px;color:var(--text2)}
 .badge-card h4{font-size:16px;font-weight:800;margin-bottom:4px}
 .badge-card p{font-size:13px;color:var(--text2);font-weight:600;line-height:1.35}
 
-/* Avatar */
 .avatar-preview{display:flex;align-items:center;gap:16px;background:#fff;border-radius:22px;border:1px solid var(--border);padding:18px;margin-bottom:20px;box-shadow:var(--shadow)}
 .avatar-preview-circle{width:104px;height:104px;border-radius:50%;background:#FFE3D0;display:grid;place-items:center;flex-shrink:0;border:4px solid #fff;box-shadow:0 4px 14px rgba(242,106,27,.18)}
 .avatar-preview-circle svg{width:88px;height:88px}
@@ -262,7 +244,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .avatar-actions{display:flex;gap:12px;padding-bottom:10px}
 .avatar-actions .btn{flex:1}
 
-/* Profil */
 .cloud-wrap{position:relative;width:290px;height:210px;margin:4px auto 0}
 .blob{position:absolute;border-radius:50%;filter:blur(14px);opacity:.8}
 .b-violet{width:190px;height:190px;left:50px;top:-18px;background:#C58BFF}
@@ -291,14 +272,17 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 .realis-card{border-radius:18px;padding:12px 6px;text-align:center;display:flex;flex-direction:column;justify-content:space-between;gap:8px;box-shadow:var(--shadow)}
 .realis-card h4{font-size:13px;font-weight:800;line-height:1.25}
 .realis-card p{font-size:10.5px;font-weight:700;line-height:1.3;opacity:.85}
-.realis-icon{display:flex;justify-content:center}
-.realis-icon .badge-halo{margin:0}
+.realis-card .realis-icon{display:flex;justify-content:center;margin-top:6px}
 .rc-green{background:linear-gradient(160deg,#E7F8E7,#CDEED0);color:#1E6B34;border:1px solid #BFE6C4}
 .rc-orange{background:linear-gradient(160deg,#FCEBDC,#F8D3B4);color:#8A4A1E;border:1px solid #F2C79F}
 .rc-purple{background:linear-gradient(160deg,#F3E4FB,#E3CBF2);color:#6B2E86;border:1px solid #DFC2EF}
 .realis-card.locked{opacity:.5}
 
-/* Tutoriel */
+.end-q{font-size:16px;font-weight:700;color:var(--text2);margin-bottom:18px}
+.help-suggest{font-size:20px;font-weight:800;line-height:1.35;margin-bottom:20px;min-height:56px}
+#endActions{display:flex;flex-direction:column;gap:10px}
+#endActions .btn{width:100%}
+
 .tut-overlay{position:fixed;inset:0;background:var(--bg);z-index:400;display:none;align-items:center;justify-content:center;padding:24px}
 .tut-overlay.show{display:flex}
 .tut-card{background:#fff;border-radius:26px;border:1px solid var(--border);box-shadow:var(--shadow-lg);padding:28px 22px;text-align:center;max-width:340px;width:100%}
@@ -340,7 +324,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </header>
 
-  <!-- ===== ACCUEIL ===== -->
   <section class="screen active" id="screen-accueil">
     <h1 style="margin-top:6px;">Bonjour !</h1>
     <p class="subtitle">Rendons votre journée productive !</p>
@@ -389,7 +372,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </section>
 
-  <!-- ===== MES TÂCHES ===== -->
   <section class="screen" id="screen-taches">
     <div class="page-header">
       <button class="back-btn" onclick="navigateTo('accueil')" aria-label="Retour">
@@ -416,7 +398,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </section>
 
-  <!-- ===== MINUTEUR / AJOUTER ===== -->
   <section class="screen no-pad no-scroll" id="screen-timer">
     <div class="page-header">
       <button class="back-btn" onclick="cancelTimer()" aria-label="Retour">
@@ -444,7 +425,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     <div class="keypad" id="keypad"></div>
   </section>
 
-  <!-- ===== FOCUS ===== -->
   <section class="screen no-pad" id="screen-focus">
     <div class="focus-top">
       <button class="back-btn" onclick="minimizeFocus()" aria-label="Réduire">
@@ -456,7 +436,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     <div id="focusBody"></div>
   </section>
 
-  <!-- ===== PARCOURS ===== -->
   <section class="screen" id="screen-parcours">
     <div class="page-header">
       <button class="back-btn" onclick="navigateTo('accueil')" aria-label="Retour">
@@ -499,7 +478,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     <div class="card" style="padding:8px 18px;" id="sessionsList"></div>
   </section>
 
-  <!-- ===== BADGES ===== -->
   <section class="screen" id="screen-badges">
     <div class="page-header">
       <button class="back-btn" onclick="navigateTo('parcours')" aria-label="Retour">
@@ -512,7 +490,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     <div class="badges-grid" id="badgesGrid"></div>
   </section>
 
-  <!-- ===== AVATAR ===== -->
   <section class="screen" id="screen-avatar">
     <h1 style="margin-top:6px;">Choisis ton avatar</h1>
     <p class="subtitle">Sélectionnez un style qui vous ressemble</p>
@@ -534,7 +511,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </section>
 
-  <!-- ===== PROFIL ===== -->
   <section class="screen" id="screen-profil">
     <div class="page-header">
       <button class="back-btn" onclick="navigateTo('accueil')" aria-label="Retour">
@@ -592,14 +568,12 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </section>
 
-  <!-- Bandeau focus -->
   <div id="focusBanner" role="button" tabindex="0" aria-label="Reprendre le focus" onclick="navigateTo('focus')">
     <span class="fb-dot"></span>
     <span id="fbText">Focus en cours</span>
     <span class="fb-time" id="fbTime">00:00</span>
   </div>
 
-  <!-- Barre du bas -->
   <nav class="nav" aria-label="Navigation principale">
     <button class="nav-tab active" data-screen="accueil" onclick="navigateTo('accueil')" aria-label="Accueil">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V10"/></svg>
@@ -622,7 +596,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </button>
   </nav>
 
-  <!-- Feuille modèles -->
   <div class="sheet-overlay" id="modelsOverlay" onclick="closeSheet('modelsOverlay',event)">
     <div class="sheet" onclick="event.stopPropagation()">
       <div class="sheet-handle"></div>
@@ -635,7 +608,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </div>
 
-  <!-- Feuille « Temps terminé ! » -->
   <div class="sheet-overlay" id="endOverlay">
     <div class="sheet" onclick="event.stopPropagation()">
       <div class="sheet-handle"></div>
@@ -645,8 +617,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </div>
 
-  <!-- Feuille « Je bloque » -->
-  <div class="sheet-overlay" id="helpOverlay">
+  <div class="sheet-overlay" id="helpOverlay" onclick="closeSheet('helpOverlay',event)">
     <div class="sheet" onclick="event.stopPropagation()">
       <div class="sheet-handle"></div>
       <div class="sheet-title">Je bloque</div>
@@ -658,7 +629,6 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
     </div>
   </div>
 
-  <!-- Tutoriel -->
   <div class="tut-overlay" id="tutOverlay">
     <div class="tut-card">
       <div class="tut-disc" id="tutDisc"></div>
@@ -674,7 +644,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
 </div>
 
 <script>
-/* ================= Utilitaires ================= */
+/* ============ Utilitaires ============ */
 function fmtDuration(totalMin){
   const m=Number.isFinite(totalMin)&&totalMin>0?Math.round(totalMin):0;
   if(m<60)return m+' min';
@@ -687,7 +657,7 @@ function fmtClock(s){s=Math.max(0,Math.round(num(s)));const h=Math.floor(s/3600)
 function todayISO(){return new Date().toISOString().slice(0,10);}
 const esc=s=>String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;');
 
-/* ================= Avatars (stickers) ================= */
+/* ============ Avatars ============ */
 const happyEyes=(cx,cy,s)=>`<path d="M${cx-9*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M${cx+4*s} ${cy+1.5*s}q${2.5*s} ${-3*s} ${5*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
 const eyesDots=(cx,cy,s)=>`<circle cx="${cx-5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/><circle cx="${cx+5*s}" cy="${cy}" r="${1.8*s}" fill="#5B3320"/>`;
 const smile=(cx,cy,s)=>`<path d="M${cx-3.5*s} ${cy}q${3.5*s} ${3.5*s} ${7*s} 0" stroke="#5B3320" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
@@ -696,81 +666,18 @@ const spark=(x,y)=>`<path d="M${x} ${y-4}v8M${x-4} ${y}h8" stroke="#F26A1B" stro
 const spark2=(x,y)=>`<path d="M${x} ${y-3}v6M${x-3} ${y}h6" stroke="#F26A1B" stroke-width="1.8" stroke-linecap="round" opacity=".7"/>`;
 
 const AVATARS=[
- {id:'plante',name:'La petite plante',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="85" rx="19" ry="3" fill="#000" opacity=".05"/>
-   <path d="M50 62V46" stroke="#3FA34D" stroke-width="3.2" stroke-linecap="round"/>
-   <path d="M49 50C41 50 34 44 33 35c9-1 15 5 16 15z" fill="#57B65B"/>
-   <path d="M51 46C57 42 63 36 64 28c-8 1-13 8-13 18z" fill="#78CE7C"/>
-   <path d="M33 62h34l-3.5 17a5 5 0 0 1-5 4.5H41.5a5 5 0 0 1-5-4.5z" fill="#E08A5A"/>
-   <rect x="30" y="57" width="40" height="8" rx="4" fill="#E8956B"/>
-   ${happyEyes(50,70,1)}${smile(50,74,.8)}${cheeks(50,70,1)}
-   ${spark(72,32)}${spark2(78,40)}</svg>`},
- {id:'livres',name:'La pile de livres',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="80" rx="22" ry="4" fill="#000" opacity=".06"/>
-   <rect x="26" y="62" width="48" height="12" rx="3" fill="#8B5CF6"/><rect x="26" y="62" width="48" height="4" rx="2" fill="#7C3AED"/><rect x="70" y="64" width="4" height="8" rx="1" fill="#EDE9FE"/>
-   <rect x="30" y="50" width="40" height="12" rx="3" fill="#F59E0B"/><rect x="30" y="50" width="40" height="4" rx="2" fill="#D97706"/><rect x="66" y="52" width="4" height="8" rx="1" fill="#FEF3C7"/>
-   <rect x="34" y="36" width="32" height="14" rx="3" fill="#F97316"/><rect x="34" y="36" width="32" height="4" rx="2" fill="#EA580C"/>
-   ${happyEyes(50,44,1)}${smile(50,48,.7)}${cheeks(50,44,.9)}
-   ${spark(74,28)}${spark2(26,30)}</svg>`},
- {id:'cible',name:'La cible',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="80" rx="18" ry="4" fill="#000" opacity=".06"/>
-   <circle cx="48" cy="52" r="20" fill="#F87171"/><circle cx="48" cy="52" r="14" fill="#fff"/><circle cx="48" cy="52" r="8.5" fill="#EF4444"/><circle cx="48" cy="52" r="3.5" fill="#fff"/>
-   <line x1="66" y1="26" x2="52" y2="46" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
-   <path d="M66 26l6-2-2 6z" fill="#DC2626"/><path d="M62 30l4 4" stroke="#DC2626" stroke-width="2.4" stroke-linecap="round"/><path d="M66 26l4 8" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
-   ${spark(26,32)}${spark2(76,60)}</svg>`},
- {id:'calendrier',name:'Le calendrier',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="82" rx="20" ry="4" fill="#000" opacity=".06"/>
-   <rect x="26" y="34" width="48" height="42" rx="8" fill="#FDF3DC" stroke="#EAD9B0" stroke-width="1.5"/>
-   <path d="M26 42a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8v4H26z" fill="#EF4444"/>
-   <rect x="36" y="26" width="5" height="12" rx="2.5" fill="#DC2626"/><rect x="59" y="26" width="5" height="12" rx="2.5" fill="#DC2626"/>
-   <circle cx="36" cy="54" r="2.6" fill="#D6C79E"/><circle cx="46" cy="54" r="2.6" fill="#D6C79E"/><circle cx="56" cy="54" r="2.6" fill="#D6C79E"/><circle cx="66" cy="54" r="2.6" fill="#D6C79E"/>
-   ${eyesDots(50,63,1)}${smile(50,67,.8)}${cheeks(50,63,1)}
-   ${spark(78,30)}${spark2(22,60)}</svg>`},
- {id:'cafe',name:'La tasse de café',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="82" rx="22" ry="4" fill="#000" opacity=".06"/>
-   <path d="M40 26q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/>
-   <path d="M50 24q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/>
-   <path d="M60 26q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/>
-   <path d="M30 42h34v16a17 17 0 0 1-34 0z" fill="#fff" stroke="#EAD9CE" stroke-width="1.6"/>
-   <ellipse cx="47" cy="42" rx="17" ry="4.5" fill="#6B4226"/>
-   <path d="M64 46h4a7 7 0 0 1 0 14h-3" fill="none" stroke="#EAD9CE" stroke-width="3"/>
-   <ellipse cx="47" cy="74" rx="24" ry="5" fill="#F2915C"/>
-   ${happyEyes(47,52,1)}${smile(47,56,.7)}${cheeks(47,52,.9)}
-   ${spark(78,40)}${spark2(20,44)}</svg>`},
- {id:'crayon',name:'Le crayon',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="82" rx="16" ry="4" fill="#000" opacity=".06"/>
-   <g transform="rotate(35 50 50)">
-     <rect x="42" y="24" width="16" height="44" rx="3" fill="#FCD34D"/>
-     <rect x="42" y="24" width="16" height="7" rx="3" fill="#F9A8A8"/>
-     <rect x="42" y="31" width="16" height="4" fill="#F472B6" opacity=".5"/>
-     <path d="M42 68h16l-8 12z" fill="#FDE68A"/><path d="M48 75l2 5 2-5z" fill="#3B1A10"/>
-     ${eyesDots(50,46,1)}${smile(50,50,.7)}${cheeks(50,46,.9)}
-   </g>
-   ${spark(24,34)}${spark2(76,64)}</svg>`},
- {id:'ampoule',name:'L\'ampoule',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="82" rx="14" ry="4" fill="#000" opacity=".06"/>
-   <path d="M38 44a14 14 0 1 1 24 0c0 7-5 9-6 14h-12c-1-5-6-7-6-14z" fill="#FACC15"/>
-   <rect x="42" y="58" width="16" height="5" rx="2" fill="#9CA3AF"/><rect x="43" y="63" width="14" height="4" rx="2" fill="#6B7280"/><path d="M45 67h10l-2 5h-6z" fill="#4B5563"/>
-   <path d="M50 18v-5M34 24l-3-4M66 24l3-4" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round"/>
-   ${eyesDots(50,42,1)}${smile(50,46,.7)}${cheeks(50,42,.9)}
-   ${spark(78,40)}${spark2(22,44)}</svg>`},
- {id:'coeur',name:'Le cœur',svg:`<svg viewBox="0 0 100 100">
-   <circle cx="50" cy="50" r="46" fill="#FFE3D0"/>
-   <ellipse cx="50" cy="80" rx="18" ry="4" fill="#000" opacity=".06"/>
-   <path d="M50 72c-16-10-24-19-24-28a11 11 0 0 1 24-4 11 11 0 0 1 24 4c0 9-8 18-24 28z" fill="#F87171"/>
-   ${happyEyes(50,44,1)}${smile(50,49,.8)}${cheeks(50,45,1)}
-   ${spark(76,30)}${spark2(24,32)}</svg>`}
+ {id:'plante',name:'La petite plante',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="85" rx="19" ry="3" fill="#000" opacity=".05"/><path d="M50 62V46" stroke="#3FA34D" stroke-width="3.2" stroke-linecap="round"/><path d="M49 50C41 50 34 44 33 35c9-1 15 5 16 15z" fill="#57B65B"/><path d="M51 46C57 42 63 36 64 28c-8 1-13 8-13 18z" fill="#78CE7C"/><path d="M33 62h34l-3.5 17a5 5 0 0 1-5 4.5H41.5a5 5 0 0 1-5-4.5z" fill="#E08A5A"/><rect x="30" y="57" width="40" height="8" rx="4" fill="#E8956B"/>${happyEyes(50,70,1)}${smile(50,74,.8)}${cheeks(50,70,1)}${spark(72,32)}${spark2(78,40)}</svg>`},
+ {id:'livres',name:'La pile de livres',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="80" rx="22" ry="4" fill="#000" opacity=".06"/><rect x="26" y="62" width="48" height="12" rx="3" fill="#8B5CF6"/><rect x="26" y="62" width="48" height="4" rx="2" fill="#7C3AED"/><rect x="70" y="64" width="4" height="8" rx="1" fill="#EDE9FE"/><rect x="30" y="50" width="40" height="12" rx="3" fill="#F59E0B"/><rect x="30" y="50" width="40" height="4" rx="2" fill="#D97706"/><rect x="66" y="52" width="4" height="8" rx="1" fill="#FEF3C7"/><rect x="34" y="36" width="32" height="14" rx="3" fill="#F97316"/><rect x="34" y="36" width="32" height="4" rx="2" fill="#EA580C"/>${happyEyes(50,44,1)}${smile(50,48,.7)}${cheeks(50,44,.9)}${spark(74,28)}${spark2(26,30)}</svg>`},
+ {id:'cible',name:'La cible',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="80" rx="18" ry="4" fill="#000" opacity=".06"/><circle cx="48" cy="52" r="20" fill="#F87171"/><circle cx="48" cy="52" r="14" fill="#fff"/><circle cx="48" cy="52" r="8.5" fill="#EF4444"/><circle cx="48" cy="52" r="3.5" fill="#fff"/><line x1="66" y1="26" x2="52" y2="46" stroke="#B45309" stroke-width="3" stroke-linecap="round"/><path d="M66 26l6-2-2 6z" fill="#DC2626"/><path d="M62 30l4 4" stroke="#DC2626" stroke-width="2.4" stroke-linecap="round"/><path d="M66 26l4 8" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>${spark(26,32)}${spark2(76,60)}</svg>`},
+ {id:'calendrier',name:'Le calendrier',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="82" rx="20" ry="4" fill="#000" opacity=".06"/><rect x="26" y="34" width="48" height="42" rx="8" fill="#FDF3DC" stroke="#EAD9B0" stroke-width="1.5"/><path d="M26 42a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8v4H26z" fill="#EF4444"/><rect x="36" y="26" width="5" height="12" rx="2.5" fill="#DC2626"/><rect x="59" y="26" width="5" height="12" rx="2.5" fill="#DC2626"/><circle cx="36" cy="54" r="2.6" fill="#D6C79E"/><circle cx="46" cy="54" r="2.6" fill="#D6C79E"/><circle cx="56" cy="54" r="2.6" fill="#D6C79E"/><circle cx="66" cy="54" r="2.6" fill="#D6C79E"/>${eyesDots(50,63,1)}${smile(50,67,.8)}${cheeks(50,63,1)}${spark(78,30)}${spark2(22,60)}</svg>`},
+ {id:'cafe',name:'La tasse de café',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="82" rx="22" ry="4" fill="#000" opacity=".06"/><path d="M40 26q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/><path d="M50 24q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/><path d="M60 26q3-5 0-10" stroke="#D4A090" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/><path d="M30 42h34v16a17 17 0 0 1-34 0z" fill="#fff" stroke="#EAD9CE" stroke-width="1.6"/><ellipse cx="47" cy="42" rx="17" ry="4.5" fill="#6B4226"/><path d="M64 46h4a7 7 0 0 1 0 14h-3" fill="none" stroke="#EAD9CE" stroke-width="3"/><ellipse cx="47" cy="74" rx="24" ry="5" fill="#F2915C"/>${happyEyes(47,52,1)}${smile(47,56,.7)}${cheeks(47,52,.9)}${spark(78,40)}${spark2(20,44)}</svg>`},
+ {id:'crayon',name:'Le crayon',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="82" rx="16" ry="4" fill="#000" opacity=".06"/><g transform="rotate(35 50 50)"><rect x="42" y="24" width="16" height="44" rx="3" fill="#FCD34D"/><rect x="42" y="24" width="16" height="7" rx="3" fill="#F9A8A8"/><rect x="42" y="31" width="16" height="4" fill="#F472B6" opacity=".5"/><path d="M42 68h16l-8 12z" fill="#FDE68A"/><path d="M48 75l2 5 2-5z" fill="#3B1A10"/>${eyesDots(50,46,1)}${smile(50,50,.7)}${cheeks(50,46,.9)}</g>${spark(24,34)}${spark2(76,64)}</svg>`},
+ {id:'ampoule',name:'L\'ampoule',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="82" rx="14" ry="4" fill="#000" opacity=".06"/><path d="M38 44a14 14 0 1 1 24 0c0 7-5 9-6 14h-12c-1-5-6-7-6-14z" fill="#FACC15"/><rect x="42" y="58" width="16" height="5" rx="2" fill="#9CA3AF"/><rect x="43" y="63" width="14" height="4" rx="2" fill="#6B7280"/><path d="M45 67h10l-2 5h-6z" fill="#4B5563"/><path d="M50 18v-5M34 24l-3-4M66 24l3-4" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round"/>${eyesDots(50,42,1)}${smile(50,46,.7)}${cheeks(50,42,.9)}${spark(78,40)}${spark2(22,44)}</svg>`},
+ {id:'coeur',name:'Le cœur',svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE3D0"/><ellipse cx="50" cy="80" rx="18" ry="4" fill="#000" opacity=".06"/><path d="M50 72c-16-10-24-19-24-28a11 11 0 0 1 24-4 11 11 0 0 1 24 4c0 9-8 18-24 28z" fill="#F87171"/>${happyEyes(50,44,1)}${smile(50,49,.8)}${cheeks(50,45,1)}${spark(76,30)}${spark2(24,32)}</svg>`}
 ];
 function avatarSvg(id){const a=AVATARS.find(x=>x.id===id);return a?a.svg:'';}
 
-/* ================= BADGES : une seule définition ================= */
+/* ============ BADGES : UNE SEULE DÉFINITION ============ */
 const BADGES={
  premier_pas:{title:'Premier pas',desc:'Termine ta première tâche',c1:'#7ED06E',c2:'#3FA74E',halo:'#DFF2D9',
    icon:'<path d="M12 20v-8"/><path d="M12 14c-5 0-8-4-8-8 4 0 7 3 8 6"/><path d="M12 12c4-1 7-4 7-8-4 0-6 3-7 5"/>'},
@@ -784,7 +691,7 @@ const BADGES={
    icon:'<path d="M12 4L4 8l8 4 8-4z"/><path d="M4 12.5l8 4 8-4"/><path d="M4 17l8 4 8-4"/>'},
  debloque:{title:'Je me débloque',desc:'Utilise Je bloque pour repartir',c1:'#FFCB4A',c2:'#F5A011',halo:'#FFEFC4',
    icon:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v5M12 15.5v5M3.5 12h5M15.5 12h5"/>'},
- retour:{title:'Retour en douceur',desc:'Reviens après quelques jours d’absence',c1:'#FA85AF',c2:'#E84C87',halo:'#FFDDEA',
+ retour:{title:'Retour en douceur',desc:'Reviens après quelques jours d\'absence',c1:'#FA85AF',c2:'#E84C87',halo:'#FFDDEA',
    icon:'<path d="M12 20c-6-4.5-8.5-8-8.5-11a4.5 4.5 0 0 1 8.5-2 4.5 4.5 0 0 1 8.5 2c0 3-2.5 6.5-8.5 11z"/>'},
  marathon:{title:'Grand marathon',desc:'10 h de travail au total',c1:'#D067C6',c2:'#A63A9C',halo:'#F5DBF2',
    icon:'<path d="M7 4h10v6a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 14v3M9 19h6M10 17h4v3h-4z"/><path d="M12 6l.9 1.8 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9.1 8.1l2-.3z" fill="#fff" stroke-width="1.2"/>'}
@@ -792,7 +699,6 @@ const BADGES={
 const BADGE_ORDER=['premier_pas','objectif','une_heure','jours_actifs','multi','debloque','retour','marathon'];
 const LOCK_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 
-/* Halo + disque + reflet + icône — proportions de la page Badges (halo = size×1.3, icône = size×0.53) */
 function badgeIcon(id,size,locked){
   const b=BADGES[id];const halo=Math.round(size*1.3),ic=Math.round(size*0.53);
   return `<div class="badge-halo" style="width:${halo}px;height:${halo}px;background:${b.halo};">
@@ -802,15 +708,12 @@ function badgeIcon(id,size,locked){
     </div>
   </div>`;
 }
-
-/* Source unique de vérité : état sauvegardé, avec date de déblocage */
 function isUnlocked(id){return !!(state.badgesUnlocked&&state.badgesUnlocked[id]);}
 function badgeUnlocked(b){return isUnlocked(b.id);}
 
-/* Conditions — une seule fonction, appelée partout */
 function checkBadges(){
   if(!state.badgesUnlocked)state.badgesUnlocked={};
-  const unlock=(id)=>{if(!state.badgesUnlocked[id]){state.badgesUnlocked[id]=new Date().toISOString();}};
+  const unlock=(id)=>{if(!state.badgesUnlocked[id])state.badgesUnlocked[id]=new Date().toISOString();};
   const real=state.tasks.filter(t=>!t.demo);
   const today=todayISO();
   if(real.some(t=>t.done))unlock('premier_pas');
@@ -823,11 +726,11 @@ function checkBadges(){
   if(days.size>=3)unlock('jours_actifs');
   if(state.sessions.some(s=>(s.tasksDone||[]).length>=2))unlock('multi');
   if(state.sessions.some(s=>s.aideUtilisee))unlock('debloque');
-  if(state._retourEligible&&days.has(today)){unlock('retour');state._retourEligible=false;}
+  if(state._pendingReturn&&state.activeDays.includes(today)){unlock('retour');state._pendingReturn=false;}
   save();
 }
 
-/* ================= État unique ================= */
+/* ============ TÂCHES DE DÉMO ============ */
 const DEFAULT_TASKS=[
  {id:1,name:'Réviser un cours',done:false,duration:1500,demo:true},
  {id:2,name:'Projet TER',done:false,duration:2700,demo:true},
@@ -837,6 +740,8 @@ const DEFAULT_TASKS=[
 ];
 const DEMO_NAMES=['Réviser un cours','Projet TER','Lecture article','Répondre aux e-mails','Préparer l\'exposé'];
 const MODELS=[{name:'Réviser un chapitre',duration:1500},{name:'Faire du sport',duration:2700},{name:'Lire 10 pages',duration:900}];
+
+/* ============ État unique ============ */
 let state=null;
 
 function sanitize(){
@@ -846,10 +751,9 @@ function sanitize(){
   if(!Array.isArray(state.tasks))state.tasks=JSON.parse(JSON.stringify(DEFAULT_TASKS));
   state.tasks.forEach(t=>{
     t.duration=num(t.duration);t.done=!!t.done;t.name=String(t.name||'Tâche');t.id=num(t.id)||1;
-    /* migration : uniquement les tâches créées par l'ancien code de démo (ids 1–5 + noms exacts) */
     if(!t.demo&&t.id>=1&&t.id<=5&&DEMO_NAMES.includes(t.name))t.demo=true;
     if(!t.done)t.doneAt=null;
-    if(t.done&&!t.doneAt)t.doneAt=todayISO();
+    if(t.done&&!t.doneAt)t.doneAt=null;
     t.workedSeconds=num(t.workedSeconds);
   });
   if(!Array.isArray(state.sessions))state.sessions=[];
@@ -864,7 +768,6 @@ function sanitize(){
   state.name=typeof state.name==='string'?state.name:'';
   state.motto=typeof state.motto==='string'?state.motto:'';
   state.tutorialSeen=!!state.tutorialSeen;
-  state.pendingConfirm=state.pendingConfirm||null;
 }
 function load(){
   try{
@@ -888,14 +791,13 @@ function load(){
   }catch(e){state=null;}
   if(!state)state={tasks:JSON.parse(JSON.stringify(DEFAULT_TASKS)),sessions:[],focusMinutes:0,totalCompleted:0,activeDays:[],abandons:0,lastVisit:'',seenBadges:[],avatar:'plante',name:'',motto:'',tutorialSeen:false,focus:null,pendingConfirm:null};
   sanitize();
-  /* éligibilité « retour en douceur » : ≥3 jours sans activité */
-  if(state.lastActivityDate&&state.lastActivityDate!==todayISO()){
-    const gap=Math.round((new Date(todayISO())-new Date(state.lastActivityDate))/864e5);
-    if(gap>=3)state._retourEligible=true;
+  const today=todayISO();
+  if(state.lastActivityDate&&state.lastActivityDate!==today){
+    const gap=Math.round((new Date(today)-new Date(state.lastActivityDate))/864e5);
+    if(gap>=3)state._pendingReturn=true;
   }
-  state.lastVisit=todayISO();
-  /* minuteur expiré pendant la fermeture : temps enregistré UNE fois + fenêtre à afficher */
-  if(state.focus&&!state.focus.done&&focusRemaining()<=0){recordExpiry();state.focus.done=true;}
+  state.lastVisit=today;
+  if(state.focus&&!state.focus.done&&focusRemaining()<=0)recordExpiry();
   checkBadges();
   save();
 }
@@ -909,7 +811,7 @@ function computeStreak(){
 }
 function level(){return 1+Math.floor((state.totalCompleted*3+state.focusMinutes)/30);}
 
-/* ================= Navigation ================= */
+/* ============ Navigation ============ */
 const SCREENS=['accueil','taches','timer','focus','parcours','badges','avatar','profil'];
 let prevScreen='accueil';
 function navigateTo(s){
@@ -935,7 +837,7 @@ window.addEventListener('hashchange',()=>{
   if(SCREENS.includes(h)&&h!==prevScreen)navigateTo(h);
 });
 
-/* ================= Avatars ================= */
+/* ============ Avatars ============ */
 function updateAvatarDisplays(){
   const svg=avatarSvg(state.avatar);
   document.getElementById('headerAvatar').innerHTML=svg;
@@ -946,7 +848,6 @@ function updateAvatarDisplays(){
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
     </button>`;
 }
-let tempAvatar='plante';
 function renderAvatars(){
   document.getElementById('avatarPreviewCircle').innerHTML=avatarSvg(tempAvatar);
   document.getElementById('avatarPreviewName').textContent=(AVATARS.find(a=>a.id===tempAvatar)||{}).name||'';
@@ -957,10 +858,11 @@ function renderAvatars(){
       <span class="avatar-label">${a.name}</span>
     </button>`).join('');
 }
+let tempAvatar='plante';
 function cancelAvatar(){tempAvatar=state.avatar;navigateTo(prevScreen||'accueil');}
 function confirmAvatar(){state.avatar=tempAvatar;save();updateAvatarDisplays();navigateTo('profil');}
 
-/* ================= Tâches ================= */
+/* ============ Tâches ============ */
 function renderTasks(){
   const list=document.getElementById('taskList');
   const real=state.tasks.filter(t=>!t.demo);
@@ -982,7 +884,7 @@ function renderTasks(){
     <button class="task-check ${t.done?'checked':''}" onclick="toggleTask(${t.id})" role="checkbox" aria-checked="${t.done}" aria-label="${t.done?'Rouvrir':'Terminer'} ${t.name}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></button>
     <div class="task-main"><span class="task-name">${t.name}</span><span class="task-dur">${fmtDuration(t.duration/60)}</span></div>
-    ${t.done?'':`<button class="task-launch" onclick="startFocus(${t.id},'${esc(t.name)}',${t.duration})" aria-label="Lancer ${t.name}">
+    ${t.done||t.demo?'':`<button class="task-launch" onclick="startFocus(${t.id},'${esc(t.name)}',${t.duration})" aria-label="Lancer ${t.name}">
       <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"/></svg></button>`}
     <button class="task-delete" onclick="deleteTask(${t.id})" aria-label="Supprimer ${t.name}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></svg></button></div>`;
@@ -997,14 +899,20 @@ function toggleTask(id){
   t.done=!t.done;
   if(t.done){
     t.doneAt=todayISO();
-    if(!t.demo){state.totalCompleted++;markActiveDay();
-      if(state.focus&&!state.focus.done){state.focus.tasksCompleted=state.focus.tasksCompleted||[];state.focus.tasksCompleted.push(id);}}
+    if(!t.demo){
+      state.totalCompleted++;markActiveDay();
+      if(state.focus&&!state.focus.done&&!state.focus.expired){
+        state.focus.tasksCompleted=state.focus.tasksCompleted||[];
+        state.focus.tasksCompleted.push(id);
+      }
+    }
   }else{t.doneAt=null;}
   checkBadges();save();renderTasks();updateBanner();
 }
 function deleteTask(id){
   state.tasks=state.tasks.filter(t=>t.id!==id);
   if(state.focus&&state.focus.taskId===id)state.focus=null;
+  if(state.pendingConfirm&&state.pendingConfirm.taskId===id)state.pendingConfirm=null;
   save();renderTasks();renderAccueil();updateBanner();
 }
 let currentFilter='all';
@@ -1012,7 +920,7 @@ function setFilter(f,btn){currentFilter=f;
   document.querySelectorAll('.filter-row .btn-pill').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');renderTasks();}
 
-/* ================= Clavier minuteur ================= */
+/* ============ Clavier minuteur ============ */
 let kpNum=0,kpTotal=0;
 const PILLS=[1,5,10,15];
 function openTimer(){kpNum=0;renderKeypad();renderTimerDisplay();document.getElementById('timerName').value='';navigateTo('timer');}
@@ -1033,9 +941,8 @@ function renderKeypad(){
   del.addEventListener('click',()=>{if(!longFired){kpNum=Math.floor(kpNum/10);renderTimerDisplay();}});
 }
 function kpDigit(d){
-  const n=parseInt(d,10);
   if(d==='00'){if(String(kpNum).length>=5)return;kpNum=kpNum*100;}
-  else{if(String(kpNum).length>=6)return;kpNum=kpNum*10+n;}
+  else{if(String(kpNum).length>=6)return;kpNum=kpNum*10+parseInt(d,10);}
   renderTimerDisplay();
 }
 function kpAddMin(m){
@@ -1073,27 +980,27 @@ function addFromTimer(){
   save();navigateTo('taches');
 }
 
-/* ================= Moteur focus ================= */
+/* ============ Moteur focus ============ */
 function startFocus(taskId,name,seconds){
   const total=Math.max(1,Math.round(num(seconds)));
   state.focus={taskId,name,total,endTs:Date.now()+total*1000,paused:false,remaining:total,done:false,
-    timeRecorded:false,aideUtilisee:false,tasksCompleted:[]};
+    timeRecorded:false,expired:false,aideUtilisee:false,tasksCompleted:[]};
   save();navigateTo('focus');
 }
 function focusRemaining(){
   const f=state.focus;if(!f)return 0;
-  if(f.paused)return num(f.remaining);
+  if(f.paused||f.expired)return num(f.remaining);
   return Math.max(0,Math.round((f.endTs-Date.now())/1000));
 }
 function minimizeFocus(){navigateTo(prevScreen||'accueil');}
 function pauseResume(){
-  const f=state.focus;if(!f)return;
+  const f=state.focus;if(!f||f.expired)return;
   if(f.paused){f.endTs=Date.now()+f.remaining*1000;f.paused=false;}
   else{f.remaining=focusRemaining();f.paused=true;}
   save();renderFocus();
 }
 function addFive(){
-  const f=state.focus;if(!f)return;
+  const f=state.focus;if(!f||f.expired)return;
   f.total+=300;
   if(f.paused)f.remaining+=300;else f.endTs+=300000;
   save();renderFocus();
@@ -1104,14 +1011,13 @@ function cancelAbandon(){confirming=false;renderFocus();}
 function abandonFocus(){
   confirming=false;
   state.abandons++;markActiveDay();
-  state.focus=null;state.pendingConfirm=null;   /* un abandon n'enregistre aucune session → ne débloque rien */
+  state.focus=null;state.pendingConfirm=null;
   save();checkBadges();navigateTo(prevScreen||'accueil');
 }
-/* enregistre les secondes réellement travaillées, UNE SEULE FOIS, dans session + tâche + stats */
 function recordExpiry(){
   const f=state.focus;if(!f||f.timeRecorded)return;
   const elapsed=Math.max(1,f.total-focusRemaining());
-  f.timeRecorded=true;
+  f.timeRecorded=true;f.expired=true;f.remaining=0;
   state.focusMinutes+=elapsed/60;
   if(f.taskId!=null){const t=state.tasks.find(x=>x.id===f.taskId);if(t)t.workedSeconds=num(t.workedSeconds)+elapsed;}
   state.sessions.unshift({name:f.name,date:todayISO(),minutes:elapsed/60,tasksDone:(f.tasksCompleted||[]).slice(),aideUtilisee:!!f.aideUtilisee});
@@ -1120,14 +1026,11 @@ function recordExpiry(){
   if(f.taskId!=null)state.pendingConfirm={taskId:f.taskId,name:f.name};
   save();checkBadges();
 }
-/* Fin naturelle : on NE coche PAS la tâche, on ouvre la fenêtre de confirmation */
 function handleExpiry(){
   recordExpiry();
-  state.focus.done=true;save();
   if(navigator.vibrate)navigator.vibrate([40,60,40]);
   showEndSheet();
 }
-/* « Terminer » manuel = l'utilisateur déclare avoir fini → comportement d'avant, inchangé */
 function completeFocus(auto,silent){
   const f=state.focus;if(!f)return;
   if(auto){handleExpiry();return;}
@@ -1135,7 +1038,7 @@ function completeFocus(auto,silent){
   if(!f.timeRecorded){
     f.timeRecorded=true;state.focusMinutes+=elapsed/60;
     if(f.taskId!=null){const t=state.tasks.find(x=>x.id===f.taskId);if(t){t.workedSeconds=num(t.workedSeconds)+elapsed;
-      if(!t.demo&&!t.done){t.done=true;t.doneAt=todayISO();state.totalCompleted++;}}}
+      if(!t.demo){t.done=true;t.doneAt=todayISO();state.totalCompleted++;}}}
     state.sessions.unshift({name:f.name,date:todayISO(),minutes:elapsed/60,tasksDone:(f.tasksCompleted||[]).slice(),aideUtilisee:!!f.aideUtilisee});
     state.sessions=state.sessions.slice(0,30);markActiveDay();
   }
@@ -1229,7 +1132,7 @@ function finishSuccess(){state.focus=null;save();navigateTo('accueil');}
 function updateBanner(){
   const b=document.getElementById('focusBanner');
   const s=(location.hash||'#accueil').replace('#','');
-  if(state.focus&&!state.focus.done&&s!=='focus'&&s!=='timer'){
+  if(state.focus&&!state.focus.done&&!state.focus.expired&&s!=='focus'&&s!=='timer'){
     b.classList.add('show');
     document.getElementById('fbText').textContent='Focus en cours · '+state.focus.name;
     document.getElementById('fbTime').textContent=fmtClock(focusRemaining());
@@ -1244,13 +1147,13 @@ setInterval(()=>{
       const prog=document.querySelector('.timer-prog');
       if(prog){const R=120,C=2*Math.PI*R;prog.style.strokeDashoffset=C*(1-focusRemaining()/state.focus.total);}
     }
-    if(!state.focus.paused&&focusRemaining()<=0)handleExpiry();
+    if(!state.focus.paused&&!state.focus.expired&&focusRemaining()<=0)handleExpiry();
     updateBanner();
     if(s==='accueil')renderContinueCard();
   }
 },500);
 
-/* ================= « Je bloque » ================= */
+/* ============ « Je bloque » ============ */
 const HELP_IDEAS=[
  'Ouvre ton document et écris juste le titre.',
  'Mets-toi 2 minutes et fais seulement la toute première chose.',
@@ -1271,12 +1174,12 @@ function helpGo(){
   document.getElementById('helpOverlay').classList.remove('show');
   if(state.focus&&!state.focus.done){
     state.focus.aideUtilisee=true;
-    if(state.focus.paused)pauseResume();   /* relance la session immédiatement */
+    if(state.focus.paused)pauseResume();
     save();
   }
 }
 
-/* ================= Accueil ================= */
+/* ============ Accueil ============ */
 function renderAccueil(){
   const real=state.tasks.filter(t=>!t.demo);
   const done=real.filter(t=>t.done).length,total=real.length;
@@ -1295,7 +1198,7 @@ function renderContinueCard(){
       </div><button class="continue-btn" onclick="navigateTo('focus')">Continuer
         <svg viewBox="0 0 24 24" fill="#F26A1B" stroke="none"><path d="M8 5v14l11-7z"/></svg></button>`;
   }else{
-    const next=state.tasks.find(t=>!t.done);
+    const next=state.tasks.find(t=>!t.demo&&!t.done);
     if(next){
       card.innerHTML=`<div class="continue-info">
           <h3>${next.name}</h3><div class="status">À lancer</div>
@@ -1311,7 +1214,7 @@ function renderContinueCard(){
   }
 }
 
-/* ================= Parcours ================= */
+/* ============ Parcours ============ */
 function renderParcours(){
   const real=state.tasks.filter(t=>!t.demo);
   const done=real.filter(t=>t.done).length,total=real.length;
@@ -1343,7 +1246,7 @@ function renderParcours(){
   }
 }
 
-/* ================= Badges ================= */
+/* ============ Badges ============ */
 function renderBadges(){
   document.getElementById('badgesGrid').innerHTML=BADGE_ORDER.map(id=>{
     const b=BADGES[id],u=isUnlocked(id);
@@ -1352,7 +1255,7 @@ function renderBadges(){
       <h4>${b.title}</h4><p>${b.desc}</p></div>`;}).join('');
 }
 
-/* ================= Profil ================= */
+/* ============ Profil ============ */
 function renderProfil(){
   document.getElementById('profDone').textContent=state.totalCompleted;
   document.getElementById('profFocus').textContent=fmtDuration(state.focusMinutes);
@@ -1360,9 +1263,9 @@ function renderProfil(){
   document.getElementById('profLevel').textContent=level();
   document.getElementById('profileName').value=state.name||'';
   document.getElementById('profileMotto').value=state.motto||'';
-  document.getElementById('riFocus').innerHTML=badgeIcon('une_heure',40,!isUnlocked('une_heure'));
-  document.getElementById('riStreak').innerHTML=badgeIcon('jours_actifs',40,!isUnlocked('jours_actifs'));
-  document.getElementById('riTasks').innerHTML=badgeIcon('marathon',40,!isUnlocked('marathon'));
+  document.getElementById('riFocus').innerHTML=badgeIcon('une_heure',40,isUnlocked('une_heure'));
+  document.getElementById('riStreak').innerHTML=badgeIcon('jours_actifs',40,isUnlocked('jours_actifs'));
+  document.getElementById('riTasks').innerHTML=badgeIcon('marathon',40,isUnlocked('marathon'));
   document.getElementById('realFocus').classList.toggle('locked',state.sessions.length<100);
   document.getElementById('realStreak').classList.toggle('locked',computeStreak()<15);
   document.getElementById('realTasks').classList.toggle('locked',state.totalCompleted<100);
@@ -1370,11 +1273,11 @@ function renderProfil(){
 }
 document.getElementById('profileName').addEventListener('input',function(){state.name=this.value;save();});
 document.getElementById('profileMotto').addEventListener('input',function(){state.motto=this.value;save();});
-['profileName','profileMotto'].forEach(id=>{
+[['profileName'],['profileMotto']].forEach(([id])=>{
   document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur();});
 });
 
-/* ================= Modèles ================= */
+/* ============ Modèles ============ */
 function closeSheet(id,e){if(e&&e.target!==e.currentTarget)return;document.getElementById(id).classList.remove('show');}
 function showModels(){
   document.getElementById('modelsList').innerHTML=MODELS.map((m,i)=>`
@@ -1390,7 +1293,7 @@ function addModel(i){
   save();closeSheet('modelsOverlay');renderTasks();renderAccueil();navigateTo('taches');
 }
 
-/* ================= Recherche ================= */
+/* ============ Recherche ============ */
 document.getElementById('searchInput').addEventListener('input',function(){
   const q=this.value.trim().toLowerCase(),r=document.getElementById('searchResults');
   if(!q){r.innerHTML='';return;}
@@ -1402,7 +1305,7 @@ document.getElementById('searchInput').addEventListener('input',function(){
     :`<div class="empty-state" style="padding:18px;"><p>Aucun résultat pour « ${q} »</p></div>`;
 });
 
-/* ================= Tutoriel ================= */
+/* ============ Tutoriel ============ */
 const TUT=[
  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>',
   title:'Bienvenue sur Clic',text:'Touchez le + orange pour ajouter une tâche ou lancer un focus libre.'},
@@ -1427,15 +1330,14 @@ function tutNext(){
 }
 function closeTutorial(){state.tutorialSeen=true;save();document.getElementById('tutOverlay').classList.remove('show');}
 
-/* ================= Init ================= */
+/* ============ Init ============ */
 load();
 tempAvatar=state.avatar;
 updateAvatarDisplays();
 const h=(location.hash||'#accueil').replace('#','');
 navigateTo(SCREENS.includes(h)?h:'accueil');
-if(state.pendingConfirm)showEndSheet();   /* fin survenue écran éteint / rechargé */
+if(state.pendingConfirm)showEndSheet();
 if(!state.tutorialSeen)showTutorial();
 </script>
-<script src="./Clic-bluetooth.js"></script>
 </body>
 </html>
