@@ -578,7 +578,7 @@ h2{font-size:19px;font-weight:800;margin-bottom:12px}
       </div>
     </div>
 
-    <!-- ===== SECTION BLUETOOTH RESTAURÉE ===== -->
+    <!-- ===== SECTION BLUETOOTH ===== -->
     <div class="section-title" style="margin-top:24px;">Mon boîtier Clic</div>
     <div class="card" style="padding:18px;">
       <div class="bt-status">
@@ -1372,7 +1372,7 @@ function updateBluetoothUI(){
   const dot=btEl('btDot'), txt=btEl('btStatusText');
   const connectBtn=btEl('btConnectBtn'), discBtn=btEl('btDisconnectBtn');
   const msg=btEl('btMessage');
-  if(!dot) return; // Profil pas encore affiché
+  if(!dot) return;
   if(btConnected){
     dot.className='bt-dot on';
     txt.textContent='Connecté à '+BT_NAME;
@@ -1452,10 +1452,10 @@ function onBluetoothMessage(event){
     if(value==='START'){
       handleBluetoothStart();
     }
-  }catch(e){/* valeur binaire ignorée */}
+  }catch(e){}
 }
 
-/* Logique anti-doublon : ne crée jamais de session en double */
+/* Logique anti-doublon avec correction du bug START sur écran timer */
 function handleBluetoothStart(){
   // 1. Si une session existe et n'est pas terminée : reprendre si en pause, sinon ignorer
   if(state.focus && !state.focus.done){
@@ -1467,13 +1467,28 @@ function handleBluetoothStart(){
     }
     return;
   }
-  // 2. Sinon : chercher une tâche utilisable (non démo, non terminée)
+
+  // 2. Si on est sur l'écran timer avec une durée valide, démarrer comme le bouton "Commencer"
+  const currentScreen = (location.hash || '#accueil').replace('#','');
+  if(currentScreen === 'timer'){
+    if(kpTotal > 0){
+      // Réutilise exactement la logique du bouton orange "Commencer"
+      startFromTimer();
+      btShowMsg('Session lancée.','ok');
+    }else{
+      // Durée à zéro : conserver les champs, afficher un message
+      btShowMsg('Durée à zéro. Règle le minuteur puis réappuie.','err');
+    }
+    return;
+  }
+
+  // 3. Depuis un autre écran : chercher une tâche utilisable (non démo, non terminée)
   const next=state.tasks.find(t=>!t.demo && !t.done);
   if(next){
     startFocus(next.id, next.name, next.duration);
     btShowMsg('« '+next.name+' » lancé.','ok');
   }else{
-    // 3. Fallback : ouvrir le minuteur (l'utilisateur choisit)
+    // 4. Fallback : ouvrir le minuteur (l'utilisateur choisit)
     openTimer();
     btShowMsg('Aucune tâche à lancer. Choisis une durée.','ok');
   }
